@@ -10,28 +10,37 @@ import {
   BsLink45Deg,
 } from "react-icons/bs";
 import NowPlaying from "../components/NowPlaying";
-import { useContext } from "react";
-import { UserContext } from "../context/context";
 import { GiBasketballBall, GiMusicalNotes } from "react-icons/Gi";
+import { allPosts } from "contentlayer/generated";
+import RecentPosts from "../components/RecentPosts";
+import { useEffect } from "react";
+export const getStaticProps = async () => {
+  const posts = allPosts.sort(
+    (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
+  );
+  return {
+    props: {
+      posts,
+    },
+  };
+};
 
-export default function Home() {
-  const { isMobile } = useContext(UserContext);
+export default function Home({ posts }: any) {
+  useEffect(() => {
+    console.log(posts);
+  }, []);
   return (
     <div>
-      <Seo title="Home" />
+      <Seo customMeta={{ title: "Home" }} />
       <section>
         <div className={styles.introbox}>
           <div className={styles.intro}>
-            반갑습니다🖐🏻 신입 프론트엔드 개발자 <span>이우진</span>입니다.
+            반갑습니다🖐🏻 프론트엔드 개발자 <span>이우진</span>입니다.
           </div>
         </div>
       </section>
       <section>
         <ul className={styles.introContents}>
-          <li>
-            웹 애플리케이션을 서비스하는 스타트업 기업에서 웹 디자이너로 현장
-            실습을 하면서 개발 분야까지 관심을 가지게 되었습니다.
-          </li>
           <li>
             눈으로 보이는 결과물을 직접 완성해내고 문제를 해결하는 것에 흥미를
             느껴 프론트엔드 개발자의 꿈을 키우게 되었습니다.
@@ -57,21 +66,29 @@ export default function Home() {
       </section>
       <section>
         <div className={styles.title}>Infomation</div>
-        <Information Icon={BsPersonCircle} list="이름" contents=": 이우진" />
+        <Information
+          Icon={BsPersonCircle}
+          list="이름"
+          contents=": 이우진"
+          link={null}
+        />
         <Information
           Icon={BsFillCalendarEventFill}
           list="생년월일"
           contents=": 1996.11.27"
+          link={null}
         />
         <Information
           Icon={BsFillPencilFill}
           list="학력"
           contents=": 부산대학교 디자인학과 디자인앤테크놀로지전공"
+          link={null}
         />
         <Information
           Icon={BsFillEnvelopeFill}
           list="이메일"
           contents=": nijoow1127@gmail.com"
+          link={null}
         />
         <Information
           Icon={BsGithub}
@@ -85,6 +102,10 @@ export default function Home() {
           contents=": @nijoow"
           link="https://prfl.link/@nijoow"
         />
+      </section>
+      <section>
+        <div className={styles.title}>Recent Posts</div>
+        <RecentPosts posts={posts} />
       </section>
       <section>
         <div className={styles.title}>Recently Played Music</div>

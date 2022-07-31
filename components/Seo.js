@@ -1,14 +1,20 @@
 import Head from "next/head";
+import metadata from "data/metadata";
 
-export default function Seo({ title }) {
+export default function Seo({ customMeta }) {
+  const meta = {
+    title: metadata.title,
+    discription: metadata.discription,
+    author: metadata.author,
+    ...customMeta,
+  };
+  let headerTitle = `${meta.title} | nijoow portfolio`;
   return (
     <Head>
-      <title>{title} | nijoow portfolio</title>
+      <title>{headerTitle}</title>
       <link rel="shortcut icon" href="/images/favicon.ico" />
-      <meta
-        name="description"
-        content="신입 프론트엔드 개발자 이우진의 포트폴리오입니다."
-      />
+      <meta content={meta.discription} names="discription" />
+      <meta property="og:site_name" content={meta.author} />
     </Head>
   );
 }
