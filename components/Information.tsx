@@ -1,5 +1,16 @@
 import styles from "../styles/Contents.module.css";
-export default function Information({ Icon, list, contents, link = null }) {
+interface InformationProps {
+  Icon: any;
+  list: string;
+  contents: string;
+  link: string | null;
+}
+export default function Information({
+  Icon,
+  list,
+  contents,
+  link,
+}: InformationProps) {
   return (
     <div className={styles.infomation}>
       <div className={styles.subTitle}>
