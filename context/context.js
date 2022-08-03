@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
   const systemPrefers = useMediaQuery({
     query: "(prefers-color-scheme: dark)",
   });
-  const isMobile = useMediaQuery({ maxDeviceWidth: 480 });
+  // const isMobile = useMediaQuery({ maxDeviceWidth: 480 });
 
   useEffect(() => {
     const osTheme = systemPrefers ? "dark" : "light";

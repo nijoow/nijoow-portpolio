@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../context/context";
+import { UserContext } from "../../context/context";
 const Footer = () => {
   const { currentTheme } = useContext(UserContext);
 

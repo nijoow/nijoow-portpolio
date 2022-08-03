@@ -1,12 +1,12 @@
-import Seo from "../../components/Seo";
+import Seo from "../../components/_common/Seo";
 import Link from "next/link";
 import styles from "../../styles/Contents.module.css";
-import Work from "../../components/Work";
+import Work from "../../components/works/Work";
 import { BsGithub } from "react-icons/bs";
 export default function Pnudt12() {
   return (
     <>
-      <Seo title="Works" />
+      <Seo customMeta={{ title: "Catch The Candy" }} />
       <section>
         <div className={styles.title}>
           <Link href="/works">
@@ -23,7 +23,7 @@ export default function Pnudt12() {
           <Work
             url="https://nijoow.github.io/CatchTheCandy_p5/"
             imgSrc="catchTheCandy.PNG"
-          ></Work>
+          />
           <br />
           <div className={styles.subTitle}>[Explanation]</div>
           <ul className={styles.infoContents}>

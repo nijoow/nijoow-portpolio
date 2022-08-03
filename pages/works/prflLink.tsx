@@ -1,12 +1,12 @@
-import Seo from "../../components/Seo";
+import Seo from "../../components/_common/Seo";
 import Link from "next/link";
 import styles from "../../styles/Contents.module.css";
-import Work from "../../components/Work";
+import Work from "../../components/works/Work";
 
 export default function Pnudt12() {
   return (
     <>
-      <Seo title="Works" />
+      <Seo customMeta={{ title: "prfl link" }} />
       <section>
         <div className={styles.title}>
           <Link href="/works">

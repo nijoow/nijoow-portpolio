@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { UserContext } from "../context/context";
-import styles from "../styles/Contents.module.css";
-// pageName="pnudt12"
-// name="MEMORY"
-// url="https://nijoow.github.io/PNUDT12/"
-// imgSrc="pnudt12.png"
-const Work = ({ url, imgSrc }) => {
+import { UserContext } from "../../context/context";
+import styles from "../../styles/Contents.module.css";
+
+interface WorkProps {
+  url: string;
+  imgSrc: string;
+}
+const Work = ({ url, imgSrc }: WorkProps) => {
   const { prefix } = useContext(UserContext);
 
   return (

@@ -1,9 +1,12 @@
-import Seo from "../components/Seo";
+import Seo from "../components/_common/Seo";
 // import Image from "next/image";
 import { useContext } from "react";
 import { UserContext } from "../context/context";
 import styles from "../styles/Contents.module.css";
-
+interface SkillProps {
+  fileName: string;
+  name: string;
+}
 export default function Skills() {
   const { prefix } = useContext(UserContext);
   const skillsFront = [
@@ -12,10 +15,8 @@ export default function Skills() {
     { id: 3, fileName: "javascript.svg", name: "JAVASCRIPT" },
     { id: 4, fileName: "react.svg", name: "REACT JS" },
     { id: 5, fileName: "sass.svg", name: "SASS" },
-
-    { id: 6, fileName: "bootstrap.svg", name: "BOOTSTRAP" },
+    // { id: 6, fileName: "bootstrap.svg", name: "BOOTSTRAP" },
     { id: 7, fileName: "typescript.svg", name: "TYPESCRIPT" },
-
     { id: 8, fileName: "next.svg", name: "NEXT JS" },
   ];
   const skillsEtc = [
@@ -26,7 +27,7 @@ export default function Skills() {
     { id: 4, fileName: "aftereffect.png", name: "AFTER EFFECT" },
     // /{ id: 6, fileName: "arduino.svg", name: "ARDUINO" },
   ];
-  const Skill = ({ fileName, name }) => {
+  const Skill = ({ fileName, name }: SkillProps) => {
     return (
       <div className={styles.skill}>
         <img
@@ -40,7 +41,7 @@ export default function Skills() {
   };
   return (
     <>
-      <Seo title="Skills" />
+      <Seo customMeta={{ title: "Skills" }} />
       <section>
         <div className={styles.title}>Front-End Skills</div>
         <div className={styles.imageContainer}>

@@ -1,4 +1,4 @@
-import Seo from "../components/Seo";
+import Seo from "../components/_common/Seo";
 import Link from "next/link";
 import styles from "../styles/Contents.module.css";
 import { useContext } from "react";
@@ -40,7 +40,7 @@ export default function Works() {
   const { prefix } = useContext(UserContext);
   return (
     <div>
-      <Seo title="Works" />
+      <Seo customMeta={{ title: "Works" }} />
       <section>
         <div className={styles.title}>
           <Link href="/works">

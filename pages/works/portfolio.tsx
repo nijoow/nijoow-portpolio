@@ -1,18 +1,18 @@
-import Seo from "../../components/Seo";
+import Seo from "../../components/_common/Seo";
 import Link from "next/link";
 import styles from "../../styles/Contents.module.css";
-import Work from "../../components/Work";
+import Work from "../../components/works/Work";
 import { BsGithub } from "react-icons/bs";
 export default function portfolio() {
   return (
     <>
-      <Seo title="Works" />
+      <Seo customMeta={{ title: "Portfolio" }} />
       <section>
-        <div className={styles.title}>
+        <div className="title">
           <Link href="/works">
             <a>Works</a>
           </Link>
-          <span className={styles.workTitle}>
+          <span className="secondTitle">
             &nbsp;&nbsp;&gt;&nbsp;&nbsp;포트폴리오 사이트
           </span>
         </div>
@@ -32,7 +32,7 @@ export default function portfolio() {
             <li>
               <span className={styles.bold}>[주요 기능]</span>
               <br />
-              Next.js 프레임워크를 사용한 Single Page Application
+              - Next.js 프레임워크를 사용한 Single Page Application
               <br />
               - 다양한 동적 요소를 활용한 페이지 구현
               <br />

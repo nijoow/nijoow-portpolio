@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Logo from "./Logo";
+import Logo from "../_common/Logo";
 import { useRouter } from "next/router";
-import styles from "../styles/NavBar.module.css";
+import styles from "../../styles/_common/NavBar.module.css";
 import { MdDarkMode, MdWbSunny } from "react-icons/md";
 import { useContext } from "react";
-import { UserContext } from "../context/context";
+import { UserContext } from "../../context/context";
 import NavToggle from "./NavToggle";
 export default function NavBar() {
   const router = useRouter();
@@ -16,6 +16,7 @@ export default function NavBar() {
   return (
     <nav className={`${styles.nav} ${currentTheme}`}>
       <div className={styles.navBar}>
+        {" "}
         <Link href="/">
           <a>
             <div className={styles.logo}>
@@ -27,18 +28,19 @@ export default function NavBar() {
                   stroke={currentTheme === "dark" ? "#fff" : "#443483"}
                 />
               </div>
-              <span>&apos;S Portfolio</span>
+              <span className={`${styles.angledGradient}`}>
+                &apos;S Portfolio
+              </span>
             </div>
           </a>
         </Link>
         <NavToggle />
         <ul className={isNavShow ? styles.show : styles.noShow}>
-          <li>
+          <li className={`${styles.navLi} `}>
             <Link href="/">
-              <a>
+              <a className="font-bold">
                 <span
-                  className={`
-                  ${router.pathname === "/" ? styles.active : ""}
+                  className={`${router.pathname === "/" ? styles.active : ""} 
                   ${styles.angledGradient} ${styles.underLine}`}
                 >
                   About
@@ -46,15 +48,28 @@ export default function NavBar() {
               </a>
             </Link>
           </li>
-          <li>
+          <li className={`${styles.navLi}`}>
             <Link href="/skills">
-              <a>
+              <a className="font-bold">
                 <span
                   className={`
                   ${router.pathname === "/skills" ? styles.active : ""}
                   ${styles.angledGradient} ${styles.underLine}`}
                 >
                   Skills
+                </span>
+              </a>
+            </Link>
+          </li>
+          <li className={`${styles.navLi}`}>
+            <Link href="/blog">
+              <a>
+                <span
+                  className={`
+                  ${router.pathname.includes("/blog") ? styles.active : ""}
+                  ${styles.angledGradient} ${styles.underLine}`}
+                >
+                  blog
                 </span>
               </a>
             </Link>

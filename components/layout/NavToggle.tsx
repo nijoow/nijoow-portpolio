@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../styles/NavBar.module.css";
+import styles from "../../styles/_common/NavBar.module.css";
 import { useContext } from "react";
-import { UserContext } from "../context/context";
+import { UserContext } from "../../context/context";
 
 const NavToggle = () => {
   const { dispatch } = useContext(UserContext);

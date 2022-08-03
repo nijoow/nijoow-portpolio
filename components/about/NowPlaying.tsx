@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "../styles/Contents.module.css";
+import styles from "../../styles/Contents.module.css";
 import querystring from "querystring";
 import { useContext } from "react";
-import { UserContext } from "../context/context";
+import { UserContext } from "../../context/context";
 
 const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
@@ -83,6 +83,7 @@ export default function NowPlaying() {
   };
   useEffect(() => {
     getNowPlaying();
+    setInterval(() => getNowPlaying(), 60000);
   }, []);
 
   return (

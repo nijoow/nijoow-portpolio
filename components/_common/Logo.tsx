@@ -1,6 +1,11 @@
 import * as React from "react";
-
-const Logo = (props) => (
+interface LogoProps {
+  width: number;
+  height: number;
+  fill: string;
+  stroke: string;
+}
+const Logo = (props: LogoProps) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 108" {...props}>
     <path
       className="a"

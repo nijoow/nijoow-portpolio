@@ -1,4 +1,4 @@
-import styles from "../styles/Contents.module.css";
+import styles from "../../styles/about/About.module.css";
 interface InformationProps {
   Icon: any;
   list: string;
@@ -13,7 +13,7 @@ export default function Information({
 }: InformationProps) {
   return (
     <div className={styles.infomation}>
-      <div className={styles.subTitle}>
+      <div className={styles.infoTitle}>
         {Icon ? <Icon className={styles.icon} /> : ""}
         <span>{list}</span>
       </div>

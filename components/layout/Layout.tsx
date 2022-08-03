@@ -3,28 +3,30 @@ import Footer from "./Footer";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import Lights from "../components/Lights";
-import Nijoow from "../components/Nijoow";
+import Lights from "../_common/Lights";
+import Nijoow from "../_common/Nijoow";
 import { useContext } from "react";
-import { UserContext } from "../context/context";
-import { motion, AnimatePresence } from "framer-motion";
+import { UserContext } from "../../context/context";
+import {
+  AnimatePresence,
+  motion,
+} from "../../node_modules/framer-motion/dist/framer-motion";
 import { useRouter } from "next/router";
-export default function Layout({ children }) {
+interface LayoutProps {
+  children: JSX.Element;
+}
+export default function Layout({ children }: LayoutProps) {
   const { currentTheme } = useContext(UserContext);
   const router = useRouter();
   return (
-    <>
+    <div className="dark">
       <NavBar />
-      <container className={`container ${currentTheme}`}>
+      <div className={`container  ${currentTheme}`}>
         <div>
-          <Canvas
-            colorManagement
-            camera={{ position: [0, 0, 1], fov: 70 }}
-            className="canvas"
-          >
+          <Canvas camera={{ position: [0, 0, 1], fov: 70 }} className="canvas">
             <OrbitControls maxDistance={2} minDistance={0.9} />
             <Lights />
-            <Suspense fallback={null} r3f>
+            <Suspense fallback={null}>
               <Nijoow />
             </Suspense>
           </Canvas>
@@ -42,9 +44,9 @@ export default function Layout({ children }) {
             {children}
           </motion.div>
         </AnimatePresence>
-      </container>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 const variants = {

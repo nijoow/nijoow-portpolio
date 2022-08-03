@@ -1,23 +1,49 @@
 import { allPosts } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
-import BlogPost from "../components/BlogPost";
-import Seo from "../components/Seo";
+import BlogPost from "../components/blog/BlogPost";
+import Seo from "../components/_common/Seo";
+import styles from "../styles/blog/Blog.module.css";
 
+import { useState } from "react";
+const blogCategory = ["all", "html", "css", "javascript"];
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [nowPosts, setNowPosts] = useState(posts);
+  const [selected, setSelected] = useState(0);
+  const filterPost = (value: string, index: number) => {
+    setNowPosts(posts.filter((post) => post.category === value));
+    setSelected(index);
+    if (value === "all") {
+      setNowPosts(posts);
+    }
+  };
   return (
     <div>
       <Seo customMeta={{ title: "Blog" }} />
-      <div className="">
-        {posts.map((post) => (
+      <section>
+        <div className="title">Blog</div>
+        <div className={styles.categories}>
+          <div className={styles.category}>
+            {blogCategory.map((category, index) => (
+              <button
+                onClick={() => filterPost(category, index)}
+                className={index === selected ? styles.selected : ""}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+        {nowPosts.map((post) => (
           <BlogPost
             date={post.date}
             title={post.title}
-            des={post.description}
+            description={post.description}
+            category={post.category}
             slug={post._raw.flattenedPath}
             key={post._id}
           />
         ))}
-      </div>
+      </section>
     </div>
   );
 };

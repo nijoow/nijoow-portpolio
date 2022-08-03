@@ -1,15 +1,21 @@
 import { allPosts } from "contentlayer/generated";
-import { InferGetStaticPropsType } from "next";
+import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from "next";
+import { ParsedUrlQuery } from "querystring";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import Seo from "../../components/Seo";
-export const getStaticPaths = async () => {
+import styles from "../../styles/blog/Blog.module.css";
+import Link from "next/link";
+import Seo from "../../components/_common/Seo";
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: allPosts.map((p) => ({ params: { slug: p._raw.flattenedPath } })),
     fallback: false,
   };
 };
 
-export const getStaticProps = async ({ params }: any) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
   return {
     props: {
@@ -28,10 +34,21 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div>
       <Seo customMeta={customMeta} />
-      <div className="mt-10 prose">
-        <h1 className="text-sky-700">{post.title}</h1>
-        <MDXComponent />
-      </div>
+      <section>
+        <div className="title">
+          <Link href="/blog">
+            <a>Blog</a>
+          </Link>
+
+          {/* <button className={styles.postCategory}>{post.category}</button> */}
+        </div>
+        <div className={styles.postContent}>
+          <button className={styles.postCategory}>{post.category}</button>
+          <div>{post.date}</div>
+          <h1>{post.title}</h1>
+          <MDXComponent />
+        </div>
+      </section>
     </div>
   );
 };
