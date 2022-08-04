@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/context";
-import styles from "../../styles/Contents.module.css";
+import { prefix } from "../../config/config";
+import styles from "../../styles/works/Works.module.css";
 
 interface WorkProps {
   url: string;
   imgSrc: string;
 }
 const Work = ({ url, imgSrc }: WorkProps) => {
-  const { prefix } = useContext(UserContext);
-
   return (
     <div className={styles.card}>
       <img

@@ -1,14 +1,12 @@
-import Seo from "../components/_common/Seo";
-// import Image from "next/image";
-import { useContext } from "react";
-import { UserContext } from "../context/context";
-import styles from "../styles/Contents.module.css";
+import Seo from "../../components/_common/Seo";
+import styles from "../../styles/skills/Skills.module.css";
+import { prefix } from "../../config/config";
+
 interface SkillProps {
   fileName: string;
   name: string;
 }
 export default function Skills() {
-  const { prefix } = useContext(UserContext);
   const skillsFront = [
     { id: 1, fileName: "html.svg", name: "HTML" },
     { id: 2, fileName: "css.svg", name: "CSS" },
@@ -20,7 +18,7 @@ export default function Skills() {
     { id: 8, fileName: "next.svg", name: "NEXT JS" },
   ];
   const skillsEtc = [
-    //{ id: 1, fileName: "git.svg", name: "GIT" },
+    { id: 1, fileName: "git.svg", name: "GIT" },
     { id: 1, fileName: "illustrator.svg", name: "ILLUSTRATOR" },
     { id: 2, fileName: "photoshop.svg", name: "PHOTOSHOP" },
     { id: 3, fileName: "premiere.png", name: "PREMIERE" },
@@ -43,8 +41,8 @@ export default function Skills() {
     <>
       <Seo customMeta={{ title: "Skills" }} />
       <section>
-        <div className={styles.title}>Front-End Skills</div>
-        <div className={styles.imageContainer}>
+        <div className="title">Front-End Skills</div>
+        <div className={styles.skillsContainer}>
           {skillsFront.map((skill) => {
             return (
               <Skill
@@ -55,8 +53,8 @@ export default function Skills() {
             );
           })}
         </div>
-        <div className={styles.title}>Etc Skills</div>
-        <div className={styles.imageContainer}>
+        <div className="title">Etc Skills</div>
+        <div className={styles.skillsContainer}>
           {skillsEtc.map((skill) => {
             return (
               <Skill

@@ -1,4 +1,4 @@
-import styles from "../../styles/about/About.module.css";
+import styles from "../../styles/home/Home.module.css";
 interface InformationProps {
   Icon: any;
   list: string;

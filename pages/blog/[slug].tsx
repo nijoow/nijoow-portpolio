@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
+  const post = allPosts.find((p) => p._raw.flattenedPath === params?.slug);
   return {
     props: {
       post,
@@ -39,8 +39,6 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <Link href="/blog">
             <a>Blog</a>
           </Link>
-
-          {/* <button className={styles.postCategory}>{post.category}</button> */}
         </div>
         <div className={styles.postContent}>
           <button className={styles.postCategory}>{post.category}</button>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/about/About.module.css";
+import styles from "../../styles/home/Home.module.css";
 import BlogPost from "../blog/BlogPost";
 const RecentPosts = ({ posts }: any) => {
   return (

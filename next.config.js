@@ -1,9 +1,8 @@
-const debug = process.env.NODE_ENV !== "production";
-/**
- * @type {import('next').NextConfig}
- */
-const nextConfig = {
-  assetPrefix: !debug ? "https://nijoow.github.io/" : "",
-};
+// const debug = process.env.NODE_ENV !== "production";
 
-module.exports = nextConfig;
+// export const prefix =
+//   process.env.NODE_ENV === "production" ? "https://nijoow.github.io/" : "";
+
+// module.exports = {
+//   assetPrefix: !debug ? "https://nijoow.github.io/" : "",
+// };

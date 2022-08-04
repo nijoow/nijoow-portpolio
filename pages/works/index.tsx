@@ -1,9 +1,8 @@
-import Seo from "../components/_common/Seo";
+import Seo from "../../components/_common/Seo";
 import Link from "next/link";
-import styles from "../styles/Contents.module.css";
-import { useContext } from "react";
-import { UserContext } from "../context/context";
-// import Image from "next/image";
+import styles from "../../styles/works/Works.module.css";
+import { prefix } from "../../config/config";
+
 const works = [
   {
     id: 1,
@@ -37,12 +36,11 @@ const works = [
 
 //
 export default function Works() {
-  const { prefix } = useContext(UserContext);
   return (
     <div>
       <Seo customMeta={{ title: "Works" }} />
       <section>
-        <div className={styles.title}>
+        <div className="title">
           <Link href="/works">
             <a>Works</a>
           </Link>{" "}

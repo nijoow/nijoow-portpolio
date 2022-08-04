@@ -1,15 +1,15 @@
-import Layout from "../components/layout/Layout";
-import Head from "next/head";
+import Layout from "../components/_common/layout/Layout";
 import "../styles/_common/globals.css";
-import { UserProvider } from "../context/context";
 import type { AppProps } from "next/app";
+import { store } from "../store/config";
+import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
+    <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </UserProvider>
+    </Provider>
   );
 }

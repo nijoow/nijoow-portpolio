@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/Contents.module.css";
+import styles from "../../styles/ahome/Home.module.css";
 import querystring from "querystring";
-import { useContext } from "react";
-import { UserContext } from "../../context/context";
-
 const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN;
@@ -33,7 +30,12 @@ export const getAccessToken = async () => {
 };
 
 export default function NowPlaying() {
-  const { dispatch, recentlyPlayed } = useContext(UserContext);
+  const [recentlyPlayed, setRecentlyPlayedMusic] = useState({
+    title: undefined,
+    artist: undefined,
+    albumImageUrl: undefined,
+    songUrl: undefined,
+  });
   const getNowPlaying = async () => {
     const { access_token } = await getAccessToken();
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
@@ -43,14 +45,11 @@ export default function NowPlaying() {
     })
       .then((res) => res.json())
       .then((song) => {
-        dispatch({
-          type: "setSong",
-          value: {
-            title: song.item.name,
-            artist: song.item.artists[0].name,
-            albumImageUrl: song.item.album.images[0].url,
-            songUrl: song.item.external_urls.spotify,
-          },
+        setRecentlyPlayedMusic({
+          title: song.item.name,
+          artist: song.item.artists[0].name,
+          albumImageUrl: song.item.album.images[0].url,
+          songUrl: song.item.external_urls.spotify,
         });
       })
       .catch((e) => {
@@ -67,14 +66,11 @@ export default function NowPlaying() {
     })
       .then((res) => res.json())
       .then((song) => {
-        dispatch({
-          type: "setSong",
-          value: {
-            title: song.items[0].track.name,
-            artist: song.items[0].track.artists[0].name,
-            albumImageUrl: song.items[0].track.album.images[0].url,
-            songUrl: song.items[0].track.external_urls.spotify,
-          },
+        setRecentlyPlayedMusic({
+          title: song.items[0].track.name,
+          artist: song.items[0].track.artists[0].name,
+          albumImageUrl: song.items[0].track.album.images[0].url,
+          songUrl: song.items[0].track.external_urls.spotify,
         });
       })
       .catch((e) => {

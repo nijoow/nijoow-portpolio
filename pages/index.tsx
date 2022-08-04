@@ -1,6 +1,6 @@
-import Seo from "../components/Seo";
-import styles from "../styles/Contents.module.css";
-import Information from "../components/Information";
+import Seo from "../components/_common/Seo";
+import styles from "../styles/home/Home.module.css";
+import Information from "../components/home/Information";
 import {
   BsPersonCircle,
   BsFillCalendarEventFill,
@@ -9,11 +9,10 @@ import {
   BsFillPencilFill,
   BsLink45Deg,
 } from "react-icons/bs";
-import NowPlaying from "../components/NowPlaying";
+import NowPlaying from "../components/home/NowPlaying";
 import { GiBasketballBall, GiMusicalNotes } from "react-icons/Gi";
 import { allPosts } from "contentlayer/generated";
-import RecentPosts from "../components/RecentPosts";
-import { useEffect } from "react";
+import RecentPosts from "../components/home/RecentPosts";
 export const getStaticProps = async () => {
   const posts = allPosts.sort(
     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
@@ -26,9 +25,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ posts }: any) {
-  useEffect(() => {
-    console.log(posts);
-  }, []);
   return (
     <div>
       <Seo customMeta={{ title: "Home" }} />
@@ -65,7 +61,7 @@ export default function Home({ posts }: any) {
         </ul>
       </section>
       <section>
-        <div className={styles.title}>Infomation</div>
+        <div className="title">Infomation</div>
         <Information
           Icon={BsPersonCircle}
           list="이름"
@@ -104,11 +100,11 @@ export default function Home({ posts }: any) {
         />
       </section>
       <section>
-        <div className={styles.title}>Recent Posts</div>
+        <div className="title">Recent Posts</div>
         <RecentPosts posts={posts} />
       </section>
       <section>
-        <div className={styles.title}>Recently Played Music</div>
+        <div className="title">Recently Played Music</div>
 
         <NowPlaying />
       </section>

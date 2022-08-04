@@ -1,6 +1,6 @@
 import Seo from "../../components/_common/Seo";
 import Link from "next/link";
-import styles from "../../styles/Contents.module.css";
+import styles from "../../styles/works/Works.module.css";
 import Work from "../../components/works/Work";
 import { BsGithub } from "react-icons/bs";
 export default function portfolio() {
@@ -24,13 +24,13 @@ export default function portfolio() {
           <div className={styles.subTitle}>[Explanation]</div>
           <ul className={styles.infoContents}>
             <li>
-              <span className={styles.bold}> 개인 포트폴리오 사이트</span>
+              <span className="bold"> 개인 포트폴리오 사이트</span>
               <br />- 저에 대한 소개와 경험했던 프로젝트를 모아놓은 포트폴리오
               사이트입니다.
               <br />- 다양한 기능을 추가해보며 업데이트하고 있습니다.
             </li>
             <li>
-              <span className={styles.bold}>[주요 기능]</span>
+              <span className="bold">[주요 기능]</span>
               <br />
               - Next.js 프레임워크를 사용한 Single Page Application
               <br />
@@ -45,7 +45,7 @@ export default function portfolio() {
               <br />- Spotify API를 사용하여 최근에 들은 음악 소개
             </li>
             <li>
-              <span className={styles.bold}>[기술 스택]</span>
+              <span className="bold">[기술 스택]</span>
               <br />- React / Next.js / SASS / three.js
             </li>
             <li></li>
@@ -55,7 +55,7 @@ export default function portfolio() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className={styles.btn}>
+            <button className="btn">
               <BsGithub />
               &nbsp; Github
             </button>

@@ -1,8 +1,8 @@
 import { allPosts } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
-import BlogPost from "../components/blog/BlogPost";
-import Seo from "../components/_common/Seo";
-import styles from "../styles/blog/Blog.module.css";
+import BlogPost from "../../components/blog/BlogPost";
+import Seo from "../../components/_common/Seo";
+import styles from "../../styles/blog/Blog.module.css";
 
 import { useState } from "react";
 const blogCategory = ["all", "html", "css", "javascript"];
