@@ -1,0 +1,116 @@
+.gridContainer {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(40%, auto))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(40%, auto));
+  gap: 20px;
+}
+
+.card {
+  margin: 0 auto;
+  max-width: 768px;
+  width: 90vw;
+  height: calc(90 / 16 * 9vw);
+  max-height: 432px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.2);
+          box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.2);
+}
+
+.card .cardOverlay {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.card .cardOverlay span {
+  font-size: 1.3em;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.card :hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardMini {
+  width: 368px;
+  height: 198px;
+}
+
+.workInfomation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  vertical-align: middle;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+.workInfomation .subTitle {
+  width: 100%;
+  text-align: left;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--theme-highlight-color);
+  margin-bottom: 10px;
+}
+
+.workInfomation .infoContents {
+  text-align: left;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.workInfomation .infoContents li {
+  margin: 0 0 10px 0;
+  padding: 0px;
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    -ms-grid-columns: (minmax(50%, auto))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+  }
+  .card .cardImg {
+    width: inherit;
+    height: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridContainer {
+    -ms-grid-columns: (minmax(50%, auto))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+  }
+  .cardMini {
+    width: 90vw;
+    height: calc(90 / 16 * 9vw);
+  }
+}
+/*# sourceMappingURL=Works.module.css.map */

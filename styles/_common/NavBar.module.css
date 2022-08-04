@@ -119,10 +119,20 @@
           transform: scaleX(0);
   -webkit-transform-origin: right;
           transform-origin: right;
+  opacity: 0.6;
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.nav .navBar li .active.underLine::after {
+  background: var(--theme-gradient-active);
+  opacity: 1;
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
 }
 
 .nav .navBar li :hover .underLine::after {
@@ -164,7 +174,7 @@
   transition: all 0.2s;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .nav {
     width: 100%;
     padding: 0;
@@ -239,17 +249,15 @@
             transform: translateY(50%) rotate(-225deg);
   }
   .nav .navBar .show {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
     opacity: 1;
   }
   .nav .navBar ul {
     position: absolute;
     background-color: var(--theme-nav-background);
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%);
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
+    z-index: -10;
+    opacity: 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

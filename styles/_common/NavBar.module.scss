@@ -84,8 +84,15 @@
         background: var(--theme-gradient-text);
         transform: scaleX(0);
         transform-origin: right;
-
+        opacity:0.6;
         transition: transform 0.3s ease-in-out;
+      }
+      .active.underLine::after {
+        background: var(--theme-gradient-active);
+        opacity:1;
+
+        transform: scaleX(1);
+        transform-origin: left;
       }
       :hover .underLine::after {
         transform: scaleX(1);
@@ -118,7 +125,7 @@
     }
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .nav {
     width: 100%;
     padding: 0;
@@ -180,16 +187,16 @@
       }
 
       .show {
-        transform: translateX(0);
+        //transform: translateY(0%);
         opacity: 1;
       }
       ul {
         position: absolute;
         background-color: var(--theme-nav-background);
-        transform: translateX(100%);
+        //transform: translateY(-100%);
         transition: all 0.3s;
-
-        //opacity: 0;
+        z-index: -10;
+        opacity: 0;
         display: flex;
         right: 0;
         top: 99%;
