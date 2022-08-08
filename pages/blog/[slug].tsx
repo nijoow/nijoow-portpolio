@@ -40,10 +40,13 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
             <a>Blog</a>
           </Link>
         </div>
-        <div className={styles.postContent}>
-          <button className={styles.postCategory}>{post.category}</button>
-          <div>{post.date}</div>
-          <h1>{post.title}</h1>
+        <div className={`${styles.postContent} markdown-body`}>
+          <div className={styles.postInfo}>
+            <div className={styles.postDate}>{post.date}</div>
+            <button className={styles.postCategory}>{post.category}</button>
+          </div>
+          <h1 className={styles.postTitle}>{post.title}</h1>
+
           <MDXComponent />
         </div>
       </section>

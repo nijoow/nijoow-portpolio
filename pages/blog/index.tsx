@@ -3,9 +3,8 @@ import { InferGetStaticPropsType } from "next";
 import BlogPost from "../../components/blog/BlogPost";
 import Seo from "../../components/_common/Seo";
 import styles from "../../styles/blog/Blog.module.css";
-
-import { useState } from "react";
-const blogCategory = ["all", "html", "css", "javascript"];
+import { useState, useEffect } from "react";
+const blogCategory = ["all", "html", "css", "javascript", "typescript"];
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [nowPosts, setNowPosts] = useState(posts);
   const [selected, setSelected] = useState(0);
@@ -27,6 +26,7 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
               <button
                 onClick={() => filterPost(category, index)}
                 className={index === selected ? styles.selected : ""}
+                key={index}
               >
                 {category}
               </button>

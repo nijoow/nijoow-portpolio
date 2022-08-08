@@ -77,11 +77,31 @@
   background: var(--theme-highlight-color);
 }
 
-.postCategory {
-  -webkit-transform: translateY(-15px);
-          transform: translateY(-15px);
+.postInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.postInfo .postCategory {
+  margin-left: 1rem;
   color: #fff;
   background: var(--theme-highlight-color);
+}
+
+.postInfo .postDate {
+  font-weight: bold;
+}
+
+.postTitle {
+  margin-top: 5px !important;
+  color: var(--theme-highlight-color);
 }
 
 .postContent {
