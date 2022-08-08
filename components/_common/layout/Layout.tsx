@@ -29,10 +29,8 @@ export default function Layout({ children }: LayoutProps) {
     const userTheme = localStorage.getItem("color-theme");
     const theme = userTheme || osTheme;
     dispatch(setTheme(theme));
-    console.log(systemPrefers, osTheme, userTheme, currentTheme);
-  }, [systemPrefers]);
+  }, [systemPrefers, currentTheme, dispatch]);
 
-  // const { currentTheme } = useContext(UserContext);
   const router = useRouter();
   return (
     <div className="dark">
