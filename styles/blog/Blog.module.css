@@ -30,9 +30,10 @@
   margin-right: 1rem;
 }
 
-.post .postRow .category {
+.post .postRow .postCategory {
   color: #fff;
   background: var(--theme-highlight-color);
+  margin-right: 1rem;
 }
 
 .post .description {

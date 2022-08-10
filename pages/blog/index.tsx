@@ -4,12 +4,26 @@ import BlogPost from "../../components/blog/BlogPost";
 import Seo from "../../components/_common/Seo";
 import styles from "../../styles/blog/Blog.module.css";
 import { useState, useEffect } from "react";
-const blogCategory = ["all", "html", "css", "javascript", "typescript"];
+const blogCategory = [
+  "all",
+  "html",
+  "css",
+  "javascript",
+  "react",
+  "typescript",
+  "library",
+];
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [nowPosts, setNowPosts] = useState(posts);
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    console.log(posts);
+  }, []);
   const filterPost = (value: string, index: number) => {
-    setNowPosts(posts.filter((post) => post.category === value));
+    setNowPosts(
+      posts.filter((post) => post.category.split(", ").includes(value))
+    );
     setSelected(index);
     if (value === "all") {
       setNowPosts(posts);

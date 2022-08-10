@@ -43,7 +43,12 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <div className={`${styles.postContent} markdown-body`}>
           <div className={styles.postInfo}>
             <div className={styles.postDate}>{post.date}</div>
-            <button className={styles.postCategory}>{post.category}</button>
+            {post.category.split(", ").map((item: string, index: number) => (
+              <button className={styles.postCategory} key={index}>
+                {item}
+              </button>
+            ))}
+            {/* <button className={styles.postCategory}>{post.category}</button> */}
           </div>
           <h1 className={styles.postTitle}>{post.title}</h1>
 
