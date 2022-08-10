@@ -5,6 +5,9 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import styles from "../../styles/blog/Blog.module.css";
 import Link from "next/link";
 import Seo from "../../components/_common/Seo";
+import { useAppDispatch, useAppSelector } from "../../store/config";
+import { setCategory } from "../../store/slices/categorySlice";
+
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }
@@ -25,11 +28,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const dispatch = useAppDispatch();
+
   const customMeta = {
     title: post.title,
     description: post.description,
     date: new Date(post.date).toISOString(),
   };
+
   const MDXComponent = useMDXComponent(post.body.code);
   return (
     <div>
@@ -44,9 +50,18 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <div className={styles.postInfo}>
             <div className={styles.postDate}>{post.date}</div>
             {post.category.split(", ").map((item: string, index: number) => (
-              <button className={styles.postCategory} key={index}>
-                {item}
-              </button>
+              <Link href="/blog">
+                <button
+                  className={styles.postCategory}
+                  key={index}
+                  onClick={() => {
+                    console.log("@");
+                    dispatch(setCategory(item));
+                  }}
+                >
+                  {item}
+                </button>
+              </Link>
             ))}
             {/* <button className={styles.postCategory}>{post.category}</button> */}
           </div>

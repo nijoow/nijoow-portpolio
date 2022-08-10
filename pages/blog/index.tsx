@@ -4,6 +4,9 @@ import BlogPost from "../../components/blog/BlogPost";
 import Seo from "../../components/_common/Seo";
 import styles from "../../styles/blog/Blog.module.css";
 import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/config";
+import { setCategory } from "../../store/slices/categorySlice";
+
 const blogCategory = [
   "all",
   "html",
@@ -16,19 +19,25 @@ const blogCategory = [
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [nowPosts, setNowPosts] = useState(posts);
   const [selected, setSelected] = useState(0);
+  const { currentCategory } = useAppSelector((state) => state.category);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(posts);
-  }, []);
-  const filterPost = (value: string, index: number) => {
+    console.log(currentCategory);
     setNowPosts(
-      posts.filter((post) => post.category.split(", ").includes(value))
+      posts.filter((post) =>
+        post.category.split(", ").includes(currentCategory)
+      )
     );
-    setSelected(index);
-    if (value === "all") {
+    blogCategory.forEach((category, index) => {
+      if (category === currentCategory) setSelected(index);
+      return;
+    });
+    if (currentCategory === "all") {
       setNowPosts(posts);
     }
-  };
+  }, [currentCategory]);
+
   return (
     <div>
       <Seo customMeta={{ title: "Blog" }} />
@@ -38,7 +47,10 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <div className={styles.category}>
             {blogCategory.map((category, index) => (
               <button
-                onClick={() => filterPost(category, index)}
+                onClick={() => {
+                  dispatch(setCategory(category));
+                  // setSelected(index);
+                }}
                 className={index === selected ? styles.selected : ""}
                 key={index}
               >

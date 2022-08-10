@@ -148,12 +148,7 @@
 }
 
 .recentPosts {
-  display: -ms-grid;
-  display: grid;
   width: 100%;
-  gap: 1rem;
-  -ms-grid-columns: (minmax(0, 1fr))[1];
-      grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .recentPosts .postTitle {
@@ -266,17 +261,6 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-  }
-  .recentPosts {
-    -ms-grid-columns: (minmax(0, 1fr))[1];
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .recentPosts {
-    -ms-grid-columns: (minmax(0, 1fr))[1];
-        grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 /*# sourceMappingURL=Home.module.css.map */

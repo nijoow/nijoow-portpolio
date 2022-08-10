@@ -2,10 +2,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 import themeSlice from "./slices/themeSlice";
+import categorySlice from "./slices/categorySlice";
 const logger = createLogger();
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
+  category: categorySlice.reducer,
 });
 
 const initialState = {};

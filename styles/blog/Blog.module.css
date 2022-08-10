@@ -1,7 +1,7 @@
 .post {
   display: block;
   width: 94%;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   background: var(--theme-box-background);
   -webkit-box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.3);
           box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.3);

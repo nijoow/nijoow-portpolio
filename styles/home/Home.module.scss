@@ -119,11 +119,8 @@
 
 
 .recentPosts {
-    display: grid;
+    
     width: 100%;
-    gap: 1rem;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-
     .postTitle {
         font-size: 2rem;
         font-weight: bold;
@@ -221,15 +218,5 @@
             }
         }
     }
-
-
-    .recentPosts {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
 }
 
-@media (max-width: 768px) {
-    .recentPosts {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-}

@@ -3,8 +3,8 @@ import styles from "../../styles/home/Home.module.css";
 import BlogPost from "../blog/BlogPost";
 const RecentPosts = ({ posts }: any) => {
   return (
-    <div className={styles.recentPosts}>
-      {posts.slice(0, 5).map((post: any) => (
+    <>
+      {posts.slice(0, 3).map((post: any) => (
         <BlogPost
           date={post.date}
           title={post.title}
@@ -13,21 +13,8 @@ const RecentPosts = ({ posts }: any) => {
           slug={post._raw.flattenedPath}
           key={post._id}
         />
-        // <div>
-        //   <Link
-        //     key={post._id}
-        //     href={`/blog/${post._raw.flattenedPath}`}
-        //     passHref
-        //   >
-        //     <a>
-        //       <div className={styles.postTitle}>{post.title}</div>
-        //       <div className={styles.description}>{post.description}</div>
-        //       <div className={styles.date}>{post.date}</div>
-        //     </a>
-        //   </Link>
-        // </div>
       ))}
-    </div>
+    </>
   );
 };
 
