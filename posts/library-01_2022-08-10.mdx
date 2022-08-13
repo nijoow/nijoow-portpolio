@@ -28,15 +28,16 @@ yarn add react-daum-postcode
 `DaumPostcodeEmbed` 컴포넌트를 사용하여, 우편번호 검색 서비스를 임베드 방식으로 사용할 수 있습니다.
 
 ```jsx
+// Postcode.jsx
 import React from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
-const Postcode = () => {
+const Postcode = ({ address, setAddress }) => {
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
 
-    // 도로명 주소에 법정동/법정리/건물명이 있는 경우 전체 주소로 합쳐주는 과정
+    // 도로명 주소와 함께 법정동/법정리/건물명이 있는 경우 전체 주소로 합쳐주는 과정
     if (data.addressType === "R") {
       if (data.bname !== "") {
         extraAddress += data.bname;
@@ -48,10 +49,55 @@ const Postcode = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    setAddress({
+      ...address,
+      fullAddress: fullAddress,
+      postcode: data.zonecode,
+    });
   };
 
   return <DaumPostcodeEmbed onComplete={handleComplete} />;
+};
+```
+
+```jsx
+// AddressForm.jsx
+import { useState } from "react";
+import Postcode from "./Postcode";
+
+const AddressForm = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [address, setAddress] = useState({
+    fullAddress: undefined,
+    postcode: undefined,
+    detailAddress: undefined,
+  });
+  return (
+    <form>
+      <input
+        type="number"
+        placeholder="우편번호"
+        value={address.postcode}
+        readOnly
+      />
+      <input
+        type="text"
+        placeholder="주소"
+        value={address.fullAddress}
+        readOnly
+      />
+      <input
+        type="text"
+        placeholder="상세주소"
+        value={address.detailAddress}
+        onChange={(e) =>
+          setAddress({ ...address, detailAddress: e.target.value })
+        }
+      />
+      <button onClick={() => setModalOpen(!modalOpen)}>주소찾기</button>
+      {modalOpen && <Postcode address={address} setAddress={setAddress} />}
+    </form>
+  );
 };
 ```
 
