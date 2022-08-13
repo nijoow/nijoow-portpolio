@@ -50,12 +50,10 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <div className={styles.postInfo}>
             <div className={styles.postDate}>{post.date}</div>
             {post.category.split(", ").map((item: string, index: number) => (
-              <Link href="/blog">
+              <Link href="/blog" key={index}>
                 <button
                   className={styles.postCategory}
-                  key={index}
                   onClick={() => {
-                    console.log("@");
                     dispatch(setCategory(item));
                   }}
                 >
@@ -63,10 +61,8 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
                 </button>
               </Link>
             ))}
-            {/* <button className={styles.postCategory}>{post.category}</button> */}
           </div>
           <h1 className={styles.postTitle}>{post.title}</h1>
-
           <MDXComponent />
         </div>
       </section>

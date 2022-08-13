@@ -23,7 +23,6 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(currentCategory);
     setNowPosts(
       posts.filter((post) =>
         post.category.split(", ").includes(currentCategory)
@@ -51,7 +50,9 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
                   dispatch(setCategory(category));
                   // setSelected(index);
                 }}
-                className={index === selected ? styles.selected : ""}
+                className={`${styles.categoryBtn} ${
+                  index === selected ? styles.selected : ""
+                }`}
                 key={index}
               >
                 {category}

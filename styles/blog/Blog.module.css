@@ -66,11 +66,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
 .category button {
-  margin: 0 1rem;
+  margin: 0.5rem 1rem;
 }
 
 .selected {
@@ -107,6 +109,6 @@
 
 .postContent {
   width: 100%;
-  text-align: justify;
+  text-align: inherit;
 }
 /*# sourceMappingURL=Blog.module.css.map */
