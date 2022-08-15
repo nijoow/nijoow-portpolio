@@ -33,7 +33,7 @@ export default function Layout({ children }: LayoutProps) {
 
   const router = useRouter();
   return (
-    <div className="dark">
+    <div>
       <NavBar />
       <div className={`container  ${currentTheme}`}>
         <div>

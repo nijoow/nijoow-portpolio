@@ -102,6 +102,7 @@
   line-height: 1.5;
   word-wrap: break-word;
   word-break: keep-all;
+  transition: all 0.3s;
 }
 .markdown-body .octicon {
   display: inline-block;
@@ -926,6 +927,8 @@
   font-size: 85%;
   line-height: 1.45;
   background-color: var(--color-canvas-subtle);
+  background-color: #1c1d21;
+
   border-radius: 6px;
 }
 

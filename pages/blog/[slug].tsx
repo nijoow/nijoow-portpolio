@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { allPosts } from "contentlayer/generated";
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
@@ -7,10 +8,10 @@ import Link from "next/link";
 import Seo from "../../components/_common/Seo";
 import { useAppDispatch, useAppSelector } from "../../store/config";
 import { setCategory } from "../../store/slices/categorySlice";
+import { setTheme } from "../../store/slices/themeSlice";
+import hljs from "highlight.js/lib/common";
+import "../../node_modules/highlight.js/styles/base16/dracula.css";
 
-interface IParams extends ParsedUrlQuery {
-  slug: string;
-}
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: allPosts.map((p) => ({ params: { slug: p._raw.flattenedPath } })),
@@ -29,13 +30,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const dispatch = useAppDispatch();
+  const { currentTheme } = useAppSelector((state) => state.theme);
 
   const customMeta = {
     title: post.title,
     description: post.description,
     date: new Date(post.date).toISOString(),
   };
-
+  useEffect(() => {
+    hljs.initHighlightingOnLoad();
+  }, [currentTheme]);
   const MDXComponent = useMDXComponent(post.body.code);
   return (
     <div>
