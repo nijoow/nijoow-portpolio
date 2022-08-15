@@ -18,7 +18,7 @@ react-daum-postcode는 React 환경에서 Daum 우편번호 검색 서비스를 
 
 ### Install
 
-```
+```bash
 npm install react-daum-postcode
 yarn add react-daum-postcode
 ```
@@ -32,7 +32,7 @@ yarn add react-daum-postcode
 import React from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
-const Postcode = ({ address, setAddress }) => {
+export const Postcode = ({ address, setAddress }) => {
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -65,7 +65,7 @@ const Postcode = ({ address, setAddress }) => {
 import { useState } from "react";
 import Postcode from "./Postcode";
 
-const AddressForm = () => {
+export const AddressForm = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [address, setAddress] = useState({
     fullAddress: undefined,
@@ -107,9 +107,9 @@ postcode의 자세한 생성자 속성들은 <a href="https://postcode.map.daum.
 
 > ### **Reference**
 >
-> - <a href="https://www.npmjs.com/package/react-daum-postcode" target="_blank">
->     react-daum-postcode - npm
->   </a>
-> - <a href="https://postcode.map.daum.net/guide" target="_blank">
->     Daum 우편번호 서비스 가이드
->   </a>
+> <a href="https://www.npmjs.com/package/react-daum-postcode" target="_blank">
+>   react-daum-postcode - npm
+> </a>
+> <a href="https://postcode.map.daum.net/guide" target="_blank">
+>   Daum 우편번호 서비스 가이드
+> </a>
