@@ -4,7 +4,7 @@ import BlogPost from "../blog/BlogPost";
 const RecentPosts = ({ posts }: any) => {
   return (
     <>
-      {posts.slice(0, 3).map((post: any) => (
+      {posts.slice(0, 5).map((post: any) => (
         <BlogPost
           date={post.date}
           title={post.title}
