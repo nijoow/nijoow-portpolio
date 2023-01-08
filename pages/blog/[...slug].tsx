@@ -14,13 +14,24 @@ import "../../node_modules/highlight.js/styles/base16/dracula.css";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: allPosts.map((p) => ({ params: { slug: p._raw.flattenedPath } })),
+    paths: allPosts.map((p) => ({
+      params: {
+        slug: p._raw.flattenedPath.split("/").map((element) => String(element)),
+      },
+    })),
     fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = allPosts.find((p) => p._raw.flattenedPath === params?.slug);
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: {
+  params: { slug: string[] };
+}) => {
+  const post = allPosts.find(
+    (p) => p._raw.flattenedPath === params.slug.join("/")
+  );
+
   return {
     props: {
       post,

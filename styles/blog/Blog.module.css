@@ -1,5 +1,11 @@
 .post {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 94%;
   margin: 1rem 0;
   background: var(--theme-box-background);
@@ -9,6 +15,18 @@
   padding: 3% 3% 2% 3%;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  gap: 1rem;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.post .postTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
 }
 
 .post .postRow {
@@ -19,15 +37,13 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.5rem;
+  gap: 1rem;
 }
 
-.post .postRow .postTitle {
-  font-size: 2rem;
-  font-weight: bold;
+.post .postRow .date {
+  font-size: 1.3rem;
+  opacity: 0.6;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin-right: 1rem;
 }
 
 .post .postRow .postCategory {
@@ -44,15 +60,9 @@
   margin-bottom: 0.5rem;
 }
 
-.post .date {
-  font-size: 1.3rem;
-  opacity: 0.6;
-  white-space: nowrap;
-}
-
 .post:hover {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   -webkit-transform: scale(1.03);
           transform: scale(1.03);
 }
