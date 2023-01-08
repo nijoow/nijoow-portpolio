@@ -12,18 +12,13 @@ export default function Skills() {
     { id: 2, fileName: "css.svg", name: "CSS" },
     { id: 3, fileName: "javascript.svg", name: "JAVASCRIPT" },
     { id: 4, fileName: "react.svg", name: "REACT JS" },
-    { id: 5, fileName: "sass.svg", name: "SASS" },
-    // { id: 6, fileName: "bootstrap.svg", name: "BOOTSTRAP" },
-    { id: 7, fileName: "typescript.svg", name: "TYPESCRIPT" },
-    { id: 8, fileName: "next.svg", name: "NEXT JS" },
+    { id: 5, fileName: "typescript.svg", name: "TYPESCRIPT" },
+    { id: 6, fileName: "next.svg", name: "NEXT JS" },
   ];
   const skillsEtc = [
     { id: 1, fileName: "git.svg", name: "GIT" },
-    { id: 1, fileName: "illustrator.svg", name: "ILLUSTRATOR" },
-    { id: 2, fileName: "photoshop.svg", name: "PHOTOSHOP" },
-    { id: 3, fileName: "premiere.png", name: "PREMIERE" },
-    { id: 4, fileName: "aftereffect.png", name: "AFTER EFFECT" },
-    // /{ id: 6, fileName: "arduino.svg", name: "ARDUINO" },
+    { id: 2, fileName: "illustrator.svg", name: "ILLUSTRATOR" },
+    { id: 3, fileName: "photoshop.svg", name: "PHOTOSHOP" },
   ];
   const Skill = ({ fileName, name }: SkillProps) => {
     return (
