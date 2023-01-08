@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "../../styles/works/Works.module.css";
 import Work from "../../components/works/Work";
 import { BsGithub } from "react-icons/bs";
-export default function portfolio() {
+export default function PortfolioPage() {
   return (
     <>
       <Seo customMeta={{ title: "Portfolio" }} />
@@ -30,24 +30,25 @@ export default function portfolio() {
               <br />- 다양한 기능을 추가해보며 업데이트하고 있습니다.
             </li>
             <li>
+              <span className="bold">[기술 스택]</span>
+              <br />- Next.js, Typescript, SCSS
+            </li>
+            <li>
               <span className="bold">[주요 기능]</span>
               <br />
-              - Next.js 프레임워크를 사용한 Single Page Application
+              - Next.js 프레임워크를 사용한 SPA 개발
               <br />
-              - 다양한 동적 요소를 활용한 페이지 구현
+              - CSS Transition을 통한 interactive 한 웹 페이지
               <br />
-              - 반응형 CSS 마크업
+              - 반응형 웹 CSS 마크업
               <br />
               - 시스템 테마에 따른 다크모드 및 토글 기능
               <br />
-              - canvas와 three.js를 사용하여 blender로 제작한 3D 로고 오브젝트
-              렌더링
-              <br />- Spotify API를 사용하여 최근에 들은 음악 소개
+              - canvas와 three.js를 사용한 3D 오브젝트 렌더링
+              <br />- spotify open API를 연동하여 최근에 들은 음악 소개
+              <br />- markdown 파일을 통한 블로그 포스팅 기능
             </li>
-            <li>
-              <span className="bold">[기술 스택]</span>
-              <br />- React / Next.js / SASS / three.js
-            </li>
+
             <li></li>
           </ul>
           <a

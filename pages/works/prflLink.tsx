@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "../../styles/works/Works.module.css";
 import Work from "../../components/works/Work";
 
-export default function Pnudt12() {
+export default function PrflLinkPage() {
   return (
     <>
       <Seo customMeta={{ title: "prfl link" }} />

@@ -12,11 +12,33 @@ const works = [
     imgSrc: "portfolio.PNG",
   },
   {
+    id: 5,
+    pageName: "treenow",
+    name: "Treenow",
+    url: "https://nijoow.github.io/CatchTheCandy_p5/",
+    imgSrc: "",
+  },
+  {
+    id: 6,
+    pageName: "nijoow-music",
+    name: "nijoow-music",
+    url: "https://nijoow-music.vercel.app/",
+    imgSrc: "",
+  },
+  {
     id: 2,
-    pageName: "pnudt12",
+    pageName: "pnudt",
     name: "MEMORY",
     url: "https://nijoow.github.io/PNUDT12/",
     imgSrc: "pnudt12.png",
+  },
+
+  {
+    id: 4,
+    pageName: "catchTheCandy",
+    name: "CATCH THE CANDY",
+    url: "https://nijoow.github.io/CatchTheCandy_p5/",
+    imgSrc: "catchTheCandy.PNG",
   },
   {
     id: 3,
@@ -24,13 +46,6 @@ const works = [
     name: "prfl.link",
     url: "https://prfl.link/",
     imgSrc: "prflLink.PNG",
-  },
-  {
-    id: 4,
-    pageName: "catchTheCandy",
-    name: "CATCH THE CANDY",
-    url: "https://nijoow.github.io/CatchTheCandy_p5/",
-    imgSrc: "catchTheCandy.PNG",
   },
 ];
 
@@ -52,18 +67,16 @@ export default function Works() {
                 className={`${styles.card} ${styles.cardMini}`}
                 key={work.id}
               >
-                <img
-                  src={`${prefix}/images/works/${work.imgSrc}`}
-                  width="384"
-                  height="216"
-                  className={styles.cardImg}
-                ></img>
-                {/* <Image
-                  src={`${prefix}/images/works/${work.imgSrc}`}
-                  width="368"
-                  height="198"
-                  className={styles.worksImg}
-                ></Image> */}
+                {work.imgSrc === "" ? (
+                  <div className={styles.cardImg}>이미지가 없습니다</div>
+                ) : (
+                  <img
+                    src={`${prefix}/images/works/${work.imgSrc}`}
+                    width="384"
+                    height="216"
+                    className={styles.cardImg}
+                  />
+                )}
                 <Link href={`works/${work.pageName}`}>
                   <a>
                     <div className={styles.cardOverlay}>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "../../styles/works/Works.module.css";
 import Work from "../../components/works/Work";
 import { BsGithub } from "react-icons/bs";
-export default function Pnudt12() {
+export default function PNUDTPage() {
   return (
     <>
       <Seo customMeta={{ title: "PNU DT 12" }} />
