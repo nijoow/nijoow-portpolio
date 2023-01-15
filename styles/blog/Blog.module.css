@@ -37,16 +37,19 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.5rem;
-  gap: 1rem;
+  gap: 0.5rem;
+  height: auto;
 }
 
 .post .postRow .date {
   font-size: 1.3rem;
   opacity: 0.6;
   white-space: nowrap;
+  margin-right: 1rem;
 }
 
 .post .postRow .postCategory {
+  height: 2.5rem;
   color: #fff;
   background: var(--theme-highlight-color);
   margin-right: 1rem;
