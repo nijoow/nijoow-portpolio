@@ -13,17 +13,20 @@ export default function NijoowMusicPage() {
             <a>Works</a>
           </Link>
           <span className="secondTitle">
-            &nbsp;&nbsp;&gt;&nbsp;&nbsp;nijoow-music
+            &nbsp;&nbsp;&gt;&nbsp;&nbsp;nijoow-launchpad
           </span>
         </div>
         <div className={styles.workInfomation}>
           <div className={styles.subTitle}>[View]</div>
-          <Work url="https://nijoow-music.vercel.app/" imgSrc="" />
+          <Work
+            url="https://nijoow-launchpad.vercel.app/"
+            imgSrc="nijoow_launchpad.png"
+          />
           <br />
           <div className={styles.subTitle}>[Explanation]</div>
           <ul className={styles.infoContents}>
             <li>
-              <span className="bold">nijoow-music</span>
+              <span className="bold">nijoow-launchpad</span>
               <br /> 음악 관련 토이프로젝트
               <br />- 개발 진행 중
             </li>

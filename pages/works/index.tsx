@@ -20,10 +20,10 @@ const works = [
   },
   {
     id: 6,
-    pageName: "nijoow-music",
-    name: "nijoow-music",
-    url: "https://nijoow-music.vercel.app/",
-    imgSrc: "",
+    pageName: "nijoow-launchpad",
+    name: "nijoow-launchpad",
+    url: "https://nijoow-launchpad.vercel.app/",
+    imgSrc: "nijoow_launchpad.png",
   },
   {
     id: 2,
