@@ -15,6 +15,7 @@ const blogCategory = [
   "react",
   "typescript",
   "data structure",
+  "algorithm",
 ];
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [nowPosts, setNowPosts] = useState(posts);
