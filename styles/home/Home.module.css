@@ -36,6 +36,11 @@
   word-break: keep-all;
 }
 
+.introContents li span {
+  font-weight: bold;
+  color: var(--theme-highlight-color);
+}
+
 .infomation {
   display: -webkit-box;
   display: -ms-flexbox;
