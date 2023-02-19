@@ -20,7 +20,7 @@ export default function NijoowMusicPage() {
           <div className={styles.subTitle}>[View]</div>
           <Work
             url="https://nijoow-launchpad.vercel.app/"
-            imgSrc="nijoow_launchpad.png"
+            imgSrc="nijoow-launchpad.png"
           />
           <br />
           <div className={styles.subTitle}>[Explanation]</div>
