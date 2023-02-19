@@ -18,7 +18,7 @@ export default function TreenowPage() {
         </div>
         <div className={styles.workInfomation}>
           <div className={styles.subTitle}>[View]</div>
-          <Work url="https://treenow.co.kr" imgSrc="" />
+          <Work url="https://treenow.co.kr" imgSrc="treenow.png" />
           <br />
           <div className={styles.subTitle}>[Explanation]</div>
           <ul className={styles.infoContents}>
