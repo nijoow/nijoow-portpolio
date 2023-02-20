@@ -31,7 +31,7 @@ const works = [
     pageName: "portfolio",
     name: "portfolio",
     url: "https://nijoow.github.io/",
-    imgSrc: "portfolio.PNG",
+    imgSrc: "portfolio.png",
   },
   {
     id: 2,
@@ -79,7 +79,7 @@ export default function Works() {
                   <div className={styles.cardImg}>이미지가 없습니다</div>
                 ) : (
                   <img
-                    src={`${prefix}/images/works/${work.imgSrc}`}
+                    src={`${prefix}images/works/${work.imgSrc}`}
                     width="384"
                     height="216"
                     className={styles.cardImg}

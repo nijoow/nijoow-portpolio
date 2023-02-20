@@ -18,7 +18,7 @@ export default function PortfolioPage() {
         </div>
         <div className={styles.workInfomation}>
           <div className={styles.subTitle}>[View]</div>
-          <Work url="https://nijoow.github.io/" imgSrc="portfolio.PNG"></Work>
+          <Work url="https://nijoow.github.io/" imgSrc="portfolio.png"></Work>
 
           <br />
           <div className={styles.subTitle}>[Explanation]</div>

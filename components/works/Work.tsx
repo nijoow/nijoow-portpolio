@@ -12,7 +12,7 @@ const Work = ({ url, imgSrc }: WorkProps) => {
         <div className={styles.cardImg}>이미지가 없습니다</div>
       ) : (
         <img
-          src={`${prefix}/images/works/${imgSrc}`}
+          src={`${prefix}images/works/${imgSrc}`}
           width="768"
           height="432"
           className={styles.cardImg}
