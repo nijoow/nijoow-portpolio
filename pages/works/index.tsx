@@ -5,25 +5,33 @@ import { prefix } from "../../config/config";
 
 const works = [
   {
-    id: 1,
-    pageName: "portfolio",
-    name: "portfolio",
-    url: "https://nijoow.github.io/",
-    imgSrc: "portfolio.PNG",
-  },
-  {
     id: 5,
     pageName: "treenow",
     name: "Treenow",
     url: "https://nijoow.github.io/CatchTheCandy_p5/",
-    imgSrc: "",
+    imgSrc: "treenow.png",
   },
+  {
+    id: 5,
+    pageName: "nijoow-vintage",
+    name: "nijoow-vintage",
+    url: "https://nijoow-vintage.vercel.app/",
+    imgSrc: "nijoow-vintage.png",
+  },
+
   {
     id: 6,
     pageName: "nijoow-launchpad",
     name: "nijoow-launchpad",
     url: "https://nijoow-launchpad.vercel.app/",
-    imgSrc: "nijoow_launchpad.png",
+    imgSrc: "nijoow-launchpad.png",
+  },
+  {
+    id: 1,
+    pageName: "portfolio",
+    name: "portfolio",
+    url: "https://nijoow.github.io/",
+    imgSrc: "portfolio.PNG",
   },
   {
     id: 2,
@@ -38,14 +46,14 @@ const works = [
     pageName: "catchTheCandy",
     name: "CATCH THE CANDY",
     url: "https://nijoow.github.io/CatchTheCandy_p5/",
-    imgSrc: "catchTheCandy.PNG",
+    imgSrc: "catchTheCandy.png",
   },
   {
     id: 3,
     pageName: "prflLink",
     name: "prfl.link",
     url: "https://prfl.link/",
-    imgSrc: "prflLink.PNG",
+    imgSrc: "prflLink.png",
   },
 ];
 
