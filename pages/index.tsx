@@ -26,7 +26,7 @@ export const getStaticProps = async () => {
 
 export default function Home({ posts }: any) {
   return (
-    <div>
+    <div className="bg-red-500">
       <Seo customMeta={{ title: "Home" }} />
       <section>
         <div className={styles.introbox}>
