@@ -8,13 +8,14 @@ const BlogPost = ({ date, title, description, category, slug }: any) => {
         <a>
           <div className={styles.postTitle}>{title}</div>
 
-          <div className={styles.description}>{description}</div>
-          <div className={styles.postRow}>
+          <div
+           className={styles.description}>{description}</div>
+             <div className={styles.postRow}>
             <div className={styles.date}>{date}</div>
 
             {category.split(", ").map((item: string, index: number) => (
               <button className={styles.postCategory} key={index}>
-                {item}
+                  {item}
               </button>
             ))}
           </div>

@@ -1,32 +1,28 @@
-import Seo from "../../components/_common/Seo";
-import Link from "next/link";
-import styles from "../../styles/works/Works.module.css";
-import Work from "../../components/works/Work";
-import { BsGithub } from "react-icons/bs";
+import Seo from '../../components/_common/Seo';
+import Link from 'next/link';
+import styles from '../../styles/works/Works.module.css';
+import Work from '../../components/works/Work';
+import { BsGithub } from 'react-icons/bs';
 export default function PortfolioPage() {
   return (
     <>
-      <Seo customMeta={{ title: "Portfolio" }} />
+      <Seo customMeta={{ title: 'Portfolio' }} />
       <section>
         <div className="title">
           <Link href="/works">
             <a>Works</a>
           </Link>
-          <span className="secondTitle">
-            &nbsp;&nbsp;&gt;&nbsp;&nbsp;포트폴리오 사이트
-          </span>
+          <span className="secondTitle">&nbsp;&nbsp;&gt;&nbsp;&nbsp;포트폴리오 사이트</span>
         </div>
         <div className={styles.workInfomation}>
           <div className={styles.subTitle}>[View]</div>
           <Work url="https://nijoow.github.io/" imgSrc="portfolio.png"></Work>
-
           <br />
           <div className={styles.subTitle}>[Explanation]</div>
           <ul className={styles.infoContents}>
             <li>
               <span className="bold"> 개인 포트폴리오 사이트</span>
-              <br />- 저에 대한 소개와 경험했던 프로젝트를 모아놓은 포트폴리오
-              사이트입니다.
+              <br />- 저에 대한 소개와 경험했던 프로젝트를 모아놓은 포트폴리오 사이트입니다.
               <br />- 다양한 기능을 추가해보며 업데이트하고 있습니다.
             </li>
             <li>
@@ -51,11 +47,7 @@ export default function PortfolioPage() {
 
             <li></li>
           </ul>
-          <a
-            href="https://github.com/nijoow/nijoow.github.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://github.com/nijoow/nijoow.github.io" target="_blank" rel="noopener noreferrer">
             <button className="btn">
               <BsGithub />
               &nbsp; Github
