@@ -1,0 +1,339 @@
+.nav {
+  font-size: 1.8rem;
+  width: 100%;
+  position: fixed;
+  background: var(--theme-nav-background);
+  z-index: 100;
+  color: #ddd;
+  -webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.3);
+          box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.3);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.nav .navBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  max-width: 768px;
+  height: 50px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.nav .navBar .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.nav .navBar .logo span {
+  margin-left: 10px;
+}
+
+.nav .navBar .logoImg {
+  -webkit-transition: 200ms ease;
+  transition: 200ms ease;
+}
+
+.nav .navBar a:hover .logoImg {
+  -webkit-transform: rotate(5deg) scale(1.2);
+          transform: rotate(5deg) scale(1.2);
+}
+
+.nav .navBar a {
+  font-weight: 800;
+  padding: 0;
+}
+
+.nav .navBar a span {
+  background: var(--theme-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav .navBar .navToggleContainer {
+  display: none;
+}
+
+.nav .navBar ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+}
+
+.nav .navBar li {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+  padding: 0 20px;
+}
+
+.nav .navBar li .angledGradient {
+  background: var(--theme-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav .navBar li .active {
+  background: var(--theme-gradient-active);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav .navBar li .underLine {
+  position: relative;
+}
+
+.nav .navBar li .underLine::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: -3px;
+  border-radius: 1px;
+  left: 0;
+  background: var(--theme-gradient-text);
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  opacity: 0.6;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.nav .navBar li .active.underLine::after {
+  background: var(--theme-gradient-active);
+  opacity: 1;
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.nav .navBar li :hover .underLine::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.nav .navBar .darkModeBtnContainer {
+  margin-left: 20px;
+}
+
+.nav .navBar .darkModeBtnContainer .darkModeBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--theme-highlight-color);
+}
+
+.nav .navBar .darkModeBtnContainer .darkModeIcon {
+  margin: auto;
+  color: var(--theme-nav-background);
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.nav .navBar .darkModeBtn:hover .darkModeIcon {
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+  .nav .navBar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 5%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative;
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+  }
+  .nav .navBar a:hover .logoImg {
+    -webkit-transform: none;
+            transform: none;
+  }
+  .nav .navBar .navToggleContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    vertical-align: middle;
+  }
+  .nav .navBar .navToggleContainer .navToggle {
+    display: none;
+  }
+  .nav .navBar .navToggleContainer .navToggle + label {
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    position: relative;
+  }
+  .nav .navBar .navToggleContainer .navToggle + label > span {
+    display: block;
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--theme-highlight-color);
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+    position: absolute;
+  }
+  .nav .navBar .navToggleContainer .navToggle + label > span:nth-child(1) {
+    top: 0;
+  }
+  .nav .navBar .navToggleContainer .navToggle + label > span:nth-child(2) {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  .nav .navBar .navToggleContainer .navToggle + label > span:nth-child(3) {
+    bottom: 0;
+  }
+  .nav .navBar .navToggleContainer .navToggle:checked + label > span:nth-child(1) {
+    top: 50%;
+    -webkit-transform: translateY(-50%) rotate(225deg);
+            transform: translateY(-50%) rotate(225deg);
+  }
+  .nav .navBar .navToggleContainer .navToggle:checked + label > span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav .navBar .navToggleContainer .navToggle:checked + label > span:nth-child(3) {
+    bottom: 50%;
+    -webkit-transform: translateY(50%) rotate(-225deg);
+            transform: translateY(50%) rotate(-225deg);
+  }
+  .nav .navBar .show {
+    opacity: 1;
+  }
+  .nav .navBar ul {
+    position: absolute;
+    background-color: var(--theme-nav-background);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: -10;
+    opacity: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    right: 0;
+    top: 99%;
+    list-style: none;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    height: 80%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    border-radius: 0 0 10px 10px;
+  }
+  .nav .navBar ul li {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0;
+  }
+  .nav .navBar ul li .angledGradient {
+    background: var(--theme-gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav .navBar ul li .active {
+    background: var(--theme-gradient-active);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav .navBar ul li .underLine {
+    position: relative;
+  }
+  .nav .navBar ul li .underLine::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: -3px;
+    border-radius: 1px;
+    left: 0;
+    background: var(--theme-gradient-text);
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  }
+  .nav .navBar ul li :hover .underLine::after {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: left;
+            transform-origin: left;
+  }
+  .nav .navBar .darkModeBtnContainer {
+    margin-left: 0px;
+  }
+  .nav .navBar .darkModeBtnContainer .darkModeBtn {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+/*# sourceMappingURL=NavBar.module.css.map */
