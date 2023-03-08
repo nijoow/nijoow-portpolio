@@ -7,14 +7,13 @@ import { MdDarkMode, MdWbSunny } from 'react-icons/md';
 import NavToggle from '@components/_common/layout/NavToggle';
 import { useAppDispatch, useAppSelector } from '@store/config';
 import { toggleTheme } from '@store/slices/themeSlice';
+import { useTheme } from 'next-themes';
 
 export default function NavBar() {
   const router = useRouter();
-  const { currentTheme } = useAppSelector((state) => state.theme);
   const [isNavShow, setIsNavShow] = useState(false);
-  const dispatch = useAppDispatch();
-  const toggleThemeHandler = () => {
-    dispatch(toggleTheme());
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
   return (
     <nav className={`${styles.nav} ${currentTheme}`}>
@@ -72,11 +71,12 @@ export default function NavBar() {
               </span>
             </Link>
           </li>
-          <div className={styles.darkModeBtnContainer}>
-            <button className={styles.darkModeBtn} onClick={toggleThemeHandler}>
-              {currentTheme === 'dark' ? <MdWbSunny className={styles.darkModeIcon} /> : <MdDarkMode className={styles.darkModeIcon} />}
-            </button>
-          </div>
+          <button
+            className={`flex items-center justify-center p-1.5 rounded-md text-purple-light bg-purple-dark dark:bg-purple-regular dark:text-gray-dark`}
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? <MdWbSunny size={20} /> : <MdDarkMode size={20} />}
+          </button>
         </ul>
       </div>
     </nav>

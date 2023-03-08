@@ -5,6 +5,7 @@ import '@styles/_common/github-markdown.css';
 import type { AppProps } from 'next/app';
 import { store } from '@store/config';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'next-themes';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,6 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <ThemeProvider attribute="class">
+      </ThemeProvider>
     </Provider>
   );
 }
