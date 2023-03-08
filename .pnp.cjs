@@ -65,6 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-contentlayer", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.3.0"],\
             ["next-redux-wrapper", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:8.1.0"],\
             ["next-sitemap", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:4.0.2"],\
+            ["next-themes", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.2.1"],\
             ["postcss", "npm:8.4.21"],\
             ["prettier", "npm:2.8.4"],\
             ["prop-types", "npm:15.8.1"],\
@@ -7877,6 +7878,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["next-themes", [\
+        ["npm:0.2.1", {\
+          "packageLocation": "./.yarn/cache/next-themes-npm-0.2.1-16a440cf6e-ebc248b956.zip/node_modules/next-themes/",\
+          "packageDependencies": [\
+            ["next-themes", "npm:0.2.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.2.1", {\
+          "packageLocation": "./.yarn/__virtual__/next-themes-virtual-5b2e3b54e4/0/cache/next-themes-npm-0.2.1-16a440cf6e-ebc248b956.zip/node_modules/next-themes/",\
+          "packageDependencies": [\
+            ["next-themes", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.2.1"],\
+            ["@types/next", null],\
+            ["@types/react", "npm:18.0.28"],\
+            ["@types/react-dom", "npm:18.0.11"],\
+            ["next", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:13.2.3"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/next",\
+            "@types/react-dom",\
+            "@types/react",\
+            "next",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["nijoow-portfolio", [\
         ["workspace:.", {\
           "packageLocation": "./",\
@@ -7919,6 +7950,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-contentlayer", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.3.0"],\
             ["next-redux-wrapper", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:8.1.0"],\
             ["next-sitemap", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:4.0.2"],\
+            ["next-themes", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.2.1"],\
             ["postcss", "npm:8.4.21"],\
             ["prettier", "npm:2.8.4"],\
             ["prop-types", "npm:15.8.1"],\
