@@ -11,37 +11,22 @@ import { useAppDispatch, useAppSelector } from '@store/config';
 import { setTheme } from '@store/slices/themeSlice';
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
+import { IChildren } from '@type/interface';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-const Layout = ({ children }: LayoutProps) => {
-  const { currentTheme } = useAppSelector((state) => state.theme);
-  const dispatch = useAppDispatch();
-  const systemPrefers = useMediaQuery({
-    query: '(prefers-color-scheme: dark)',
-  });
-  useEffect(() => {
-    const osTheme = systemPrefers ? 'dark' : 'light';
-    const userTheme = localStorage.getItem('color-theme');
-    const theme = userTheme || osTheme;
-    dispatch(setTheme(theme));
-  }, [systemPrefers, currentTheme, dispatch]);
-
+const Layout = ({ children }: IChildren) => {
   const router = useRouter();
   return (
-    <div>
+    <div className="w-full bg-purple-100 dark:bg-gray-darker">
       <NavBar />
-      <div className={`container ${currentTheme}`}>
-        <div>
-          <Canvas camera={{ position: [0, 0, 1], fov: 70 }} className="canvas">
-            <OrbitControls maxDistance={2} minDistance={0.9} />
-            <Lights />
-            <Suspense fallback={null}>
-              <Nijoow />
-            </Suspense>
-          </Canvas>
-        </div>
+      <div className="w-full max-w-3xl mx-auto pt-14">
+        <Canvas camera={{ position: [0, 0, 1], fov: 70 }} className="py-12">
+          <OrbitControls maxDistance={2} minDistance={0.9} />
+          <Lights />
+          <Suspense fallback={null}>
+            <Nijoow />
+          </Suspense>
+        </Canvas>
+
         <AnimatePresence initial={false}>
           <motion.div
             className="contents"

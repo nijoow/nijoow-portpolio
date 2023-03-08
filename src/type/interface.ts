@@ -1,3 +1,7 @@
+export interface IChildren {
+  children: React.ReactNode;
+}
+
 export interface IMusic {
   title: string;
   artist: string;

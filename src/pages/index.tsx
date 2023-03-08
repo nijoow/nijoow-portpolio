@@ -3,17 +3,18 @@ import Information from '@components/home/Information';
 import { BsPersonCircle, BsFillCalendarEventFill, BsGithub, BsFillEnvelopeFill, BsFillPencilFill, BsLink45Deg } from 'react-icons/bs';
 import NowPlaying from '../components/home/NowPlaying';
 import { GiBasketballBall, GiMusicalNotes } from 'react-icons/gi';
+import Section from '@components/section/section';
 
 export default function Home() {
   return (
     <div>
-      <section>
+      <Section>
         <div className={styles.introbox}>
           <div className={styles.intro}>
             반갑습니다🖐🏻 프론트엔드 개발자 <span>이우진</span>입니다.
           </div>
         </div>
-      </section>
+      </Section>
 
       <section>
         <ul className={styles.introContents}>

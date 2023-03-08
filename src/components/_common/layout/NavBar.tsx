@@ -9,68 +9,44 @@ import { useAppDispatch, useAppSelector } from '@store/config';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { useTheme } from 'next-themes';
 
-export default function NavBar() {
+const NavListItem = ({ text, url }: { text: string; url: string }) => {
   const router = useRouter();
-  const [isNavShow, setIsNavShow] = useState(false);
+
+  return (
+    <Link href={url} className="p-2.5">
+      <li
+        className={`text-lg font-bold bg-gradient-to-r from-purple-medium bg-clip-text text-transparent to-purple-dark dark:from-gray-400 dark:to-gray-50 ${
+          router.pathname === url ? 'underline' : ''
+        }`}
+      >
+        {text}
+      </li>
+    </Link>
+  );
+};
+export default function NavBar() {
+  const [isNavShow, setIsNavShow] = useState(true);
+  const { theme, setTheme } = useTheme();
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+
   return (
-    <nav className={`${styles.nav} ${currentTheme}`}>
-      <div className={styles.navBar}>
-        <Link href="/">
-          <div className={styles.logo}>
-            <div className={styles.logoImg}>
-              <Logo width={80} height={50} fill={currentTheme === 'dark' ? '#fff' : '#443483'} stroke={currentTheme === 'dark' ? '#fff' : '#443483'} />
-            </div>
-            <span className={`${styles.angledGradient}`}>&apos;S Portfolio</span>
-          </div>
+    <nav className={`h-14 w-full fixed z-50 shadow-md bg-purple-light dark:bg-gray-dark`}>
+      <div className={`${styles.navBar} max-w-3xl h-14 flex w-full mx-auto items-center `}>
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Logo width={80} height={50} />
+          <span className={`bg-gradient-to-r from-purple-medium bg-clip-text text-transparent to-purple-dark dark:from-gray-400 dark:to-gray-50`}>
+            &apos;S Portfolio
+          </span>
         </Link>
         <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
-        <ul className={isNavShow ? styles.show : ''}>
-          <li className={`${styles.navLi} `}>
-            <Link href="/">
-              <span
-                className={`${router.pathname === '/' ? styles.active : ''} 
-                  ${styles.angledGradient} ${styles.underLine}`}
-              >
-                Home
-              </span>
-            </Link>
-          </li>
-          <li className={`${styles.navLi}`}>
-            <Link href="/skills">
-              <span
-                className={`
-                  ${router.pathname === '/skills' ? styles.active : ''}
-                  ${styles.angledGradient} ${styles.underLine}`}
-              >
-                Skills
-              </span>
-            </Link>
-          </li>
-          <li className={`${styles.navLi}`}>
-            <Link href="/blog">
-              <span
-                className={`
-                  ${router.pathname.includes('/blog') ? styles.active : ''}
-                  ${styles.angledGradient} ${styles.underLine}`}
-              >
-                blog
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/works">
-              <span
-                className={`
-                  ${router.pathname.includes('/works') ? styles.active : ''}
-                  ${styles.angledGradient} ${styles.underLine}`}
-              >
-                Works
-              </span>
-            </Link>
-          </li>
+        <ul className={`ml-auto flex gap-4 h-full items-center`}>
+          <NavListItem text={'Home'} url={'/'} />
+          <NavListItem text={'Skills'} url={'/skills'} />
+          <NavListItem text={'Works'} url={'/works'} />
+
           <button
             className={`flex items-center justify-center p-1.5 rounded-md text-purple-light bg-purple-dark dark:bg-purple-regular dark:text-gray-dark`}
             onClick={toggleTheme}
