@@ -1,24 +1,26 @@
 import styles from '@styles/home/Home.module.css';
+import Link from 'next/link';
+import { IconType } from 'react-icons/lib';
 interface InformationProps {
-  Icon: any;
+  Icon: IconType;
   list: string;
   contents: string;
   link: string | null;
 }
 export default function Information({ Icon, list, contents, link }: InformationProps) {
   return (
-    <div className={styles.infomation}>
-      <div className={styles.infoTitle}>
-        {Icon ? <Icon className={styles.icon} /> : ''}
+    <div className={'flex w-full items-center'}>
+      <div className={'flex items-center justify-start gap-1 flex-[2]'}>
+        <Icon />
         <span>{list}</span>
       </div>
-      <div className={styles.infoContents}>
+      <div className={'flex-[8] font-semibold text-lg'}>
         {link ? (
-          <a href={link} target="_blank" rel="noopener noreferrer" className={styles.linkText}>
+          <Link href={link} target="_blank" rel="noopener noreferrer" className={'text-purple-dark'}>
             {contents}
-          </a>
+          </Link>
         ) : (
-          contents
+          <span>{contents}</span>
         )}
       </div>
     </div>

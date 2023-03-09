@@ -15,7 +15,7 @@ const NavListItem = ({ text, url }: { text: string; url: string }) => {
   return (
     <Link href={url} className="p-2.5">
       <li
-        className={`text-lg font-bold bg-gradient-to-r from-purple-medium bg-clip-text text-transparent to-purple-dark dark:from-gray-400 dark:to-gray-50 ${
+        className={`text-lg font-bold bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-400 dark:to-gray-50 ${
           router.pathname === url ? 'underline' : ''
         }`}
       >
@@ -34,10 +34,10 @@ export default function NavBar() {
 
   return (
     <nav className={`h-14 w-full fixed z-50 shadow-md bg-purple-light dark:bg-gray-dark`}>
-      <div className={`${styles.navBar} max-w-3xl h-14 flex w-full mx-auto items-center `}>
+      <div className={`${styles.navBar} max-w-2xl h-14 flex w-full mx-auto items-center `}>
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <Logo width={80} height={50} />
-          <span className={`bg-gradient-to-r from-purple-medium bg-clip-text text-transparent to-purple-dark dark:from-gray-400 dark:to-gray-50`}>
+          <span className={`bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-400 dark:to-gray-50`}>
             &apos;S Portfolio
           </span>
         </Link>
