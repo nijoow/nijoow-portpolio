@@ -9,9 +9,9 @@ import Three from '../three/Three';
 const Layout = ({ children }: IChildren) => {
   const router = useRouter();
   return (
-    <div className="w-full bg-purple-100 dark:bg-gray-darker">
+    <div className="transition-all duration-300 w-full bg-purple-100 dark:bg-gray-darker dark:text-purple-50 text-black">
       <NavBar />
-      <div className="w-full max-w-2xl mx-auto pt-14">
+      <div className="w-full max-w-2xl mx-auto pt-12">
         <Three />
         <AnimatePresence initial={false}>
           <motion.div variants={variants} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ type: 'linear' }} key={router.route}>

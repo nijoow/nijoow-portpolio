@@ -11,9 +11,9 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-6">
       <Section>
-        <div className={'w-full rounded-lg bg-purple-light/50 flex justify-center items-center p-6 text-xl font-bold '}>
-          <div className={styles.intro}>
-            반갑습니다🖐🏻 프론트엔드 개발자 <span>이우진</span>입니다.
+        <div className={'w-full rounded-lg bg-purple-light/50 dark:bg-white/10 flex justify-center items-center p-6 text-xl font-bold '}>
+          <div className={'text-lg'}>
+            반갑습니다🖐🏻 프론트엔드 개발자 <span className={'text-2xl text-purple-dark dark:text-purple-regular'}>이우진</span>입니다.
           </div>
         </div>
       </Section>
