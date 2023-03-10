@@ -1,30 +1,26 @@
 import styles from '@styles/skills/Skills.module.css';
 import { prefix } from '@config/config';
 import Head from 'next/head';
-
+import { skillsEtc, skillsFront } from '@data/skills';
+import Image from 'next/image';
+import Section from '@components/section/section';
+import SubTitle from '@components/_common/SubTitle';
 interface SkillProps {
   fileName: string;
   name: string;
 }
 export default function Skills() {
-  const skillsFront = [
-    { id: 1, fileName: 'html.svg', name: 'HTML' },
-    { id: 2, fileName: 'css.svg', name: 'CSS' },
-    { id: 3, fileName: 'javascript.svg', name: 'JAVASCRIPT' },
-    { id: 4, fileName: 'react.svg', name: 'REACT JS' },
-    { id: 5, fileName: 'typescript.svg', name: 'TYPESCRIPT' },
-    { id: 6, fileName: 'next.svg', name: 'NEXT JS' },
-  ];
-  const skillsEtc = [
-    { id: 1, fileName: 'git.svg', name: 'GIT' },
-    { id: 2, fileName: 'illustrator.svg', name: 'ILLUSTRATOR' },
-    { id: 3, fileName: 'photoshop.svg', name: 'PHOTOSHOP' },
-  ];
   const Skill = ({ fileName, name }: SkillProps) => {
     return (
-      <div className={styles.skill}>
-        <img src={`${prefix}/images/skills/${fileName}`} width="60" height="60" />
-        <span className={styles.skillName}>{name}</span>
+      <div className="col-span-6 sm:col-span-3 flex flex-col gap-2 items-center">
+        <div
+          className={`transition-all duration-300 rounded-lg overflow-hidden w-16 h-16 relative ${
+            name === 'NEXT JS' ? 'dark:bg-purple-50 bg-transparent p-2' : ''
+          }`}
+        >
+          <Image src={`${prefix}/images/skills/${fileName}`} alt={fileName} fill className={`${name === 'NEXT JS' ? 'p-1' : ''}`} />
+        </div>
+        <span className={'font-semibold'}>{name}</span>
       </div>
     );
   };
@@ -33,20 +29,22 @@ export default function Skills() {
       <Head>
         <title>Skill</title>
       </Head>
-      <section>
-        <div className="title">Front-End Skills</div>
-        <div className={styles.skillsContainer}>
+      <Section>
+        <SubTitle title="Front-End Skills" />
+        <div className={'grid grid-cols-12 w-full mt-4 mb-8'}>
           {skillsFront.map((skill) => {
             return <Skill key={skill.name} name={skill.name} fileName={skill.fileName} />;
           })}
         </div>
-        <div className="title">Etc Skills</div>
-        <div className={styles.skillsContainer}>
+      </Section>
+      <Section>
+        <SubTitle title="Etc Skills" />
+        <div className={'grid grid-cols-12 w-full mt-4 mb-8'}>
           {skillsEtc.map((skill) => {
             return <Skill key={skill.id} name={skill.name} fileName={skill.fileName} />;
           })}
         </div>
-      </section>
+      </Section>
     </>
   );
 }

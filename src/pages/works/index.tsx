@@ -2,95 +2,44 @@ import Link from 'next/link';
 import styles from '@styles/works/Works.module.css';
 import { prefix } from '@config/config';
 import Head from 'next/head';
-
-const works = [
-  {
-    id: 5,
-    pageName: 'treenow',
-    name: 'Treenow',
-    url: 'https://nijoow.github.io/CatchTheCandy_p5/',
-    imgSrc: 'treenow.png',
-  },
-  {
-    id: 5,
-    pageName: 'nijoow-vintage',
-    name: 'nijoow-vintage',
-    url: 'https://nijoow-vintage.vercel.app/',
-    imgSrc: 'nijoow-vintage.png',
-  },
-
-  {
-    id: 6,
-    pageName: 'nijoow-launchpad',
-    name: 'nijoow-launchpad',
-    url: 'https://nijoow-launchpad.vercel.app/',
-    imgSrc: 'nijoow-launchpad.png',
-  },
-  {
-    id: 1,
-    pageName: 'portfolio',
-    name: 'portfolio',
-    url: 'https://nijoow.github.io/',
-    imgSrc: 'portfolio.png',
-  },
-  {
-    id: 2,
-    pageName: 'pnudt',
-    name: 'MEMORY',
-    url: 'https://nijoow.github.io/PNUDT12/',
-    imgSrc: 'pnudt12.png',
-  },
-
-  {
-    id: 4,
-    pageName: 'catchTheCandy',
-    name: 'CATCH THE CANDY',
-    url: 'https://nijoow.github.io/CatchTheCandy_p5/',
-    imgSrc: 'catchTheCandy.png',
-  },
-  {
-    id: 3,
-    pageName: 'prflLink',
-    name: 'prfl.link',
-    url: 'https://prfl.link/',
-    imgSrc: 'prflLink.png',
-  },
-];
-
-//
+import { works } from '@data/works';
+import Section from '@components/section/section';
+import SubTitle from '@components/_common/SubTitle';
+import Image from 'next/image';
 export default function Works() {
   return (
-    <div>
+    <>
       <Head>
         <title>Works</title>
       </Head>
-      <section>
-        <div className="title">
-          <Link href="/works">
-            <a>Works</a>
-          </Link>{' '}
+      <Section>
+        <div className="w-full flex flex-col gap-0.5 mb-4">
+          <Link href="/works" className="text-2xl font-bold">
+            Works
+          </Link>
+          <div className="w-full h-[2px] bg-gray-dark dark:bg-white rounded-full" />
         </div>
-        <div className={styles.gridContainer}>
+        <div className={'w-full grid grid-cols-2 gap-3'}>
           {works.map((work) => {
             return (
-              <div className={`${styles.card} ${styles.cardMini}`} key={work.id}>
+              <div className={`col-span-2 sm:col-span-1 w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md `} key={work.id}>
                 {work.imgSrc === '' ? (
                   <div className={styles.cardImg}>이미지가 없습니다</div>
                 ) : (
-                  <img src={`${prefix}images/works/${work.imgSrc}`} width="384" height="216" className={styles.cardImg} />
+                  <Image src={`${prefix}/images/works/${work.imgSrc}`} fill className={styles.cardImg} alt={''} />
                 )}
                 <Link href={`works/${work.pageName}`}>
-                  <a>
-                    <div className={styles.cardOverlay}>
-                      <span>{work.name} &gt;</span>
-                    </div>
-                  </a>
+                  <div
+                    className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}
+                  >
+                    <span className="text-white text-lg">{work.name} &gt;</span>
+                  </div>
                 </Link>
               </div>
             );
           })}
         </div>
-      </section>
-    </div>
+      </Section>
+    </>
   );
 }
