@@ -11,9 +11,7 @@ export default function CatchTheCandyPage() {
       </Head>
       <section>
         <div className="title">
-          <Link href="/works">
-            <a>Works</a>
-          </Link>
+          <Link href="/works">Works</Link>
           <span className="secondTitle">&nbsp;&nbsp;&gt;&nbsp;&nbsp;Catch The Candy</span>
         </div>
 

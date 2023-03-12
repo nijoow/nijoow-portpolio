@@ -1,23 +1,28 @@
 import { prefix } from '@config/config';
 import styles from '@styles/works/Works.module.css';
+import { IWorkImage } from '@type/interface';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FiChevronRight } from 'react-icons/fi';
 
-interface WorkProps {
-  url: string;
-  imgSrc: string;
-}
-const Work = ({ url, imgSrc }: WorkProps) => {
+const Work = ({ url, imgSrc }: IWorkImage) => {
   return (
-    <div className={styles.card}>
-      {imgSrc === '' ? (
+    <div className={'max-w-3xl w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md'}>
+      {!imgSrc ? (
         <div className={styles.cardImg}>이미지가 없습니다</div>
       ) : (
-        <img src={`${prefix}images/works/${imgSrc}`} width="768" height="432" className={styles.cardImg} />
+        <Image src={`${prefix}/images/works/${imgSrc}`} fill className={styles.cardImg} alt={''} />
       )}
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        <div className={styles.cardOverlay}>
-          <span>사이트 바로가기 &gt;</span>
-        </div>
-      </a>
+
+      <Link
+        href={url}
+        target="_blank"
+        className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}
+      >
+        <span className="flex items-center text-2xl text-white">
+          사이트 바로가기 <FiChevronRight size={30} />
+        </span>
+      </Link>
     </div>
   );
 };

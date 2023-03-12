@@ -4,9 +4,8 @@ import { prefix } from '@config/config';
 import Head from 'next/head';
 import { works } from '@data/works';
 import Section from '@components/section/section';
-import SubTitle from '@components/_common/SubTitle';
 import Image from 'next/image';
-export default function Works() {
+const WorksPage = () => {
   return (
     <>
       <Head>
@@ -28,12 +27,11 @@ export default function Works() {
                 ) : (
                   <Image src={`${prefix}/images/works/${work.imgSrc}`} fill className={styles.cardImg} alt={''} />
                 )}
-                <Link href={`works/${work.pageName}`}>
-                  <div
-                    className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}
-                  >
-                    <span className="text-white text-lg">{work.name} &gt;</span>
-                  </div>
+                <Link
+                  href={`works/${work.pageName}`}
+                  className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}
+                >
+                  <span className="text-lg text-white">{work.name} &gt;</span>
                 </Link>
               </div>
             );
@@ -42,4 +40,5 @@ export default function Works() {
       </Section>
     </>
   );
-}
+};
+export default WorksPage;

@@ -9,6 +9,7 @@ export const skillsFront = [
 ];
 export const skillsEtc = [
   { id: 1, fileName: 'git.svg', name: 'GIT' },
-  { id: 2, fileName: 'illustrator.svg', name: 'ILLUSTRATOR' },
-  { id: 3, fileName: 'photoshop.svg', name: 'PHOTOSHOP' },
+  { id: 2, fileName: 'github.svg', name: 'GITHUB' },
+  { id: 3, fileName: 'illustrator.svg', name: 'ILLUSTRATOR' },
+  { id: 4, fileName: 'photoshop.svg', name: 'PHOTOSHOP' },
 ];
