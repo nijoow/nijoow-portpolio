@@ -12,4 +12,5 @@ export const skillsEtc = [
   { id: 2, fileName: 'github.svg', name: 'GITHUB' },
   { id: 3, fileName: 'illustrator.svg', name: 'ILLUSTRATOR' },
   { id: 4, fileName: 'photoshop.svg', name: 'PHOTOSHOP' },
+  { id: 5, fileName: 'figma.svg', name: 'FIGMA' },
 ];

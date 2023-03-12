@@ -1,29 +1,11 @@
 import Link from 'next/link';
 import Logo from '@components/_common/Logo';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import styles from '@styles/_common/NavBar.module.css';
 import { MdDarkMode, MdWbSunny } from 'react-icons/md';
-import NavToggle from '@components/_common/layout/NavToggle';
-import { useAppDispatch, useAppSelector } from '@store/config';
-import { toggleTheme } from '@store/slices/themeSlice';
+import NavToggle from '@components/_common/navbar/NavToggle';
 import { useTheme } from 'next-themes';
+import NavListItem from './NavListItem';
 
-const NavListItem = ({ text, url }: { text: string; url: string }) => {
-  const router = useRouter();
-
-  return (
-    <Link href={url} className="p-2.5">
-      <li
-        className={`text-base font-bold bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-200 dark:to-gray-400 ${
-          router.pathname === url ? 'underline' : ''
-        }`}
-      >
-        {text}
-      </li>
-    </Link>
-  );
-};
 export default function NavBar() {
   const [isNavShow, setIsNavShow] = useState(true);
   const { theme, setTheme } = useTheme();

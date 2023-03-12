@@ -13,7 +13,6 @@ export const works = [
     url: 'https://nijoow-vintage.vercel.app/',
     imgSrc: 'nijoow-vintage.png',
   },
-
   {
     id: 6,
     pageName: 'nijoow-launchpad',
@@ -30,7 +29,7 @@ export const works = [
   },
   {
     id: 2,
-    pageName: 'pnudt',
+    pageName: 'memory',
     name: 'MEMORY',
     url: 'https://nijoow.github.io/PNUDT12/',
     imgSrc: 'pnudt12.png',
@@ -38,14 +37,14 @@ export const works = [
 
   {
     id: 4,
-    pageName: 'catchTheCandy',
+    pageName: 'catch-the-candy',
     name: 'CATCH THE CANDY',
     url: 'https://nijoow.github.io/CatchTheCandy_p5/',
     imgSrc: 'catchTheCandy.png',
   },
   {
     id: 3,
-    pageName: 'prflLink',
+    pageName: 'prfl-link',
     name: 'prfl.link',
     url: 'https://prfl.link/',
     imgSrc: 'prflLink.png',

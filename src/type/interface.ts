@@ -26,6 +26,11 @@ export interface ISkill {
   fileName: string;
   name: string;
 }
+
+export interface ISkillProps extends ISkill {
+  constraintsRef: React.MutableRefObject<null>;
+}
+
 export interface ISkillGrid {
   skills: ISkill[];
 }
