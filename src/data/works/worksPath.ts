@@ -10,6 +10,6 @@ export const worksPaths = [
   ,
   { params: { slug: 'portfolio' } },
   ,
-  { params: { slug: 'prfllink' } },
+  { params: { slug: 'prfl-link' } },
   ,
 ];
