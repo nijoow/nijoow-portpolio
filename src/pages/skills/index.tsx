@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Section from '@components/section/section';
+import Section from '@components/_common/section/section';
 import SubTitle from '@components/_common/SubTitle';
 import SkillGrid from '@components/skills/SkillGrid';
 import { skillsEtc, skillsFront } from '@data/skills';

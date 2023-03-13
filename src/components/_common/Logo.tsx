@@ -2,13 +2,14 @@ import * as React from 'react';
 interface ILogoProps {
   width: number;
   height: number;
+  className: string;
 }
 const Logo = (props: ILogoProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 192 108"
     {...props}
-    className="fill-purple-medium stroke-purple-medium dark:fill-white dark:stroke-white"
+    className={`fill-purple-medium stroke-purple-medium dark:fill-white dark:stroke-white ${props.className}`}
   >
     <path
       className="a"

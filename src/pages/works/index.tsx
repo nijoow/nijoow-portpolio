@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import styles from '@styles/works/Works.module.css';
 import { prefix } from '@config/config';
 import Head from 'next/head';
 import { works } from '@data/works/works';
-import Section from '@components/section/section';
+import Section from '@components/_common/section/section';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -25,11 +24,7 @@ const WorksPage = () => {
             return (
               <motion.div whileHover={{ scale: 1.05 }}>
                 <div className={`col-span-2 sm:col-span-1 w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md `} key={work.id}>
-                  {work.imgSrc === '' ? (
-                    <div className={styles.cardImg}>이미지가 없습니다</div>
-                  ) : (
-                    <Image src={`${prefix}/images/works/${work.imgSrc}`} fill className={styles.cardImg} alt={''} />
-                  )}
+                  {work.imgSrc === '' ? <div>이미지가 없습니다</div> : <Image src={`${prefix}/images/works/${work.imgSrc}`} fill alt={work.name} />}
                   <Link
                     href={`works/${work.pageName}`}
                     className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}

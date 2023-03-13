@@ -1,4 +1,4 @@
-import Section from '@components/section/section';
+import Section from '@components/_common/section/section';
 import { GetStaticProps } from 'next';
 import React from 'react';
 import WorksBreadCrumb from '@components/works/WorksBreadCrumb';

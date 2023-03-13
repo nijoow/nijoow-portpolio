@@ -17,8 +17,8 @@ export default function NavBar() {
   return (
     <nav className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark`}>
       <div className={`px-3 max-w-2xl h-12 flex w-full mx-auto items-center `}>
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Logo width={80} height={50} />
+        <Link href="/" className="flex items-center gap-2 font-semibold group">
+          <Logo width={80} height={50} className="group-hover:rotate-[5deg] group-hover:scale-[1.2] transition-all duration-300" />
           <span className={`bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-200 dark:to-gray-400`}>
             &apos;S Portfolio
           </span>
@@ -29,10 +29,14 @@ export default function NavBar() {
           <NavListItem text={'Skills'} url={'/skills'} />
           <NavListItem text={'Works'} url={'/works'} />
           <button
-            className={`flex items-center justify-center p-1.5 rounded-md text-purple-light bg-purple-dark dark:bg-purple-regular dark:text-gray-dark`}
+            className={`flex items-center justify-center p-1.5 rounded-md text-purple-light bg-purple-dark dark:bg-purple-regular dark:text-gray-dark group`}
             onClick={toggleTheme}
           >
-            {theme === 'dark' ? <MdWbSunny size={20} /> : <MdDarkMode size={20} />}
+            {theme === 'dark' ? (
+              <MdWbSunny size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+            ) : (
+              <MdDarkMode size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+            )}
           </button>
         </ul>
       </div>
