@@ -24,7 +24,6 @@ const WorksDetailPage = ({ slug }: any) => {
       <Section>
         <WorksBreadCrumb subTitle={slug} />
       </Section>
-
       <Section alignItems="items-start">{WorkContent[slug]}</Section>
     </>
   );

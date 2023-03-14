@@ -23,7 +23,6 @@ export const useGetNowPlaying = () => {
         songUrl: data.item.external_urls.spotify,
       });
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

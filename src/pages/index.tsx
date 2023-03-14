@@ -1,8 +1,6 @@
-import styles from '@styles/home/Home.module.css';
 import Information from '@components/home/Information';
 import { BsPersonCircle, BsFillCalendarEventFill, BsGithub, BsFillEnvelopeFill, BsFillPencilFill, BsLink45Deg } from 'react-icons/bs';
-import NowPlaying from '../components/home/NowPlaying';
-import { GiBasketballBall, GiMusicalNotes } from 'react-icons/gi';
+import NowPlaying from '@components/home/NowPlaying';
 import Section from '@components/_common/section/section';
 import Introduce from '@components/home/Introduce';
 import SubTitle from '@components/_common/SubTitle';

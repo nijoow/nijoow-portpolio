@@ -4,7 +4,6 @@ import React from 'react';
 
 const NavListItem = ({ text, url }: { text: string; url: string }) => {
   const router = useRouter();
-  console.log(router.pathname === url);
   return (
     <Link href={url} className="p-2.5 group hover-underline-animation-parent">
       <li

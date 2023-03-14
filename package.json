@@ -24,6 +24,7 @@
     "@types/three": "^0.149.0",
     "@zeit/next-css": "^1.0.1",
     "autoprefixer": "^10.4.13",
+    "axios": "^1.3.4",
     "caniuse-lite": "^1.0.30001460",
     "contentlayer": "^0.3.0",
     "date-fns": "^2.29.3",

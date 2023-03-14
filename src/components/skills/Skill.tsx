@@ -1,17 +1,28 @@
 import { prefix } from '@config/config';
 import { ISkillProps } from '@type/interface';
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 const Skill = ({ fileName, name, constraintsRef }: ISkillProps) => {
+  const controls = useAnimationControls();
+
+  const resetMotionDiv = () => {
+    controls.set({ x: 0, y: 0 });
+  };
+  useEffect(() => {
+    window.addEventListener('resize', resetMotionDiv);
+    return () => window.removeEventListener('resize', resetMotionDiv);
+  }, []);
   return (
     <motion.div
+      animate={controls}
       drag
       dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
       dragConstraints={constraintsRef}
       dragSnapToOrigin
       whileHover={{ scale: 1.2 }}
-      className="flex flex-col items-center col-span-6 gap-2 cursor-pointer sm:col-span-3"
+      className="flex flex-col items-center col-span-2 gap-2 cursor-pointer sm:col-span-1"
     >
       <div
         className={`transition-all duration-300 rounded-lg overflow-hidden w-16 h-16 relative ${
