@@ -21,7 +21,6 @@ export const useGetRecentlyPlayed = () => {
         songUrl: data.items[0].track.external_urls.spotify,
       });
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

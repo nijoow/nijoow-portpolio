@@ -6,6 +6,8 @@ import Image from 'next/image';
 const NowPlaying = () => {
   const { loading: nowPlayingLoading, song: nowPlayingSong } = useGetNowPlaying();
   const { loading: recentlyPlayedLoading, song: recentlyPlayedSong } = useGetRecentlyPlayed();
+  // console.log(nowPlayingSong, recentlyPlayedSong);
+  // return <></>;
 
   if (nowPlayingSong) {
     return (
@@ -15,15 +17,8 @@ const NowPlaying = () => {
         rel="noopener noreferrer"
         className={'flex bg-black w-full items-center rounded-xl max-w-md overflow-hidden'}
       >
-        <div className={'rounded-md w-24 h-24 overflow-hidden relative m-2.5'}>
-          <Image
-            src={nowPlayingSong.albumImageUrl}
-            sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            fill
-            alt={nowPlayingSong.title}
-          />
+        <div className={'rounded-md w-24 h-24 overflow-hidden relative m-2.5 min-w-[6rem]'}>
+          <Image src={nowPlayingSong.albumImageUrl} sizes="33vw" fill alt={nowPlayingSong.title} />
         </div>
         <div className={'flex flex-col truncate text-white'}>
           <div className={'text-base truncate'}>{nowPlayingSong.title}</div>
@@ -40,8 +35,8 @@ const NowPlaying = () => {
         rel="noopener noreferrer"
         className={'flex bg-black w-full items-center rounded-xl max-w-md overflow-hidden'}
       >
-        <div className={'rounded-md w-24 h-24 overflow-hidden relative m-2.5'}>
-          <Image src={recentlyPlayedSong.albumImageUrl} fill alt={recentlyPlayedSong.title} />
+        <div className={'rounded-md w-24 h-24 overflow-hidden relative m-2.5 min-w-[6rem]'}>
+          <Image src={recentlyPlayedSong.albumImageUrl} sizes="33vw" fill alt={recentlyPlayedSong.title} />
         </div>
         <div className={'flex flex-col truncate text-white'}>
           <div className={'text-base truncate'}>{recentlyPlayedSong.title}</div>
