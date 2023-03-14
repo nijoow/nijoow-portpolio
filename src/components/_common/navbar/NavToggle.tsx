@@ -1,8 +1,7 @@
 import React from 'react';
-import styles from '@styles/_common/NavBar.module.css';
 const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
   return (
-    <div className={' md:hidden block'}>
+    <div className={'md:hidden block ml-auto'}>
       <input
         type="checkbox"
         id="navToggle"
@@ -18,14 +17,14 @@ const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
         }`}
       >
         <span
-          className={`h-[2px] w-1/2 rounded transform transition-all duration-300 origin-right delay-75 bg-purple-light ${
-            isNavShow ? '-translate-y-[1px] -rotate-90 ' : ''
+          className={`h-[2px] rounded transform transition-all duration-300 origin-right delay-150 bg-purple-medium dark:bg-purple-regular ${
+            isNavShow ? '-translate-y-[1px] w-1/2 -rotate-90 ' : 'w-2/3'
           }`}
         ></span>
-        <span className={`h-[2px] rounded bg-purple-light`}></span>
+        <span className={`h-[2px] rounded bg-purple-medium dark:bg-purple-regular`}></span>
         <span
-          className={`h-[2px] w-1/2 rounded transform transition-all self-end duration-300 origin-left delay-75 bg-purple-light ${
-            isNavShow ? 'translate-y-[1px] -rotate-90 ' : ''
+          className={`h-[2px] rounded transform transition-all self-end duration-300 origin-left delay-150 bg-purple-medium dark:bg-purple-regular ${
+            isNavShow ? 'translate-y-[1px] w-1/2 -rotate-90 ' : 'w-2/3'
           }`}
         ></span>
       </label>

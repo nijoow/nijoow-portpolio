@@ -15,7 +15,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark`}>
+    <nav className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark `}>
       <div className={`px-3 max-w-2xl h-12 flex w-full mx-auto items-center `}>
         <Link href="/" className="flex items-center gap-2 font-semibold group">
           <Logo width={80} height={50} className="group-hover:rotate-[5deg] group-hover:scale-[1.2] transition-all duration-300" />
@@ -24,7 +24,7 @@ export default function NavBar() {
           </span>
         </Link>
         <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
-        <ul className={`ml-auto flex gap-4 h-full items-center`}>
+        <ul className={`hidden md:flex md:ml-auto gap-4 h-full items-center`}>
           <NavListItem text={'Home'} url={'/'} />
           <NavListItem text={'Skills'} url={'/skills'} />
           <NavListItem text={'Works'} url={'/works'} />
@@ -40,6 +40,26 @@ export default function NavBar() {
           </button>
         </ul>
       </div>
+
+      <ul
+        className={`md:hidden absolute -bottom-11 flex -z-40 h-12 items-center bg-purple-light dark:bg-gray-dark justify-evenly left-0 w-full transition-all duration-300 ${
+          isNavShow ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 '
+        }`}
+      >
+        <NavListItem text={'Home'} url={'/'} />
+        <NavListItem text={'Skills'} url={'/skills'} />
+        <NavListItem text={'Works'} url={'/works'} />
+        <button
+          className={`flex items-center justify-center p-1.5 rounded-md text-purple-light bg-purple-dark dark:bg-purple-regular dark:text-gray-dark group`}
+          onClick={toggleTheme}
+        >
+          {theme === 'dark' ? (
+            <MdWbSunny size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+          ) : (
+            <MdDarkMode size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+          )}
+        </button>
+      </ul>
     </nav>
   );
 }

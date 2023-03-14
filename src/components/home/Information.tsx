@@ -1,4 +1,3 @@
-import styles from '@styles/home/Home.module.css';
 import Link from 'next/link';
 import { IconType } from 'react-icons/lib';
 interface InformationProps {
