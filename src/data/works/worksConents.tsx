@@ -55,7 +55,7 @@ export const WorkContent: WorkContents = {
   'catch-the-candy': (
     <>
       <PartTitle title={'View'} />
-      <Work url="https://nijoow.github.io/CatchTheCandy_p5/" imgSrc="catchTheCandy.PNG" />
+      <Work url="https://nijoow.github.io/CatchTheCandy_p5/" imgSrc="catchTheCandy.png" />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🍬 Catch the candy</span>
@@ -282,7 +282,7 @@ export const WorkContent: WorkContents = {
   'prfl-link': (
     <>
       <PartTitle title={'View'} />
-      <Work url="https://prfl.link/" imgSrc="prflLink.PNG"></Work>
+      <Work url="https://prfl.link/" imgSrc="prflLink.png"></Work>
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🔗 프로필링크 (prfl.link)</span>

@@ -7,7 +7,7 @@ import { FiChevronRight } from 'react-icons/fi';
 const Work = ({ url, imgSrc }: IWorkImage) => {
   return (
     <div className={'max-w-3xl w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md'}>
-      {!imgSrc ? <div className={''}>이미지가 없습니다</div> : <Image src={`${prefix}/images/works/${imgSrc}`} fill className={'object-contain'} alt={''} />}
+      {!imgSrc ? <div className={''}>이미지가 없습니다</div> : <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} />}
 
       <Link
         href={url}
