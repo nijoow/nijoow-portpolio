@@ -29,6 +29,11 @@ export const WorkContent: WorkContents = {
         <li>- 상품 리스트 및 상품 디테일 페이지</li>
         <li>- 전역 상태로 임시 구현한 장바구니, 관심상품 기능</li>
       </ul>
+      <div className="my-1" /> <PartSubTitle title={'테스트 계정'} />
+      <ul>
+        <li>- id : test@email.com</li>
+        <li>- pw : test12#$</li>
+      </ul>
       <div className="my-3" />
       <PartTitle title={'Link'} />
       <Link
