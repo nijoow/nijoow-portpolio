@@ -20,7 +20,7 @@ const WorksPage = () => {
           <div className="w-full h-[2px] bg-gray-dark dark:bg-white rounded-full" />
         </div>
         <div className={'w-full grid grid-cols-2 gap-3'}>
-          {works.map((work) => {
+          {works.reverse().map((work) => {
             return (
               <motion.div
                 whileHover={{ scale: 1.05 }}
