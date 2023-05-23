@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from '@components/_common/Logo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdDarkMode, MdWbSunny } from 'react-icons/md';
 import NavToggle from '@components/_common/navbar/NavToggle';
 import { useTheme } from 'next-themes';
@@ -8,11 +8,18 @@ import NavListItem from './NavListItem';
 
 export default function NavBar() {
   const [isNavShow, setIsNavShow] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+
+  if (!mounted) return null;
 
   return (
     <nav className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark `}>
