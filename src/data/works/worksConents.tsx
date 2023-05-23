@@ -196,7 +196,6 @@ export const WorkContent: WorkContents = {
   memory: (
     <>
       <PartTitle title={'View'} />
-
       <Work url="https://nijoow.github.io/PNUDT12/" imgSrc="pnudt12.png"></Work>
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
@@ -349,6 +348,45 @@ export const WorkContent: WorkContents = {
       <div className="my-1" />
       <Link
         href="https://github.com/nijoow/ai-love-predictor-front"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <BsGithub />
+        <span>Github</span>
+      </Link>
+    </>
+  ),
+  'nijoow-cocktail': (
+    <>
+      <PartTitle title={'View'} />
+      <Work url="https://nijoow-cocktail.vercel.app/" imgSrc="nijoow-cocktail.png"></Work>
+      <div className="my-3" />
+      <PartTitle title={'Explanation'} />
+      <span className="text-xl font-bold">🍸 nijoow-cocktail</span>
+      <span className="text-base font-medium">- 칵테일 조회 사이트 토이 프로젝트</span>
+      <PartSubTitle title={'기술 스택'} />
+      <span>- Next.js, Typescript, Recoil, Tailwind, React-query, Daisy UI</span>
+      <PartSubTitle title={'기능'} />
+      <ul>
+        <li>- Next.js 13 버전 사용</li>
+        <li>- thecocktaildb.com 칵테일 관련 api 연동</li>
+        <li>- 카테고리, 재료 필터 기능</li>
+        <li>- React-query 데이터 캐싱</li>
+      </ul>
+      <div className="my-3" />
+      <PartTitle title={'Link'} />
+      <Link
+        href="https://nijoow-cocktail.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <span>사이트 바로가기</span>
+      </Link>
+      <div className="my-1" />
+      <Link
+        href="https://github.com/nijoow/nijoow-cocktail"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
