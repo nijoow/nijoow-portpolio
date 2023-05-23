@@ -9,7 +9,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && type nul > out/.nojekyll && git add out/ -f && git commit -m \"deploy to gh-pages\" && git subtree push --prefix out origin gh-pages"
+    "deploy": "next build && next export && type nul > out/.nojekyll && git add out/ -f && git commit -m \"🚀 deploy to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@react-three/drei": "^9.57.0",
