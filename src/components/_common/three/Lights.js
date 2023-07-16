@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Lights = () => {
   return (
@@ -20,7 +20,7 @@ const Lights = () => {
       />
       <spotLight intensity={0.2} position={[90, 100, 50]} castShadow />
     </>
-  );
-};
+  )
+}
 
-export default Lights;
+export default Lights

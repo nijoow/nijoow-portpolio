@@ -1,36 +1,41 @@
 export interface IChildren {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export interface ISection extends IChildren {
-  alignItems?: 'items-start' | 'items-end' | 'items-center' | 'items-baseline' | 'items-stretch';
+  alignItems?:
+    | 'items-start'
+    | 'items-end'
+    | 'items-center'
+    | 'items-baseline'
+    | 'items-stretch'
 }
 
 export interface IPartTitle {
-  title: string;
+  title: string
 }
 
 export interface IMusic {
-  title: string;
-  artist: string;
-  albumImageUrl: string;
-  songUrl: string;
+  title: string
+  artist: string
+  albumImageUrl: string
+  songUrl: string
 }
 
 export interface IWorkImage {
-  url: string;
-  imgSrc: string | undefined | null;
+  url: string
+  imgSrc: string | undefined | null
 }
 
 export interface ISkill {
-  fileName: string;
-  name: string;
+  fileName: string
+  name: string
 }
 
 export interface ISkillProps extends ISkill {
-  constraintsRef: React.MutableRefObject<null>;
+  constraintsRef: React.MutableRefObject<null>
 }
 
 export interface ISkillGrid {
-  skills: ISkill[];
+  skills: ISkill[]
 }
