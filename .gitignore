@@ -25,18 +25,16 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
 # vercel
 .vercel
 
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 
-# Contentlayer
-.contentlayer
-
+# yarn berry zero-installs
 .yarn/*
 !.yarn/cache
 !.yarn/patches
@@ -44,3 +42,6 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Visual Studio Code
+.vscode 

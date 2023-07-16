@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import React from 'react';
-import { FiChevronRight } from 'react-icons/fi';
+import Link from 'next/link'
+import React from 'react'
+import { FiChevronRight } from 'react-icons/fi'
 
 const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
   return (
@@ -14,7 +14,7 @@ const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
       </div>
       <div className="w-full h-[2px] bg-gray-dark dark:bg-white rounded-full" />
     </div>
-  );
-};
+  )
+}
 
-export default WorksBreadCrumb;
+export default WorksBreadCrumb

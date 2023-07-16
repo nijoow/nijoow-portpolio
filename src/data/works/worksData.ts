@@ -41,11 +41,22 @@ export const works = [
     name: 'AI-Love-Predictor',
     imgSrc: 'ai-love-predictor.png',
   },
-  { id: 8, pageName: 'nijoow-cocktail', name: 'nijoow-cocktail', imgSrc: 'nijoow-cocktail.png' },
+  {
+    id: 8,
+    pageName: 'nijoow-cocktail',
+    name: 'nijoow-cocktail',
+    imgSrc: 'nijoow-cocktail.png',
+  },
   {
     id: 9,
     pageName: 'treenow',
     name: 'Treenow',
     imgSrc: 'treenow.png',
   },
-];
+  {
+    id: 10,
+    pageName: 'nijoow-drawing',
+    name: 'nijoow-drawing',
+    imgSrc: 'nijoow-drawing.png',
+  },
+]

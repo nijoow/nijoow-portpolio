@@ -8,4 +8,5 @@ export const worksPaths = [
   { params: { slug: 'prfl-link' } },
   { params: { slug: 'ai-love-predictor' } },
   { params: { slug: 'nijoow-cocktail' } },
-];
+  { params: { slug: 'nijoow-drawing' } },
+]

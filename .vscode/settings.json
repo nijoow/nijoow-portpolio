@@ -1,8 +1,4 @@
 {
-  "pasteImage.path": "${projectRoot}/public/images/post",
-  "pasteImage.basePath": "${projectRoot}/public/images/",
-  "pasteImage.forceUnixStyleSeparator": true,
-  "pasteImage.prefix": "/images/",
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
@@ -10,7 +6,5 @@
   "eslint.nodePath": ".yarn/sdks",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-  
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js"
 }

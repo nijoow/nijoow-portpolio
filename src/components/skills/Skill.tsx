@@ -1,19 +1,19 @@
-import { prefix } from '@config/config';
-import { ISkillProps } from '@type/interface';
-import { motion, useAnimationControls } from 'framer-motion';
-import Image from 'next/image';
-import { useEffect } from 'react';
+import { prefix } from '@/config/config'
+import { ISkillProps } from '@/type/interface'
+import { motion, useAnimationControls } from 'framer-motion'
+import Image from 'next/image'
+import { useEffect } from 'react'
 
 const Skill = ({ fileName, name, constraintsRef }: ISkillProps) => {
-  const controls = useAnimationControls();
+  const controls = useAnimationControls()
 
   const resetMotionDiv = () => {
-    controls.set({ x: 0, y: 0 });
-  };
+    controls.set({ x: 0, y: 0 })
+  }
   useEffect(() => {
-    window.addEventListener('resize', resetMotionDiv);
-    return () => window.removeEventListener('resize', resetMotionDiv);
-  }, []);
+    window.addEventListener('resize', resetMotionDiv)
+    return () => window.removeEventListener('resize', resetMotionDiv)
+  }, [])
   return (
     <motion.div
       animate={controls}
@@ -29,10 +29,15 @@ const Skill = ({ fileName, name, constraintsRef }: ISkillProps) => {
           name === 'NEXT JS' ? 'dark:bg-purple-50 bg-transparent p-2' : ''
         }`}
       >
-        <Image src={`${prefix}/images/skills/${fileName}`} alt={fileName} fill className={`pointer-events-none ${name === 'NEXT JS' ? 'p-1' : ''}`} />
+        <Image
+          src={`${prefix}/images/skills/${fileName}`}
+          alt={fileName}
+          fill
+          className={`pointer-events-none ${name === 'NEXT JS' ? 'p-1' : ''}`}
+        />
       </div>
       <span className={'font-semibold'}>{name}</span>
     </motion.div>
-  );
-};
-export default Skill;
+  )
+}
+export default Skill

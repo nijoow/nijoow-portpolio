@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
 
-import { OrbitControls } from '@react-three/drei';
-import Lights from '@components/_common/three/Lights.js';
-import Nijoow from '@components/_common/three/Nijoow.js';
+import { OrbitControls } from '@react-three/drei'
+import Lights from '@/components/_common/three/Lights.js'
+import Nijoow from '@/components/_common/three/Nijoow.js'
 
 const Three = () => {
   return (
@@ -16,7 +16,7 @@ const Three = () => {
         </Suspense>
       </Canvas>
     </div>
-  );
-};
+  )
+}
 
-export default Three;
+export default Three

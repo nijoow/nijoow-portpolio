@@ -1,32 +1,40 @@
-import Link from 'next/link';
-import Logo from '@components/_common/Logo';
-import { useEffect, useState } from 'react';
-import { MdDarkMode, MdWbSunny } from 'react-icons/md';
-import NavToggle from '@components/_common/navbar/NavToggle';
-import { useTheme } from 'next-themes';
-import NavListItem from './NavListItem';
+import Link from 'next/link'
+import Logo from '@/components/_common/Logo'
+import { useEffect, useState } from 'react'
+import { MdDarkMode, MdWbSunny } from 'react-icons/md'
+import NavToggle from '@/components/_common/navbar/NavToggle'
+import { useTheme } from 'next-themes'
+import NavListItem from './NavListItem'
 
 export default function NavBar() {
-  const [isNavShow, setIsNavShow] = useState(true);
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const [isNavShow, setIsNavShow] = useState(true)
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
-    <nav className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark `}>
+    <nav
+      className={`transition-all duration-300 h-12 w-full fixed z-50 shadow-lg bg-purple-light dark:bg-gray-dark `}
+    >
       <div className={`px-3 max-w-2xl h-12 flex w-full mx-auto items-center `}>
         <Link href="/" className="flex items-center gap-2 font-semibold group">
-          <Logo width={80} height={50} className="group-hover:rotate-[5deg] group-hover:scale-[1.2] transition-all duration-300" />
-          <span className={`bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-200 dark:to-gray-400`}>
+          <Logo
+            width={80}
+            height={50}
+            className="group-hover:rotate-[5deg] group-hover:scale-[1.2] transition-all duration-300"
+          />
+          <span
+            className={`bg-gradient-to-br from-purple-medium bg-clip-text text-transparent to-purple-darker dark:from-gray-200 dark:to-gray-400`}
+          >
             &apos;S Portfolio
           </span>
         </Link>
@@ -40,9 +48,15 @@ export default function NavBar() {
             onClick={toggleTheme}
           >
             {theme === 'dark' ? (
-              <MdWbSunny size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+              <MdWbSunny
+                size={20}
+                className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300"
+              />
             ) : (
-              <MdDarkMode size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+              <MdDarkMode
+                size={20}
+                className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300"
+              />
             )}
           </button>
         </ul>
@@ -50,7 +64,9 @@ export default function NavBar() {
 
       <ul
         className={`md:hidden absolute -bottom-11 flex -z-40 h-12 items-center bg-purple-light dark:bg-gray-dark justify-evenly left-0 w-full transition-all duration-300 ${
-          isNavShow ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 '
+          isNavShow
+            ? 'translate-y-0 opacity-100'
+            : 'translate-y-full opacity-0 '
         }`}
       >
         <NavListItem text={'Home'} url={'/'} />
@@ -61,12 +77,18 @@ export default function NavBar() {
           onClick={toggleTheme}
         >
           {theme === 'dark' ? (
-            <MdWbSunny size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+            <MdWbSunny
+              size={20}
+              className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300"
+            />
           ) : (
-            <MdDarkMode size={20} className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300" />
+            <MdDarkMode
+              size={20}
+              className="group-hover:rotate-[30deg] group-hover:scale-110 transition-all duration-300"
+            />
           )}
         </button>
       </ul>
     </nav>
-  );
+  )
 }

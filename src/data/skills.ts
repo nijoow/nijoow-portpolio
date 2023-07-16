@@ -6,11 +6,11 @@ export const skillsFront = [
   { id: 5, fileName: 'typescript.svg', name: 'TYPESCRIPT' },
   { id: 6, fileName: 'next.svg', name: 'NEXT JS' },
   { id: 7, fileName: 'tailwind.svg', name: 'TAILWIND CSS' },
-];
+]
 export const skillsEtc = [
   { id: 1, fileName: 'git.svg', name: 'GIT' },
   { id: 2, fileName: 'github.svg', name: 'GITHUB' },
   { id: 3, fileName: 'illustrator.svg', name: 'ILLUSTRATOR' },
   { id: 4, fileName: 'photoshop.svg', name: 'PHOTOSHOP' },
   { id: 5, fileName: 'figma.svg', name: 'FIGMA' },
-];
+]

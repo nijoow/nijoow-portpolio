@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
   return (
     <div className={'md:hidden block ml-auto'}>
@@ -7,7 +7,7 @@ const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
         id="navToggle"
         className={'hidden'}
         onClick={() => {
-          setIsNavShow(!isNavShow);
+          setIsNavShow(!isNavShow)
         }}
       />
       <label
@@ -21,7 +21,9 @@ const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
             isNavShow ? '-translate-y-[1px] w-1/2 -rotate-90 ' : 'w-2/3'
           }`}
         ></span>
-        <span className={`h-[2px] rounded bg-purple-medium dark:bg-purple-regular`}></span>
+        <span
+          className={`h-[2px] rounded bg-purple-medium dark:bg-purple-regular`}
+        ></span>
         <span
           className={`h-[2px] rounded transform transition-all self-end duration-300 origin-left delay-150 bg-purple-medium dark:bg-purple-regular ${
             isNavShow ? 'translate-y-[1px] w-1/2 -rotate-90 ' : 'w-2/3'
@@ -29,6 +31,6 @@ const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
         ></span>
       </label>
     </div>
-  );
-};
-export default NavToggle;
+  )
+}
+export default NavToggle

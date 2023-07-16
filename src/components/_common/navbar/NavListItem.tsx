@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React from 'react'
 
 const NavListItem = ({ text, url }: { text: string; url: string }) => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <Link href={url} className="p-2.5 group hover-underline-animation-parent">
       <li
@@ -16,6 +16,6 @@ const NavListItem = ({ text, url }: { text: string; url: string }) => {
         {text}
       </li>
     </Link>
-  );
-};
-export default NavListItem;
+  )
+}
+export default NavListItem

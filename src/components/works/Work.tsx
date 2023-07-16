@@ -1,14 +1,21 @@
-import { prefix } from '@config/config';
-import { IWorkImage } from '@type/interface';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FiChevronRight } from 'react-icons/fi';
+import { prefix } from '@/config/config'
+import { IWorkImage } from '@/type/interface'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FiChevronRight } from 'react-icons/fi'
 
 const Work = ({ url, imgSrc }: IWorkImage) => {
   return (
-    <div className={'max-w-3xl w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md'}>
-      {!imgSrc ? <div className={''}>이미지가 없습니다</div> : <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} />}
-
+    <div
+      className={
+        'max-w-3xl w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md'
+      }
+    >
+      {!imgSrc ? (
+        <div className={''}>이미지가 없습니다</div>
+      ) : (
+        <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} />
+      )}
       <Link
         href={url}
         target="_blank"
@@ -19,6 +26,6 @@ const Work = ({ url, imgSrc }: IWorkImage) => {
         </span>
       </Link>
     </div>
-  );
-};
-export default Work;
+  )
+}
+export default Work

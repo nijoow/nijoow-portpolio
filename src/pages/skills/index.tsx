@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import Section from '@components/_common/section/section';
-import SubTitle from '@components/_common/SubTitle';
-import SkillGrid from '@components/skills/SkillGrid';
-import { skillsEtc, skillsFront } from '@data/skills';
+import Head from 'next/head'
+import Section from '@/components/_common/section/section'
+import SubTitle from '@/components/_common/SubTitle'
+import SkillGrid from '@/components/skills/SkillGrid'
+import { skillsEtc, skillsFront } from '@/data/skills'
 
 const SkillsPage = () => {
   return (
@@ -19,6 +19,6 @@ const SkillsPage = () => {
         <SkillGrid skills={skillsEtc} />
       </Section>
     </>
-  );
-};
-export default SkillsPage;
+  )
+}
+export default SkillsPage
