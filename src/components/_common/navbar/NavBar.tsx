@@ -9,11 +9,16 @@ import NavListItem from './NavListItem'
 export default function NavBar() {
   const [isNavShow, setIsNavShow] = useState(true)
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (!resolvedTheme) return
+    setTheme(resolvedTheme)
+  }, [resolvedTheme])
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
