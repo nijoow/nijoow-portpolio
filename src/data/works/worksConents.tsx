@@ -76,7 +76,7 @@ export const WorkContent: WorkContents = {
       </span>
       <div className="my-1" />
       <PartSubTitle title={'컨셉'} />
-      <span className="font-semibold">"Bias"</span>
+      <span className="font-semibold">&quot;Bias&quot;</span>
       <span className="pl-1">
         바구니를 선택하면 게임은 시작된다. 높은 점수를 얻기 위해 이리저리
         움직이며 떨어지는 사탕들을 받아보자. 게임에 온전히 몰입하고 빠져들어보는
