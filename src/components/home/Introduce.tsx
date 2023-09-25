@@ -40,7 +40,7 @@ const Introduce = () => {
         문제를 해결해나가려고 노력합니다.
       </li>
       <li>
-        <div className={'flex'}>
+        <div className={'flex items-center'}>
           힙합
           <GiMusicalNotes />과 농구
           <GiBasketballBall />를 좋아합니다.
