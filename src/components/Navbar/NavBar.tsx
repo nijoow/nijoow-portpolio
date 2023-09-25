@@ -1,8 +1,9 @@
+'use client'
 import Link from 'next/link'
 import Logo from '@/components/_common/Logo'
 import { useEffect, useState } from 'react'
 import { MdDarkMode, MdWbSunny } from 'react-icons/md'
-import NavToggle from '@/components/_common/navbar/NavToggle'
+import NavToggle from '@/components/Navbar/NavToggle'
 import { useTheme } from 'next-themes'
 import NavListItem from './NavListItem'
 

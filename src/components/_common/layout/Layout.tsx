@@ -1,4 +1,4 @@
-import NavBar from '@/components/_common/navbar/NavBar'
+import NavBar from '@/components/Navbar/NavBar'
 import Footer from '@/components/_common/footer/Footer'
 import { useRouter } from 'next/router'
 import { AnimatePresence, motion } from 'framer-motion'
