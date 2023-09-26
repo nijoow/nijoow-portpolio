@@ -1,19 +1,30 @@
+'use client'
 import { prefix } from '@/config/config'
-import { ISkillProps } from '@/type/interface'
 import { motion, useAnimationControls } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect } from 'react'
 
-const Skill = ({ fileName, name, constraintsRef }: ISkillProps) => {
+export interface SkillType {
+  fileName: string
+  name: string
+}
+
+interface SkillProps extends SkillType {
+  constraintsRef: React.MutableRefObject<null>
+}
+
+const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
   const controls = useAnimationControls()
 
-  const resetMotionDiv = () => {
-    controls.set({ x: 0, y: 0 })
-  }
   useEffect(() => {
     window.addEventListener('resize', resetMotionDiv)
     return () => window.removeEventListener('resize', resetMotionDiv)
   }, [])
+
+  const resetMotionDiv = () => {
+    controls.set({ x: 0, y: 0 })
+  }
+
   return (
     <motion.div
       animate={controls}

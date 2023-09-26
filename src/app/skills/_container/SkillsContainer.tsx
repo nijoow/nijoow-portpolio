@@ -1,8 +1,12 @@
-import { ISkillGrid } from '@/type/interface'
+'use client'
 import React, { useRef } from 'react'
-import Skill from '@/components/skills/Skill'
+import Skill, { SkillType } from './Skill'
 
-const SkillGrid = ({ skills }: ISkillGrid) => {
+interface SkillsContainerProps {
+  skills: SkillType[]
+}
+
+const SkillsContainer = ({ skills }: SkillsContainerProps) => {
   const constraintsRef = useRef(null)
 
   return (
@@ -15,8 +19,6 @@ const SkillGrid = ({ skills }: ISkillGrid) => {
       {skills.map((skill) => (
         <Skill
           key={skill.name}
-
-          
           name={skill.name}
           fileName={skill.fileName}
           constraintsRef={constraintsRef}
@@ -26,4 +28,4 @@ const SkillGrid = ({ skills }: ISkillGrid) => {
   )
 }
 
-export default SkillGrid
+export default SkillsContainer

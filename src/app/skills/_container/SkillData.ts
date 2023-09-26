@@ -7,6 +7,7 @@ export const skillsFront = [
   { id: 6, fileName: 'next.svg', name: 'NEXT JS' },
   { id: 7, fileName: 'tailwind.svg', name: 'TAILWIND CSS' },
 ]
+
 export const skillsEtc = [
   { id: 1, fileName: 'git.svg', name: 'GIT' },
   { id: 2, fileName: 'github.svg', name: 'GITHUB' },
