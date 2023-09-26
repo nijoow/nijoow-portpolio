@@ -1,18 +1,18 @@
 import Link from 'next/link'
 
-interface InformationProps {
+interface InformationItemProps {
   icon: JSX.Element
   list: string
   contents: string
   link: string | null
 }
 
-export default function Information({
+export default function InformationItem({
   icon,
   list,
   contents,
   link,
-}: InformationProps) {
+}: InformationItemProps) {
   return (
     <div className={'flex w-full items-center'}>
       <div
