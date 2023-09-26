@@ -1,13 +1,14 @@
 import Link from 'next/link'
-import { IconType } from 'react-icons/lib'
+
 interface InformationProps {
-  Icon: IconType
+  icon: JSX.Element
   list: string
   contents: string
   link: string | null
 }
+
 export default function Information({
-  Icon,
+  icon,
   list,
   contents,
   link,
@@ -19,16 +20,17 @@ export default function Information({
           'flex items-center justify-start gap-1 flex-[3] sm:flex-[2] font-semibold text-sm'
         }
       >
-        <Icon />
+        {icon}
         <span>{list}</span>
       </div>
       <div className={'flex-[7] sm:flex=[8] font-semibold text-sm sm:text-lg'}>
+        :{' '}
         {link ? (
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={'text-purple-medium dark:text-purple-regular '}
+            className={'text-purple-medium dark:text-purple-light '}
           >
             {contents}
           </Link>
