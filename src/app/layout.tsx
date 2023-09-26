@@ -1,5 +1,5 @@
 import NavBar from '@/components/Navbar/NavBar'
-import Three from '@/components/_common/three/Three'
+import Three from '@/components/Three/Three'
 import Motion from '@/context/Motion'
 import Theme from '@/context/Theme'
 import { Metadata } from 'next'
@@ -16,17 +16,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="w-full h-full">
+    <html lang="en" className="w-full h-full" suppressHydrationWarning>
       <body className="w-full h-full">
-        <div className="flex flex-col w-full min-h-screen overflow-x-hidden text-black transition-all duration-300 bg-purple-50 dark:bg-gray-darker dark:text-purple-50">
-          <NavBar />
-          <div className="flex-auto w-full max-w-2xl px-3 pt-12 mx-auto">
-            <Three />
-            <Motion>
-              <Theme>{children}</Theme>
-            </Motion>
+        <Theme>
+          <div className="transition-all duration-300 flex flex-col w-full min-h-screen overflow-x-hidden text-black bg-purple-50 dark:bg-gray-darker dark:text-purple-50">
+            <NavBar />
+            <div className="flex-auto w-full max-w-2xl px-3 pt-12 mx-auto">
+              <Three />
+              <Motion>{children}</Motion>
+            </div>
+            <footer
+              className={'text-sm py-5 w-full flex items-center justify-center'}
+            >
+              &copy; {new Date().getFullYear()} Lee Woo Jin. All Rights
+              Reserved.
+            </footer>
           </div>
-        </div>
+        </Theme>
       </body>
     </html>
   )
