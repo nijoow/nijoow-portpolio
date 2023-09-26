@@ -3,8 +3,8 @@ import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 
 import { OrbitControls } from '@react-three/drei'
-import Lights from '@/components/_common/three/Lights.js'
-import Nijoow from '@/components/_common/three/Nijoow.js'
+import Lights from './Lights'
+import Nijoow from './Nijoow'
 
 const Three = () => {
   return (

@@ -5,7 +5,6 @@ const Lights = () => {
     <>
       <ambientLight intensity={0.4} />
       <directionalLight position={[40, 10, 5]} intensity={0.7} />
-
       <directionalLight
         castShadow
         position={[10, 420, 100]}
