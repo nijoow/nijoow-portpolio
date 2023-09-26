@@ -1,10 +1,10 @@
 import * as React from 'react'
-interface ILogoProps {
+interface LogoProps {
   width: number
   height: number
   className: string
 }
-const Logo = (props: ILogoProps) => (
+const Logo = (props: LogoProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 192 108"

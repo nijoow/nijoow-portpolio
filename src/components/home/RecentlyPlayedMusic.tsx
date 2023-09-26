@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -33,9 +33,18 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex bg-black w-full items-center rounded-xl max-w-md overflow-hidden'
+          'flex bg-gray-700 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
         }
-      />
+      >
+        <div
+          className={
+            'rounded-md w-24 h-24 overflow-hidden relative shrink-0 flex items-center text-6xl justify-center bg-gray-500'
+          }
+        >
+          😭
+        </div>
+        <div className="flex-auto">현재 곡을 표시할 수 없습니다ㅠㅠ</div>
+      </div>
     )
 
   return (
@@ -44,23 +53,18 @@ const RecentlyPlayedMusic = () => {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'flex bg-black w-full items-center rounded-xl max-w-md overflow-hidden'
+        'flex bg-gray-700 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
       }
     >
-      <div
-        className={
-          'rounded-md w-24 h-24 overflow-hidden relative m-2.5 min-w-[6rem]'
-        }
-      >
+      <div className={'rounded-md w-24 h-24 overflow-hidden relative shrink-0'}>
         <Image
           src={music.albumImageUrl}
-          sizes="33vw"
           fill
           unoptimized={true}
           alt={music.title}
         />
       </div>
-      <div className={'flex flex-col truncate text-white'}>
+      <div className={'flex flex-col flex-auto truncate text-white'}>
         <div className={'text-base truncate'}>{music.title}</div>
         <div className={'text-sm text-gray-300 truncate'}>{music.artist}</div>
       </div>
