@@ -25,7 +25,7 @@ export default function RootLayout({
               <NavBar />
               <div className="flex-auto w-full max-w-2xl px-3 pt-12 mx-auto">
                 <Three />
-                <Motion>{children}</Motion>
+                {children}
               </div>
               <footer
                 className={
