@@ -1,27 +1,26 @@
 'use client'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
-interface Song {
-  title: string
-  artist: string
-  albumImageUrl: string
-  songUrl: string
-}
+import { useRecoilState } from 'recoil'
+import { musicAtom } from '@/recoil/atoms'
 
 const RecentlyPlayedMusic = () => {
-  const [music, setMusic] = useState<null | Song>(null)
+  const [music, setMusic] = useRecoilState(musicAtom)
 
   useEffect(() => {
     const getSongApis = async () => {
-      const currentlyPlayingSong = await (
-        await fetch('/api/spotify/currently-playing')
-      ).json()
-      const recentlyPlayedSong = await (
-        await fetch('/api/spotify/recently-played')
-      ).json()
-      setMusic(currentlyPlayingSong ?? recentlyPlayedSong)
+      try {
+        const currentlyPlayingSong = await (
+          await fetch('/api/spotify/currently-playing')
+        ).json()
+        const recentlyPlayedSong = await (
+          await fetch('/api/spotify/recently-played')
+        ).json()
+        setMusic(currentlyPlayingSong ?? recentlyPlayedSong)
+      } catch (error) {
+        setMusic(null)
+      }
     }
     getSongApis()
     const getSong = setInterval(() => getSongApis(), 30000)
@@ -38,10 +37,10 @@ const RecentlyPlayedMusic = () => {
       >
         <div
           className={
-            'rounded-md w-24 h-24 overflow-hidden relative shrink-0 flex items-center text-6xl justify-center bg-gray-500'
+            'rounded-md w-24 h-24 overflow-hidden relative shrink-0 flex items-center justify-center bg-gray-500'
           }
         >
-          😭
+          <span className="text-6xl">😭</span>
         </div>
         <div className="flex-auto">현재 곡을 표시할 수 없습니다ㅠㅠ</div>
       </div>
