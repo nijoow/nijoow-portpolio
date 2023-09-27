@@ -1,13 +1,13 @@
-import axios from 'axios'
 const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID || ''
 const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET || ''
 const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN || ''
 
+const ACCESS_TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`
 
 export const getAccessTokenApi = async () => {
-  const response = await fetch('https://accounts.spotify.com/api/token', {
+  const response = await fetch(ACCESS_TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${Buffer.from(
@@ -19,31 +19,32 @@ export const getAccessTokenApi = async () => {
       grant_type: 'refresh_token',
       refresh_token,
     }),
+    cache: 'no-store',
   })
 
   return response.json()
 }
 
-export const getNowPlayingApi = async () => {
+export const getCurrentlyPlayingApi = async () => {
   const { access_token } = await getAccessTokenApi()
 
-  const { data } = await axios.get(NOW_PLAYING_ENDPOINT, {
+  return await fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    cache: 'no-store',
   })
-
-  return data
 }
 
 export const getRecentlyPlayedApi = async () => {
   const { access_token } = await getAccessTokenApi()
 
-  const { data } = await axios.get(RECENTLY_PLAYED_ENDPOINT, {
+  const response = await fetch(RECENTLY_PLAYED_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    cache: 'no-store',
   })
 
-  return data
+  return response
 }
