@@ -28,7 +28,7 @@ const WorksList = () => {
             />
           )}
           <Link
-            href={`works/${work.pageName}`}
+            href={`/works/${work.pageName}`}
             className={`absolute inset-0 w-full h-full bg-black/70 flex items-center justify-center group-hover:opacity-100 opacity-0 transition-all duration-300`}
           >
             <span className="text-lg text-white">{work.name} &gt;</span>
