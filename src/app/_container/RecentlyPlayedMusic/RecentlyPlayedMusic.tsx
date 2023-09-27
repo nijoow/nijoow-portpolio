@@ -23,8 +23,7 @@ const RecentlyPlayedMusic = () => {
       }
     }
     getSongApis()
-    const getSong = setInterval(() => getSongApis(), 3000000)
-    // const getSong = setInterval(() => getSongApis(), 30000)
+    const getSong = setInterval(() => getSongApis(), 30000)
 
     return () => clearInterval(getSong)
   }, [])
