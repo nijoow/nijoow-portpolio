@@ -1,4 +1,5 @@
 import React from 'react'
+
 const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
   return (
     <div className={'md:hidden block ml-auto'}>

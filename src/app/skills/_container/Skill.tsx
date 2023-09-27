@@ -1,4 +1,5 @@
 'use client'
+
 import { prefix } from '@/config/config'
 import { motion, useAnimationControls } from 'framer-motion'
 import Image from 'next/image'

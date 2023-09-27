@@ -1,9 +1,11 @@
 import * as React from 'react'
+
 interface LogoProps {
   width: number
   height: number
   className: string
 }
+
 const Logo = (props: LogoProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
