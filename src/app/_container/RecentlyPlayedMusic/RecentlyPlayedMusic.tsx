@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRecoilState } from 'recoil'
@@ -17,7 +17,7 @@ const RecentlyPlayedMusic = () => {
         const recentlyPlayedSong = await (
           await fetch('/api/spotify/recently-played')
         ).json()
-        setMusic(currentlyPlayingSong ?? recentlyPlayedSong)
+        setMusic(currentlyPlayingSong.payload ?? recentlyPlayedSong.payload)
       } catch (error) {
         setMusic(null)
       }
