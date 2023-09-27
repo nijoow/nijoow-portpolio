@@ -1,5 +1,5 @@
 import React from 'react'
-import SubTitle from '@/components/_common/SubTitle'
+import SubTitle from '@/components/SubTitle/SubTitle'
 import Section from '@/components/Section/Section'
 import Introduce from './_container/Introduce/Introduce'
 import Informations from './_container/Information/Informations'

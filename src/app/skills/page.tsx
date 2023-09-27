@@ -1,5 +1,5 @@
 import Section from '@/components/Section/Section'
-import SubTitle from '@/components/_common/SubTitle'
+import SubTitle from '@/components/SubTitle/SubTitle'
 import SkillsContainer from './_container/SkillsContainer'
 import React from 'react'
 import { skillsEtc, skillsFront } from './_container/skillsData'
