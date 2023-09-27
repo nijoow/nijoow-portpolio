@@ -1,6 +1,5 @@
 import NavBar from '@/components/Navbar/NavBar'
 import Three from '@/components/Three/Three'
-import Motion from '../context/Motion'
 import Theme from '../context/Theme'
 import { Metadata } from 'next'
 import './globals.css'
