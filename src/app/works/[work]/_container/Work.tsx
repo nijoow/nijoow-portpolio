@@ -1,10 +1,9 @@
 import { prefix } from '@/config/config'
-import { IWorkImage } from '@/type/interface'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FiChevronRight } from 'react-icons/fi'
 
-const Work = ({ url, imgSrc }: IWorkImage) => {
+const Work = ({ url, imgSrc }: { url: string; imgSrc: string }) => {
   return (
     <div
       className={

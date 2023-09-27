@@ -1,16 +1,15 @@
-import PartSubTitle from '@/components/works/PartSubTitle'
-import PartTitle from '@/components/works/PartTitle'
-import Work from '@/components/works/Work'
+import PartSubTitle from '@/app/works/[work]/_container/PartSubTitle'
+import PartTitle from '@/app/works/[work]/_container/PartTitle'
+import Work from '@/app/works/[work]/_container/Work'
 import Link from 'next/link'
 import React from 'react'
 import { BsGithub } from 'react-icons/bs'
-import { FiChevronRight } from 'react-icons/fi'
 
 interface WorkContents {
   [key: string]: JSX.Element
 }
 
-export const WorkContent: WorkContents = {
+export const workContent: WorkContents = {
   'nijoow-vintage': (
     <>
       <PartTitle title={'View'} />

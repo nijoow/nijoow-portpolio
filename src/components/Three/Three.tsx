@@ -1,7 +1,6 @@
 'use client'
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-
 import { OrbitControls } from '@react-three/drei'
 import Lights from './Lights'
 import Nijoow from './Nijoow'

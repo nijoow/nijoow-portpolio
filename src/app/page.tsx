@@ -5,7 +5,7 @@ import Introduce from './_container/Introduce/Introduce'
 import Informations from './_container/Information/Informations'
 import RecentlyPlayedMusic from './_container/RecentlyPlayedMusic/RecentlyPlayedMusic'
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="flex flex-col gap-6">
       <Section>
@@ -42,4 +42,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage
