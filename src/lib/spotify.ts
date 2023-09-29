@@ -32,7 +32,7 @@ export const getCurrentlyPlayingApi = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    cache: 'no-store',
+    next: { revalidate: 0 },
   })
 }
 
@@ -43,7 +43,7 @@ export const getRecentlyPlayedApi = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    cache: 'no-store',
+    next: { revalidate: 0 },
   })
 
   return response
