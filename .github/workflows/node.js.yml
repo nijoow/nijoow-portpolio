@@ -26,6 +26,7 @@ jobs:
         
     - name: Install and Build
       run: |
+        yarn
         yarn build
         touch out/.nojekyll
         
