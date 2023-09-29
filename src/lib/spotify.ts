@@ -19,7 +19,7 @@ export const getAccessTokenApi = async () => {
       grant_type: 'refresh_token',
       refresh_token,
     }),
-    cache: 'no-store',
+    next: { revalidate: 0 },
   })
 
   return response.json()
