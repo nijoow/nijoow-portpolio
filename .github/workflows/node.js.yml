@@ -29,6 +29,9 @@ jobs:
         yarn
         yarn build
         touch out/.nojekyll
+        echo "SPOTIFY_CLIENT_ID : $SPOTIFY_CLIENT_ID"
+        echo "SPOTIFY_REFRESH_TOKEN : $SPOTIFY_REFRESH_TOKEN"
+
       env: 
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
