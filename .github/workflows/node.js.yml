@@ -30,12 +30,13 @@ jobs:
         yarn build
         touch out/.nojekyll
         echo "SPOTIFY_CLIENT_ID : ${{ secrets.SPOTIFY_CLIENT_ID }}"
-        echo "TEST : $TEST"
+        echo "SPOTIFY_CLIENT_SECRET : ${{ secrets.SPOTIFY_CLIENT_SECRET }}"
+        echo "SPOTIFY_REFRESH_TOKEN : ${{ secrets.SPOTIFY_REFRESH_TOKEN }}"
+
       env: 
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
-        TEST: TEST123
         
     - name: Deploy
       # https://github.com/JamesIves/github-pages-deploy-action
