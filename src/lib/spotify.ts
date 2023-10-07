@@ -19,7 +19,7 @@ export const getAccessTokenApi = async () => {
       grant_type: 'refresh_token',
       refresh_token,
     }),
-    next: { revalidate: 0 },
+    next: { revalidate: 3600 },
   })
 
   return response.json()
@@ -32,7 +32,7 @@ export const getCurrentlyPlayingApi = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    next: { revalidate: 0 },
+    cache: 'no-store',
   })
 }
 
@@ -43,7 +43,7 @@ export const getRecentlyPlayedApi = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    next: { revalidate: 0 },
+    cache: 'no-store',
   })
 
   return response
