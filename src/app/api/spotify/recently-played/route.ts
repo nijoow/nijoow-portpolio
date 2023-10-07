@@ -1,7 +1,9 @@
 import { getRecentlyPlayedApi } from '@/lib/spotify'
 import { NextResponse } from 'next/server'
 
-export async function GET(reqeust: Request) {
+export const revalidate = 0
+
+export async function GET() {
   try {
     const res = await getRecentlyPlayedApi()
     if (res.status === 200) {
