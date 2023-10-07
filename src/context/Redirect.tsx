@@ -12,7 +12,7 @@ const Redirect = ({ children }: Props) => {
   useEffect(() => {
     const origin = typeof window !== undefined ? window.location.origin : ''
 
-    if (origin === 'https://nijoow.github.io/')
+    if (origin === 'https://nijoow.github.io')
       router.push('https://nijoow-portfolio.vercel.app')
   }, [])
 
