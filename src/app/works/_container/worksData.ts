@@ -59,4 +59,10 @@ export const works = [
     name: 'nijoow-drawing',
     imgSrc: 'nijoow-drawing.png',
   },
+  {
+    id: 11,
+    pageName: 'cusmetic',
+    name: 'cusmetic',
+    imgSrc: 'cusmetic.png',
+  },
 ]
