@@ -1,2 +1,4 @@
 export const prefix =
-  process.env.NODE_ENV === 'production' ? 'https://nijoow.github.io' : ''
+  process.env.NODE_ENV === 'production'
+    ? 'https://nijoow-portfolio.vercel.app'
+    : ''

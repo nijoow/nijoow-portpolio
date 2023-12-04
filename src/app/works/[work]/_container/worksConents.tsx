@@ -64,7 +64,7 @@ export const workContent: WorkContents = {
     <>
       <PartTitle title={'View'} />
       <Work
-        url="https://nijoow.github.io/CatchTheCandy_p5/"
+        url="https://nijoow-portfolio.vercel.app/CatchTheCandy_p5/"
         imgSrc="catchTheCandy.png"
       />
       <div className="my-3" />
@@ -114,7 +114,7 @@ export const workContent: WorkContents = {
       </Link>
       <div className="my-1" />
       <Link
-        href="https://nijoow.github.io/CatchTheCandy_p5/"
+        href="https://nijoow-portfolio.vercel.app/CatchTheCandy_p5/"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
@@ -226,7 +226,10 @@ export const workContent: WorkContents = {
   memory: (
     <>
       <PartTitle title={'View'} />
-      <Work url="https://nijoow.github.io/PNUDT12/" imgSrc="pnudt12.png"></Work>
+      <Work
+        url="https://nijoow-portfolio.vercel.app/PNUDT12/"
+        imgSrc="pnudt12.png"
+      ></Work>
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🎓 MEMORY</span>
@@ -251,7 +254,7 @@ export const workContent: WorkContents = {
       <PartTitle title={'Link'} />
 
       <Link
-        href="https://nijoow.github.io/PNUDT12/"
+        href="https://nijoow-portfolio.vercel.app/PNUDT12/"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
@@ -274,7 +277,10 @@ export const workContent: WorkContents = {
     <>
       {' '}
       <PartTitle title={'View'} />
-      <Work url="https://nijoow.github.io/" imgSrc="portfolio.png"></Work>
+      <Work
+        url="https://nijoow-portfolio.vercel.app"
+        imgSrc="portfolio.png"
+      ></Work>
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🎨 개인 포트폴리오 사이트</span>
@@ -297,7 +303,7 @@ export const workContent: WorkContents = {
       <div className="my-3" />
       <PartTitle title={'Link'} />
       <Link
-        href="https://nijoow.github.io/"
+        href="https://nijoow-portfolio.vercel.app"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"

@@ -1,6 +1,6 @@
 {
   "name": "nijoow-portfolio",
-  "homepage": "https://nijoow.github.io/",
+  "homepage": "https://nijoow-portfolio.vercel.app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
