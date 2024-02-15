@@ -16,7 +16,7 @@ const WorksList = () => {
         <motion.div
           whileHover={{ scale: 1.05 }}
           className={`col-span-2 sm:col-span-1 w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md `}
-          key={work.id}
+          key={work.name}
         >
           {work.imgSrc === '' ? (
             <div>이미지가 없습니다</div>
