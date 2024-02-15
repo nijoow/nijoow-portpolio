@@ -33,7 +33,7 @@
     "three": "^0.156.1",
     "typescript": "5.1.6"
   },
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "yarn@4.1.0",
   "devDependencies": {
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
