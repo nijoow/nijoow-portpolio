@@ -227,7 +227,7 @@ export const workContent: WorkContents = {
     <>
       <PartTitle title={'View'} />
       <Work
-        url="https://nijoow-portfolio.vercel.app/PNUDT12/"
+        url="https://nijoow.github.io/PNUDT12/pages/about.html"
         imgSrc="pnudt12.png"
       ></Work>
       <div className="my-3" />
