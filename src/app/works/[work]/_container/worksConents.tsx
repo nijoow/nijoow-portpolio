@@ -64,7 +64,7 @@ export const workContent: WorkContents = {
     <>
       <PartTitle title={'View'} />
       <Work
-        url="https://nijoow-portfolio.vercel.app/CatchTheCandy_p5/"
+        url="https://nijoow.github.io/CatchTheCandy_p5/"
         imgSrc="catchTheCandy.png"
       />
       <div className="my-3" />
