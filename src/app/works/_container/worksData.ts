@@ -45,4 +45,14 @@ export const works = [
     name: 'cusmetic',
     imgSrc: 'cusmetic.png',
   },
+  {
+    pageName: 'nijoow-shopping-mall',
+    name: 'nijoow-shopping-mall',
+    imgSrc: 'nijoow-shopping-mall.png',
+  },
+  {
+    pageName: 'moharu',
+    name: 'moharu',
+    imgSrc: 'moharu.png',
+  },
 ]

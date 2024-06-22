@@ -25,7 +25,7 @@ export const workContent: WorkContents = {
       </span>
       <div className="my-1" />
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Tailwind, Recoil, supabase</span>
+      <span>- Next.js, Typescript, Tailwind CSS, Recoil, Supabase</span>
       <div className="my-1" />
       <PartSubTitle title={'기능'} />
       <ul>
@@ -146,7 +146,7 @@ export const workContent: WorkContents = {
       </span>
       <PartSubTitle title={'기술 스택'} />
       <span>
-        - React.js, Typescript, Recoil, Tailwind, React-native(webview)
+        - React.js, Typescript, Recoil, Tailwind CSS, React-native(webview)
       </span>
       <PartSubTitle title={'팀구성'} />
       <span>- PM 1, 프론트엔드 1, 백엔드 1, 디자이너 1</span>
@@ -193,7 +193,7 @@ export const workContent: WorkContents = {
       <span className="text-xl font-bold">🎹 nijoow-launchpad</span>
       <span>- 전자 악기 런치패드 토이프로젝트</span>
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Tailwind</span>
+      <span>- Next.js, Typescript, Tailwind CSS</span>
       <PartSubTitle title={'기능'} />
       <span>
         - 마우스/키보드/터치 이벤트로 런치패드를 클릭할 때 마다 사운드 재생
@@ -286,7 +286,7 @@ export const workContent: WorkContents = {
       <span className="text-xl font-bold">🎨 개인 포트폴리오 사이트</span>
       <span>- 주기적으로 업데이트 중</span>
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, tailwind css</span>
+      <span>- Next.js, Typescript, Tailwind CSS</span>
       <PartSubTitle title={'개발'} />
       <ul>
         <li>- Next.js 프레임워크의 SPA</li>
@@ -375,7 +375,7 @@ export const workContent: WorkContents = {
         - 기획 미완성, 프론트엔드만 임시로 제작해서 배포
       </span>
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Jotai, Tailwind</span>
+      <span>- Next.js, Typescript, Jotai, Tailwind CSS</span>
       <PartSubTitle title={'역할'} />
       <ul>
         <li>- 기획 참여</li>
@@ -404,52 +404,6 @@ export const workContent: WorkContents = {
       </Link>
     </>
   ),
-  // 'nijoow-cocktail': (
-  //   <>
-  //     <PartTitle title={'View'} />
-  //     <Work
-  //       url="https://nijoow-cocktail.vercel.app/"
-  //       imgSrc="nijoow-cocktail.png"
-  //     ></Work>
-  //     <div className="my-3" />
-  //     <PartTitle title={'Explanation'} />
-  //     <span className="text-xl font-bold">🍸 nijoow-cocktail</span>
-  //     <span className="text-base font-medium">
-  //       - 칵테일 조회 사이트 토이 프로젝트
-  //     </span>
-  //     <PartSubTitle title={'기술 스택'} />
-  //     <span>
-  //       - Next.js, Typescript, Recoil, Tailwind, React-query, Daisy UI
-  //     </span>
-  //     <PartSubTitle title={'기능'} />
-  //     <ul>
-  //       <li>- Next.js 13 버전 사용</li>
-  //       <li>- thecocktaildb.com 칵테일 관련 api 연동</li>
-  //       <li>- 카테고리, 재료 필터 기능</li>
-  //       <li>- React-query 데이터 캐싱</li>
-  //     </ul>
-  //     <div className="my-3" />
-  //     <PartTitle title={'Link'} />
-  //     <Link
-  //       href="https://nijoow-cocktail.vercel.app/"
-  //       target="_blank"
-  //       rel="noopener noreferrer"
-  //       className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
-  //     >
-  //       <span>사이트 바로가기</span>
-  //     </Link>
-  //     <div className="my-1" />
-  //     <Link
-  //       href="https://github.com/nijoow/nijoow-cocktail"
-  //       target="_blank"
-  //       rel="noopener noreferrer"
-  //       className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
-  //     >
-  //       <BsGithub />
-  //       <span>Github</span>
-  //     </Link>
-  //   </>
-  // ),
   'nijoow-drawing': (
     <>
       <PartTitle title={'View'} />
@@ -463,7 +417,7 @@ export const workContent: WorkContents = {
       <span className="text-base font-medium">- svg 드로잉 토이 프로젝트</span>
       <span className="text-base font-medium">- 🚧 개발 진행 중 🚧</span>
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Recoil, Tailwind</span>
+      <span>- Next.js, Typescript, Recoil, Tailwind CSS</span>
       <PartSubTitle title={'기능'} />
       <ul>
         <li>- 마우스 드래그로 사각형, 삼각형, 원 그리기</li>
@@ -530,6 +484,101 @@ export const workContent: WorkContents = {
         <span>사이트 바로가기</span>
       </Link>
       <div className="my-1" />
+    </>
+  ),
+  'nijoow-shopping-mall': (
+    <>
+      <PartTitle title={'View'} />
+      <Work
+        url="https://nijoow-shopping-mall.vercel.app/"
+        imgSrc="nijoow-shopping-mall.png"
+      ></Work>
+      <div className="my-3" />
+      <PartTitle title={'Explanation'} />
+      <span className="text-xl font-bold">👟 nijoow-shopping-mall</span>
+      <span className="text-base font-medium">
+        - 쇼핑몰 풀스택 토이 프로젝트
+      </span>
+      <span className="text-base font-medium">- 🚧 개발 진행 중 🚧</span>
+      <PartSubTitle title={'기술 스택'} />
+      <span>- Next.js, Typescript, Tailwind CSS, PostgreSQL</span>
+      <PartSubTitle title={'기능'} />
+      <ul>
+        <li>- 회원가입, 로그인, 소셜로그인 기능</li>
+        <li>- 내 정보 수정, 배송정보 저장</li>
+        <li>- 홈화면, 상품 목록 페이지, 상품 페이지</li>
+      </ul>
+      <div className="my-3" />
+      <PartTitle title={'Link'} />
+      <Link
+        href="https://nijoow-shopping-mall.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <span>사이트 바로가기</span>
+      </Link>
+      <div className="my-1" />
+      <Link
+        href="https://github.com/nijoow/nijoow-shopping-mall"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <BsGithub />
+        <span>Github</span>
+      </Link>
+    </>
+  ),
+  moharu: (
+    <>
+      <PartTitle title={'View'} />
+      <Work url="https://moharu.site" imgSrc="moharu.png"></Work>
+      <div className="my-3" />
+      <PartTitle title={'Explanation'} />
+      <span className="text-xl font-bold">🎫 moharu</span>
+      <span className="text-base font-medium">- 취미 활동 추천 플랫폼</span>
+      <span className="text-base font-medium">
+        - 비사이드 포텐데이 온라인 해커톤 팀 프로젝트
+      </span>
+      <PartSubTitle title={'기술 스택'} />
+      <span>- Next.js, Typescript, Tailwind CSS</span>
+      <PartSubTitle title={'팀구성'} />
+      <span>- 기획자 1, 디자이너 1, 프론트엔드 2, 백엔드 2</span>
+      <PartSubTitle title={'역할'} />
+      <ul>
+        <li>- Next.js 구조 설계</li>
+        <li>- 회원가입/이메일 로그인/소셜 로그인 기능 및 페이지 구현</li>
+      </ul>
+      <div className="my-3" />
+      <PartTitle title={'Link'} />
+      <Link
+        href="https://bside.best/projects/detail/P240514222247"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <span>상세 설명 바로가기</span>
+      </Link>
+      <div className="my-1" />
+      <Link
+        href="https://moharu.site"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <span>사이트 바로가기</span>
+      </Link>
+      <div className="my-1" />
+      <Link
+        href="https://github.com/poten-moharu/moharu-frontend"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+      >
+        <BsGithub />
+        <span>Github</span>
+      </Link>
     </>
   ),
 }
