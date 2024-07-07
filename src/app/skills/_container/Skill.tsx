@@ -4,6 +4,7 @@ import { prefix } from '@/config/config'
 import { motion, useAnimationControls } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect } from 'react'
+import Tilt from 'react-parallax-tilt'
 
 export interface SkillType {
   fileName: string
@@ -33,10 +34,10 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
       dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
       dragConstraints={constraintsRef}
       dragSnapToOrigin
-      whileHover={{ scale: 1.2 }}
       className="flex flex-col items-center col-span-2 gap-2 cursor-pointer sm:col-span-1"
     >
-      <div
+      <Tilt
+        scale={1.2}
         className={`transition-all duration-300 rounded-lg overflow-hidden w-16 h-16 relative ${
           name === 'NEXT JS' ? 'dark:bg-purple-50 bg-transparent p-2' : ''
         }`}
@@ -47,7 +48,8 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
           fill
           className={`pointer-events-none ${name === 'NEXT JS' ? 'p-1' : ''}`}
         />
-      </div>
+      </Tilt>
+
       <span className={'font-semibold'}>{name}</span>
     </motion.div>
   )
