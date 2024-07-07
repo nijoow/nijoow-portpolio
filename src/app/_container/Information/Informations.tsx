@@ -35,12 +35,6 @@ const informationList = [
     contents: '@nijoow',
     link: 'https://github.com/nijoow',
   },
-  {
-    icon: <BsLink45Deg />,
-    list: '프로필링크',
-    contents: '@nijoow',
-    link: 'https://prfl.link/@nijoow',
-  },
 ]
 
 const Informations = () => {
