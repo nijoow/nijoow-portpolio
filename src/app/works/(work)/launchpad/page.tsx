@@ -36,11 +36,6 @@ const LaunchpadPage = () => {
           이벤트를 통해 사운드를 재생하였을때, 연속으로 클릭할 경우 사운드가
           끊기지 않고 중복되는 문제 발생
         </li>
-
-        <li>
-          - 클라이언트 Router Cache가 서버컴포넌트의 payload를 캐싱하여 발생한
-          것을 확인
-        </li>
         <li className="font-semibold text-purple-regular">
           - 마우스를 누를때와 떼는 이벤트를 분리하여
           <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
