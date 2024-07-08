@@ -1191,6 +1191,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^2.0.1":
   version: 2.0.1
   resolution: "color-convert@npm:2.0.1"
@@ -3473,6 +3480,7 @@ __metadata:
     "@types/react-dom": "npm:18.2.7"
     "@types/three": "npm:^0.156.0"
     autoprefixer: "npm:10.4.14"
+    clsx: "npm:^2.1.1"
     eslint: "npm:8.45.0"
     eslint-config-next: "npm:13.4.10"
     eslint-config-prettier: "npm:^8.8.0"
@@ -3489,6 +3497,7 @@ __metadata:
     react-parallax-tilt: "npm:^1.7.230"
     recoil: "npm:^0.7.7"
     recoil-persist: "npm:^5.1.0"
+    tailwind-merge: "npm:^2.4.0"
     tailwindcss: "npm:3.3.3"
     three: "npm:^0.156.1"
     typescript: "npm:5.1.6"
@@ -4738,6 +4747,13 @@ __metadata:
     "@pkgr/utils": "npm:^2.3.1"
     tslib: "npm:^2.5.0"
   checksum: 10/fb6798a2db2650ca3a2435ad32d4fc14842da807993a1a350b64d267e0e770aa7f26492b119aa7500892d3d07a5af1eec7bfbd6e23a619451558be0f226a6094
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "tailwind-merge@npm:2.4.0"
+  checksum: 10/dda331a95146c9943dd18f152156fe7a5daf450a686d0562fb521ebc027273bd0c8f9503742668b3e90d27e887aa794ea5e79c38faa51216e19e9d0f1ec55925
   languageName: node
   linkType: hard
 
