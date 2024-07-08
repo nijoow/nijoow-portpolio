@@ -6,16 +6,27 @@ import { works } from './worksData'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 const WorksList = () => {
-  const worksList = [...works].reverse()
+  const searchParams = useSearchParams()
+
+  const selectedTags = searchParams.getAll('tags')
+
+  const worksList = [...works]
+    .reverse()
+    .filter(
+      (work) =>
+        selectedTags.length === 0 ||
+        selectedTags.some((tag) => work.tags.includes(tag)),
+    )
 
   return (
     <div className={'w-full grid grid-cols-2 gap-3'}>
       {worksList.map((work) => (
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className={`col-span-2 sm:col-span-1 w-full relative pb-[56.25%] h-0 group overflow-hidden rounded-lg shadow-md `}
+          className={`col-span-2 sm:col-span-1 w-full h-auto relative aspect-video group overflow-hidden rounded-lg shadow-md `}
           key={work.name}
         >
           {work.imgSrc === '' ? (
