@@ -37,14 +37,13 @@ const MemoryPage = () => {
       <PartTitle title={'Link'} />
 
       <Link
-        href="https://nijoow-portfolio.vercel.app/PNUDT12/"
+        href="https://nijoow.github.io/PNUDT12/pages/about.html"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
       </Link>
-      <div className="my-1" />
       <Link
         href="https://github.com/nijoow/PNUDT12"
         target="_blank"

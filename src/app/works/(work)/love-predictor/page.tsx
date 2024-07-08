@@ -41,7 +41,6 @@ const LovePredictorPage = () => {
       >
         <span>사이트 바로가기</span>
       </Link>
-      <div className="my-1" />
       <Link
         href="https://github.com/nijoow/ai-love-predictor-front"
         target="_blank"

@@ -28,8 +28,7 @@ const PrflLinkPage = () => {
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
-      </Link>{' '}
-      <div className="my-1" />
+      </Link>
       <Link
         href="https://prfl.link/@nijoow"
         target="_blank"

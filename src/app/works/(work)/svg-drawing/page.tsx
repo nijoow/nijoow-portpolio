@@ -29,6 +29,18 @@ const SVGDrawingPage = () => {
         </li>
         <li>- 도형 선택 핸들러 구현 (드래그 이동, 크기 조절, 회전 이벤트)</li>
       </ul>
+      <PartSubTitle title={'트러블 슈팅'} />
+      <ul className="pl-2 flex flex-col gap-1">
+        <li>
+          1) 도형을 Resize할 때 회전이 되어있는 경우, 드래그와 크기 조절이
+          일치하지 않는 문제 발생
+        </li>
+        <li>- 계산이 너무 복잡해져서 보류</li>
+        <li className="font-semibold text-purple-regular">
+          - 중심점을 기준으로 크기를 조절하도록 구현
+        </li>
+      </ul>
+
       <div className="my-3" />
       <PartTitle title={'Link'} />
       <Link
@@ -39,9 +51,8 @@ const SVGDrawingPage = () => {
       >
         <span>사이트 바로가기</span>
       </Link>
-      <div className="my-1" />
       <Link
-        href="https://github.com/nijoow/nijoow-drawing"
+        href="https://github.com/nijoow/svg-drawing"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"

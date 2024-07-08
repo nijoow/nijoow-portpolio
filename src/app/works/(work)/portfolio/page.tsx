@@ -40,7 +40,6 @@ const PortPolioPage = () => {
       >
         <span>사이트 바로가기</span>
       </Link>
-      <div className="my-1" />
       <Link
         href="https://github.com/nijoow/nijoow.github.io"
         target="_blank"

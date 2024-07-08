@@ -9,13 +9,13 @@ export const works = [
     pageName: 'memory',
     name: 'MEMORY',
     imgSrc: 'pnudt12.png',
-    tags: ['Interactive', 'Web', 'Design', 'Frontend'],
+    tags: ['Web', 'Interactive', 'Design', 'Frontend'],
   },
   {
     pageName: 'catch-the-candy',
     name: 'CATCH THE CANDY',
     imgSrc: 'catchTheCandy.png',
-    tags: ['Interactive', 'Web'],
+    tags: ['Web', 'Interactive'],
   },
   {
     pageName: 'portfolio',
@@ -27,7 +27,7 @@ export const works = [
     pageName: 'launchpad',
     name: 'launchpad',
     imgSrc: 'nijoow-launchpad.png',
-    tags: ['Interactive', 'Frontend', 'Design'],
+    tags: ['Web', 'Interactive', 'Frontend', 'Design'],
   },
   {
     pageName: 'nijoow-vintage',
@@ -39,7 +39,7 @@ export const works = [
     pageName: 'love-predictor',
     name: 'Love-Predictor',
     imgSrc: 'ai-love-predictor.png',
-    tags: ['Frontend'],
+    tags: ['Web', 'Frontend'],
   },
   {
     pageName: 'treenow',
@@ -51,7 +51,7 @@ export const works = [
     pageName: 'svg-drawing',
     name: 'svg-drawing',
     imgSrc: 'nijoow-drawing.png',
-    tags: ['Frontend', 'Interactive', 'Web', 'Design'],
+    tags: ['Web', 'Frontend', 'Interactive', 'Design'],
   },
   {
     pageName: 'cusmetic',
