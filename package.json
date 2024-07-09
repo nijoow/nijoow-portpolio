@@ -11,6 +11,7 @@
     "deploy": "next build && touch out/.nojekyll && git add -f out/ && git commit -m '🚀 gh-pages 배포' && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.4",
     "@react-three/drei": "^9.85.0",
     "@react-three/fiber": "^8.13.5",
     "@types/node": "20.4.2",

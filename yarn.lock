@@ -260,6 +260,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/third-parties@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "@next/third-parties@npm:14.2.4"
+  dependencies:
+    third-party-capital: "npm:1.0.20"
+  peerDependencies:
+    next: ^13.0.0 || ^14.0.0
+    react: ^18.2.0
+  checksum: 10/7da1f7724b339f32657cbab651ca7e4bb9160938964ba3cc08b0c297f4f95ee4dec63110517d1c3264506a429f83e2d56c664762904513d243516b54066f5c4e
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3473,6 +3485,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nijoow-portfolio@workspace:."
   dependencies:
+    "@next/third-parties": "npm:^14.2.4"
     "@react-three/drei": "npm:^9.85.0"
     "@react-three/fiber": "npm:^8.13.5"
     "@types/node": "npm:20.4.2"
@@ -4833,6 +4846,13 @@ __metadata:
   dependencies:
     any-promise: "npm:^1.0.0"
   checksum: 10/486e1283a867440a904e36741ff1a177faa827cf94d69506f7e3ae4187b9afdf9ec368b3d8da225c192bfe2eb943f3f0080594156bf39f21b57cd1411e2e7f6d
+  languageName: node
+  linkType: hard
+
+"third-party-capital@npm:1.0.20":
+  version: 1.0.20
+  resolution: "third-party-capital@npm:1.0.20"
+  checksum: 10/40e2531b428a21f05531fc62ef82859c0071211eff09588baf75d4b525096bbdb4f93e17e2d538849db8d4fc3cceb074933d7be59fddc26f86718fbbe852a97f
   languageName: node
   linkType: hard
 
