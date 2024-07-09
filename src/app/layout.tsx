@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import './globals.css'
 import Recoil from '@/context/Recoil'
 import Redirect from '@/context/Redirect'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: 'nijoow | portfolio',
@@ -40,6 +41,7 @@ export default function RootLayout({
             </Recoil>
           </Theme>
         </body>
+        <GoogleAnalytics gaId="G-5QJWDNZCYK" />
       </html>
     </Redirect>
   )
