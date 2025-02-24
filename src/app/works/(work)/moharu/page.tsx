@@ -9,7 +9,7 @@ const MoharuPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <WorkImage url="https://moharu.site" imgSrc="moharu.png" />
+      <WorkImage imgSrc="moharu.png" />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🎫 moharu</span>
@@ -59,14 +59,6 @@ const MoharuPage = () => {
         className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
       >
         <span>상세 설명 바로가기</span>
-      </Link>
-      <Link
-        href="https://moharu.site"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
-      >
-        <span>사이트 바로가기</span>
       </Link>
       <Link
         href="https://github.com/poten-moharu/moharu-frontend"

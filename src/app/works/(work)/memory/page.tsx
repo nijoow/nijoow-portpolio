@@ -1,6 +1,6 @@
 import React from 'react'
 import PartTitle from '../../_container/PartTitle'
-import Work from '../../_container/WorkImage'
+import WorkImage from '../../_container/WorkImage'
 import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
@@ -9,7 +9,7 @@ const MemoryPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <Work
+      <WorkImage
         url="https://nijoow.github.io/PNUDT12/pages/about.html"
         imgSrc="pnudt12.png"
       />

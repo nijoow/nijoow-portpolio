@@ -8,7 +8,7 @@ const CusmeticPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <WorkImage url="https://cusmetic.kr" imgSrc="cusmetic.png" />
+      <WorkImage imgSrc="cusmetic.png" />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🧴 Cusmetic</span>
@@ -72,15 +72,6 @@ const CusmeticPage = () => {
         </li>
       </ul>
       <div className="my-3" />
-      <PartTitle title={'Link'} />
-      <Link
-        href="https://cusmetic.kr"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
     </>
   )
 }

@@ -8,7 +8,7 @@ const TreenowPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <WorkImage url="https://treenow.co.kr" imgSrc="treenow.png" />
+      <WorkImage imgSrc="treenow.png" />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🌳 트리나우</span>
@@ -40,15 +40,6 @@ const TreenowPage = () => {
         <li>- Lazy Loading, CDN 이미지 최적화로 성능 개선</li>
       </ul>
       <div className="my-3" />
-      <PartTitle title={'Link'} />
-      <Link
-        href="https://treenow.co.kr"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
     </>
   )
 }

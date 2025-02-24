@@ -1,6 +1,6 @@
 import React from 'react'
 import PartTitle from '../../_container/PartTitle'
-import Work from '../../_container/WorkImage'
+import WorkImage from '../../_container/WorkImage'
 import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
@@ -9,7 +9,7 @@ const ReturnToBlankPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <Work
+      <WorkImage
         url="https://www.youtube.com/watch?v=11Wplgnpt90"
         imgSrc="return-to-blank.png"
       />

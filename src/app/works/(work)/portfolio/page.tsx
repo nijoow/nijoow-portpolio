@@ -1,6 +1,6 @@
 import React from 'react'
 import PartTitle from '../../_container/PartTitle'
-import Work from '../../_container/WorkImage'
+import WorkImage from '../../_container/WorkImage'
 import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
@@ -9,7 +9,10 @@ const PortPolioPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
-      <Work url="https://nijoow-portfolio.vercel.app" imgSrc="portfolio.png" />
+      <WorkImage
+        url="https://nijoow-portfolio.vercel.app"
+        imgSrc="portfolio.png"
+      />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🎨 개인 포트폴리오 사이트</span>
