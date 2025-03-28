@@ -1,8 +1,7 @@
-import React from 'react'
 import Section from '@/components/Section/Section'
 import Link from 'next/link'
-import WorksList from './_container/WorksList'
 import WorkTags from './_container/WorkTags'
+import WorksList from './_container/WorksList'
 
 const WorksPage = () => {
   return (

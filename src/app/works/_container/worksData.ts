@@ -77,4 +77,10 @@ export const works = [
     imgSrc: 'television.png',
     tags: ['Web', 'Frontend', '3D'],
   },
+  {
+    pageName: 'atop-dms',
+    name: 'ATOP.DMS',
+    imgSrc: 'atop-dms/main.png',
+    tags: ['Web', 'Frontend'],
+  },
 ]

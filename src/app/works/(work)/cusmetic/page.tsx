@@ -1,14 +1,24 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
 import PartSubTitle from '../../_container/PartSubTitle'
-import Link from 'next/link'
+import PartTitle from '../../_container/PartTitle'
+import WorkCarousel from '../../_container/WorkCarousel'
+import WorkImage from '../../_container/WorkImage'
 
 const CusmeticPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
       <WorkImage imgSrc="cusmetic.png" />
+      <WorkCarousel
+        imgSrcList={[
+          'cusmetic/landing.png',
+          'cusmetic/skin-type-check.png',
+          'cusmetic/skin-type-result.png',
+          'cusmetic/search.png',
+          'cusmetic/cosmetic-result.png',
+        ]}
+        aspectRatio="square"
+      />
+
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🧴 Cusmetic</span>

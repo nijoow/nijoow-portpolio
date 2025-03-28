@@ -1,15 +1,14 @@
 'use client'
 
-import React from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 
-import Image from 'next/image'
 import { prefix } from '@/config/config'
+import Image from 'next/image'
 
 const PrevButton = () => {
   const swiper = useSwiper()
@@ -39,7 +38,13 @@ const NextButton = () => {
   )
 }
 
-const WorkCarousel = ({ imgSrcList }: { imgSrcList: string[] }) => {
+const WorkCarousel = ({
+  imgSrcList,
+  aspectRatio = 'video',
+}: {
+  imgSrcList: string[]
+  aspectRatio?: 'video' | 'square'
+}) => {
   return (
     <Swiper
       modules={[Pagination, Navigation]}
@@ -47,10 +52,10 @@ const WorkCarousel = ({ imgSrcList }: { imgSrcList: string[] }) => {
         clickable: true,
       }}
       loop
-      className="max-w-3xl w-full relative aspect-video overflow-hidden rounded-lg shadow-md
-      [&_.swiper-pagination-bullet-active]:bg-purple-regular 
-
-      "
+      className={`max-w-3xl w-full relative overflow-hidden rounded-lg shadow-md
+      [&_.swiper-pagination-bullet-active]:bg-purple-regular ${
+        { video: 'aspect-video', square: 'aspect-square' }[aspectRatio]
+      }`}
     >
       {imgSrcList.map((imgSrc) => (
         <SwiperSlide key={imgSrc} className="relative w-full h-full bg-white">

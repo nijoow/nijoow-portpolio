@@ -1,9 +1,9 @@
 'use client'
 
 import Section from '@/components/Section/Section'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 import WorksBreadCrumb from '../_container/WorksBreadCrumb'
-import { usePathname } from 'next/navigation'
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname()
