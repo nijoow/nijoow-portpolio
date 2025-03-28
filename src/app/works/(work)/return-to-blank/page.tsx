@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const ReturnToBlankPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://www.youtube.com/watch?v=11Wplgnpt90"
         imgSrc="return-to-blank.png"

@@ -2,8 +2,6 @@
 import { cn } from '@/lib/utils'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import React from 'react'
-
 const workFilterData = [
   'Web',
   'Design',
@@ -11,6 +9,8 @@ const workFilterData = [
   'Interactive',
   '3D',
   'Backend',
+  'Business Project',
+  'Side Project',
 ]
 
 const WorkTags = () => {

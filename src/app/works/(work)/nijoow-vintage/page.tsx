@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const NijoowVintagePage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://nijoow-vintage.vercel.app/"
         imgSrc="nijoow-vintage.png"

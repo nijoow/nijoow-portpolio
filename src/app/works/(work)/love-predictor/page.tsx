@@ -8,7 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const LovePredictorPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
       <WorkImage
         url="https://ai-love-predictor.vercel.app/"
         imgSrc="ai-love-predictor.png"

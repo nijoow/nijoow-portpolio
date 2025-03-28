@@ -6,8 +6,6 @@ import WorkImage from '../../_container/WorkImage'
 const PrflLinkPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage imgSrc="prflLink.png" />
 
       <div className="my-3" />

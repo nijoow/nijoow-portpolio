@@ -6,7 +6,6 @@ import WorkCarousel from '../../_container/WorkCarousel'
 const AtopDmsPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
       <WorkCarousel
         imgSrcList={[
           'atop-dms/main.png',

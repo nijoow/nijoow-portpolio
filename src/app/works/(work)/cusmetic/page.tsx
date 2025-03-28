@@ -6,8 +6,6 @@ import WorkCarousel from '../../_container/WorkCarousel'
 const CusmeticPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkCarousel
         imgSrcList={[
           'cusmetic/landing.png',

@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const PortPolioPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://nijoow-portfolio.vercel.app"
         imgSrc="portfolio.png"

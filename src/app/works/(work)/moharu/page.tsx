@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const MoharuPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage imgSrc="moharu.png" />
 
       <div className="my-3" />

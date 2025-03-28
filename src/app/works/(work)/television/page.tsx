@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const TelevisionPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://nijoow-television.vercel.app/"
         imgSrc="television.png"

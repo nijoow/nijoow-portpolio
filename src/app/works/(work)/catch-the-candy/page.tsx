@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const CatchTheCandyPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://nijoow.github.io/CatchTheCandy_p5/"
         imgSrc="catchTheCandy.png"

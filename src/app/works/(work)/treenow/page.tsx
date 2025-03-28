@@ -6,8 +6,6 @@ import WorkImage from '../../_container/WorkImage'
 const TreenowPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage imgSrc="treenow.png" />
 
       <div className="my-3" />

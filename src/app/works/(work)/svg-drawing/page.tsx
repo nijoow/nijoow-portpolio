@@ -8,8 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const SVGDrawingPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
-
       <WorkImage
         url="https://nijoow-drawing.vercel.app/"
         imgSrc="nijoow-drawing.png"

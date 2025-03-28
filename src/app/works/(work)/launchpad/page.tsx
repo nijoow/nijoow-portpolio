@@ -8,7 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const LaunchpadPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
       <WorkImage
         url="https://nijoow-launchpad.vercel.app/"
         imgSrc="nijoow-launchpad.png"

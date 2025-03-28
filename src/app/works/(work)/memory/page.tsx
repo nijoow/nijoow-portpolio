@@ -8,7 +8,6 @@ import WorkImage from '../../_container/WorkImage'
 const MemoryPage = () => {
   return (
     <>
-      <PartTitle title={'View'} />
       <WorkImage
         url="https://nijoow.github.io/PNUDT12/pages/about.html"
         imgSrc="pnudt12.png"
