@@ -1,9 +1,9 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
+import PartTitle from '../../_container/PartTitle'
+import WorkImage from '../../_container/WorkImage'
 
 const MemoryPage = () => {
   return (
@@ -16,24 +16,52 @@ const MemoryPage = () => {
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
       <span className="text-xl font-bold">🎓 MEMORY</span>
-      <span>
-        - 부산대학교 디자인학과 디자인엔테크놀로지 전공 12회 졸업전시회 웹사이트
-      </span>
-      <span>- 졸업전시회 소개 및 전시 정보 소개</span>
-      <span>- 컨셉 및 작품 설명 (전시회 도록 대체)</span>
-      <span>- 전시회 작품 시연 영상 링크</span>
+      <CustomList>
+        <CustomList.MainListItem>
+          부산대학교 디자인학과 디자인엔테크놀로지 전공 12회 졸업전시회 웹사이트
+          <CustomList.MainListItem>
+            졸업전시회 소개 및 전시 정보 소개
+          </CustomList.MainListItem>
+          <CustomList.MainListItem>
+            컨셉 및 작품 설명 (전시회 도록 대체)
+          </CustomList.MainListItem>
+          <CustomList.MainListItem>
+            전시회 작품 시연 영상 링크
+          </CustomList.MainListItem>
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기술 스택'} />
-      <span>- HTML, CSS, Javascript</span>
+
+      <CustomList>
+        <CustomList.MainListItem>HTML, CSS, Javascript</CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'팀구성'} />
-      <span>- 디자인앤테크놀로지 졸업전시회 멤버 웹팀 5명</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          디자인앤테크놀로지 졸업전시회 멤버 웹팀 5명
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'역할'} />
-      <ul>
-        <li>- 기획 및 디자인 참여</li>
-        <li>- 전체적인 레이아웃, About 페이지, Header 반응형 퍼블리싱</li>
-        <li>- 가로스크롤 페이지, 스크롤 타임라인 구현</li>
-        <li>- 스크롤, hover 애니메이션 구현</li>
-      </ul>
+
+      <CustomList>
+        <CustomList.MainListItem>기획 및 디자인 참여</CustomList.MainListItem>
+        <CustomList.MainListItem>
+          전체적인 레이아웃, About 페이지, Header 반응형 퍼블리싱
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          가로스크롤 페이지, 스크롤 타임라인 구현
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          스크롤, hover 애니메이션 구현
+        </CustomList.MainListItem>
+      </CustomList>
+
       <div className="my-3" />
+
       <PartTitle title={'Link'} />
 
       <Link

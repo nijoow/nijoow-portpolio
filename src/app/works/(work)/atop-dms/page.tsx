@@ -18,8 +18,8 @@ const AtopDmsPage = () => {
       />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />
+      <span className="text-gray-400">주식회사 비멕스(BMEKSCo. Ltd.)</span>
       <span className="text-xl font-bold">📊 ATOP.DMS</span>
-
       <CustomList>
         <CustomList.MainListItem>
           기업 맞춤형 데이터 관리 시스템 SaaS

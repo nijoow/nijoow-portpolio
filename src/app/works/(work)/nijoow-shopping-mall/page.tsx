@@ -1,44 +1,73 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
+import PartTitle from '../../_container/PartTitle'
+import WorkImage from '../../_container/WorkImage'
 
 const NijoowShoppingMallPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
+
       <WorkImage
         url="https://nijoow-shopping-mall.vercel.app/"
         imgSrc="nijoow-shopping-mall.png"
       />
-      <div className="my-3" />
-      <PartTitle title={'Explanation'} />
-      <span className="text-xl font-bold">👟 shopping-mall</span>
-      <span className="text-base font-medium">
-        - 쇼핑몰 풀스택 토이 프로젝트
-      </span>
-      <span className="text-base font-medium">- 🚧 개발 진행 중 🚧</span>
-      <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Tailwind CSS, PostgreSQL</span>
-      <PartSubTitle title={'기능'} />
-      <ul>
-        <li>- 회원가입, 로그인, 소셜로그인(구글) 기능</li>
-        <li>- 내 정보 수정, 배송정보 저장</li>
-        <li>- 홈화면, 상품 목록 페이지, 상품 페이지, 좋아요 리스트</li>
-      </ul>
-      <PartSubTitle title={'추가/개선할 기능'} />
-      <ul>
-        <li>- 디자인 개선</li>
-        <li>- 내 정보 생년월일 추가</li>
-        <li>- 소셜로그인(네이버/카카오)</li>
-        <li>- 주문, 배송, 리뷰</li>
-        <li>- 관리자 페이지(상품/주문/리뷰 관리)</li>
-      </ul>
 
       <div className="my-3" />
+
+      <PartTitle title={'Explanation'} />
+
+      <span className="text-xl font-bold">👟 shopping-mall</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          쇼핑몰 풀스택 토이 프로젝트
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>🚧 개발 진행 중 🚧</CustomList.MainListItem>
+      </CustomList>
+
+      <PartSubTitle title={'기술 스택'} />
+
+      <CustomList>
+        <CustomList.MainListItem>
+          Next.js, Typescript, Tailwind CSS, PostgreSQL
+        </CustomList.MainListItem>
+      </CustomList>
+
+      <PartSubTitle title={'기능'} />
+
+      <CustomList>
+        <CustomList.MainListItem>
+          회원가입, 로그인, 소셜로그인(구글) 기능
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          내 정보 수정, 배송정보 저장
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          홈화면, 상품 목록 페이지, 상품 페이지, 좋아요 리스트
+        </CustomList.MainListItem>
+      </CustomList>
+
+      <PartSubTitle title={'추가/개선할 기능'} />
+
+      <CustomList>
+        <CustomList.MainListItem>디자인 개선</CustomList.MainListItem>
+        <CustomList.MainListItem>내 정보 생년월일 추가</CustomList.MainListItem>
+        <CustomList.MainListItem>
+          소셜로그인(네이버/카카오)
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>주문, 배송, 리뷰</CustomList.MainListItem>
+        <CustomList.MainListItem>
+          관리자 페이지(상품/주문/리뷰 관리)
+        </CustomList.MainListItem>
+      </CustomList>
+
+      <div className="my-3" />
+
       <PartTitle title={'Link'} />
+
       <Link
         href="https://nijoow-shopping-mall.vercel.app/"
         target="_blank"

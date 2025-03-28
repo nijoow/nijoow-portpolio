@@ -1,9 +1,9 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
+import PartTitle from '../../_container/PartTitle'
+import WorkImage from '../../_container/WorkImage'
 
 const LovePredictorPage = () => {
   return (
@@ -13,25 +13,45 @@ const LovePredictorPage = () => {
         url="https://ai-love-predictor.vercel.app/"
         imgSrc="ai-love-predictor.png"
       />
+
       <div className="my-3" />
+
       <PartTitle title={'Explanation'} />
+
       <span className="text-xl font-bold">💓 너는 솔로? 그것이 알고싶다!</span>
-      <span className="text-base font-medium">
-        - 질문 응답을 통해 연애 확률 예측 결과를 보여주는 테스트
-      </span>
-      <span className="text-base font-medium">- 스터디용 사이드 프로젝트</span>
-      <span className="text-base font-medium">
-        - 기획 미완성, 프론트엔드만 임시로 제작해서 배포
-      </span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          질문 응답을 통해 연애 확률 예측 결과를 보여주는 테스트
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          스터디용 사이드 프로젝트
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          기획 미완성, 프론트엔드만 임시로 제작해서 배포
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Jotai, Tailwind CSS</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          Next.js, Typescript, Jotai, Tailwind CSS
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'역할'} />
-      <ul>
-        <li>- 기획 참여</li>
-        <li>- 디자인에 따른 UI구현</li>
-        <li>- 질문 응답 테스트 기능 구현</li>
-      </ul>
+
+      <CustomList>
+        <CustomList.MainListItem>기획 참여 </CustomList.MainListItem>
+        <CustomList.MainListItem>디자인에 따른 UI구현 </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          질문 응답 테스트 기능 구현
+        </CustomList.MainListItem>
+      </CustomList>
+
       <div className="my-3" />
+
       <PartTitle title={'Link'} />
       <Link
         href="https://ai-love-predictor.vercel.app/"

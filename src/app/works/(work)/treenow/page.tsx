@@ -1,44 +1,66 @@
-import React from 'react'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
 import PartTitle from '../../_container/PartTitle'
 import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
-import Link from 'next/link'
 
 const TreenowPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
+
       <WorkImage imgSrc="treenow.png" />
+
       <div className="my-3" />
+
       <PartTitle title={'Explanation'} />
+
+      <span className="text-gray-400">주식회사 비멕스(BMEKSCo. Ltd.)</span>
       <span className="text-xl font-bold">🌳 트리나우</span>
-      <span className="text-base font-medium">
-        - B2B 조경 수목 거래 플랫폼 웹/하이브리드앱
-      </span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          B2B 조경 수목 거래 플랫폼 웹/하이브리드앱
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기술 스택'} />
-      <span>
-        - React.js, Typescript, Recoil, Tailwind CSS, React-native(webview)
-      </span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          React.js, Typescript, Recoil, Tailwind CSS, React-native(webview)
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'팀구성'} />
-      <span>- PM 1, 프론트엔드 1, 백엔드 1, 디자이너 1</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          PM 1, 프론트엔드 1, 백엔드 1, 디자이너 1
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'역할'} />
-      <ul>
-        <li>- 프로젝트 세팅 및 SPA 웹사이트 개발</li>
-        <li>- 사용자 페이지 반응형 UI구현 및 기능 개발</li>
-        <li>- 관리자 페이지 UI구현 및 기능 개발</li>
-        <li>- REST 아키텍처 API를 통한 기능 구현</li>
-        <li>
-          - 외부 서비스의 무통장입금 결제, 본인인증, 문서 작성 및 조회, 인증서
-          등록, 세금계산서 조회 기능 연동
-        </li>
-        <li>- React-Native 웹뷰를 사용한 하이브리드앱 개발 및 빌드 경험</li>
-        <li>- 구글 플레이 스토어, 애플 앱스토어 앱 배포 경험</li>
-        <li>- firebase cloud messaging 앱 푸시알림 기능 구현</li>
-        <li>
-          - yarn berry zero-install 환경 마이그레이션을 통한 CI/CD 속도 개선
-        </li>
-        <li>- Lazy Loading, CDN 이미지 최적화로 성능 개선</li>
-      </ul>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          React 프로젝트 세팅 및 반응형 SPA 개발(유저/어드민 페이지)
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>외부 서비스 연동</CustomList.MainListItem>
+        <CustomList.SubListItem>
+          무통장입금 결제 / 휴대폰 본인인증 / 문서 작성, 서명 및 조회 / 인증서
+          등록 / 세금계산서 조회{' '}
+        </CustomList.SubListItem>
+        <CustomList.MainListItem>
+          React-Native 웹뷰를 사용한 하이브리드앱 개발 및 빌드
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          구글 플레이 스토어/애플 앱스토어 앱 배포
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          firebase cloud messaging 앱 푸시알림 기능 구현
+        </CustomList.MainListItem>
+      </CustomList>
+
       <div className="my-3" />
     </>
   )

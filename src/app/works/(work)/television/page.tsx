@@ -1,38 +1,59 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
+import PartTitle from '../../_container/PartTitle'
+import WorkImage from '../../_container/WorkImage'
 
 const TelevisionPage = () => {
   return (
     <>
       <PartTitle title={'View'} />
+
       <WorkImage
         url="https://nijoow-television.vercel.app/"
         imgSrc="television.png"
       />
+
       <div className="my-3" />
+
       <PartTitle title={'Explanation'} />
+
       <span className="text-xl font-bold">📺 Television</span>
-      <span className="text-base font-medium">
-        - 3D 레트로 텔레비전으로 유투브를 시청하는 토이 프로젝트
-      </span>
-      <span className="text-base font-medium">- 🚧 개발 진행 중 🚧</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          3D 레트로 텔레비전으로 유투브를 시청하는 토이 프로젝트
+        </CustomList.MainListItem>
+        <CustomList.MainListItem> 🚧 개발 임시 중단 🚧</CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Tailwind CSS, React-Three-Fiber</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          Next.js, Typescript, Tailwind CSS, React-Three-Fiber
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기능'} />
-      <ul>
-        <li>- 3D 텔레비전 렌더링</li>
-        <li>- 화면에 Youtube Player 매핑</li>
-      </ul>
+      <CustomList>
+        <CustomList.MainListItem> 3D 텔레비전 렌더링</CustomList.MainListItem>
+        <CustomList.MainListItem> Youtube Player 매핑</CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'개발할 기능'} />
-      <ul>
-        <li>- Youtube 검색, 재생 목록 추가 기능</li>
-        <li>- 버튼을 돌려서 사운드 조절/채널 변경 기능</li>
-      </ul>
+      <CustomList>
+        <CustomList.MainListItem>
+          Youtube 검색, 재생 목록 추가 기능
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          사운드 조절/채널 변경 기능
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'트러블 슈팅'} />
+
       <ul className="pl-2 flex flex-col gap-1">
         <li>
           1) 화면 mesh에 react-three/drei의 HTML을 렌더링하여 Youtube Player를

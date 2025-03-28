@@ -1,9 +1,9 @@
-import React from 'react'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
-import PartSubTitle from '../../_container/PartSubTitle'
 import Link from 'next/link'
 import { BsGithub } from 'react-icons/bs'
+import CustomList from '../../_container/CustomList'
+import PartSubTitle from '../../_container/PartSubTitle'
+import PartTitle from '../../_container/PartTitle'
+import WorkImage from '../../_container/WorkImage'
 
 const LaunchpadPage = () => {
   return (
@@ -13,20 +13,39 @@ const LaunchpadPage = () => {
         url="https://nijoow-launchpad.vercel.app/"
         imgSrc="nijoow-launchpad.png"
       />
+
       <div className="my-3" />
+
       <PartTitle title={'Explanation'} />
+
       <span className="text-xl font-bold">🎹 nijoow-launchpad</span>
-      <span>- 전자 악기 런치패드 토이프로젝트</span>
+      <CustomList>
+        <CustomList.MainListItem>
+          전자 악기 런치패드 토이프로젝트
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기술 스택'} />
-      <span>- Next.js, Typescript, Tailwind CSS</span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          Next.js, Typescript, Tailwind CSS
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'기능'} />
-      <span>
-        - 마우스/키보드/터치 이벤트로 런치패드를 클릭할 때 마다 사운드 재생
-      </span>
-      <span>
-        - 피아노 사운드/드럼을 포함한 다양한 사운드의 두가지 모드로 연주 가능
-      </span>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          마우스/키보드/터치 이벤트로 런치패드를 클릭할 때 마다 사운드 재생
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          피아노 사운드/드럼을 포함한 다양한 사운드의 두가지 모드로 연주 가능
+        </CustomList.MainListItem>
+      </CustomList>
+
       <PartSubTitle title={'트러블 슈팅'} />
+
       <ul className="pl-2 flex flex-col gap-1">
         <li>
           1)
