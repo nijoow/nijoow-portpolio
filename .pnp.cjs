@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["react-parallax-tilt", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:1.7.230"],\
           ["recoil", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.7.7"],\
           ["recoil-persist", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:5.1.0"],\
+          ["swiper", "npm:11.2.6"],\
           ["tailwind-merge", "npm:2.4.0"],\
           ["tailwindcss", "npm:3.3.3"],\
           ["three", "npm:0.156.1"],\
@@ -4383,6 +4384,7 @@ const RAW_RUNTIME_STATE =
           ["react-parallax-tilt", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:1.7.230"],\
           ["recoil", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:0.7.7"],\
           ["recoil-persist", "virtual:845a4bb8fac6cac22c19365098a741e8e3d414498cc2ae3172dc2f6ff7739df45897edcdc74a012b0b33889b950e92063c2a66fc5fbadad7b0355621f397eb45#npm:5.1.0"],\
+          ["swiper", "npm:11.2.6"],\
           ["tailwind-merge", "npm:2.4.0"],\
           ["tailwindcss", "npm:3.3.3"],\
           ["three", "npm:0.156.1"],\
@@ -5899,6 +5901,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/react",\
           "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["swiper", [\
+      ["npm:11.2.6", {\
+        "packageLocation": "./.yarn/cache/swiper-npm-11.2.6-856f73dc16-1c4e32ee5e.zip/node_modules/swiper/",\
+        "packageDependencies": [\
+          ["swiper", "npm:11.2.6"]\
         ],\
         "linkType": "HARD"\
       }]\
