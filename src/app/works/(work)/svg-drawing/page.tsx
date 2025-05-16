@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const SVGDrawingPage = () => {
   return (
@@ -60,7 +60,7 @@ const SVGDrawingPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           1) 도형을 Resize할 때 회전이 되어있는 경우, 드래그와 크기 조절이
           일치하지 않는 문제 발생
@@ -79,7 +79,7 @@ const SVGDrawingPage = () => {
         href="https://nijoow-drawing.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -87,13 +87,13 @@ const SVGDrawingPage = () => {
         href="https://github.com/nijoow/svg-drawing"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <BsGithub />
         <span>Github</span>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default SVGDrawingPage
+export default SVGDrawingPage;

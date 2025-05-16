@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const LaunchpadPage = () => {
   return (
@@ -45,10 +45,10 @@ const LaunchpadPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           1)
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             onClick
           </span>
           이벤트를 통해 사운드를 재생하였을때, 연속으로 클릭할 경우 사운드가
@@ -56,14 +56,14 @@ const LaunchpadPage = () => {
         </li>
         <li className="font-semibold text-purple-regular">
           - 마우스를 누를때와 떼는 이벤트를 분리하여
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             onMouseDown/onMouseEnd/onMouseLeave
           </span>
           이벤트를 통해 해결
         </li>
         <li className="font-semibold text-purple-regular">
           - 모바일 태블릿 환경에서 동작하게 하기 위해
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             onTouchStart/onTouchEnd
           </span>
           이벤트를 동시에 사용
@@ -76,7 +76,7 @@ const LaunchpadPage = () => {
         href="https://nijoow-launchpad.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -84,13 +84,13 @@ const LaunchpadPage = () => {
         href="https://github.com/nijoow/launchpad"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <BsGithub />
         <span>Github</span>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default LaunchpadPage
+export default LaunchpadPage;

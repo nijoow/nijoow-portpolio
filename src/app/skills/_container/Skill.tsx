@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import { prefix } from '@/config/config'
-import { motion, useAnimationControls } from 'framer-motion'
-import Image from 'next/image'
-import { useEffect } from 'react'
-import Tilt from 'react-parallax-tilt'
+import { prefix } from '@/config/config';
+import { motion, useAnimationControls } from 'framer-motion';
+import Image from 'next/image';
+import { useEffect } from 'react';
+import Tilt from 'react-parallax-tilt';
 
 export interface SkillType {
-  fileName: string
-  name: string
+  fileName: string;
+  name: string;
 }
 
 interface SkillProps extends SkillType {
-  constraintsRef: React.MutableRefObject<null>
+  constraintsRef: React.MutableRefObject<null>;
 }
 
 const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
-  const controls = useAnimationControls()
+  const controls = useAnimationControls();
 
   useEffect(() => {
-    window.addEventListener('resize', resetMotionDiv)
-    return () => window.removeEventListener('resize', resetMotionDiv)
-  }, [])
+    window.addEventListener('resize', resetMotionDiv);
+    return () => window.removeEventListener('resize', resetMotionDiv);
+  }, []);
 
   const resetMotionDiv = () => {
-    controls.set({ x: 0, y: 0 })
-  }
+    controls.set({ x: 0, y: 0 });
+  };
 
   return (
     <motion.div
@@ -34,12 +34,12 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
       dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
       dragConstraints={constraintsRef}
       dragSnapToOrigin
-      className="flex flex-col items-center col-span-2 gap-2 cursor-pointer sm:col-span-1"
+      className="col-span-2 flex cursor-pointer flex-col items-center gap-2 sm:col-span-1"
     >
       <Tilt
         scale={1.2}
-        className={`transition-all duration-300 rounded-lg overflow-hidden w-16 h-16 relative ${
-          name === 'NEXT JS' ? 'dark:bg-purple-50 bg-transparent p-2' : ''
+        className={`relative h-16 w-16 overflow-hidden rounded-lg transition-all duration-300 ${
+          name === 'NEXT JS' ? 'bg-transparent p-2 dark:bg-purple-50' : ''
         }`}
       >
         <Image
@@ -52,6 +52,6 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
 
       <span className={'font-semibold'}>{name}</span>
     </motion.div>
-  )
-}
-export default Skill
+  );
+};
+export default Skill;

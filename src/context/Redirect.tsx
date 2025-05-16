@@ -1,22 +1,22 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const Redirect = ({ children }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
-    const origin = typeof window !== undefined ? window.location.origin : ''
+    const origin = typeof window !== undefined ? window.location.origin : '';
 
     if (origin === 'https://nijoow.github.io')
-      router.push('https://nijoow-portfolio.vercel.app')
-  }, [])
+      router.push('https://nijoow-portfolio.vercel.app');
+  }, []);
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export default Redirect
+export default Redirect;

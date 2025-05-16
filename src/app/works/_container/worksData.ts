@@ -89,4 +89,4 @@ export const works = [
     imgSrc: 'x-pixel.png',
     tags: ['Web', 'Frontend', 'Business Project'],
   },
-]
+];

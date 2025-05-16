@@ -1,7 +1,7 @@
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkCarousel from '../../_container/WorkCarousel'
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkCarousel from '../../_container/WorkCarousel';
 
 const AtopDmsPage = () => {
   return (
@@ -82,7 +82,7 @@ const AtopDmsPage = () => {
 
       <div className="my-3" />
     </>
-  )
-}
+  );
+};
 
-export default AtopDmsPage
+export default AtopDmsPage;

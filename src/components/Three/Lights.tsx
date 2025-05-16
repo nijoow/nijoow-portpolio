@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Lights = () => {
   return (
@@ -8,7 +8,7 @@ const Lights = () => {
       <directionalLight position={[-3, -3, -3]} intensity={0.4} />
       <directionalLight position={[3, 3, 3]} intensity={0.8} />
     </>
-  )
-}
+  );
+};
 
-export default Lights
+export default Lights;

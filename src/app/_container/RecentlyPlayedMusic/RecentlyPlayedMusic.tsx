@@ -1,71 +1,71 @@
-'use client'
+'use client';
 
-import { musicAtom } from '@/recoil/atoms'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { musicAtom } from '@/recoil/atoms';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 const RecentlyPlayedMusic = () => {
-  const [music, setMusic] = useRecoilState(musicAtom)
-  const [loading, setLoading] = useState(true)
+  const [music, setMusic] = useRecoilState(musicAtom);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getSongApis = async () => {
       try {
         const currentlyPlayingSong = await (
           await fetch('/api/spotify/currently-playing')
-        ).json()
+        ).json();
         const recentlyPlayedSong = await (
           await fetch('/api/spotify/recently-played')
-        ).json()
-        setLoading(false)
-        setMusic(currentlyPlayingSong.payload ?? recentlyPlayedSong.payload)
+        ).json();
+        setLoading(false);
+        setMusic(currentlyPlayingSong.payload ?? recentlyPlayedSong.payload);
       } catch (error) {
-        setMusic(null)
+        setMusic(null);
       }
-    }
-    getSongApis()
-    const getSong = setInterval(() => getSongApis(), 30000)
+    };
+    getSongApis();
+    const getSong = setInterval(() => getSongApis(), 30000);
 
-    return () => clearInterval(getSong)
-  }, [])
+    return () => clearInterval(getSong);
+  }, []);
 
   if (loading)
     return (
       <div
         className={
-          'flex bg-gray-600 w-full items-center rounded-lg sm:rounded-xl max-w-md p-2.5 gap-3'
+          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-600 p-2.5 sm:rounded-xl'
         }
       >
         <div
           className={
-            'rounded-md w-24 h-24 overflow-hidden relative shrink-0 flex items-center justify-center bg-gray-500'
+            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-500'
           }
         >
           <span className="text-6xl">🎵</span>
         </div>
         <div className="flex-auto">음악 정보를 불러오는 중입니다...</div>
       </div>
-    )
+    );
   if (music === null)
     return (
       <div
         className={
-          'flex bg-gray-600 w-full items-center rounded-lg sm:rounded-xl max-w-md p-2.5 gap-3'
+          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-600 p-2.5 sm:rounded-xl'
         }
       >
         <div
           className={
-            'rounded-md w-24 h-24 overflow-hidden relative shrink-0 flex items-center justify-center bg-gray-500'
+            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-500'
           }
         >
           <span className="text-6xl">😭</span>
         </div>
         <div className="flex-auto">현재 곡을 표시할 수 없습니다ㅠㅠ</div>
       </div>
-    )
+    );
 
   return (
     <Link
@@ -73,10 +73,10 @@ const RecentlyPlayedMusic = () => {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'flex bg-gray-600 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
+        'flex w-full max-w-md items-center gap-3 rounded-xl bg-gray-600 p-2.5'
       }
     >
-      <div className={'rounded-md w-24 h-24 overflow-hidden relative shrink-0'}>
+      <div className={'relative h-24 w-24 shrink-0 overflow-hidden rounded-md'}>
         <Image
           src={music.albumImageUrl}
           fill
@@ -86,14 +86,14 @@ const RecentlyPlayedMusic = () => {
       </div>
       <div
         className={
-          'flex flex-col flex-auto truncate text-white h-24 justify-end pb-1'
+          'flex h-24 flex-auto flex-col justify-end truncate pb-1 text-white'
         }
       >
-        <div className={'text-base truncate mt-auto'}>{music.title}</div>
-        <div className={'text-sm text-gray-300 truncate mb-auto'}>
+        <div className={'mt-auto truncate text-base'}>{music.title}</div>
+        <div className={'mb-auto truncate text-sm text-gray-300'}>
           {music.artist}
         </div>
-        <div className="w-full h-4 flex gap-0.5">
+        <div className="flex h-4 w-full gap-0.5">
           {Array.from({ length: 64 }).map((_, i) => (
             <motion.div
               key={i}
@@ -113,7 +113,7 @@ const RecentlyPlayedMusic = () => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default RecentlyPlayedMusic
+export default RecentlyPlayedMusic;

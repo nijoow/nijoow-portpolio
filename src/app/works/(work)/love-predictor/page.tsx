@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const LovePredictorPage = () => {
   return (
@@ -56,7 +56,7 @@ const LovePredictorPage = () => {
         href="https://ai-love-predictor.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -64,13 +64,13 @@ const LovePredictorPage = () => {
         href="https://github.com/nijoow/ai-love-predictor-front"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <BsGithub />
         <span>Github</span>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default LovePredictorPage
+export default LovePredictorPage;

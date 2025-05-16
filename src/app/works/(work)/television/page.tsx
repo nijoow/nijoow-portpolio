@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const TelevisionPage = () => {
   return (
@@ -52,7 +52,7 @@ const TelevisionPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           1) 화면 mesh에 react-three/drei의 HTML을 렌더링하여 Youtube Player를
           표시하였는데 width, height의 px이 너무 작아서 Youtube Player의
@@ -64,7 +64,7 @@ const TelevisionPage = () => {
         </li>
         <li>
           - width를 늘리고 css의{' '}
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             transform: scale()
           </span>
           옵션으로 크기를 줄였으나 canvas에 줄어들기 전의 여백 공간이 남아있는
@@ -81,7 +81,7 @@ const TelevisionPage = () => {
         href="https://nijoow-television.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -89,13 +89,13 @@ const TelevisionPage = () => {
         href="https://github.com/nijoow/television"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <BsGithub />
         <span>Github</span>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default TelevisionPage
+export default TelevisionPage;

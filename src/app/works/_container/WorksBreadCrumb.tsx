@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import React from 'react'
-import { FiChevronRight } from 'react-icons/fi'
+import Link from 'next/link';
+import React from 'react';
+import { FiChevronRight } from 'react-icons/fi';
 
 const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
   return (
-    <div className="w-full flex flex-col gap-0.5 mb-4">
+    <div className="mb-4 flex w-full flex-col gap-0.5">
       <div className="flex items-center gap-2">
         <Link href="/works" className="text-2xl font-bold">
           Works
@@ -12,9 +12,9 @@ const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
         <FiChevronRight size={24} />
         <span className="text-lg font-bold">{subTitle}</span>
       </div>
-      <div className="w-full h-[2px] bg-gray-dark dark:bg-white rounded-full" />
+      <div className="h-[2px] w-full rounded-full bg-gray-dark dark:bg-white" />
     </div>
-  )
-}
+  );
+};
 
-export default WorksBreadCrumb
+export default WorksBreadCrumb;

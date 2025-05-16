@@ -1,7 +1,7 @@
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const TreenowPage = () => {
   return (
@@ -61,7 +61,7 @@ const TreenowPage = () => {
 
       <div className="my-3" />
     </>
-  )
-}
+  );
+};
 
-export default TreenowPage
+export default TreenowPage;

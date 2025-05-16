@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import React from 'react'
+import { motion } from 'framer-motion';
+import React from 'react';
 
 const TransitionPageWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -13,7 +13,7 @@ const TransitionPageWrapper = ({ children }: { children: React.ReactNode }) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default TransitionPageWrapper
+export default TransitionPageWrapper;

@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import React from 'react'
-import { GiBasketballBall, GiMusicalNotes } from 'react-icons/gi'
+import { motion } from 'framer-motion';
+import React from 'react';
+import { GiBasketballBall, GiMusicalNotes } from 'react-icons/gi';
 
 const Introduce = () => {
   return (
-    <ul className="flex flex-col gap-2 text-sm leading-relaxed list-none sm:px-4 sm:list-disc sm:pl-8 sm:gap-3 break-keep text-start">
+    <ul className="flex list-none flex-col gap-2 break-keep text-start text-sm leading-relaxed sm:list-disc sm:gap-3 sm:px-4 sm:pl-8">
       <motion.li
         initial={{ x: '-20%', opacity: 0 }}
         animate={{ x: '0', opacity: 1 }}
@@ -74,12 +74,12 @@ const Introduce = () => {
         <div className={'flex items-center'}>
           힙합
           <GiMusicalNotes />과 농구
-          <GiBasketballBall className="transition-colors bounce fill-amber-700 dark:fill-amber-600" />
+          <GiBasketballBall className="bounce fill-amber-700 transition-colors dark:fill-amber-600" />
           를 좋아합니다.
         </div>
       </motion.li>
     </ul>
-  )
-}
+  );
+};
 
-export default Introduce
+export default Introduce;

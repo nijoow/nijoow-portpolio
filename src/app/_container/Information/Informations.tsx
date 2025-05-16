@@ -4,8 +4,8 @@ import {
   BsFillPencilFill,
   BsGithub,
   BsPersonCircle,
-} from 'react-icons/bs'
-import InformationItem from './InformationItem'
+} from 'react-icons/bs';
+import InformationItem from './InformationItem';
 
 const informationList = [
   { icon: <BsPersonCircle />, list: '이름', contents: '이우진', link: null },
@@ -33,11 +33,11 @@ const informationList = [
     contents: '@nijoow',
     link: 'https://github.com/nijoow',
   },
-]
+];
 
 const Informations = () => {
   return (
-    <div className="flex flex-col w-full gap-1">
+    <div className="flex w-full flex-col gap-1">
       {informationList.map(({ icon, list, contents, link }) => (
         <InformationItem
           key={list}
@@ -48,7 +48,7 @@ const Informations = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Informations
+export default Informations;

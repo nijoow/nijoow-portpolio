@@ -1,7 +1,7 @@
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkCarousel from '../../_container/WorkCarousel'
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkCarousel from '../../_container/WorkCarousel';
 
 const CusmeticPage = () => {
   return (
@@ -64,10 +64,10 @@ const CusmeticPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           1) Next.js 서버컴포넌트에서 fetch 함수의
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             cache: &apos;no-store&apos;
           </span>
           옵션을 적용하였으나, 30초 가량 새로운 데이터를 불러오지 못하는 문제
@@ -78,21 +78,21 @@ const CusmeticPage = () => {
         </li>
         <li className="font-semibold text-purple-regular">
           - 해당 페이지에 접근하였을때{' '}
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             router.refresh()
           </span>
           를 통해 강제로 새로고침하도록 수정하여 문제 해결
         </li>
       </ul>
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           2) Next/Image 컴포넌트를 사용하여 이미지를 불러왔을 때, 이미지를
           불러오는 속도가 느린 문제 발생
         </li>
         <li>
           -{' '}
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             layout=&apos;fill&apos;
           </span>{' '}
           옵션을 사용했을 때, 기본적으로 생성되는 이미지 srcSet 이 너무 많아지는
@@ -100,7 +100,7 @@ const CusmeticPage = () => {
         </li>
         <li className="font-semibold text-purple-regular">
           - next.config.js 파일에서
-          <span className="rounded-md px-2 py-1 mx-1 text-sm bg-gray-500 text-white">
+          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             images.imageSizes / images.domains
           </span>
           옵션을 수정하여 해결
@@ -108,7 +108,7 @@ const CusmeticPage = () => {
       </ul>
       <div className="my-3" />
     </>
-  )
-}
+  );
+};
 
-export default CusmeticPage
+export default CusmeticPage;

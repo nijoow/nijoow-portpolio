@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
-import CustomList from '../../_container/CustomList'
-import PartSubTitle from '../../_container/PartSubTitle'
-import PartTitle from '../../_container/PartTitle'
-import WorkImage from '../../_container/WorkImage'
+import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
+import CustomList from '../../_container/CustomList';
+import PartSubTitle from '../../_container/PartSubTitle';
+import PartTitle from '../../_container/PartTitle';
+import WorkImage from '../../_container/WorkImage';
 
 const MoharuPage = () => {
   return (
@@ -56,7 +56,7 @@ const MoharuPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="pl-2 flex flex-col gap-1">
+      <ul className="flex flex-col gap-1 pl-2">
         <li>
           1) 백엔드 서버는 네이버 클라우드 플랫폼에 배포되었고, 프론트엔드
           서버는 vercel에 배포하였는데, Auth.js 로그인/회원가입 요청에서 가끔씩
@@ -84,7 +84,7 @@ const MoharuPage = () => {
         href="https://bside.best/projects/detail/P240514222247"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <span>상세 설명 바로가기</span>
       </Link>
@@ -93,13 +93,13 @@ const MoharuPage = () => {
         href="https://github.com/poten-moharu/moharu-frontend"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-5 py-2 text-base text-white rounded-lg bg-purple-medium dark:bg-purple-regular"
+        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
         <BsGithub />
         <span>Github</span>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default MoharuPage
+export default MoharuPage;

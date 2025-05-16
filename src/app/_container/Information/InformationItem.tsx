@@ -1,10 +1,10 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 interface InformationItemProps {
-  icon: JSX.Element
-  list: string
-  contents: string
-  link: string | null
+  icon: JSX.Element;
+  list: string;
+  contents: string;
+  link: string | null;
 }
 
 export default function InformationItem({
@@ -17,20 +17,20 @@ export default function InformationItem({
     <div className={'flex w-full items-center'}>
       <div
         className={
-          'flex items-center justify-start gap-1 flex-[3] sm:flex-[2] font-semibold text-sm'
+          'flex flex-[3] items-center justify-start gap-1 text-sm font-semibold sm:flex-[2]'
         }
       >
         {icon}
         <span>{list}</span>
       </div>
-      <div className={'flex-[7] sm:flex=[8] font-semibold text-sm sm:text-lg'}>
+      <div className={'sm:flex=[8] flex-[7] text-sm font-semibold sm:text-lg'}>
         :{' '}
         {link ? (
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={'text-purple-medium dark:text-purple-light '}
+            className={'text-purple-medium dark:text-purple-light'}
           >
             {contents}
           </Link>
@@ -39,5 +39,5 @@ export default function InformationItem({
         )}
       </div>
     </div>
-  )
+  );
 }
