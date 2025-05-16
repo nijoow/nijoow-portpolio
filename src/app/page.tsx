@@ -1,10 +1,10 @@
-import React from 'react'
-import SubTitle from '@/components/SubTitle/SubTitle'
-import Section from '@/components/Section/Section'
-import Introduce from './_container/Introduce/Introduce'
-import Informations from './_container/Information/Informations'
-import RecentlyPlayedMusic from './_container/RecentlyPlayedMusic/RecentlyPlayedMusic'
 import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper'
+import Section from '@/components/Section/Section'
+import SubTitle from '@/components/SubTitle/SubTitle'
+import GithubCommitLog from './_container/GithubCommitLog/GithubCommitLog'
+import Informations from './_container/Information/Informations'
+import Introduce from './_container/Introduce/Introduce'
+import RecentlyPlayedMusic from './_container/RecentlyPlayedMusic/RecentlyPlayedMusic'
 
 const HomePage = () => {
   return (
@@ -39,6 +39,10 @@ const HomePage = () => {
         <Section>
           <SubTitle title="Recently Played Music" />
           <RecentlyPlayedMusic />
+        </Section>
+        <Section>
+          <SubTitle title="Github Commit Log" />
+          <GithubCommitLog />
         </Section>
       </div>
     </TransitionPageWrapper>
