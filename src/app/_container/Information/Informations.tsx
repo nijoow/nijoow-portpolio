@@ -1,11 +1,9 @@
-import React from 'react'
 import {
-  BsPersonCircle,
   BsFillCalendarEventFill,
-  BsGithub,
   BsFillEnvelopeFill,
   BsFillPencilFill,
-  BsLink45Deg,
+  BsGithub,
+  BsPersonCircle,
 } from 'react-icons/bs'
 import InformationItem from './InformationItem'
 

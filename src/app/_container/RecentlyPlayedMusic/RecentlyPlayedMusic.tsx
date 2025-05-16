@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useRecoilState } from 'recoil'
 import { musicAtom } from '@/recoil/atoms'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
 
 const RecentlyPlayedMusic = () => {
   const [music, setMusic] = useRecoilState(musicAtom)
@@ -36,7 +36,7 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex bg-gray-700 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
+          'flex bg-gray-600 w-full items-center rounded-lg sm:rounded-xl max-w-md p-2.5 gap-3'
         }
       >
         <div
@@ -53,7 +53,7 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex bg-gray-700 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
+          'flex bg-gray-600 w-full items-center rounded-lg sm:rounded-xl max-w-md p-2.5 gap-3'
         }
       >
         <div
@@ -73,7 +73,7 @@ const RecentlyPlayedMusic = () => {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'flex bg-gray-700 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
+        'flex bg-gray-600 w-full items-center rounded-xl max-w-md p-2.5 gap-3'
       }
     >
       <div className={'rounded-md w-24 h-24 overflow-hidden relative shrink-0'}>
