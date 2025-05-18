@@ -36,12 +36,12 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-600 p-2.5 sm:rounded-xl'
+          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-800 p-2.5 sm:rounded-xl'
         }
       >
         <div
           className={
-            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-500'
+            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-800'
           }
         >
           <span className="text-6xl">🎵</span>
@@ -53,12 +53,12 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-600 p-2.5 sm:rounded-xl'
+          'flex w-full max-w-md items-center gap-3 rounded-lg bg-gray-800 p-2.5 sm:rounded-xl'
         }
       >
         <div
           className={
-            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-500'
+            'relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-800'
           }
         >
           <span className="text-6xl">😭</span>
@@ -73,7 +73,7 @@ const RecentlyPlayedMusic = () => {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'flex w-full max-w-md items-center gap-3 rounded-xl bg-gray-600 p-2.5'
+        'flex w-full max-w-md items-center gap-3 rounded-xl bg-gray-800 p-2.5'
       }
     >
       <div className={'relative h-24 w-24 shrink-0 overflow-hidden rounded-md'}>
