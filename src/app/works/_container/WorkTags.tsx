@@ -11,6 +11,7 @@ const workFilterData = [
   'Backend',
   'Business Project',
   'Side Project',
+  'Freelancer',
 ];
 
 const WorkTags = () => {
@@ -18,25 +19,31 @@ const WorkTags = () => {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
-  const selectedTags = searchParams.getAll('tags');
+  const selectedTag = searchParams.get('tag');
 
   return (
     <div className="mb-2 flex w-full flex-wrap gap-1">
+      <button
+        className={cn('rounded-md px-2 py-1 text-xs', {
+          'bg-purple-regular text-white': selectedTag === null,
+          'bg-gray-300 text-gray-500': selectedTag !== null,
+        })}
+        onClick={() => {
+          router.replace(`${pathName}`);
+        }}
+      >
+        All
+      </button>
       {workFilterData.map((data) => (
         <button
           key={data}
           className={cn('rounded-md px-2 py-1 text-xs', {
-            'bg-purple-regular text-white': selectedTags.includes(data),
-            'bg-gray-300 text-gray-500': !selectedTags.includes(data),
+            'bg-purple-regular text-white': selectedTag === data,
+            'bg-gray-300 text-gray-500': selectedTag !== data,
           })}
           onClick={() => {
-            const newTags = selectedTags.includes(data)
-              ? selectedTags.filter((tag) => tag !== data)
-              : [...selectedTags, data];
-            const newParams = new URLSearchParams(
-              newTags.map((tag) => ['tags', tag]),
-            );
-
+            const newParams = new URLSearchParams();
+            newParams.set('tag', data);
             router.replace(`${pathName}?${newParams.toString()}`);
           }}
         >
