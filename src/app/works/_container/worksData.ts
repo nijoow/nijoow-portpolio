@@ -29,12 +29,12 @@ export const works = [
     imgSrc: 'nijoow-launchpad.png',
     tags: ['Web', 'Interactive', 'Frontend', 'Design', 'Side Project'],
   },
-  {
-    pageName: 'nijoow-vintage',
-    name: 'nijoow-vintage',
-    imgSrc: 'nijoow-vintage.png',
-    tags: ['Web', 'Frontend', 'Design', 'Side Project'],
-  },
+  // {
+  //   pageName: 'nijoow-vintage',
+  //   name: 'nijoow-vintage',
+  //   imgSrc: 'nijoow-vintage.png',
+  //   tags: ['Web', 'Frontend', 'Design', 'Side Project'],
+  // },
   {
     pageName: 'love-predictor',
     name: 'Love-Predictor',
@@ -78,15 +78,28 @@ export const works = [
     tags: ['Web', 'Frontend', '3D', 'Side Project'],
   },
   {
-    pageName: 'atop-dms',
-    name: 'ATOP.DMS',
-    imgSrc: 'atop-dms/main.png',
-    tags: ['Web', 'Frontend', 'Business Project'],
+    pageName: 'fromyou',
+    name: 'fromyou',
+    imgSrc: 'fromyou.png',
+    tags: [
+      'Web',
+      'Frontend',
+      'Interactive',
+      'Design',
+      'Business Project',
+      'Freelancer',
+    ],
   },
-  {
-    pageName: 'x-pixel',
-    name: 'X-PIXEL',
-    imgSrc: 'x-pixel.png',
-    tags: ['Web', 'Frontend', 'Business Project'],
-  },
+  // {
+  //   pageName: 'atop-dms',
+  //   name: 'ATOP.DMS',
+  //   imgSrc: 'atop-dms/main.png',
+  //   tags: ['Web', 'Frontend', 'Business Project'],
+  // },
+  // {
+  //   pageName: 'x-pixel',
+  //   name: 'X-PIXEL',
+  //   imgSrc: 'x-pixel.png',
+  //   tags: ['Web', 'Frontend', 'Business Project'],
+  // },
 ];
