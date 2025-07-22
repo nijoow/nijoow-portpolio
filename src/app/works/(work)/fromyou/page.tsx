@@ -34,19 +34,23 @@ const AtopDmsPage = () => {
 
       <CustomList>
         <CustomList.MainListItem>
-          인트로 및 스크롤 애니메이션 디자인/개발
+          반응형 페이지 설계, 디자인 및 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          지역구/연령대/관심사 선택 기능 개발
+          SVG 컴포넌트, 드래그앤드롭, nivo 차트 등을 활용한 지역구/연령대/관심사
+          선택 UI 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          선택한 정보에 따라 기사를 보여주는 기능 개발
+          설문에 따른 독자 맞춤형 기사 노출 개발{' '}
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          각 기사 페이지 디자인 및 스크롤 애니메이션 개발
+          인트로 및 기사별 스크롤 애니메이션 기획, 시각화 및 구현{' '}
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           AWS Amplify 프론트엔드 배포 자동화
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          Cafe24 도메인을 활용한 서브도메인 DNS 설정 및 배포
         </CustomList.MainListItem>
       </CustomList>
 
