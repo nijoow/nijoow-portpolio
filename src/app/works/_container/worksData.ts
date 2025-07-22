@@ -35,12 +35,12 @@ export const works = [
   //   imgSrc: 'nijoow-vintage.png',
   //   tags: ['Web', 'Frontend', 'Design', 'Side Project'],
   // },
-  {
-    pageName: 'love-predictor',
-    name: 'Love-Predictor',
-    imgSrc: 'ai-love-predictor.png',
-    tags: ['Web', 'Frontend', 'Side Project'],
-  },
+  // {
+  //   pageName: 'love-predictor',
+  //   name: 'Love-Predictor',
+  //   imgSrc: 'ai-love-predictor.png',
+  //   tags: ['Web', 'Frontend', 'Side Project'],
+  // },
   {
     pageName: 'treenow',
     name: 'Treenow',
