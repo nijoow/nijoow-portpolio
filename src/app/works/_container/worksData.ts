@@ -102,4 +102,10 @@ export const works = [
   //   imgSrc: 'x-pixel.png',
   //   tags: ['Web', 'Frontend', 'Business Project'],
   // },
+  {
+    pageName: 'moimcity',
+    name: '모임특별시',
+    imgSrc: 'moimcity/moimcity.png',
+    tags: ['Web', 'Frontend', 'Business Project', 'Freelancer'],
+  },
 ];

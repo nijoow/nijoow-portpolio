@@ -54,13 +54,13 @@ const Introduce = () => {
         transition={{ duration: 0.8, delay: 1.5 }}
       >
         <div className={'flex items-center'}>
-          힙합
-          <GiMusicalNotes className="fill-purple-dark dark:fill-purple-light" />
-          과 농구
-          <GiBasketballBall className="bounce fill-amber-700 transition-colors dark:fill-amber-600" />
-          , 커피
+          커피
           <GiCoffeeMug className="fill-amber-900 transition-colors dark:fill-amber-900" />
-          를 좋아합니다.
+          와 농구
+          <GiBasketballBall className="bounce fill-amber-700 transition-colors dark:fill-amber-600" />
+          , 힙합
+          <GiMusicalNotes className="fill-purple-dark dark:fill-purple-light" />
+          을 좋아합니다.
         </div>
       </motion.li>
     </ul>
