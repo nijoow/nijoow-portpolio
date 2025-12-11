@@ -1,6 +1,7 @@
 'use client';
 
 import { prefix } from '@/config/config';
+import { sendGAEvent } from '@next/third-parties/google';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -54,6 +55,12 @@ const WorksList = () => {
             <Link
               href={`/works/${work.pageName}`}
               className={`absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 group-hover:opacity-100`}
+              onClick={() => {
+                sendGAEvent({
+                  event: 'select_content',
+                  value: work.name,
+                });
+              }}
             >
               <span className="text-lg text-white">{work.name} &gt;</span>
             </Link>

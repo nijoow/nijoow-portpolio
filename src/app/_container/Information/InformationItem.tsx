@@ -1,3 +1,6 @@
+'use client';
+
+import { sendGAEvent } from '@next/third-parties/google';
 import Link from 'next/link';
 
 interface InformationItemProps {
@@ -31,6 +34,14 @@ export default function InformationItem({
             target="_blank"
             rel="noopener noreferrer"
             className={'text-purple-medium dark:text-purple-light'}
+            onClick={() => {
+              if (link.includes('github')) {
+                sendGAEvent({
+                  event: 'click',
+                  value: 'github',
+                });
+              }
+            }}
           >
             {contents}
           </Link>
