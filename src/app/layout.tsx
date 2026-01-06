@@ -4,7 +4,7 @@ import Recoil from '@/context/Recoil';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
 import './globals.css';
 
