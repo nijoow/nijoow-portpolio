@@ -4,6 +4,7 @@ import Recoil from '@/context/Recoil';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import './globals.css';
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           </Theme>
         </body>
         <GoogleAnalytics gaId="G-5QJWDNZCYK" />
+        <Analytics />
       </html>
     </Redirect>
   );
