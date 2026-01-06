@@ -108,4 +108,10 @@ export const works = [
     imgSrc: 'moimcity/moimcity.png',
     tags: ['Web', 'Frontend', 'Business Project', 'Freelancer'],
   },
+  {
+    pageName: 'fromis9-stickers',
+    name: '프로미스나인 스티커 꾸미기',
+    imgSrc: 'fromis9-stickers.png',
+    tags: ['Web', 'Interactive', 'Design', 'Frontend', 'Side Project'],
+  },
 ];
