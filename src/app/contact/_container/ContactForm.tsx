@@ -57,7 +57,7 @@ export const ContactForm = () => {
             name="name"
             id="name"
             required
-            placeholder="성함을 입력해주세요"
+            placeholder="이름을 입력해주세요"
             className="border-purple-dark/20 ring-purple-regular dark:ring-purple-light rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:border-white/10 dark:bg-white/5"
           />
         </div>
