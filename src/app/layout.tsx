@@ -5,6 +5,7 @@ import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -41,6 +42,7 @@ export default function RootLayout({
         </body>
         <GoogleAnalytics gaId="G-5QJWDNZCYK" />
         <Analytics />
+        <Toaster position="bottom-center" reverseOrder={false} />
       </html>
     </Redirect>
   );
