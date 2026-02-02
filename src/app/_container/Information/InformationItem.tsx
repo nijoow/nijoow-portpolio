@@ -19,13 +19,13 @@ export default function InformationItem({
     <div className={'flex w-full items-center'}>
       <div
         className={
-          'flex flex-[3] items-center justify-start gap-1 text-sm font-semibold sm:flex-[2]'
+          'flex flex-3 items-center justify-start gap-1 text-sm font-semibold sm:flex-2'
         }
       >
         {icon}
         <span>{list}</span>
       </div>
-      <div className={'sm:flex=[8] flex-[7] text-sm font-semibold sm:text-lg'}>
+      <div className={'flex-7 text-sm font-semibold sm:flex-8 sm:text-lg'}>
         :{' '}
         {link ? (
           <Link
