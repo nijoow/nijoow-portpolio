@@ -59,12 +59,12 @@ export const works = [
     imgSrc: 'cusmetic.png',
     tags: ['Web', 'Frontend', 'Business Project'],
   },
-  {
-    pageName: 'nijoow-shopping-mall',
-    name: 'nijoow-shopping-mall',
-    imgSrc: 'nijoow-shopping-mall.png',
-    tags: ['Web', 'Frontend', 'Backend', 'Design', 'Side Project'],
-  },
+  // {
+  //   pageName: 'nijoow-shopping-mall',
+  //   name: 'nijoow-shopping-mall',
+  //   imgSrc: 'nijoow-shopping-mall.png',
+  //   tags: ['Web', 'Frontend', 'Backend', 'Design', 'Side Project'],
+  // },
   {
     pageName: 'moharu',
     name: 'moharu',

@@ -26,8 +26,8 @@ const themeIcon = {
 
 const navList = [
   { text: 'Home', url: '/' },
-  { text: 'Skills', url: '/skills' },
   { text: 'Works', url: '/works' },
+  { text: 'Contact', url: '/contact' },
 ];
 
 export default function NavBar() {

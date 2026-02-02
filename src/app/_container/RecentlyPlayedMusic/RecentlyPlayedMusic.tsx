@@ -1,14 +1,14 @@
 'use client';
 
-import { musicAtom } from '@/recoil/atoms';
+import { musicAtom } from '@/store/atoms';
 import { motion } from 'framer-motion';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 const RecentlyPlayedMusic = () => {
-  const [music, setMusic] = useRecoilState(musicAtom);
+  const [music, setMusic] = useAtom(musicAtom);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

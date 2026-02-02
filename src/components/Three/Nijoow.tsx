@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useRef, useState } from 'react';
+import * as THREE from 'three';
 import { Group } from 'three';
 
-type GLTFResult = GLTF & {
+type GLTFResult = any & {
   nodes: {
     Curve003: THREE.Mesh;
   };

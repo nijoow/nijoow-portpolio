@@ -1,6 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-purple-light: #c0a8eb;
+  --color-purple-medium: #8458b3;
+  --color-purple-regular: #8d83ba;
+  --color-purple-dark: #8458b3;
+  --color-purple-darker: #443483;
+  --color-gray-darker: #111111;
+  --color-gray-dark: #1e1e1e;
+}
 
 @font-face {
   font-family: 'NanumSquareRound';

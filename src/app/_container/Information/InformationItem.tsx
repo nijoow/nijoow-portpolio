@@ -1,10 +1,9 @@
-'use client';
-
 import { sendGAEvent } from '@next/third-parties/google';
 import Link from 'next/link';
+import React from 'react';
 
 interface InformationItemProps {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   list: string;
   contents: string;
   link: string | null;
