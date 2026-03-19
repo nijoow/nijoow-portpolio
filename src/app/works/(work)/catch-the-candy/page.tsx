@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const CatchTheCandyPage = () => {
@@ -47,14 +48,20 @@ const CatchTheCandyPage = () => {
 
       <PartSubTitle title={'기술 스택 및 사용 도구'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          졸업 작품 : Processing, Arduino, kinect v1{' '}
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          웹 버전 : Javascript (p5.js)
-        </CustomList.MainListItem>
-      </CustomList>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1.5">
+          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            졸업 작품
+          </span>
+          <TechStack stacks={['Processing', 'Arduino', 'kinect v1']} />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            웹 버전
+          </span>
+          <TechStack stacks={['Javascript (p5.js)']} />
+        </div>
+      </div>
 
       <PartSubTitle title={'팀구성'} />
 

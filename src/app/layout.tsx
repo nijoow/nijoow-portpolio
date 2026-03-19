@@ -39,10 +39,10 @@ export default function RootLayout({
               </footer>
             </div>
           </Theme>
+          <GoogleAnalytics gaId="G-5QJWDNZCYK" />
+          <Analytics />
+          <Toaster position="bottom-center" reverseOrder={false} />
         </body>
-        <GoogleAnalytics gaId="G-5QJWDNZCYK" />
-        <Analytics />
-        <Toaster position="bottom-center" reverseOrder={false} />
       </html>
     </Redirect>
   );

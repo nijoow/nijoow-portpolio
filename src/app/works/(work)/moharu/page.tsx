@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const MoharuPage = () => {
@@ -25,11 +26,7 @@ const MoharuPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Tailwind CSS, Auth.js
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'Auth.js']} />
 
       <PartSubTitle title={'팀구성'} />
 

@@ -1,9 +1,10 @@
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
-const AtopDmsPage = () => {
+const FromYouPage = () => {
   return (
     <>
       <WorkImage
@@ -24,11 +25,7 @@ const AtopDmsPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Tailwind CSS, Motion
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'Motion']} />
 
       <PartSubTitle title={'담당 역할'} />
 
@@ -74,4 +71,4 @@ const AtopDmsPage = () => {
   );
 };
 
-export default AtopDmsPage;
+export default FromYouPage;

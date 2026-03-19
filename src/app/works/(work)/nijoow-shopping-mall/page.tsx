@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const NijoowShoppingMallPage = () => {
@@ -28,11 +29,9 @@ const NijoowShoppingMallPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Tailwind CSS, PostgreSQL
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack
+        stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'PostgreSQL']}
+      />
 
       <PartSubTitle title={'기능'} />
 

@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const ReturnToBlankPage = () => {
@@ -55,12 +56,9 @@ const ReturnToBlankPage = () => {
       </ul>
       <PartSubTitle title={'기술 스택 및 사용 도구'} />
 
-      <CustomList>
-        <CustomList.MainListItem>Unity</CustomList.MainListItem>
-        <CustomList.MainListItem>
-          빔프로젝터, kinect v1, 패브릭 스크린
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack
+        stacks={['Unity', '빔프로젝터', 'kinect v1', '패브릭 스크린']}
+      />
 
       <PartSubTitle title={'구현 기능'} />
       <CustomList>

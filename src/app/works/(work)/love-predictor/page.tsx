@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const LovePredictorPage = () => {
@@ -33,11 +34,7 @@ const LovePredictorPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Jotai, Tailwind CSS
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack stacks={['Next.js', 'Typescript', 'Jotai', 'Tailwind CSS']} />
 
       <PartSubTitle title={'역할'} />
 

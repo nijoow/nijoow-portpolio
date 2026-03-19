@@ -2,6 +2,7 @@ import Link from 'next/link';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const Fromis9StickersPage = () => {
@@ -26,6 +27,10 @@ const Fromis9StickersPage = () => {
           좋아하는 멤버의 사진을 다양한 스티커로 꾸미고 이미지로 저장할 수 있는
           기능을 제공
         </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          AI Agent (Google Antigravity)를 활용하여 기획, 디자인, 프론트엔드
+          개발까지 전 과정을 수행
+        </CustomList.MainListItem>
       </CustomList>
 
       <PartSubTitle title={'주요 기능'} />
@@ -45,11 +50,9 @@ const Fromis9StickersPage = () => {
       </CustomList>
 
       <PartSubTitle title={'기술 스택'} />
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, TypeScript, Tailwind CSS, Framer Motion
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack
+        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']}
+      />
 
       <div className="my-3" />
 
@@ -59,7 +62,7 @@ const Fromis9StickersPage = () => {
         href="https://fromis9-stickers.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>사이트 바로가기</span>
       </Link>

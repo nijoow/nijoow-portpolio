@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const MemoryPage = () => {
@@ -17,24 +18,24 @@ const MemoryPage = () => {
       <span className="text-xl font-bold">🎓 MEMORY</span>
       <CustomList>
         <CustomList.MainListItem>
-          부산대학교 디자인학과 디자인엔테크놀로지 전공 12회 졸업전시회 웹사이트
-          <CustomList.MainListItem>
-            졸업전시회 소개 및 전시 정보 소개
-          </CustomList.MainListItem>
-          <CustomList.MainListItem>
-            컨셉 및 작품 설명 (전시회 도록 대체)
-          </CustomList.MainListItem>
-          <CustomList.MainListItem>
-            전시회 작품 시연 영상 링크
-          </CustomList.MainListItem>
+          부산대학교 디자인학과 디자인엔테크놀로지 전공 12회 졸업전시회
+          웹사이트{' '}
+        </CustomList.MainListItem>
+
+        <CustomList.MainListItem>
+          졸업전시회 소개 및 전시 정보 소개
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          컨셉 및 작품 설명 (전시회 도록 대체)
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          전시회 작품 시연 영상 링크
         </CustomList.MainListItem>
       </CustomList>
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>HTML, CSS, Javascript</CustomList.MainListItem>
-      </CustomList>
+      <TechStack stacks={['HTML', 'CSS', 'Javascript']} />
 
       <PartSubTitle title={'팀구성'} />
 
@@ -67,7 +68,7 @@ const MemoryPage = () => {
         href="https://nijoow.github.io/PNUDT12/pages/about.html"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -75,7 +76,7 @@ const MemoryPage = () => {
         href="https://github.com/nijoow/PNUDT12"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
       >
         <BsGithub />
         <span>Github</span>

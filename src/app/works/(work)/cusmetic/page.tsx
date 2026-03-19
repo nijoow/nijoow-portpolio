@@ -1,6 +1,7 @@
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
 
 const CusmeticPage = () => {
@@ -32,33 +33,42 @@ const CusmeticPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Recoil, Tailwind CSS
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack stacks={['Next.js', 'Typescript', 'Recoil', 'Tailwind CSS']} />
 
-      <PartSubTitle title={'기능'} />
+      <PartSubTitle title={'주요 업무 및 성과'} />
 
       <CustomList>
         <CustomList.MainListItem>
-          Next.js App Router 기반 프로젝트 세팅 및 반응형 웹 개발
+          <strong className="font-bold">Next.js/Typescript</strong> 기반의{' '}
+          <strong className="font-bold">
+            프론트엔드 아키텍쳐 설계 및 인터페이스 구현
+          </strong>
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          서버/클라이언트 컴포넌트를 조합하여 유저 페이지 개발
+          <strong className="font-bold">Next.js</strong>와 서버 사이드 세션을
+          활용해 인증에 따른 컴포넌트 깜빡임 제거 및 초기 렌더링 속도 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          유저/화장품/성분 등을 Excel import/export를 통해 관리할 수 있는 어드민
-          페이지 개발
+          <strong className="font-bold">Next-Auth</strong>를 활용해 프론트엔드
+          환경에서{' '}
+          <strong className="font-bold">소셜 로그인 기반의 인증 체계</strong>를
+          신속하게 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          Next-Auth를 통한 소셜 로그인 연동
+          검색 상태를 <strong className="font-bold">URL 쿼리 스트링</strong>으로
+          관리하여 새로고침이나 링크 공유 시 맥락 유지
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          화장품 검색 리스트 무한스크롤 적용
+          검색 <strong className="font-bold">Debounce</strong> 적용으로{' '}
+          <strong className="font-bold">API 호출을 80% 이상 절감</strong>
+          하고, <strong className="font-bold">무한스크롤</strong> 기반 리스트
+          최적화로 사용자 경험 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          AWS Amplify 프론트엔드 배포 자동화
+          AWS Amplify를 활용한{' '}
+          <strong className="font-bold">배포 자동화 파이프라인</strong>을
+          구축하여{' '}
+          <strong className="font-bold">개발 및 배포 프로세스 단축</strong>
         </CustomList.MainListItem>
       </CustomList>
 
@@ -76,7 +86,7 @@ const CusmeticPage = () => {
           - 클라이언트 Router Cache가 서버컴포넌트의 payload를 캐싱하여 발생한
           것을 확인
         </li>
-        <li className="font-semibold text-purple-regular">
+        <li className="text-purple-regular font-semibold">
           - 해당 페이지에 접근하였을때{' '}
           <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             router.refresh()
@@ -98,7 +108,7 @@ const CusmeticPage = () => {
           옵션을 사용했을 때, 기본적으로 생성되는 이미지 srcSet 이 너무 많아지는
           것을 확인
         </li>
-        <li className="font-semibold text-purple-regular">
+        <li className="text-purple-regular font-semibold">
           - next.config.js 파일에서
           <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
             images.imageSizes / images.domains

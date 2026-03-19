@@ -1,6 +1,7 @@
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const TreenowPage = () => {
@@ -23,11 +24,15 @@ const TreenowPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          React.js, Typescript, Recoil, Tailwind CSS, React-native(webview)
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack
+        stacks={[
+          'React.js',
+          'Typescript',
+          'Recoil',
+          'Tailwind CSS',
+          'React-native(webview)',
+        ]}
+      />
 
       <PartSubTitle title={'팀구성'} />
 

@@ -12,6 +12,12 @@ import InformationItem from './InformationItem';
 const informationList = [
   { icon: <BsPersonCircle />, list: '이름', contents: '이우진', link: null },
   {
+    icon: <BsFillEnvelopeFill />,
+    list: '이메일',
+    contents: 'nijoow1127@gmail.com',
+    link: null,
+  },
+  {
     icon: <BsFillCalendarEventFill />,
     list: '생년월일',
     contents: '1996.11.27',
@@ -21,12 +27,6 @@ const informationList = [
     icon: <BsFillPencilFill />,
     list: '학력',
     contents: '부산대학교 디자인학과 디자인앤테크놀로지전공',
-    link: null,
-  },
-  {
-    icon: <BsFillEnvelopeFill />,
-    list: '이메일',
-    contents: 'nijoow1127@gmail.com',
     link: null,
   },
   {

@@ -3,6 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
 const PortPolioPage = () => {
@@ -21,11 +22,15 @@ const PortPolioPage = () => {
 
       <PartSubTitle title={'기술 스택'} />
 
-      <CustomList>
-        <CustomList.MainListItem>
-          Next.js, Typescript, Tailwind CSS, React-Three-Fiber, Framer-Motion
-        </CustomList.MainListItem>
-      </CustomList>
+      <TechStack
+        stacks={[
+          'Next.js',
+          'Typescript',
+          'Tailwind CSS',
+          'React-Three-Fiber',
+          'Framer-Motion',
+        ]}
+      />
 
       <PartSubTitle title={'개발'} />
 
