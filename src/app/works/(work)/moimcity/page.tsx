@@ -30,25 +30,29 @@ const MoimcityPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'담당 역할'} />
+      <PartSubTitle title={'주요 업무 및 성과'} />
 
       <CustomList>
         <CustomList.MainListItem>
-          서비스 리뉴얼 UI/UX 설계 및 프론트엔드 개발
+          서비스 리뉴얼에 따른 프론트엔드 고도화 개발
         </CustomList.MainListItem>
-        <CustomList.MainListItem>기존 기능 버그 수정</CustomList.MainListItem>
-        <CustomList.SubListItem>
-          모바일·크로스 브라우저 터치 동작 오류 해결 및 UX 안정화
-        </CustomList.SubListItem>
         <CustomList.MainListItem>
-          코드 정리 및 개발 환경 최적화
+          크로스 브라우저 환경에서의{' '}
+          <strong className="font-bold">터치 동작 오류 해결</strong> 등 모바일
+          UX 개선
         </CustomList.MainListItem>
-        <CustomList.SubListItem>
-          Prettier/tailwind plugin 설정
-        </CustomList.SubListItem>
-        <CustomList.SubListItem>
-          레거시 코드에서 사용하지않는 파일과 코드 제거 및 구조 개선
-        </CustomList.SubListItem>
+        <CustomList.MainListItem>
+          <strong className="font-bold">
+            Prettier 및 플러그인 설정・코드 리팩토링
+          </strong>
+          을 통해 가독성 및 유지보수성 개선
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          <strong className="font-bold">
+            600개 이상의 불필요한 파일 정리 및 9만 줄의 데드코드 감축
+          </strong>
+          을 통해 개발 환경 최적화 및 빌드 속도 개선
+        </CustomList.MainListItem>
       </CustomList>
 
       <div className="my-3" />

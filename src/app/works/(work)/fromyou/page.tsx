@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
@@ -27,46 +28,47 @@ const FromYouPage = () => {
 
       <TechStack stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'Motion']} />
 
-      <PartSubTitle title={'담당 역할'} />
+      <PartSubTitle title={'주요 업무 및 성과'} />
 
       <CustomList>
         <CustomList.MainListItem>
-          반응형 페이지 설계, 디자인 및 구현
+          SVG・드래그앤드롭・차트・스크롤 애니메이션 등을 활용한{' '}
+          <strong className="font-bold">
+            UX/UI 시각화 기획・디자인 및 반응형 웹 개발
+          </strong>
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          SVG 컴포넌트, 드래그앤드롭, nivo 차트 등을 활용한 지역구/연령대/관심사
-          선택 UI 구현
+          AWS Amplify 기반 <strong className="font-bold">배포 자동화</strong>{' '}
+          구축
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          설문에 따른 독자 맞춤형 기사 노출 개발{' '}
+          서브도메인 DNS 설정 및 배포
         </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          인트로 및 기사별 스크롤 애니메이션 기획, 시각화 및 구현{' '}
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          AWS Amplify 프론트엔드 배포 자동화
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          Cafe24 도메인을 활용한 서브도메인 DNS 설정 및 배포
-        </CustomList.MainListItem>
-      </CustomList>
-
-      <PartSubTitle title={'성과 및 배운점'} />
-
-      <CustomList>
         <CustomList.MainListItem>
           신문방송편집인협회 - 2025 지역신문 기획취재 제작 지원 대상으로 선정
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          motion 라이브러리를 활용하여 다양한 스크롤 애니메이션 개발 경험
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          텍스트/이미지와 간단한 요구사항만 제공된 상황에서 기획부터 반응형
-          디자인, 애니메이션 구현 및 배포까지 전 과정을 단독으로 진행
+          인천일보 팀 이달의 기자상 수상에 기여
         </CustomList.MainListItem>
       </CustomList>
 
       <div className="my-3" />
+      <Link
+        href="https://from-you.incheonilbo-interactive.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
+      >
+        <span>사이트 바로가기</span>
+      </Link>
+      <Link
+        href="https://www.incheonilbo.com/news/articleView.html?idxno=1312711"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
+      >
+        <span>기사 바로가기</span>
+      </Link>
     </>
   );
 };

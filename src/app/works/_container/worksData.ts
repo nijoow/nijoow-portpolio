@@ -77,6 +77,13 @@ export const works = [
   //   imgSrc: 'television.png',
   //   tags: ['Web', 'Frontend', '3D', 'Side Project'],
   // },
+
+  {
+    pageName: 'atop-dms',
+    name: 'ATOP.DMS',
+    imgSrc: 'atop-dms/main.png',
+    tags: ['Web', 'Frontend', 'Business Project'],
+  },
   {
     pageName: 'fromyou',
     name: 'fromyou',
@@ -90,12 +97,7 @@ export const works = [
       'Freelancer',
     ],
   },
-  {
-    pageName: 'atop-dms',
-    name: 'ATOP.DMS',
-    imgSrc: 'atop-dms/main.png',
-    tags: ['Web', 'Frontend', 'Business Project'],
-  },
+
   // {
   //   pageName: 'x-pixel',
   //   name: 'X-PIXEL',

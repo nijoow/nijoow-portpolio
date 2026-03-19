@@ -42,25 +42,26 @@ const TreenowPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'역할'} />
+      <PartSubTitle title={'주요 업무 및 성과'} />
 
       <CustomList>
         <CustomList.MainListItem>
-          React 프로젝트 세팅 및 반응형 SPA 개발(유저/어드민 페이지)
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>외부 서비스 연동</CustomList.MainListItem>
-        <CustomList.SubListItem>
-          무통장입금 결제 / 휴대폰 본인인증 / 문서 작성, 서명 및 조회 / 인증서
-          등록 / 세금계산서 조회{' '}
-        </CustomList.SubListItem>
-        <CustomList.MainListItem>
-          React-Native 웹뷰를 사용한 하이브리드앱 개발 및 빌드
+          <strong className="font-bold">디자인 시스템</strong>을 고려한{' '}
+          <strong className="font-bold">React/Typescript</strong> 기반{' '}
+          <strong className="font-bold">
+            프론트엔드 환경 설계 및 반응형 UI 개발
+          </strong>
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          구글 플레이 스토어/애플 앱스토어 앱 배포
+          무통장입금, 본인인증, 전자계약 서명 등{' '}
+          <strong className="font-bold">외부 API 연동</strong>을 통한 비즈니스
+          로직 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          firebase cloud messaging 앱 푸시알림 기능 구현
+          <strong className="font-bold">React-Native 웹뷰</strong>를 활용한{' '}
+          <strong className="font-bold">
+            하이브리드 앱 개발 및 앱스토어 심사·배포
+          </strong>
         </CustomList.MainListItem>
       </CustomList>
 
