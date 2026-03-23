@@ -30,12 +30,6 @@ export const works = [
     tags: ['Web', 'Interactive', 'Frontend', 'Design', 'Side Project'],
   },
   // {
-  //   pageName: 'nijoow-vintage',
-  //   name: 'nijoow-vintage',
-  //   imgSrc: 'nijoow-vintage.png',
-  //   tags: ['Web', 'Frontend', 'Design', 'Side Project'],
-  // },
-  // {
   //   pageName: 'love-predictor',
   //   name: 'Love-Predictor',
   //   imgSrc: 'ai-love-predictor.png',
@@ -71,12 +65,6 @@ export const works = [
     imgSrc: 'moharu.png',
     tags: ['Web', 'Frontend', 'Side Project'],
   },
-  // {
-  //   pageName: 'television',
-  //   name: 'television',
-  //   imgSrc: 'television.png',
-  //   tags: ['Web', 'Frontend', '3D', 'Side Project'],
-  // },
 
   {
     pageName: 'atop-dms',
@@ -86,7 +74,7 @@ export const works = [
   },
   {
     pageName: 'fromyou',
-    name: 'fromyou',
+    name: '독자시점주의 From You',
     imgSrc: 'fromyou.png',
     tags: [
       'Web',
@@ -97,13 +85,6 @@ export const works = [
       'Freelancer',
     ],
   },
-
-  // {
-  //   pageName: 'x-pixel',
-  //   name: 'X-PIXEL',
-  //   imgSrc: 'x-pixel.png',
-  //   tags: ['Web', 'Frontend', 'Business Project'],
-  // },
   {
     pageName: 'moimcity',
     name: '모임특별시',
@@ -115,5 +96,11 @@ export const works = [
     name: '프로미스나인 스티커 꾸미기',
     imgSrc: 'fromis9-stickers.png',
     tags: ['Web', 'Interactive', 'Design', 'Frontend', 'Side Project'],
+  },
+  {
+    pageName: 'ml3yp',
+    name: 'Midnight Lo-fi 3D Youtube Player',
+    imgSrc: 'ml3yp.png',
+    tags: ['Web', 'Frontend', '3D', 'Interactive', 'Design', 'Side Project'],
   },
 ];
