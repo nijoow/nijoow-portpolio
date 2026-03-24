@@ -1,3 +1,4 @@
+import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
 import Three from '@/components/Three/Three';
 import Redirect from '@/context/Redirect';
@@ -23,7 +24,8 @@ export default function RootLayout({
       <html lang="en" className="h-full w-full" suppressHydrationWarning>
         <body className="h-full w-full">
           <Theme>
-            <div className="dark:bg-gray-darker flex min-h-screen w-full flex-col overflow-x-hidden bg-purple-50 text-black transition-all duration-300 dark:text-purple-50">
+            <CustomCursor />
+            <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
               <NavBar />
               <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-12">
                 <Three />
