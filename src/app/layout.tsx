@@ -18,32 +18,32 @@ const mPlusRounded1c = localFont({
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-Light.ttf',
+      path: '../font/MPLUSRounded1c-Thin.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-Regular.ttf',
+      path: '../font/MPLUSRounded1c-Light.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-Medium.ttf',
+      path: '../font/MPLUSRounded1c-Regular.ttf',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-Bold.ttf',
+      path: '../font/MPLUSRounded1c-Medium.ttf',
       weight: '700',
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-ExtraBold.ttf',
+      path: '../font/MPLUSRounded1c-Bold.ttf',
       weight: '800',
       style: 'normal',
     },
     {
-      path: '../font/MPLUSRounded1c-Black.ttf',
+      path: '../font/MPLUSRounded1c-ExtraBold.ttf',
       weight: '900',
       style: 'normal',
     },
