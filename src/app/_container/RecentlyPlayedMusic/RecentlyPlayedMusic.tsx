@@ -1,11 +1,11 @@
 'use client';
 
 import { musicAtom } from '@/store/atoms';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const RecentlyPlayedMusic = () => {
   const [music, setMusic] = useAtom(musicAtom);
@@ -32,11 +32,41 @@ const RecentlyPlayedMusic = () => {
     return () => clearInterval(getSong);
   }, [setMusic]);
 
+  const cardRef = useRef<HTMLAnchorElement>(null);
+
+  // Mouse tracking for interactive glow
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+
+  // Transformations for dynamic movement
+  const blobX = useTransform(springX, [0, 1], ['15%', '-15%']);
+  const blobY = useTransform(springY, [0, 1], ['15%', '-15%']);
+
+  const cursorBlobX = useTransform(springX, [0, 1], ['0%', '100%']);
+  const cursorBlobY = useTransform(springY, [0, 1], ['0%', '100%']);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!cardRef.current) return;
+    const { left, top, width, height } =
+      cardRef.current.getBoundingClientRect();
+    mouseX.set((e.clientX - left) / width);
+    mouseY.set((e.clientY - top) / height);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+  };
+
   if (loading)
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-black/5 bg-black/5 p-4 backdrop-blur-md dark:border-white/10 dark:bg-white/5'
+          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl dark:border-white/10'
         }
       >
         <div
@@ -55,7 +85,7 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-black/5 bg-black/5 p-4 backdrop-blur-md dark:border-white/10 dark:bg-white/5'
+          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl dark:border-white/10'
         }
       >
         <div
@@ -73,23 +103,44 @@ const RecentlyPlayedMusic = () => {
 
   return (
     <Link
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       href={music.songUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-black/5 bg-black/5 px-4 py-4 backdrop-blur-md transition-all hover:bg-black/10 md:gap-8 md:px-8 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10'
+        'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all hover:bg-white/10 md:gap-8 md:px-8 dark:border-white/5'
       }
     >
+      {/* Specular Highlight */}
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
+
+      {/* Static Background Blob (As requested to keep) */}
       <div
         className={
           'bg-purple-medium/30 group-hover:bg-purple-medium/50 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl transition-opacity md:size-40'
         }
       />
 
+      {/* Interactive Mouse Follower Blob */}
+      <motion.div
+        style={{
+          left: cursorBlobX,
+          top: cursorBlobY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+        className="bg-purple-medium/20 pointer-events-none absolute -z-10 size-48 rounded-full opacity-0 blur-3xl transition-opacity group-hover:opacity-100"
+      />
+
       <div className={'relative size-20 shrink-0 md:size-32'}>
         <motion.div
           layoutId="glow"
-          className={'bg-purple-light/50 absolute inset-0 rounded-full blur-xl'}
+          style={{ x: blobX, y: blobY }}
+          className={
+            'bg-purple-light/50 absolute inset-0 -z-10 rounded-full blur-xl'
+          }
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.3, 0.6, 0.3],

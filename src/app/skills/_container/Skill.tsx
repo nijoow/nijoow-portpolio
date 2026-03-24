@@ -34,7 +34,7 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
       dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
       dragConstraints={constraintsRef}
       dragSnapToOrigin
-      className="col-span-2 flex cursor-pointer flex-col items-center gap-2 sm:col-span-1"
+      className="col-span-2 flex flex-col items-center gap-2 sm:col-span-1"
     >
       <Tilt
         scale={1.2}
