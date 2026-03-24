@@ -25,9 +25,9 @@ export default function RootLayout({
         <body className="h-full w-full">
           <Theme>
             <CustomCursor />
-            <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
+            <div className="flex min-h-screen w-full flex-col bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
               <NavBar />
-              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-12">
+              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-14">
                 <Three />
                 {children}
               </div>
