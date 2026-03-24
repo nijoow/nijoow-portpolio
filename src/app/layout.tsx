@@ -1,6 +1,7 @@
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
+import ThreeDynamic from '@/components/Three/ThreeDynamic';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -21,17 +22,17 @@ const mPlusRounded1c = M_PLUS_Rounded_1c({
 const nanumSquareRound = localFont({
   src: [
     {
-      path: '../font/NanumSquareRoundL.ttf',
+      path: '../font/NanumSquareRoundR.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../font/NanumSquareRoundR.ttf',
+      path: '../font/NanumSquareRoundB.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../font/NanumSquareRoundB.ttf',
+      path: '../font/NanumSquareRoundEB.ttf',
       weight: '700',
       style: 'normal',
     },
@@ -43,8 +44,6 @@ const nanumSquareRound = localFont({
   ],
   variable: '--font-nanum-square-round',
 });
-
-import ThreeDynamic from '@/components/Three/ThreeDynamic';
 
 export const metadata: Metadata = {
   title: 'nijoow | portfolio',
@@ -60,7 +59,7 @@ export default function RootLayout({
     <Redirect>
       <html lang="en" className="h-full w-full" suppressHydrationWarning>
         <body
-          className={`${mPlusRounded1c.variable} ${nanumSquareRound.variable} h-full w-full`}
+          className={`${nanumSquareRound.variable} ${mPlusRounded1c.variable} h-full w-full`}
         >
           <Theme>
             <AmbientBackground />

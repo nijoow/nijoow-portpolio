@@ -82,8 +82,10 @@ const CustomCursor = () => {
       const isInteractive =
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
+        target.tagName === 'CANVAS' ||
         target.closest('a') ||
-        target.closest('button');
+        target.closest('button') ||
+        target.closest('canvas');
       setIsHovering(!!isInteractive);
     };
 
