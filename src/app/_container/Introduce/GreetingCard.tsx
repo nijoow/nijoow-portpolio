@@ -74,7 +74,9 @@ const GreetingCard = () => {
       />
 
       <div
-        className={'relative z-10 text-center text-base break-keep sm:text-lg'}
+        className={
+          'relative z-10 text-center text-base font-bold break-keep sm:text-lg'
+        }
       >
         반갑습니다🖐🏻 프론트엔드 개발자{' '}
         <span

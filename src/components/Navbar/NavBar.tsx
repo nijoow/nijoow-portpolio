@@ -54,11 +54,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 h-14 w-full transition-all duration-500 ${
-        isScrolled
-          ? 'border-b border-white/10 bg-white/20 shadow-lg backdrop-blur-md dark:bg-black/20'
-          : 'bg-transparent'
-      }`}
+      className={`sticky top-0 z-50 h-20 w-full border-b border-black/10 bg-white/80 font-bold shadow-lg backdrop-blur-xl transition-all duration-500 md:h-14 dark:border-white/10 dark:bg-black/80`}
     >
       <div className={`mx-auto flex h-full w-full max-w-2xl items-center px-4`}>
         <Magnetic strength={0.2}>
@@ -113,9 +109,9 @@ export default function NavBar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-14 left-0 w-full overflow-hidden px-4 md:hidden"
+            className="absolute top-22 left-0 w-full overflow-hidden px-4 md:hidden"
           >
-            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/80 p-4 shadow-2xl backdrop-blur-xl dark:bg-black/80">
+            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/90 p-4 shadow-2xl backdrop-blur-xl dark:bg-black/90">
               {navList.map(({ text, url }, i) => (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}

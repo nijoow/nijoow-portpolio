@@ -16,10 +16,6 @@ const CustomCursor = () => {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Precision tracking
-  const springX = useSpring(mouseX, { damping: 20, stiffness: 250, mass: 0.5 });
-  const springY = useSpring(mouseY, { damping: 20, stiffness: 250, mass: 0.5 });
-
   // Liquid trail tracking
   const trailX = useSpring(mouseX, { damping: 15, stiffness: 100, mass: 0.8 });
   const trailY = useSpring(mouseY, { damping: 15, stiffness: 100, mass: 0.8 });

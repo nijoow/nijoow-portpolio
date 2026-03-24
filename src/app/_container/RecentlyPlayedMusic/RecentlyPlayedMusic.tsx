@@ -225,7 +225,7 @@ const RecentlyPlayedMusic = () => {
         </div>
         <div
           className={
-            'dark:text-purple-light/80 mb-2 truncate text-sm text-gray-500'
+            'dark:text-purple-light/80 mb-2 truncate text-sm font-semibold text-gray-500'
           }
         >
           {music.artist}
