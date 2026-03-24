@@ -66,37 +66,68 @@ const RecentlyPlayedMusic = () => {
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl dark:border-white/10'
+          'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all md:gap-8 md:px-8 dark:border-white/10'
         }
       >
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
         <div
           className={
-            'relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black/5 dark:bg-white/10'
+            'bg-purple-medium/30 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl md:size-40'
           }
-        >
-          <span className="text-4xl">🎵</span>
+        />
+        <div className={'relative size-20 shrink-0 md:size-32'}>
+          <motion.div
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className={
+              'relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-black/5 shadow-lg md:size-32 dark:bg-white/5'
+            }
+          >
+            <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
+              🎵
+            </div>
+          </motion.div>
         </div>
-        <div className="dark:text-purple-light/80 flex-auto text-sm text-gray-500">
-          음악 정보를 불러오는 중입니다...
+        <div className={'flex h-20 flex-auto flex-col justify-center'}>
+          <div className="animate-pulse">
+            <div className="mb-2 h-5 w-32 rounded-full bg-gray-200 dark:bg-white/10" />
+            <div className="h-4 w-48 rounded-full bg-gray-100 dark:bg-white/5" />
+          </div>
         </div>
       </div>
     );
+
   if (music === null)
     return (
       <div
         className={
-          'flex w-full max-w-md items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl dark:border-white/10'
+          'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all md:gap-8 md:px-8 dark:border-white/10'
         }
       >
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
         <div
           className={
-            'relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black/5 dark:bg-white/10'
+            'bg-purple-medium/30 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl md:size-40'
           }
-        >
-          <span className="text-4xl">😭</span>
+        />
+        <div className={'relative size-20 shrink-0 md:size-32'}>
+          <div
+            className={
+              'relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-black/5 shadow-lg md:size-32 dark:bg-white/5'
+            }
+          >
+            <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
+              😭
+            </div>
+          </div>
         </div>
-        <div className="dark:text-purple-light/80 flex-auto text-sm text-gray-500">
-          현재 곡을 표시할 수 없습니다ㅠㅠ
+        <div className={'flex h-20 flex-auto flex-col justify-center'}>
+          <div className="text-base font-bold text-gray-900 dark:text-white">
+            현재 곡을 표시할 수 없습니다
+          </div>
+          <div className="dark:text-purple-light/60 text-sm text-gray-500">
+            나중에 다시 확인해 주세요ㅠㅠ
+          </div>
         </div>
       </div>
     );
@@ -110,7 +141,7 @@ const RecentlyPlayedMusic = () => {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all hover:bg-white/10 md:gap-8 md:px-8 dark:border-white/5'
+        'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all hover:bg-white/10 md:gap-8 md:px-8 dark:border-white/10'
       }
     >
       {/* Specular Highlight */}
