@@ -12,23 +12,10 @@
   --color-gray-dark: #1e1e1e;
 }
 
-@font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'M PLUS Rounded 1c';
-  src: url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
-}
-
 html,
 body,
 * {
-  font-family: 'M PLUS Rounded 1c', 'NanumSquareRound', sans-serif;
+  font-family: var(--font-m-plus-rounded-1c), sans-serif;
   cursor: none !important;
 }
 

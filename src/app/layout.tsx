@@ -6,8 +6,50 @@ import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
+import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
+
+const mPlusRounded1c = localFont({
+  src: [
+    {
+      path: '../font/MPLUSRounded1c-Thin.ttf',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-ExtraBold.ttf',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../font/MPLUSRounded1c-Black.ttf',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-m-plus-rounded-1c',
+});
 
 export const metadata: Metadata = {
   title: 'nijoow | portfolio',
@@ -22,7 +64,7 @@ export default function RootLayout({
   return (
     <Redirect>
       <html lang="en" className="h-full w-full" suppressHydrationWarning>
-        <body className="h-full w-full">
+        <body className={`${mPlusRounded1c.variable} h-full w-full`}>
           <Theme>
             <CustomCursor />
             <div className="flex min-h-screen w-full flex-col bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
