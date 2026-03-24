@@ -23,13 +23,13 @@ const WorksList = () => {
       <AnimatePresence mode="popLayout">
         {worksList.map((work) => (
           <motion.div
-            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.15 } }}
             className={`group relative col-span-2 aspect-video h-auto w-full overflow-hidden rounded-lg bg-white/80 shadow-md sm:col-span-1`}
             key={work.name}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.6 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             layout
           >
             {work.imgSrc === '' ? (

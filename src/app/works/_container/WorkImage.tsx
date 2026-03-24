@@ -9,7 +9,7 @@ const WorkImage = ({ url, imgSrc }: { url?: string; imgSrc: string }) => {
       {!imgSrc ? (
         <div className={''}>이미지가 없습니다</div>
       ) : (
-        <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} />
+        <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} priority />
       )}
       {url && (
         <Link

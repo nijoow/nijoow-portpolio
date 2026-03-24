@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import { ReactNode, useRef, useState } from 'react';
 
 interface MagneticProps {
   children: ReactNode;
@@ -14,17 +14,16 @@ const Magnetic = ({ children, strength = 0.5 }: MagneticProps) => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
-    
+
     const { clientX, clientY } = e;
     const { height, width, left, top } = ref.current.getBoundingClientRect();
-    
-    // Calculate distance from center
+
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-    
+
     const x = (clientX - centerX) * strength;
     const y = (clientY - centerY) * strength;
-    
+
     setPosition({ x, y });
   };
 

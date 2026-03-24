@@ -50,4 +50,4 @@ export default function Nijoow() {
   );
 }
 
-useGLTF.preload('/3D/nijoow.glb');
+useGLTF.preload('/3D/nijoowPurple.glb');
