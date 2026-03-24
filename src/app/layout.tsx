@@ -51,6 +51,32 @@ const mPlusRounded1c = localFont({
   variable: '--font-m-plus-rounded-1c',
 });
 
+const nanumSquareRound = localFont({
+  src: [
+    {
+      path: '../font/NanumSquareRoundL.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../font/NanumSquareRoundR.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../font/NanumSquareRoundB.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../font/NanumSquareRoundEB.ttf',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-nanum-square-round',
+});
+
 export const metadata: Metadata = {
   title: 'nijoow | portfolio',
   description: 'Welcome to nijoow`s portfolio!',
@@ -64,7 +90,9 @@ export default function RootLayout({
   return (
     <Redirect>
       <html lang="en" className="h-full w-full" suppressHydrationWarning>
-        <body className={`${mPlusRounded1c.variable} h-full w-full`}>
+        <body
+          className={`${mPlusRounded1c.variable} ${nanumSquareRound.variable} h-full w-full`}
+        >
           <Theme>
             <CustomCursor />
             <div className="flex min-h-screen w-full flex-col bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">

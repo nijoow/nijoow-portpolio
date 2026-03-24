@@ -15,7 +15,8 @@
 html,
 body,
 * {
-  font-family: var(--font-m-plus-rounded-1c), sans-serif;
+  font-family: var(--font-m-plus-rounded-1c), var(--font-nanum-square-round),
+    sans-serif;
   cursor: none !important;
 }
 
