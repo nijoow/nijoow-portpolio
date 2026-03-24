@@ -97,7 +97,7 @@ export default function RootLayout({
             <CustomCursor />
             <div className="flex min-h-screen w-full flex-col bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
               <NavBar />
-              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-14">
+              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10">
                 <Three />
                 {children}
               </div>
