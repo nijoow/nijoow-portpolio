@@ -10,17 +10,17 @@ const HomePage = () => {
   return (
     <TransitionPageWrapper>
       <div className="flex flex-col gap-6">
-        <Section>
+        <Section alignItems="items-start">
           <div
             className={
-              'flex w-full items-center justify-center rounded-lg bg-purple-light/50 p-6 text-xl font-bold dark:bg-white/10'
+              'flex w-full items-center justify-center rounded-2xl border border-white/5 bg-purple-light/30 p-8 text-xl font-bold backdrop-blur-sm dark:bg-white/5'
             }
           >
-            <div className={'break-keep text-base sm:text-lg'}>
+            <div className={'text-base break-keep sm:text-lg'}>
               반갑습니다🖐🏻 프론트엔드 개발자{' '}
               <span
                 className={
-                  'text-xl text-purple-dark dark:text-purple-light sm:text-2xl'
+                  'text-purple-dark dark:text-purple-light text-xl sm:text-2xl'
                 }
               >
                 이우진
