@@ -37,10 +37,10 @@ const GithubCommitLog = () => {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative aspect-648/141 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-xl transition-all hover:bg-white/10 dark:border-white/10"
+      className="group relative aspect-648/141 w-full overflow-hidden rounded-xl border border-white/10 bg-black/30 shadow-lg backdrop-blur-xl transition-all dark:border-white/10"
     >
       {/* Specular Highlight */}
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/5 via-transparent to-transparent opacity-30" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/15 to-white/5 opacity-10" />
 
       {/* Interactive Mouse Follower Blob */}
       <motion.div

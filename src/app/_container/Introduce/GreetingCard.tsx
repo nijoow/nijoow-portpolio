@@ -85,12 +85,6 @@ const GreetingCard = () => {
           }
         >
           이우진
-          <motion.span
-            className="bg-purple-medium/50 absolute -bottom-1 left-0 h-1 w-full blur-[2px]"
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
         </span>
         입니다.
       </div>

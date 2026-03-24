@@ -3,6 +3,7 @@
 import Logo from '@/components/Logo/Logo';
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
+import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
@@ -37,15 +38,9 @@ export default function NavBar() {
 
   const [mounted, setMounted] = useState(false);
   const [isNavShow, setIsNavShow] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -54,7 +49,9 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 h-20 w-full border-b border-black/10 bg-white/80 font-bold shadow-lg backdrop-blur-xl transition-all duration-500 md:h-14 dark:border-white/10 dark:bg-black/80`}
+      className={cn(
+        `sticky top-0 z-50 h-20 w-full overflow-hidden rounded-b-2xl border-b border-black/10 bg-white/80 font-bold shadow-md backdrop-blur-xl transition-all duration-500 md:h-14 dark:border-white/10 dark:bg-black/80`,
+      )}
     >
       <div className={`mx-auto flex h-full w-full max-w-2xl items-center px-4`}>
         <Magnetic strength={0.2}>

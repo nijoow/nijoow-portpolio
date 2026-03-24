@@ -8,9 +8,9 @@ import Nijoow from './Nijoow';
 
 const Three = () => {
   return (
-    <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-3xl sm:h-[320px]">
+    <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-3xl bg-white sm:h-[320px] dark:bg-black">
       {/* 딥한 안쪽 공간을 표현하는 배경 */}
-      <div className="pointer-events-none absolute inset-0 bg-black/5 dark:bg-white/10" />
+      <div className="pointer-events-none absolute inset-0 dark:bg-white/10" />
 
       {/* 3D 캔버스 (z-0) */}
       <Canvas

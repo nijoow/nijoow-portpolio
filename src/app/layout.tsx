@@ -1,3 +1,4 @@
+import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
 import Three from '@/components/Three/Three';
@@ -94,10 +95,11 @@ export default function RootLayout({
           className={`${mPlusRounded1c.variable} ${nanumSquareRound.variable} h-full w-full`}
         >
           <Theme>
+            <AmbientBackground />
             <CustomCursor />
-            <div className="flex min-h-screen w-full flex-col bg-[#fafafa]/50 text-black backdrop-blur-[2px] transition-all duration-300 dark:bg-black/50 dark:text-purple-50">
+            <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
               <NavBar />
-              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10">
+              <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
                 <Three />
                 {children}
               </div>
