@@ -103,4 +103,10 @@ export const works = [
     imgSrc: 'ml3yp.png',
     tags: ['Web', 'Frontend', '3D', 'Interactive', 'Design', 'Side Project'],
   },
+  {
+    pageName: 'lessor-panda-village',
+    name: '레서판다 빌리지',
+    imgSrc: 'lessor-panda-village.png',
+    tags: ['Web', 'Interactive', '3D', 'Side Project', 'Frontend'],
+  },
 ];
