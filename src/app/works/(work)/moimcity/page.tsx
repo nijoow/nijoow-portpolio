@@ -1,6 +1,7 @@
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
+import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
 
 const MoimcityPage = () => {
@@ -29,6 +30,17 @@ const MoimcityPage = () => {
           취향 기반 소셜 모임 플랫폼
         </CustomList.MainListItem>
       </CustomList>
+
+      <PartSubTitle title={'기술 스택'} />
+      <TechStack
+        stacks={[
+          'Next.js',
+          'TypeScript',
+          'Tailwind CSS',
+          'zustand',
+          'Framer Motion',
+        ]}
+      />
 
       <PartSubTitle title={'주요 업무 및 성과'} />
 

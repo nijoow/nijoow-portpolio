@@ -32,6 +32,10 @@ const Fromis9StickersPage = () => {
           개발까지 전 과정을 수행
         </CustomList.MainListItem>
       </CustomList>
+      <PartSubTitle title={'기술 스택'} />
+      <TechStack
+        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']}
+      />
 
       <PartSubTitle title={'주요 기능'} />
       <CustomList>
@@ -48,11 +52,6 @@ const Fromis9StickersPage = () => {
           이미지 저장: 꾸민 캔버스를 로컬 이미지 파일로 내보내기
         </CustomList.MainListItem>
       </CustomList>
-
-      <PartSubTitle title={'기술 스택'} />
-      <TechStack
-        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']}
-      />
 
       <div className="my-3" />
 
