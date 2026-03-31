@@ -12,15 +12,15 @@ const Introduce = () => {
         transition={{ duration: 0.5 }}
       >
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
-          스타트업에서 개발 세팅부터 운영 배포까지 프로젝트의 전반적인
-          프로세스를 경험해 보았습니다.
+          서비스 초기 세팅부터 배포, 운영까지 전반적인 프로세스를 경험했습니다.
         </span>{' '}
-        현재는{' '}
+        스타트업과 프리랜서로 Next.js와 TypeScript 기반의 프로젝트를 통해 실무
+        역량을 쌓았습니다. 최근에는{' '}
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
-          프리랜서
+          AI Agent를 활용한 개발 생산성 향상
         </span>
-        로 프로젝트에 참여하며 실무 경력을 쌓고 있으며, 변화하는 기술 환경에
-        유연하게 대응하고 성장해 나가고자 합니다.
+        에 집중하고 있으며, 변화하는 기술환경에 유연하게 대응하고 꾸준히
+        성장하고자 합니다.{' '}
       </motion.li>
       <motion.li
         initial={{ x: '-20%', opacity: 0 }}
@@ -28,11 +28,15 @@ const Introduce = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
-          UX/UI의 가치를 중요하게 생각합니다.{' '}
+          사용자의 몰입감과 UX/UI의 가치를 중요하게 생각하고 실현합니다.
         </span>
-        사용자의 관점에서 디테일한 부분까지 생각하고 계속해서 개선해 나가고자
-        합니다. 프로덕트에서 디자인을 중요하게 생각하고, 사용자가 매력을 느낄 수
-        있는 개성있는 웹페이지를 구현하는 것을 좋아합니다.
+        디자인학과 전공 경험을 바탕으로 디자이너의 의도를 깊이 이해하고 디테일을
+        완성하고자 합니다. 최근에는{' '}
+        <span className="text-purple-dark dark:text-purple-light font-extrabold">
+          웹 3D 기술을 학습{' '}
+        </span>
+        하여 더욱 풍부하고 개성있는 사용자 경험을 제공하는 것에 관심을 가지고
+        있습니다.
       </motion.li>
 
       <motion.li
@@ -41,11 +45,11 @@ const Introduce = () => {
         transition={{ duration: 0.8, delay: 1 }}
       >
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
-          팀원들과 원활하게 커뮤니케이션할 수 있는 개발자입니다.{' '}
+          팀원들과 원활하게 소통하고 협업하여 함께 목표를 달성하고자 합니다.
         </span>
-        디자인학과 전공 경험을 통해 디자이너와 편하게 소통할 수 있고, UI/UX를
-        함께 개선해 나갈 수 있습니다. 개발 중 기획 단계에서 발견하지 못한
-        문제점을 찾아내면 기획자와 함께 고민하여 문제를 해결하려고 합니다.{' '}
+        기획 단계에서 놓치기 쉬운 기술적·사용성 문제를 찾아내고,
+        기획자·디자이너와 함께 최선의 해결책을 고민하여 문제를 해결하는 것에 큰
+        보람을 느낍니다.
       </motion.li>
 
       <motion.li
