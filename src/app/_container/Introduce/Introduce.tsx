@@ -29,7 +29,7 @@ const Introduce = () => {
       >
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
           사용자의 몰입감과 UX/UI의 가치를 중요하게 생각하고 실현합니다.
-        </span>
+        </span>{' '}
         디자인학과 전공 경험을 바탕으로 디자이너의 의도를 깊이 이해하고 디테일을
         완성하고자 합니다. 최근에는{' '}
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
@@ -46,7 +46,7 @@ const Introduce = () => {
       >
         <span className="text-purple-dark dark:text-purple-light font-extrabold">
           팀원들과 원활하게 소통하고 협업하여 함께 목표를 달성하고자 합니다.
-        </span>
+        </span>{' '}
         기획 단계에서 놓치기 쉬운 기술적·사용성 문제를 찾아내고,
         기획자·디자이너와 함께 최선의 해결책을 고민하여 문제를 해결하는 것에 큰
         보람을 느낍니다.
