@@ -2,6 +2,7 @@
 
 import {
   BsFillCalendarEventFill,
+  BsFillEnvelopeFill,
   BsFillPencilFill,
   BsGithub,
   BsPersonCircle,
@@ -10,12 +11,12 @@ import InformationItem from './InformationItem';
 
 const informationList = [
   { icon: <BsPersonCircle />, list: '이름', contents: '이우진', link: null },
-  // {
-  //   icon: <BsFillEnvelopeFill />,
-  //   list: '이메일',
-  //   contents: 'nijoow1127@gmail.com',
-  //   link: null,
-  // },
+  {
+    icon: <BsFillEnvelopeFill />,
+    list: '이메일',
+    contents: 'nijoow1127@gmail.com',
+    link: null,
+  },
   {
     icon: <BsFillCalendarEventFill />,
     list: '생년월일',
