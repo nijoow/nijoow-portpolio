@@ -37,14 +37,6 @@ const MemoryPage = () => {
 
       <TechStack stacks={['HTML', 'CSS', 'Javascript']} />
 
-      <PartSubTitle title={'팀구성'} />
-
-      <CustomList>
-        <CustomList.MainListItem>
-          디자인앤테크놀로지 졸업전시회 멤버 웹팀 5명
-        </CustomList.MainListItem>
-      </CustomList>
-
       <PartSubTitle title={'역할'} />
 
       <CustomList>

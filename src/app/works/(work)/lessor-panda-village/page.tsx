@@ -95,12 +95,6 @@ const LessorPandaVillagePage = () => {
         </CustomList.SubListItem>
       </CustomList>
 
-      <PartSubTitle title={'팀 구성'} />
-
-      <CustomList>
-        <CustomList.MainListItem>개인 프로젝트</CustomList.MainListItem>
-      </CustomList>
-
       <PartSubTitle title={'트러블 슈팅'} />
 
       <CustomList>
@@ -108,19 +102,16 @@ const LessorPandaVillagePage = () => {
           <strong className="font-bold">하이드레이션(Hydration) 에러</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            이슈:
-          </strong>{' '}
-          랜덤하게 파티클을 배치할 때, 서버에서 렌더링된 결과와 클라이언트에서
-          첫 렌더링된 결과가 일치하지 않아 하이드레이션 에러가 발생
+          <p className="text-sm text-gray-400">
+            이슈: 랜덤 파티클 배치 시 서버와 클라이언트의 렌더링 결과가
+            불일치하여 발생하는 하이드레이션 오류
+          </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            해결책:
-          </strong>{' '}
-          클라이언트 전용 상태를 useEffect 내에서 초기화, dynamic import 를 통해
-          서버 사이드 렌더링 시에는 해당 로직을 제외, 로딩 화면을 통해 에셋
-          로딩이 완료된 시점부터 클라이언트 전용 UI를 활성화하여 UX 개선
+          <p className="text-purple-regular text-sm">
+            해결책: useEffect 내 상태 초기화 및 dynamic import를 통해 클라이언트
+            사이드 렌더링 시점에만 해당 로직이 활성화되도록 수정
+          </p>
         </CustomList.SubListItem>
 
         <CustomList.MainListItem>
@@ -129,18 +120,16 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            이슈:
-          </strong>{' '}
-          닉네임을 &lt;Html&gt; 컴포넌트로 구현했을 때, 캐릭터가 움직일 때
-          닉네임 UI가 캐릭터 위에 고정되지 않는 현상 발생
+          <p className="text-sm text-gray-400">
+            이슈: Html 컴포넌트로 구현된 닉네임이 캐릭터의 움직임을 따라가지
+            못하고 고정되지 않는 현상
+          </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            해결책:
-          </strong>{' '}
-          &lt;Text&gt; 컴포넌트를 사용하여 닉네임을 3D 씬의 일부로 포함시켜
-          정확한 위치 동기화
+          <p className="text-purple-regular text-sm">
+            해결책: Html 대신 3D 씬 내부에 포함되는 Text 컴포넌트를 사용하여
+            정확한 3D 좌표 동기화 구현
+          </p>
         </CustomList.SubListItem>
 
         <CustomList.MainListItem>
@@ -149,19 +138,16 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            이슈:
-          </strong>{' '}
-          Supabase Realtime을 통한 실시간 동기화 구현 시, 과도한 네트워크 사용량
-          발생 및 잦은 상태 업데이트로 인한 리렌더링 부하 문제 발생
+          <p className="text-sm text-gray-400">
+            이슈: Supabase Realtime 통신 시 과도한 업데이트로 인한 네트워크 부하
+            및 리렌더링 성능 저하
+          </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <strong className="font-semibold text-zinc-700 dark:text-zinc-300">
-            해결책:
-          </strong>{' '}
-          플레이어 위치 정보를 React 상태 대신 useRef로 관리하여 리렌더링을
-          차단하고, 전송 주기를 100ms로 제한 및 변화 감지 로직을 통해 이벤트
-          발생을 최소화하여 네트워크 트래픽을 80% 이상 절감
+          <p className="text-purple-regular text-sm">
+            해결책: 위치 정보를 useRef로 관리하여 리렌더링을 방지하고, 전송
+            주기를 100ms로 조절하여 트래픽 80% 절감
+          </p>
         </CustomList.SubListItem>
       </CustomList>
       <div className="my-3" />

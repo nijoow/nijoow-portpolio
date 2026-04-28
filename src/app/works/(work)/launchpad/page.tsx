@@ -42,30 +42,23 @@ const LaunchpadPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="flex flex-col gap-1 pl-2">
-        <li>
-          1)
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            onClick
-          </span>
-          이벤트를 통해 사운드를 재생하였을때, 연속으로 클릭할 경우 사운드가
-          끊기지 않고 중복되는 문제 발생
-        </li>
-        <li className="font-semibold text-purple-regular">
-          - 마우스를 누를때와 떼는 이벤트를 분리하여
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            onMouseDown/onMouseEnd/onMouseLeave
-          </span>
-          이벤트를 통해 해결
-        </li>
-        <li className="font-semibold text-purple-regular">
-          - 모바일 태블릿 환경에서 동작하게 하기 위해
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            onTouchStart/onTouchEnd
-          </span>
-          이벤트를 동시에 사용
-        </li>
-      </ul>
+      <CustomList>
+        <CustomList.MainListItem>
+          <strong className="font-bold">연속 클릭 시 사운드 중첩 문제</strong>
+        </CustomList.MainListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            이슈: onClick 이벤트를 통해 사운드를 재생할 때, 빠른 속도로 연속
+            클릭 시 사운드가 끊기지 않고 부자연스럽게 중첩되는 현상
+          </p>
+        </CustomList.SubListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-purple-regular text-sm">
+            해결책: 마우스를 누를 때와 뗄 때의 이벤트를 분리하고, 모바일 환경을
+            위해 Touch 이벤트를 개별 처리하여 사운드 재생 시점 제어
+          </p>
+        </CustomList.SubListItem>
+      </CustomList>
 
       <div className="my-3" />
       <PartTitle title={'Link'} />
@@ -73,7 +66,7 @@ const LaunchpadPage = () => {
         href="https://nijoow-launchpad.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -81,7 +74,7 @@ const LaunchpadPage = () => {
         href="https://github.com/nijoow/launchpad"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
       >
         <BsGithub />
         <span>Github</span>

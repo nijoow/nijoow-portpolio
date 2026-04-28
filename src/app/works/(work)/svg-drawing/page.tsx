@@ -57,16 +57,25 @@ const SVGDrawingPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="flex flex-col gap-1 pl-2">
-        <li>
-          1) 도형을 Resize할 때 회전이 되어있는 경우, 드래그와 크기 조절이
-          일치하지 않는 문제 발생
-        </li>
-        <li>- 계산이 너무 복잡해져서 보류</li>
-        <li className="font-semibold text-purple-regular">
-          - 중심점을 기준으로 크기를 조절하도록 구현
-        </li>
-      </ul>
+      <CustomList>
+        <CustomList.MainListItem>
+          <strong className="font-bold">
+            도형 Resize 시 회전에 따른 마우스 좌표 불일치 문제
+          </strong>
+        </CustomList.MainListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            이슈: 도형이 회전되어 있는 상태에서 크기를 조절할 때, 실제 드래그
+            거리와 도형의 크기 변화가 일치하지 않는 현상 발생
+          </p>
+        </CustomList.SubListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-purple-regular text-sm">
+            해결책: 중심점을 기준으로 각 꼭짓점의 상대 좌표를 계산하고, 회전각을
+            적용한 벡터 연산을 통해 크기 조절 로직을 보정하여 해결
+          </p>
+        </CustomList.SubListItem>
+      </CustomList>
 
       <div className="my-3" />
 
@@ -76,7 +85,7 @@ const SVGDrawingPage = () => {
         href="https://nijoow-drawing.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -84,7 +93,7 @@ const SVGDrawingPage = () => {
         href="https://github.com/nijoow/svg-drawing"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
       >
         <BsGithub />
         <span>Github</span>

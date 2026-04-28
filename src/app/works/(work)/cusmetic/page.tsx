@@ -74,48 +74,39 @@ const CusmeticPage = () => {
 
       <PartSubTitle title={'트러블 슈팅'} />
 
-      <ul className="flex flex-col gap-1 pl-2">
-        <li>
-          1) Next.js 서버컴포넌트에서 fetch 함수의
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            cache: &apos;no-store&apos;
-          </span>
-          옵션을 적용하였으나, 30초 가량 새로운 데이터를 불러오지 못하는 문제
-        </li>
-        <li>
-          - 클라이언트 Router Cache가 서버컴포넌트의 payload를 캐싱하여 발생한
-          것을 확인
-        </li>
-        <li className="text-purple-regular font-semibold">
-          - 해당 페이지에 접근하였을때{' '}
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            router.refresh()
-          </span>
-          를 통해 강제로 새로고침하도록 수정하여 문제 해결
-        </li>
-      </ul>
+      <CustomList>
+        <CustomList.MainListItem>
+          <strong className="font-bold">서버 컴포넌트 데이터 캐싱 문제</strong>
+        </CustomList.MainListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            이슈: fetch 함수에 no-store 옵션을 적용했음에도 클라이언트 Router
+            Cache로 인해 약 30초간 새로운 데이터를 불러오지 못하는 현상
+          </p>
+        </CustomList.SubListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-purple-regular text-sm">
+            해결책: 페이지 진입 시 router.refresh()를 호출하여 클라이언트 측
+            캐시를 강제로 무효화함으로써 최신 데이터 보장
+          </p>
+        </CustomList.SubListItem>
 
-      <ul className="flex flex-col gap-1 pl-2">
-        <li>
-          2) Next/Image 컴포넌트를 사용하여 이미지를 불러왔을 때, 이미지를
-          불러오는 속도가 느린 문제 발생
-        </li>
-        <li>
-          -{' '}
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            layout=&apos;fill&apos;
-          </span>{' '}
-          옵션을 사용했을 때, 기본적으로 생성되는 이미지 srcSet 이 너무 많아지는
-          것을 확인
-        </li>
-        <li className="text-purple-regular font-semibold">
-          - next.config.js 파일에서
-          <span className="mx-1 rounded-md bg-gray-500 px-2 py-1 text-sm text-white">
-            images.imageSizes / images.domains
-          </span>
-          옵션을 수정하여 해결
-        </li>
-      </ul>
+        <CustomList.MainListItem>
+          <strong className="font-bold">Next/Image 로딩 성능 저하</strong>
+        </CustomList.MainListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            이슈: layout=&apos;fill&apos; 사용 시 너무 많은 srcSet이 생성되어
+            이미지 로딩 속도가 느려지는 문제 발생
+          </p>
+        </CustomList.SubListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-purple-regular text-sm">
+            해결책: next.config.js에서 imageSizes 및 deviceSizes를 최적화하여
+            불필요한 이미지 생성을 방지
+          </p>
+        </CustomList.SubListItem>
+      </CustomList>
       <div className="my-3" />
     </>
   );

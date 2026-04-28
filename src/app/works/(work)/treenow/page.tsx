@@ -34,14 +34,6 @@ const TreenowPage = () => {
         ]}
       />
 
-      <PartSubTitle title={'팀구성'} />
-
-      <CustomList>
-        <CustomList.MainListItem>
-          PM 1, 프론트엔드 1, 백엔드 1, 디자이너 1
-        </CustomList.MainListItem>
-      </CustomList>
-
       <PartSubTitle title={'주요 업무 및 성과'} />
 
       <CustomList>

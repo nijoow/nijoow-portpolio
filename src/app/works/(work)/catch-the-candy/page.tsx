@@ -63,14 +63,6 @@ const CatchTheCandyPage = () => {
         </div>
       </div>
 
-      <PartSubTitle title={'팀구성'} />
-
-      <CustomList>
-        <CustomList.MainListItem>
-          디자인앤테크놀로지 졸업전시회 멤버 Memory팀
-        </CustomList.MainListItem>
-      </CustomList>
-
       <PartSubTitle title={'역할'} />
 
       <CustomList>
@@ -86,7 +78,7 @@ const CatchTheCandyPage = () => {
         href="https://www.youtube.com/watch?v=vcJvQrc6k_w"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>졸업전시회 시연 영상</span>
       </Link>
@@ -94,7 +86,7 @@ const CatchTheCandyPage = () => {
         href="https://nijoow-portfolio.vercel.app/CatchTheCandy_p5/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -102,7 +94,7 @@ const CatchTheCandyPage = () => {
         href="https://github.com/nijoow/CatchTheCandy_p5"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
       >
         <BsGithub />
         <span>Github</span>
