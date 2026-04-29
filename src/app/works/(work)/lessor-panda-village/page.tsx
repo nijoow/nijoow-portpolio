@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BsGithub } from 'react-icons/bs';
+import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
@@ -167,7 +167,7 @@ const LessorPandaVillagePage = () => {
         rel="noopener noreferrer"
         className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
       >
-        <BsGithub />
+        <GithubIcon size={20} />
         <span>Github</span>
       </Link>
     </>

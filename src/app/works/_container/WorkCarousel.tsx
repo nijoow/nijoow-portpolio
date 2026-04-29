@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -26,7 +26,7 @@ const PrevButton = () => {
       className={cn(NAV_BUTTON_CLASSES, 'left-1.5')}
       onClick={() => swiper.slidePrev()}
     >
-      <FiChevronLeft className="h-full w-full stroke-purple-regular" />
+      <ChevronLeft className="h-full w-full stroke-purple-regular" />
     </button>
   );
 };
@@ -40,7 +40,7 @@ const NextButton = () => {
       className={cn(NAV_BUTTON_CLASSES, 'right-1.5')}
       onClick={() => swiper.slideNext()}
     >
-      <FiChevronRight className="h-full w-full stroke-purple-regular" />
+      <ChevronRight className="h-full w-full stroke-purple-regular" />
     </button>
   );
 };
@@ -117,20 +117,7 @@ const WorkCarousel = ({
                   setSelectedImg(null);
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <X size={32} />
               </button>
 
               {/* Modal Image Container */}
@@ -149,7 +136,7 @@ const WorkCarousel = ({
                   {[
                     {
                       dir: 'left',
-                      icon: <FiChevronLeft className="h-8 w-8" />,
+                      icon: <ChevronLeft className="h-8 w-8" />,
                       onClick: () => {
                         const idx = imgSrcList.indexOf(selectedImg);
                         const prev =
@@ -160,7 +147,7 @@ const WorkCarousel = ({
                     },
                     {
                       dir: 'right',
-                      icon: <FiChevronRight className="h-8 w-8" />,
+                      icon: <ChevronRight className="h-8 w-8" />,
                       onClick: () => {
                         const idx = imgSrcList.indexOf(selectedImg);
                         const next = (idx + 1) % imgSrcList.length;

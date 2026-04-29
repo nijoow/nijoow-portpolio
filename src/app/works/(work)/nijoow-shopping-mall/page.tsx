@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BsGithub } from 'react-icons/bs';
+import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
@@ -79,7 +79,7 @@ const NijoowShoppingMallPage = () => {
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
       >
-        <BsGithub />
+        <GithubIcon size={20} />
         <span>Github</span>
       </Link>
     </>

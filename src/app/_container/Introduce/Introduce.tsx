@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GiBasketballBall, GiCoffeeMug, GiMusicalNotes } from 'react-icons/gi';
+import { Circle, Coffee, Music } from 'lucide-react';
 
 const Introduce = () => {
   return (
-    <ul className="flex list-none flex-col gap-2 text-start text-sm leading-relaxed font-medium break-keep sm:list-disc sm:gap-3 sm:px-4 sm:pl-8">
+    <ul className="flex list-none flex-col gap-2 text-start text-[15px] leading-loose font-medium break-keep sm:list-disc sm:gap-3 sm:px-4 sm:pl-8">
       <motion.li
         initial={{ x: '-20%', opacity: 0 }}
         animate={{ x: '0', opacity: 1 }}
@@ -57,13 +57,22 @@ const Introduce = () => {
         animate={{ x: '0', opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.5 }}
       >
-        <div className={'flex items-center'}>
+        <div className={'flex items-center gap-1'}>
           커피
-          <GiCoffeeMug className="fill-amber-900 transition-colors dark:fill-amber-900" />
+          <Coffee
+            size={16}
+            className="text-amber-900 transition-colors dark:text-amber-900"
+          />
           와 농구
-          <GiBasketballBall className="bounce fill-amber-700 transition-colors dark:fill-amber-600" />
+          <Circle
+            size={16}
+            className="bounce text-amber-700 transition-colors dark:text-amber-600"
+          />
           , 힙합
-          <GiMusicalNotes className="fill-purple-dark dark:fill-purple-light" />
+          <Music
+            size={16}
+            className="text-purple-dark dark:text-purple-light"
+          />
           을 좋아합니다.
         </div>
       </motion.li>

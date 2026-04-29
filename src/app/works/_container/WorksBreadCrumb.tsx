@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FiChevronRight } from 'react-icons/fi';
+import { ChevronRight } from 'lucide-react';
 
 const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
   return (
@@ -9,7 +9,7 @@ const WorksBreadCrumb = ({ subTitle }: { subTitle: string }) => {
         <Link href="/works" className="text-2xl font-bold">
           Works
         </Link>
-        <FiChevronRight size={24} />
+        <ChevronRight size={24} />
         <span className="text-lg font-bold">{subTitle}</span>
       </div>
       <div className="h-[2px] w-full rounded-full bg-gray-dark dark:bg-white" />

@@ -8,19 +8,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { CgDarkMode } from 'react-icons/cg';
-import { MdDarkMode, MdWbSunny } from 'react-icons/md';
+import { Loader2, Moon, Sun } from 'lucide-react';
 import NavListItem from './NavListItem';
 
 const themeIcon = {
   dark: (
-    <MdWbSunny
+    <Sun
       size={20}
       className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
     />
   ),
   light: (
-    <MdDarkMode
+    <Moon
       size={20}
       className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
     />
@@ -85,7 +84,7 @@ export default function NavBar() {
               onClick={toggleTheme}
             >
               {!mounted ? (
-                <CgDarkMode className="animate-spin" size={20} />
+                <Loader2 className="animate-spin" size={20} />
               ) : (
                 themeIcon[theme as 'dark' | 'light']
               )}

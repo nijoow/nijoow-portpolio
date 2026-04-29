@@ -1,7 +1,7 @@
 import { prefix } from '@/config/config';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FiChevronRight } from 'react-icons/fi';
+import { ChevronRight } from 'lucide-react';
 
 const WorkImage = ({ url, imgSrc }: { url?: string; imgSrc: string }) => {
   return (
@@ -18,7 +18,7 @@ const WorkImage = ({ url, imgSrc }: { url?: string; imgSrc: string }) => {
           className="absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 group-hover:opacity-100"
         >
           <span className="flex items-center text-2xl text-white">
-            사이트 바로가기 <FiChevronRight size={30} />
+            사이트 바로가기 <ChevronRight size={30} />
           </span>
         </Link>
       )}
