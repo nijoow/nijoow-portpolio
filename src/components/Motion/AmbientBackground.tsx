@@ -23,7 +23,7 @@ export const AmbientBackground = () => {
     setIsMounted(true);
 
     // 1. 클라이언트 사이드 마운트 시에만 무작위 데이터 생성 (Hydration 에러 방지)
-    const particles = [...Array(50)].map((_, i) => ({
+    const particles = [...Array(25)].map((_, i) => ({
       id: i,
       left: Math.random() * 100 + '%',
       top: Math.random() * 100 + '%',

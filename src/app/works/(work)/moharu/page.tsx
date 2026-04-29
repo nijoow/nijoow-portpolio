@@ -46,24 +46,26 @@ const MoharuPage = () => {
       </CustomList>
 
       <PartSubTitle title={'트러블 슈팅'} />
-+
-+      <CustomList>
-+        <CustomList.MainListItem>
-+          <strong className="font-bold">LTE 환경에서의 SSL 프로토콜 에러</strong>
-+        </CustomList.MainListItem>
-+        <CustomList.SubListItem showBullet={false}>
-+          <p className="text-sm text-gray-400">
-+            이슈: 백엔드(NCP)와 프론트엔드(Vercel) 배포 환경이 다른 상태에서,
-+            LTE 모바일 네트워크 접속 시 간헐적으로 SSL_PROTOCOL_ERROR 발생
-+          </p>
-+        </CustomList.SubListItem>
-+        <CustomList.SubListItem showBullet={false}>
-+          <p className="text-sm text-gray-400">
-+            해결책: NCP 서브 도메인의 DNS Records를 Vercel 도메인 설정에
-+            추가하여 네트워크 경로상의 IP 불일치 문제를 해결
-+          </p>
-+        </CustomList.SubListItem>
-+      </CustomList>
+
+      <CustomList>
+        <CustomList.MainListItem>
+          <strong className="font-bold">
+            LTE 환경에서의 SSL 프로토콜 에러
+          </strong>
+        </CustomList.MainListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            이슈: 백엔드(NCP)와 프론트엔드(Vercel) 배포 환경이 다른 상태에서,
+            LTE 모바일 네트워크 접속 시 간헐적으로 SSL_PROTOCOL_ERROR 발생
+          </p>
+        </CustomList.SubListItem>
+        <CustomList.SubListItem showBullet={false}>
+          <p className="text-sm text-gray-400">
+            해결책: NCP 서브 도메인의 DNS Records를 Vercel 도메인 설정에
+            추가하여 네트워크 경로상의 IP 불일치 문제를 해결
+          </p>
+        </CustomList.SubListItem>
+      </CustomList>
 
       <div className="my-3" />
 

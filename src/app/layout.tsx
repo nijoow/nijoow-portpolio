@@ -7,42 +7,25 @@ import Theme from '@/context/Theme';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
-import { M_PLUS_Rounded_1c } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
-const mPlusRounded1c = M_PLUS_Rounded_1c({
-  subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '800', '900'],
-  variable: '--font-m-plus-rounded-1c',
-  display: 'swap',
-});
-
-const nanumSquareRound = localFont({
+const binggrae = localFont({
   src: [
     {
-      path: '../font/NanumSquareRoundR.ttf',
-      weight: '300',
-      style: 'normal',
-    },
-    {
-      path: '../font/NanumSquareRoundB.ttf',
+      path: '../font/Binggrae.otf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../font/NanumSquareRoundEB.ttf',
+      path: '../font/Binggrae-Bold.otf',
       weight: '700',
       style: 'normal',
     },
-    {
-      path: '../font/NanumSquareRoundEB.ttf',
-      weight: '800',
-      style: 'normal',
-    },
   ],
-  variable: '--font-nanum-square-round',
+  variable: '--font-binggrae',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -58,9 +41,7 @@ export default function RootLayout({
   return (
     <Redirect>
       <html lang="en" className="h-full w-full" suppressHydrationWarning>
-        <body
-          className={`${nanumSquareRound.variable} ${mPlusRounded1c.variable} h-full w-full`}
-        >
+        <body className={`${binggrae.variable} h-full w-full`}>
           <Theme>
             <AmbientBackground />
             <CustomCursor />

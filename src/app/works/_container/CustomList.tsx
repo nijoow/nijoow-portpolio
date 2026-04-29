@@ -5,7 +5,7 @@ const CustomList = ({ children }: { children: React.ReactNode }) => (
 );
 
 const MainListItem = ({ children }: { children: React.ReactNode }) => (
-  <li className="mt-1.5">
+  <li className="mt-1.5 text-[15px]">
     <span className="pr-2.5">▪︎</span>
     {children}
   </li>
@@ -17,7 +17,7 @@ const SubListItem = ({
   children: React.ReactNode;
   showBullet?: boolean;
 }) => (
-  <li className="pl-4">
+  <li className="pl-4 text-[15px]">
     {showBullet && <span className="pr-2.5">▫︎</span>}
     {children}
   </li>
