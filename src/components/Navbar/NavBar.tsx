@@ -5,10 +5,10 @@ import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Loader2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Loader2, Moon, Sun } from 'lucide-react';
 import NavListItem from './NavListItem';
 
 const themeIcon = {
@@ -74,22 +74,28 @@ export default function NavBar() {
         {/* Desktop Menu */}
         <ul className={`hidden h-full items-center gap-6 md:ml-auto md:flex`}>
           {navList.map(({ text, url }) => (
-            <Magnetic key={text} strength={0.3}>
-              <NavListItem text={text} url={url} />
-            </Magnetic>
+            <li className="list-none" key={text}>
+              <Magnetic strength={0.3}>
+                <NavListItem text={text} url={url} />
+              </Magnetic>
+            </li>
           ))}
-          <Magnetic strength={0.3}>
-            <button
-              className={`group flex items-center justify-center rounded-full bg-white/10 p-2 text-gray-900 shadow-sm transition-colors hover:bg-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20`}
-              onClick={toggleTheme}
-            >
-              {!mounted ? (
-                <Loader2 className="animate-spin" size={20} />
-              ) : (
-                themeIcon[theme as 'dark' | 'light']
-              )}
-            </button>
-          </Magnetic>
+          <li className="list-none">
+            <Magnetic strength={0.3}>
+              <button
+                type="button"
+                aria-label="Toggle theme"
+                className={`group flex items-center justify-center rounded-full bg-white/10 p-2 text-gray-900 shadow-sm transition-colors hover:bg-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20`}
+                onClick={toggleTheme}
+              >
+                {!mounted ? (
+                  <Loader2 className="animate-spin" size={20} />
+                ) : (
+                  themeIcon[theme as 'dark' | 'light']
+                )}
+              </button>
+            </Magnetic>
+          </li>
         </ul>
 
         {/* Mobile Toggle */}

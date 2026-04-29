@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <Redirect>
-      <html lang="en" className="h-full w-full" suppressHydrationWarning>
+      <html lang="ko" className="h-full w-full" suppressHydrationWarning>
         <body className={`${binggrae.variable} h-full w-full`}>
           <LazyMotion features={domAnimation}>
             <Theme>
@@ -48,10 +48,10 @@ export default function RootLayout({
               <CustomCursor />
               <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                 <NavBar />
-                <div className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
+                <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
                   <ThreeDynamic />
                   {children}
-                </div>
+                </main>
                 <footer
                   className={
                     'flex w-full items-center justify-center py-5 text-sm'

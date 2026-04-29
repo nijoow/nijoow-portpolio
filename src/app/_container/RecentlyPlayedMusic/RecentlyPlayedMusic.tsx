@@ -196,7 +196,6 @@ const RecentlyPlayedMusic = () => {
           <Image
             src={music.albumImageUrl}
             fill
-            unoptimized={true}
             alt={music.title}
             className={'object-cover'}
           />
