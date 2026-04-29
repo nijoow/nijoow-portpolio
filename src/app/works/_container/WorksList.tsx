@@ -1,7 +1,7 @@
 'use client';
 
 import { prefix } from '@/config/config';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -21,7 +21,7 @@ const WorksList = () => {
     <div className={'grid w-full grid-cols-2 gap-3'}>
       <AnimatePresence mode="popLayout">
         {worksList.map((work) => (
-          <motion.div
+          <m.div
             whileHover={{ scale: 1.05, transition: { duration: 0.15 } }}
             className={`group relative col-span-2 aspect-video h-auto w-full overflow-hidden rounded-lg bg-white/80 shadow-md sm:col-span-1`}
             key={work.name}
@@ -57,7 +57,7 @@ const WorksList = () => {
             >
               <span className="text-lg text-white">{work.name} &gt;</span>
             </Link>
-          </motion.div>
+          </m.div>
         ))}
       </AnimatePresence>
     </div>

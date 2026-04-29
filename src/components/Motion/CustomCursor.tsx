@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const CustomCursor = () => {
@@ -155,7 +155,7 @@ const CustomCursor = () => {
             const baseScale = 1 - index * 0.05;
 
             return (
-              <motion.div
+              <m.div
                 key={index}
                 className={cn(
                   `absolute ${offset} ${sizeClass} bg-purple-light rounded-full will-change-transform`,

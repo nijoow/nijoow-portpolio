@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 /**
@@ -47,7 +47,7 @@ export const AmbientBackground = () => {
   return (
     <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-white select-none dark:bg-black">
       {/* Aurora Blobs - SSR 시에도 레이아웃 유지를 위해 고정 위치 지정 */}
-      <motion.div
+      <m.div
         style={{ y: y1, x: mousePos.x * -0.6 }}
         animate={{
           scale: [1, 1.15, 1],
@@ -56,7 +56,7 @@ export const AmbientBackground = () => {
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-[5%] -left-[5%] h-[450px] w-[450px] rounded-full bg-purple-400/25 blur-[130px] dark:bg-purple-700/15"
       />
-      <motion.div
+      <m.div
         style={{ y: y2, x: mousePos.x * 0.4 }}
         animate={{
           scale: [1.1, 1, 1.1],
@@ -65,7 +65,7 @@ export const AmbientBackground = () => {
         transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-[30%] -right-[10%] h-[600px] w-[600px] rounded-full bg-blue-400/25 blur-[120px] dark:bg-blue-700/15"
       />
-      <motion.div
+      <m.div
         style={{ y: y3, x: mousePos.x * -0.3 }}
         animate={{
           scale: [1, 1.1, 1],
@@ -78,7 +78,7 @@ export const AmbientBackground = () => {
       {/* Floating Glass Dust - 마운트 완료 후 입자 렌더링 */}
       {isMounted &&
         dustParticles.map((particle) => (
-          <motion.div
+          <m.div
             key={particle.id}
             initial={{
               left: particle.left,
