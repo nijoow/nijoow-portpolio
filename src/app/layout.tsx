@@ -4,7 +4,6 @@ import NavBar from '@/components/Navbar/NavBar';
 import ThreeDynamic from '@/components/Three/ThreeDynamic';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -61,7 +60,6 @@ export default function RootLayout({
               </footer>
             </div>
           </Theme>
-          <GoogleAnalytics gaId="G-5QJWDNZCYK" />
           <Analytics />
           <Toaster position="bottom-center" reverseOrder={false} />
         </body>
