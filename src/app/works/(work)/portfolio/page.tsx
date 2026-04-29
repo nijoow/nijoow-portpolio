@@ -11,7 +11,7 @@ const PortPolioPage = () => {
     <>
       <WorkImage
         url="https://nijoow-portfolio.vercel.app"
-        imgSrc="portfolio.png"
+        imgSrc="portfolio.webp"
       />
 
       <div className="my-3" />

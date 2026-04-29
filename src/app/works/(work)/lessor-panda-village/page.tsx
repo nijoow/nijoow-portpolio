@@ -11,7 +11,7 @@ const LessorPandaVillagePage = () => {
     <>
       <WorkImage
         url="https://lessor-panda-village.vercel.app/"
-        imgSrc="lessor-panda-village.png"
+        imgSrc="lessor-panda-village.webp"
       />
 
       <div className="my-3" />

@@ -7,7 +7,7 @@ import WorkImage from '../../_container/WorkImage';
 const XpixelPage = () => {
   return (
     <>
-      <WorkImage url="https://x-pixel.vercel.app/" imgSrc="x-pixel.png" />
+      <WorkImage url="https://x-pixel.vercel.app/" imgSrc="x-pixel.webp" />
 
       <div className="my-3" />
 

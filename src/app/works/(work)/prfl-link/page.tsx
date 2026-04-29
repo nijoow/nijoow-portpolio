@@ -6,7 +6,7 @@ import WorkImage from '../../_container/WorkImage';
 const PrflLinkPage = () => {
   return (
     <>
-      <WorkImage imgSrc="prflLink.png" />
+      <WorkImage imgSrc="prflLink.webp" />
 
       <div className="my-3" />
 

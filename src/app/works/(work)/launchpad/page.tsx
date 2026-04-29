@@ -11,7 +11,7 @@ const LaunchpadPage = () => {
     <>
       <WorkImage
         url="https://nijoow-launchpad.vercel.app/"
-        imgSrc="nijoow-launchpad.png"
+        imgSrc="nijoow-launchpad.webp"
       />
 
       <div className="my-3" />

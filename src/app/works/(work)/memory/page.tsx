@@ -11,7 +11,7 @@ const MemoryPage = () => {
     <>
       <WorkImage
         url="https://nijoow.github.io/PNUDT12/pages/about.html"
-        imgSrc="pnudt12.png"
+        imgSrc="pnudt12.webp"
       />
       <div className="my-3" />
       <PartTitle title={'Explanation'} />

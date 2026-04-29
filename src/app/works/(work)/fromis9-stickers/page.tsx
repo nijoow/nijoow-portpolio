@@ -10,7 +10,7 @@ const Fromis9StickersPage = () => {
     <>
       <WorkImage
         url="https://fromis9-stickers.vercel.app/"
-        imgSrc="fromis9-stickers.png"
+        imgSrc="fromis9-stickers.webp"
       />
 
       <div className="my-3" />

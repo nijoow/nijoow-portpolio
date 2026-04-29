@@ -11,7 +11,7 @@ const CatchTheCandyPage = () => {
     <>
       <WorkImage
         url="https://nijoow.github.io/CatchTheCandy_p5/"
-        imgSrc="catchTheCandy.png"
+        imgSrc="catchTheCandy.webp"
       />
 
       <div className="my-3" />

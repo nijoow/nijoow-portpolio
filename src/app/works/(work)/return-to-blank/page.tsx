@@ -11,7 +11,7 @@ const ReturnToBlankPage = () => {
     <>
       <WorkImage
         url="https://www.youtube.com/watch?v=11Wplgnpt90"
-        imgSrc="return-to-blank.png"
+        imgSrc="return-to-blank.webp"
       />
 
       <div className="my-3" />

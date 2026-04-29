@@ -41,13 +41,17 @@ const WorksList = () => {
                   alt="backdrop"
                   fill
                   objectFit="cover"
+                  sizes="(max-width: 640px) 100vw, 336px"
                   className="blur-md"
+                  preload
                 />
                 <Image
                   src={`${prefix}/images/works/${work.imgSrc}`}
                   fill
                   alt={work.name}
+                  sizes="(max-width: 640px) 100vw, 336px"
                   objectFit="contain"
+                  preload
                 />
               </>
             )}

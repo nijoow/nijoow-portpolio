@@ -10,7 +10,7 @@ const FromYouPage = () => {
     <>
       <WorkImage
         url="https://from-you.incheonilbo-interactive.com/"
-        imgSrc="fromyou.png"
+        imgSrc="fromyou.webp"
       />
 
       <div className="my-3" />

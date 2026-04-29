@@ -11,7 +11,7 @@ const SVGDrawingPage = () => {
     <>
       <WorkImage
         url="https://nijoow-drawing.vercel.app/"
-        imgSrc="nijoow-drawing.png"
+        imgSrc="nijoow-drawing.webp"
       />
 
       <div className="my-3" />

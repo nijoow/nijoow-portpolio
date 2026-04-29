@@ -11,7 +11,7 @@ const LovePredictorPage = () => {
     <>
       <WorkImage
         url="https://ai-love-predictor.vercel.app/"
-        imgSrc="ai-love-predictor.png"
+        imgSrc="ai-love-predictor.webp"
       />
 
       <div className="my-3" />

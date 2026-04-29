@@ -1,8 +1,8 @@
 'use client';
 
 import { AnimatePresence, m } from 'framer-motion';
-import { useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -26,7 +26,7 @@ const PrevButton = () => {
       className={cn(NAV_BUTTON_CLASSES, 'left-1.5')}
       onClick={() => swiper.slidePrev()}
     >
-      <ChevronLeft className="h-full w-full stroke-purple-regular" />
+      <ChevronLeft className="stroke-purple-regular h-full w-full" />
     </button>
   );
 };
@@ -40,7 +40,7 @@ const NextButton = () => {
       className={cn(NAV_BUTTON_CLASSES, 'right-1.5')}
       onClick={() => swiper.slideNext()}
     >
-      <ChevronRight className="h-full w-full stroke-purple-regular" />
+      <ChevronRight className="stroke-purple-regular h-full w-full" />
     </button>
   );
 };
@@ -65,11 +65,11 @@ const WorkCarousel = ({
         }}
         loop
         className={cn(
-          'relative w-full max-w-3xl overflow-hidden rounded-lg shadow-md [&_.swiper-pagination-bullet-active]:bg-purple-regular',
+          '[&_.swiper-pagination-bullet-active]:bg-purple-regular relative w-full max-w-3xl overflow-hidden rounded-lg shadow-md',
           aspectRatio === 'video' ? 'aspect-video' : 'aspect-square',
         )}
       >
-        {imgSrcList.map((imgSrc) => (
+        {imgSrcList.map((imgSrc, index) => (
           <SwiperSlide
             key={imgSrc}
             className="group relative h-full w-full bg-white"
@@ -82,7 +82,10 @@ const WorkCarousel = ({
               src={`${prefix}/images/works/${imgSrc}`}
               alt={imgSrc}
               fill
+              sizes="(max-width: 768px) 100vw, 768px"
               className="object-contain"
+              preload={index === 0}
+              fetchPriority={index === 0 ? "high" : "auto"}
             />
           </SwiperSlide>
         ))}
@@ -126,6 +129,7 @@ const WorkCarousel = ({
                   src={`${prefix}/images/works/${selectedImg}`}
                   alt={selectedImg}
                   fill
+                  sizes="100vw"
                   className="object-contain"
                 />
               </div>
@@ -161,7 +165,9 @@ const WorkCarousel = ({
                       type="button"
                       className={cn(
                         'absolute top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 transform items-center justify-center rounded-full bg-black/30 text-white/70 shadow-lg transition-colors hover:bg-white/20 hover:text-white',
-                        dir === 'left' ? 'left-2 md:left-6' : 'right-2 md:right-6',
+                        dir === 'left'
+                          ? 'left-2 md:left-6'
+                          : 'right-2 md:right-6',
                       )}
                       onClick={(e) => {
                         e.stopPropagation();

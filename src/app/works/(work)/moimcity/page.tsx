@@ -9,12 +9,12 @@ const MoimcityPage = () => {
     <>
       <WorkCarousel
         imgSrcList={[
-          'moimcity/moimcity.png',
-          'moimcity/만남.jpeg',
-          'moimcity/위시리스트.jpeg',
-          'moimcity/필터.jpeg',
-          'moimcity/모임상세.jpeg',
-          'moimcity/프로필상세.jpeg',
+          'moimcity/moimcity.webp',
+          'moimcity/만남.webp',
+          'moimcity/위시리스트.webp',
+          'moimcity/필터.webp',
+          'moimcity/모임상세.webp',
+          'moimcity/프로필상세.webp',
         ]}
         aspectRatio="square"
       />

@@ -9,11 +9,11 @@ const AtopDmsPage = () => {
     <>
       <WorkCarousel
         imgSrcList={[
-          'atop-dms/main.png',
-          'atop-dms/excel.png',
-          'atop-dms/risk-matrix.png',
-          'atop-dms/chart.png',
-          'atop-dms/formula.png',
+          'atop-dms/main.webp',
+          'atop-dms/excel.webp',
+          'atop-dms/risk-matrix.webp',
+          'atop-dms/chart.webp',
+          'atop-dms/formula.webp',
         ]}
       />
       <div className="my-3" />

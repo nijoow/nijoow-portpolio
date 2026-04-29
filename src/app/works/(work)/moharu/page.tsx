@@ -9,7 +9,7 @@ import WorkImage from '../../_container/WorkImage';
 const MoharuPage = () => {
   return (
     <>
-      <WorkImage imgSrc="moharu.png" />
+      <WorkImage imgSrc="moharu.webp" />
 
       <div className="my-3" />
 

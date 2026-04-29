@@ -9,11 +9,11 @@ const CusmeticPage = () => {
     <>
       <WorkCarousel
         imgSrcList={[
-          'cusmetic/landing.png',
-          'cusmetic/skin-type-check.png',
-          'cusmetic/skin-type-result.png',
-          'cusmetic/search.png',
-          'cusmetic/cosmetic-result.png',
+          'cusmetic/landing.webp',
+          'cusmetic/skin-type-check.webp',
+          'cusmetic/skin-type-result.webp',
+          'cusmetic/search.webp',
+          'cusmetic/cosmetic-result.webp',
         ]}
         aspectRatio="square"
       />

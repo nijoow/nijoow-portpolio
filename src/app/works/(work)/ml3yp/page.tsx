@@ -9,7 +9,7 @@ import WorkImage from '../../_container/WorkImage';
 const TelevisionPage = () => {
   return (
     <>
-      <WorkImage url="https://ml3yp.vercel.app/" imgSrc="ml3yp.png" />
+      <WorkImage url="https://ml3yp.vercel.app/" imgSrc="ml3yp.webp" />
 
       <div className="my-3" />
 

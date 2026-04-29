@@ -7,7 +7,7 @@ import WorkImage from '../../_container/WorkImage';
 const TreenowPage = () => {
   return (
     <>
-      <WorkImage imgSrc="treenow.png" />
+      <WorkImage imgSrc="treenow.webp" />
 
       <div className="my-3" />
 

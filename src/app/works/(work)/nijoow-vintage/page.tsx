@@ -11,7 +11,7 @@ const NijoowVintagePage = () => {
     <>
       <WorkImage
         url="https://nijoow-vintage.vercel.app/"
-        imgSrc="nijoow-vintage.png"
+        imgSrc="nijoow-vintage.webp"
       />
 
       <div className="my-3" />
