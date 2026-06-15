@@ -1,6 +1,6 @@
 'use client';
 import { cn } from '@/lib/utils';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useQueryState } from 'nuqs';
 
 const workFilterData = [
   'Web',
@@ -15,11 +15,9 @@ const workFilterData = [
 ];
 
 const WorkTags = () => {
-  const router = useRouter();
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
-
-  const selectedTag = searchParams.get('tag');
+  const [selectedTag, setSelectedTag] = useQueryState('tag', {
+    history: 'replace',
+  });
 
   return (
     <div className="mb-2 flex w-full flex-wrap gap-1">
@@ -28,9 +26,7 @@ const WorkTags = () => {
           'bg-purple-regular text-white': selectedTag === null,
           'bg-gray-300 text-gray-500': selectedTag !== null,
         })}
-        onClick={() => {
-          router.replace(`${pathName}`);
-        }}
+        onClick={() => setSelectedTag(null)}
       >
         All
       </button>
@@ -41,11 +37,7 @@ const WorkTags = () => {
             'bg-purple-regular text-white': selectedTag === data,
             'bg-gray-300 text-gray-500': selectedTag !== data,
           })}
-          onClick={() => {
-            const newParams = new URLSearchParams();
-            newParams.set('tag', data);
-            router.replace(`${pathName}?${newParams.toString()}`);
-          }}
+          onClick={() => setSelectedTag(data)}
         >
           {data}
         </button>

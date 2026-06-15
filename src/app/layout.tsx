@@ -9,6 +9,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -92,31 +93,33 @@ export default function RootLayout({
     <Redirect>
       <html lang="ko" className="h-full w-full" suppressHydrationWarning>
         <body className={`${binggrae.variable} h-full w-full`}>
-          <QueryProvider>
-            <LazyMotion features={domAnimation}>
-              <MotionConfig reducedMotion="user">
-                <Theme>
-                  <AmbientBackground />
-                  <CustomCursor />
-                  <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
-                    <NavBar />
-                    <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
-                      <ThreeDynamic />
-                      {children}
-                    </main>
-                    <footer
-                      className={
-                        'flex w-full items-center justify-center py-5 text-sm'
-                      }
-                    >
-                      &copy; {new Date().getFullYear()} Lee Woo Jin. All Rights
-                      Reserved.
-                    </footer>
-                  </div>
-                </Theme>
-              </MotionConfig>
-            </LazyMotion>
-          </QueryProvider>
+          <NuqsAdapter>
+            <QueryProvider>
+              <LazyMotion features={domAnimation}>
+                <MotionConfig reducedMotion="user">
+                  <Theme>
+                    <AmbientBackground />
+                    <CustomCursor />
+                    <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
+                      <NavBar />
+                      <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
+                        <ThreeDynamic />
+                        {children}
+                      </main>
+                      <footer
+                        className={
+                          'flex w-full items-center justify-center py-5 text-sm'
+                        }
+                      >
+                        &copy; {new Date().getFullYear()} Lee Woo Jin. All
+                        Rights Reserved.
+                      </footer>
+                    </div>
+                  </Theme>
+                </MotionConfig>
+              </LazyMotion>
+            </QueryProvider>
+          </NuqsAdapter>
           <Analytics />
           <Toaster position="bottom-center" reverseOrder={false} />
         </body>

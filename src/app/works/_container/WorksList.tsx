@@ -4,14 +4,12 @@ import { prefix } from '@/config/config';
 import { AnimatePresence, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useQueryState } from 'nuqs';
 import { works } from './worksData';
 const reversedWorks = [...works].reverse();
 
 const WorksList = () => {
-  const searchParams = useSearchParams();
-
-  const selectedTag = searchParams.get('tag');
+  const [selectedTag] = useQueryState('tag');
 
   const worksList = reversedWorks.filter(
     (work) => selectedTag === null || work.tags.includes(selectedTag),
@@ -58,7 +56,7 @@ const WorksList = () => {
             <Link
               href={`/works/${work.pageName}`}
               aria-label={`${work.name} 작업 상세 보기`}
-              className={`absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 outline-none transition-all duration-300 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-purple-light focus-visible:ring-inset`}
+              className={`focus-visible:ring-purple-light absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-inset`}
             >
               <span className="text-lg text-white">{work.name} &gt;</span>
             </Link>
