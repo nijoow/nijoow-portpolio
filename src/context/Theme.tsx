@@ -9,7 +9,7 @@ type Props = {
 
 const Theme = ({ children }: Props) => {
   return (
-    <ThemeProvider attribute="class" enableSystem>
+    <ThemeProvider attribute="class" forcedTheme="dark">
       {children}
     </ThemeProvider>
   );

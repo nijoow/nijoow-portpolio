@@ -1,31 +1,13 @@
 'use client';
 
-import Logo from '@/components/Logo/Logo';
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
-import { useMounted } from '@/hooks/useMounted';
+import { setExperienceMode, useExperienceMode } from '@/context/ExperienceMode';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Loader2, Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useState } from 'react';
 import NavListItem from './NavListItem';
-
-const themeIcon = {
-  dark: (
-    <Sun
-      size={20}
-      className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
-    />
-  ),
-  light: (
-    <Moon
-      size={20}
-      className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
-    />
-  ),
-};
 
 const navList = [
   { text: 'Home', url: '/' },
@@ -33,43 +15,63 @@ const navList = [
   { text: 'Contact', url: '/contact' },
 ];
 
-export default function NavBar() {
-  const { setTheme, resolvedTheme: theme } = useTheme();
-
-  const mounted = useMounted();
-  const [isNavShow, setIsNavShow] = useState(false);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
+function ModeToggle({ className }: { className?: string }) {
+  const mode = useExperienceMode();
   return (
-    <nav
+    <div
+      role="group"
+      aria-label="경험 모드 전환"
       className={cn(
-        `sticky top-0 z-50 h-20 w-full overflow-hidden rounded-b-2xl border-b border-black/10 bg-white/80 font-bold shadow-md backdrop-blur-xl transition-all duration-500 md:h-14 dark:border-white/10 dark:bg-black/80`,
+        'flex items-center gap-1 rounded-full border border-white/15 bg-white/5 p-1 text-xs font-medium',
+        className,
       )}
     >
-      <div className={`mx-auto flex h-full w-full max-w-2xl items-center px-4`}>
+      <button
+        type="button"
+        aria-pressed={mode === 'immersive'}
+        onClick={() => setExperienceMode('immersive')}
+        className={cn(
+          'rounded-full px-3 py-1 transition-colors',
+          mode === 'immersive'
+            ? 'bg-purple-medium text-white'
+            : 'text-white/55 hover:text-white',
+        )}
+      >
+        3D
+      </button>
+      <button
+        type="button"
+        aria-pressed={mode === 'classic'}
+        onClick={() => setExperienceMode('classic')}
+        className={cn(
+          'rounded-full px-3 py-1 transition-colors',
+          mode === 'classic'
+            ? 'bg-purple-medium text-white'
+            : 'text-white/55 hover:text-white',
+        )}
+      >
+        Classic
+      </button>
+    </div>
+  );
+}
+
+export default function NavBar() {
+  const [isNavShow, setIsNavShow] = useState(false);
+
+  return (
+    <nav className="sticky top-0 z-50 h-16 w-full border-b border-white/10 bg-black/40 font-medium backdrop-blur-xl md:h-14">
+      <div className="mx-auto flex h-full w-full max-w-5xl items-center px-5">
         <Magnetic strength={0.2}>
-          <Link
-            href="/"
-            className="group flex items-center gap-2 font-semibold"
-          >
-            <Logo
-              width={80}
-              height={50}
-              className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[5deg]"
-            />
-            <span
-              className={`from-purple-medium to-purple-darker bg-linear-to-br bg-clip-text text-lg tracking-tight text-transparent dark:from-gray-200 dark:to-gray-400`}
-            >
-              &apos;S Portfolio
+          <Link href="/" className="group flex items-center gap-2">
+            <span className="from-purple-light to-purple-medium bg-linear-to-br bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity group-hover:opacity-80">
+              nijoow
             </span>
           </Link>
         </Magnetic>
 
-        {/* Desktop Menu */}
-        <ul className={`hidden h-full items-center gap-6 md:ml-auto md:flex`}>
+        {/* Desktop */}
+        <ul className="hidden h-full items-center gap-7 md:ml-auto md:flex">
           {navList.map(({ text, url }) => (
             <li className="list-none" key={text}>
               <Magnetic strength={0.3}>
@@ -78,71 +80,45 @@ export default function NavBar() {
             </li>
           ))}
           <li className="list-none">
-            <Magnetic strength={0.3}>
-              <button
-                type="button"
-                aria-label="Toggle theme"
-                className={`group flex items-center justify-center rounded-full bg-white/10 p-2 text-gray-900 shadow-sm transition-colors hover:bg-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20`}
-                onClick={toggleTheme}
-              >
-                {!mounted ? (
-                  <Loader2 className="animate-spin" size={20} />
-                ) : (
-                  themeIcon[theme as 'dark' | 'light']
-                )}
-              </button>
-            </Magnetic>
+            <ModeToggle />
           </li>
         </ul>
 
-        {/* Mobile Toggle */}
+        {/* Mobile */}
         <div className="ml-auto md:hidden">
           <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
         </div>
       </div>
 
-      {/* Modern Mobile Menu Overlay */}
       <AnimatePresence>
         {isNavShow && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-22 left-0 w-full overflow-hidden px-4 md:hidden"
+            className="absolute top-18 left-0 w-full overflow-hidden px-4 md:hidden"
           >
-            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/90 p-4 shadow-2xl backdrop-blur-xl dark:bg-black/90">
+            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/90 p-4 shadow-2xl backdrop-blur-xl">
               {navList.map(({ text, url }, i) => (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.08 }}
                   key={text}
                 >
                   <Link
                     href={url}
                     onClick={() => setIsNavShow(false)}
-                    className="flex h-12 w-full items-center px-4 text-lg font-medium text-gray-900 transition-colors hover:bg-white/10 dark:text-white"
+                    className="flex h-12 w-full items-center px-4 text-lg font-medium text-white transition-colors hover:bg-white/10"
                   >
                     {text}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navList.length * 0.1 }}
-                className="mt-2 border-t border-white/10 pt-4"
-              >
-                <button
-                  className="flex h-12 w-full items-center justify-between px-4 text-lg font-medium text-gray-900 dark:text-white"
-                  onClick={toggleTheme}
-                >
-                  <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                  <div className="flex size-10 items-center justify-center rounded-full bg-white/10">
-                    {themeIcon[theme as 'dark' | 'light']}
-                  </div>
-                </button>
-              </motion.div>
+              <div className="mt-2 flex items-center justify-between border-t border-white/10 px-4 pt-4">
+                <span className="text-sm text-white/60">모드</span>
+                <ModeToggle />
+              </div>
             </div>
           </motion.div>
         )}
