@@ -1,7 +1,6 @@
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
-import ThreeDynamic from '@/components/Three/ThreeDynamic';
 import QueryProvider from '@/context/QueryProvider';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
@@ -103,7 +102,6 @@ export default function RootLayout({
                     <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                       <NavBar />
                       <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
-                        <ThreeDynamic />
                         {children}
                       </main>
                       <footer
