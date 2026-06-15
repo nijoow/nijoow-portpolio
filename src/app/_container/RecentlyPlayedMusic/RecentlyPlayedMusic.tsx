@@ -1,11 +1,10 @@
 'use client';
 
-import { musicAtom } from '@/store/atoms';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useNowPlaying } from './useNowPlaying';
 
 // 이퀄라이저 막대 애니메이션 설정은 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지).
 const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
@@ -20,29 +19,7 @@ const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
 }));
 
 const RecentlyPlayedMusic = () => {
-  const [music, setMusic] = useAtom(musicAtom);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getSongApis = async () => {
-      try {
-        const currentlyPlayingSong = await (
-          await fetch('/api/spotify/currently-playing')
-        ).json();
-        const recentlyPlayedSong = await (
-          await fetch('/api/spotify/recently-played')
-        ).json();
-        setLoading(false);
-        setMusic(currentlyPlayingSong.payload ?? recentlyPlayedSong.payload);
-      } catch (error) {
-        setMusic(null);
-      }
-    };
-    getSongApis();
-    const getSong = setInterval(() => getSongApis(), 30000);
-
-    return () => clearInterval(getSong);
-  }, [setMusic]);
+  const { data: music, isPending } = useNowPlaying();
 
   const cardRef = useRef<HTMLAnchorElement>(null);
 
@@ -74,7 +51,7 @@ const RecentlyPlayedMusic = () => {
     mouseY.set(0.5);
   };
 
-  if (loading)
+  if (isPending)
     return (
       <div
         className={
@@ -109,7 +86,7 @@ const RecentlyPlayedMusic = () => {
       </div>
     );
 
-  if (music === null)
+  if (!music)
     return (
       <div
         className={
