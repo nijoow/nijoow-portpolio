@@ -1,10 +1,13 @@
-import SignatureHero from '@/components/ConceptA/SignatureHeroDynamic';
+import ImmersiveExperience from '@/components/Immersive/ImmersiveExperienceDynamic';
 import ClassicHome from './_home/ClassicHome';
 import HomeExperience from './_home/HomeExperience';
 
 const HomePage = () => {
   return (
-    <HomeExperience immersive={<SignatureHero />} classic={<ClassicHome />} />
+    <HomeExperience
+      immersive={<ImmersiveExperience />}
+      classic={<ClassicHome />}
+    />
   );
 };
 

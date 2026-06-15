@@ -57,7 +57,17 @@ function ModeToggle({ className }: { className?: string }) {
 }
 
 export default function NavBar() {
+  const mode = useExperienceMode();
   const [isNavShow, setIsNavShow] = useState(false);
+
+  // 3D(이머시브) 모드에서는 헤더를 숨기고, 모드 전환용 최소 플로팅 토글만 노출.
+  if (mode === 'immersive') {
+    return (
+      <div className="fixed top-4 right-4 z-50">
+        <ModeToggle />
+      </div>
+    );
+  }
 
   return (
     <nav className="sticky top-0 z-50 h-16 w-full border-b border-white/10 bg-black/40 font-medium backdrop-blur-xl md:h-14">
