@@ -6,7 +6,7 @@ import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
 import { Analytics } from '@vercel/analytics/next';
 import { LazyMotion, domAnimation } from 'framer-motion';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
@@ -28,9 +28,58 @@ const binggrae = localFont({
   display: 'swap',
 });
 
+const SITE_URL = 'https://nijoow-portfolio.vercel.app';
+const SITE_DESCRIPTION =
+  '프론트엔드 개발자 이우진(nijoow)의 포트폴리오. Next.js·TypeScript·웹 3D 기반 인터랙티브 웹 작업물을 소개합니다.';
+
 export const metadata: Metadata = {
-  title: 'nijoow | portfolio',
-  description: 'Welcome to nijoow`s portfolio!',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'nijoow | portfolio',
+    template: '%s | nijoow',
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    'nijoow',
+    '이우진',
+    '포트폴리오',
+    '프론트엔드',
+    'Frontend',
+    'Next.js',
+    'React',
+    'TypeScript',
+    '웹 3D',
+    'Three.js',
+  ],
+  authors: [{ name: 'Lee Woo Jin', url: 'https://github.com/nijoow' }],
+  creator: 'Lee Woo Jin',
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: SITE_URL,
+    siteName: 'nijoow | portfolio',
+    title: 'nijoow | portfolio',
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'nijoow | portfolio',
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 };
 
 export default function RootLayout({

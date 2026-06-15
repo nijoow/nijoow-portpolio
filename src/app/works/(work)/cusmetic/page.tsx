@@ -4,6 +4,11 @@ import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
 
+export const metadata = {
+  title: 'cusmetic',
+  description: 'cusmetic — nijoow 포트폴리오 작업물',
+};
+
 const CusmeticPage = () => {
   return (
     <>

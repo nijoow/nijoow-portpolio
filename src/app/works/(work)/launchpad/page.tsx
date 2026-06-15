@@ -6,6 +6,11 @@ import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
+export const metadata = {
+  title: 'launchpad',
+  description: 'launchpad — nijoow 포트폴리오 작업물',
+};
+
 const LaunchpadPage = () => {
   return (
     <>

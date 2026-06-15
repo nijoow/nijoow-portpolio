@@ -6,6 +6,11 @@ import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
+export const metadata = {
+  title: '레서판다 빌리지',
+  description: '레서판다 빌리지 — nijoow 포트폴리오 작업물',
+};
+
 const LessorPandaVillagePage = () => {
   return (
     <>

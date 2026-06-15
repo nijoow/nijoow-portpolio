@@ -5,6 +5,11 @@ import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
 
+export const metadata = {
+  title: '독자시점주의 From You',
+  description: '독자시점주의 From You — nijoow 포트폴리오 작업물',
+};
+
 const FromYouPage = () => {
   return (
     <>
