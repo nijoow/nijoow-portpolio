@@ -4,19 +4,22 @@ import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Group } from 'three';
 
-type GLTFResult = any & {
+interface NijoowGLTF {
   nodes: {
     Curve003: THREE.Mesh;
   };
   materials: {
     ['Material.001']: THREE.MeshStandardMaterial;
   };
-};
+}
 
 export default function Nijoow() {
   const group = useRef<Group>(null);
   const [isClicked, setIsClicked] = useState(false);
-  const { nodes, materials } = useGLTF('/3D/nijoowPurple.glb') as GLTFResult;
+  // useGLTF 반환 타입(GLTF)은 노드 형상을 알 수 없어 R3F 표준대로 구체 타입으로 단언한다.
+  const { nodes, materials } = useGLTF(
+    '/3D/nijoowPurple.glb',
+  ) as unknown as NijoowGLTF;
 
   useFrame(() => {
     if (!group.current) return;

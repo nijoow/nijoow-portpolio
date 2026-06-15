@@ -3,12 +3,13 @@
 import Logo from '@/components/Logo/Logo';
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
+import { useMounted } from '@/hooks/useMounted';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NavListItem from './NavListItem';
 
 const themeIcon = {
@@ -35,12 +36,8 @@ const navList = [
 export default function NavBar() {
   const { setTheme, resolvedTheme: theme } = useTheme();
 
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [isNavShow, setIsNavShow] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');

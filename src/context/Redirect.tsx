@@ -1,19 +1,19 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 type Props = {
   children: React.ReactNode;
 };
 
-const Redirect = ({ children }: Props) => {
-  const router = useRouter();
-  useEffect(() => {
-    const origin = typeof window !== undefined ? window.location.origin : '';
+const LEGACY_ORIGIN = 'https://nijoow.github.io';
+const CANONICAL_URL = 'https://nijoow-portfolio.vercel.app';
 
-    if (origin === 'https://nijoow.github.io')
-      router.push('https://nijoow-portfolio.vercel.app');
+const Redirect = ({ children }: Props) => {
+  useEffect(() => {
+    if (window.location.origin === LEGACY_ORIGIN) {
+      window.location.replace(CANONICAL_URL);
+    }
   }, []);
 
   return <>{children}</>;

@@ -1,7 +1,29 @@
 'use client';
 
+import { useMounted } from '@/hooks/useMounted';
 import { m, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
+
+interface DustParticle {
+  id: number;
+  left: string;
+  top: string;
+  opacity: number;
+  scale: number;
+  duration: number;
+  delay: number;
+}
+
+// 무작위 입자 데이터는 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지 + 하이드레이션 안정).
+const DUST_PARTICLES: DustParticle[] = [...Array(25)].map((_, i) => ({
+  id: i,
+  left: Math.random() * 100 + '%',
+  top: Math.random() * 100 + '%',
+  opacity: Math.random() * 0.4 + 0.1,
+  scale: Math.random() * 0.6 + 0.4,
+  duration: Math.random() * 12 + 8,
+  delay: Math.random() * 5,
+}));
 
 /**
  * AmbientBackground 컴포넌트
@@ -10,8 +32,7 @@ import { useEffect, useState } from 'react';
  */
 export const AmbientBackground = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isMounted, setIsMounted] = useState(false);
-  const [dustParticles, setDustParticles] = useState<any[]>([]);
+  const isMounted = useMounted();
   const { scrollYProgress } = useScroll();
 
   // 스크롤에 따른 레이어별 이동 (Parallax)
@@ -20,20 +41,6 @@ export const AmbientBackground = () => {
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   useEffect(() => {
-    setIsMounted(true);
-
-    // 1. 클라이언트 사이드 마운트 시에만 무작위 데이터 생성 (Hydration 에러 방지)
-    const particles = [...Array(25)].map((_, i) => ({
-      id: i,
-      left: Math.random() * 100 + '%',
-      top: Math.random() * 100 + '%',
-      opacity: Math.random() * 0.4 + 0.1,
-      scale: Math.random() * 0.6 + 0.4,
-      duration: Math.random() * 12 + 8,
-      delay: Math.random() * 5,
-    }));
-    setDustParticles(particles);
-
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({
         x: (e.clientX / window.innerWidth - 0.5) * 50,
@@ -77,7 +84,7 @@ export const AmbientBackground = () => {
 
       {/* Floating Glass Dust - 마운트 완료 후 입자 렌더링 */}
       {isMounted &&
-        dustParticles.map((particle) => (
+        DUST_PARTICLES.map((particle) => (
           <m.div
             key={particle.id}
             initial={{

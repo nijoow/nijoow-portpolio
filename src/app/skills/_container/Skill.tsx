@@ -19,13 +19,10 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
   const controls = useAnimationControls();
 
   useEffect(() => {
+    const resetMotionDiv = () => controls.set({ x: 0, y: 0 });
     window.addEventListener('resize', resetMotionDiv);
     return () => window.removeEventListener('resize', resetMotionDiv);
-  }, []);
-
-  const resetMotionDiv = () => {
-    controls.set({ x: 0, y: 0 });
-  };
+  }, [controls]);
 
   return (
     <motion.div

@@ -7,6 +7,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+// 이퀄라이저 막대 애니메이션 설정은 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지).
+const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
+  id: i,
+  heights: [
+    `${40 + Math.random() * 80}%`,
+    `${30 + Math.random() * 40}%`,
+    `${40 + Math.random() * 80}%`,
+  ],
+  duration: 0.8 + Math.random() * 0.7,
+  delay: i * 0.02,
+}));
+
 const RecentlyPlayedMusic = () => {
   const [music, setMusic] = useAtom(musicAtom);
   const [loading, setLoading] = useState(true);
@@ -231,21 +243,15 @@ const RecentlyPlayedMusic = () => {
         </div>
 
         <div className="flex h-5 w-full items-end gap-0.5 overflow-hidden pb-1">
-          {Array.from({ length: 64 }).map((_, i) => (
+          {EQUALIZER_BARS.map((bar) => (
             <motion.div
-              key={i}
+              key={bar.id}
               className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
-              animate={{
-                height: [
-                  `${40 + Math.random() * 80}%`,
-                  `${30 + Math.random() * 40}%`,
-                  `${40 + Math.random() * 80}%`,
-                ],
-              }}
+              animate={{ height: bar.heights }}
               transition={{
                 repeat: Infinity,
-                duration: 0.8 + Math.random() * 0.7,
-                delay: i * 0.02,
+                duration: bar.duration,
+                delay: bar.delay,
                 ease: 'easeInOut',
               }}
             />

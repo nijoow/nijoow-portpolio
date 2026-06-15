@@ -10,7 +10,7 @@ import { works } from '../_container/worksData';
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
-  const workName = pathName.split('/works/')[1];
+  const workName = pathName.split('/works/')[1] ?? '';
 
   const tags = works.find((work) => work.pageName === workName)?.tags;
 

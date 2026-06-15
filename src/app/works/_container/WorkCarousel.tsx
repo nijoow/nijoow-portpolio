@@ -145,7 +145,7 @@ const WorkCarousel = ({
                         const idx = imgSrcList.indexOf(selectedImg);
                         const prev =
                           (idx - 1 + imgSrcList.length) % imgSrcList.length;
-                        setSelectedImg(imgSrcList[prev]);
+                        setSelectedImg(imgSrcList[prev] ?? null);
                         swiperInstance?.slideToLoop(prev);
                       },
                     },
@@ -155,7 +155,7 @@ const WorkCarousel = ({
                       onClick: () => {
                         const idx = imgSrcList.indexOf(selectedImg);
                         const next = (idx + 1) % imgSrcList.length;
-                        setSelectedImg(imgSrcList[next]);
+                        setSelectedImg(imgSrcList[next] ?? null);
                         swiperInstance?.slideToLoop(next);
                       },
                     },

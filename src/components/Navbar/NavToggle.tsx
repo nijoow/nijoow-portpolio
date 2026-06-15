@@ -1,4 +1,9 @@
-const NavToggle = ({ isNavShow, setIsNavShow }: any) => {
+interface NavToggleProps {
+  isNavShow: boolean;
+  setIsNavShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavToggle = ({ isNavShow, setIsNavShow }: NavToggleProps) => {
   return (
     <div className={'ml-auto block md:hidden'}>
       <input
