@@ -16,12 +16,30 @@ html,
 body,
 * {
   font-family: var(--font-binggrae), sans-serif;
-  cursor: none !important;
 }
 
-*::before,
-*::after {
-  cursor: none !important;
+/* 커스텀 커서는 정밀 포인터 + 모션 허용 사용자에게만 적용한다.
+   터치 기기·prefers-reduced-motion 사용자는 OS 기본 커서를 유지한다. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+/* 모션 최소화를 선호하는 사용자에게는 애니메이션/트랜지션을 사실상 제거한다. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 html,

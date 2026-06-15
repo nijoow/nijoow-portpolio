@@ -38,7 +38,7 @@ const WorksList = () => {
                 <Image
                   src={`${prefix}/images/works/${work.imgSrc}`}
                   quality={10}
-                  alt="backdrop"
+                  alt=""
                   fill
                   objectFit="cover"
                   sizes="(max-width: 640px) 100vw, 336px"
@@ -57,7 +57,8 @@ const WorksList = () => {
             )}
             <Link
               href={`/works/${work.pageName}`}
-              className={`absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 group-hover:opacity-100`}
+              aria-label={`${work.name} 작업 상세 보기`}
+              className={`absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 outline-none transition-all duration-300 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-purple-light focus-visible:ring-inset`}
             >
               <span className="text-lg text-white">{work.name} &gt;</span>
             </Link>

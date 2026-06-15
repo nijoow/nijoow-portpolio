@@ -5,7 +5,7 @@ import ThreeDynamic from '@/components/Three/ThreeDynamic';
 import Redirect from '@/context/Redirect';
 import Theme from '@/context/Theme';
 import { Analytics } from '@vercel/analytics/next';
-import { LazyMotion, domAnimation } from 'framer-motion';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
@@ -92,25 +92,27 @@ export default function RootLayout({
       <html lang="ko" className="h-full w-full" suppressHydrationWarning>
         <body className={`${binggrae.variable} h-full w-full`}>
           <LazyMotion features={domAnimation}>
-            <Theme>
-              <AmbientBackground />
-              <CustomCursor />
-              <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
-                <NavBar />
-                <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
-                  <ThreeDynamic />
-                  {children}
-                </main>
-                <footer
-                  className={
-                    'flex w-full items-center justify-center py-5 text-sm'
-                  }
-                >
-                  &copy; {new Date().getFullYear()} Lee Woo Jin. All Rights
-                  Reserved.
-                </footer>
-              </div>
-            </Theme>
+            <MotionConfig reducedMotion="user">
+              <Theme>
+                <AmbientBackground />
+                <CustomCursor />
+                <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
+                  <NavBar />
+                  <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
+                    <ThreeDynamic />
+                    {children}
+                  </main>
+                  <footer
+                    className={
+                      'flex w-full items-center justify-center py-5 text-sm'
+                    }
+                  >
+                    &copy; {new Date().getFullYear()} Lee Woo Jin. All Rights
+                    Reserved.
+                  </footer>
+                </div>
+              </Theme>
+            </MotionConfig>
           </LazyMotion>
           <Analytics />
           <Toaster position="bottom-center" reverseOrder={false} />

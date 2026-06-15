@@ -1,12 +1,13 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { m, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -98,6 +99,7 @@ const CustomCursor = () => {
     };
   }, [mouseX, mouseY, isVisible]);
 
+  if (prefersReducedMotion) return null;
   if (typeof window !== 'undefined' && 'ontouchstart' in window) return null;
 
   return (
