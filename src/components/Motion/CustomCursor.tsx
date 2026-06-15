@@ -147,9 +147,9 @@ const CustomCursor = () => {
             const offsets = [
               '-top-4 -left-4',
               '-top-3 -left-3',
-              '-top-[10px] -left-[10px]',
+              '-top-2.5 -left-2.5',
               '-top-2 -left-2',
-              '-top-[6px] -left-[6px]',
+              '-top-1.5 -left-1.5',
             ];
 
             const sizeClass = sizes[index];

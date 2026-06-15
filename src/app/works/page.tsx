@@ -11,7 +11,7 @@ const WorksPage = () => {
         <Link href="/works" className="text-2xl font-bold">
           Works
         </Link>
-        <div className="bg-gray-dark h-[2px] w-full rounded-full dark:bg-white" />
+        <div className="bg-gray-dark h-0.5 w-full rounded-full dark:bg-white" />
       </div>
       <Suspense fallback={<div>Loading tags...</div>}>
         <WorkTags />

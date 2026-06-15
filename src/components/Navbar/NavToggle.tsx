@@ -1,37 +1,44 @@
+import { cn } from '@/lib/utils';
+
 interface NavToggleProps {
   isNavShow: boolean;
   setIsNavShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const BAR_BASE = 'bg-purple-medium dark:bg-purple-regular h-0.5 rounded';
+
 const NavToggle = ({ isNavShow, setIsNavShow }: NavToggleProps) => {
   return (
-    <div className={'ml-auto block md:hidden'}>
+    <div className="ml-auto block md:hidden">
       <input
         type="checkbox"
         id="navToggle"
-        className={'hidden'}
+        className="hidden"
         onClick={() => {
           setIsNavShow(!isNavShow);
         }}
       />
       <label
         htmlFor="navToggle"
-        className={`flex h-5 w-5 origin-center transform flex-col justify-between transition-all duration-300 group-focus:-rotate-[45deg] ${
-          isNavShow ? '-rotate-[45deg]' : ''
-        }`}
+        className={cn(
+          'flex h-5 w-5 origin-center transform flex-col justify-between transition-all duration-300 group-focus:-rotate-45',
+          isNavShow && '-rotate-45',
+        )}
       >
         <span
-          className={`bg-purple-medium dark:bg-purple-regular h-[2px] origin-right transform rounded transition-all delay-150 duration-300 ${
-            isNavShow ? 'w-1/2 -translate-y-[1px] -rotate-90' : 'w-2/3'
-          }`}
+          className={cn(
+            BAR_BASE,
+            'origin-right transform transition-all delay-150 duration-300',
+            isNavShow ? 'w-1/2 -translate-y-px -rotate-90' : 'w-2/3',
+          )}
         ></span>
+        <span className={BAR_BASE}></span>
         <span
-          className={`bg-purple-medium dark:bg-purple-regular h-[2px] rounded`}
-        ></span>
-        <span
-          className={`bg-purple-medium dark:bg-purple-regular h-[2px] origin-left transform self-end rounded transition-all delay-150 duration-300 ${
-            isNavShow ? 'w-1/2 translate-y-[1px] -rotate-90' : 'w-2/3'
-          }`}
+          className={cn(
+            BAR_BASE,
+            'origin-left transform self-end transition-all delay-150 duration-300',
+            isNavShow ? 'w-1/2 translate-y-px -rotate-90' : 'w-2/3',
+          )}
         ></span>
       </label>
     </div>

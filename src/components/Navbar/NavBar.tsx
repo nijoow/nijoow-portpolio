@@ -58,7 +58,7 @@ export default function NavBar() {
             <Logo
               width={80}
               height={50}
-              className="transition-transform duration-300 group-hover:scale-[1.1] group-hover:rotate-[5deg]"
+              className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[5deg]"
             />
             <span
               className={`from-purple-medium to-purple-darker bg-linear-to-br bg-clip-text text-lg tracking-tight text-transparent dark:from-gray-200 dark:to-gray-400`}

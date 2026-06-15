@@ -1,6 +1,7 @@
 'use client';
 
 import { prefix } from '@/config/config';
+import { cn } from '@/lib/utils';
 import { motion, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect } from 'react';
@@ -35,15 +36,16 @@ const Skill = ({ fileName, name, constraintsRef }: SkillProps) => {
     >
       <Tilt
         scale={1.2}
-        className={`relative h-16 w-16 overflow-hidden rounded-lg transition-all duration-300 ${
-          name === 'NEXT JS' ? 'bg-transparent p-2 dark:bg-purple-50' : ''
-        }`}
+        className={cn(
+          'relative h-16 w-16 overflow-hidden rounded-lg transition-all duration-300',
+          name === 'NEXT JS' && 'bg-transparent p-2 dark:bg-purple-50',
+        )}
       >
         <Image
           src={`${prefix}/images/skills/${fileName}`}
           alt={fileName}
           fill
-          className={`pointer-events-none ${name === 'NEXT JS' ? 'p-1' : ''}`}
+          className={cn('pointer-events-none', name === 'NEXT JS' && 'p-1')}
         />
       </Tilt>
 

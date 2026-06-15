@@ -1,11 +1,20 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
+
+const fieldClass = (hasError: boolean) =>
+  cn(
+    'rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5',
+    hasError
+      ? 'border-red-500 ring-red-500'
+      : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10',
+  );
 
 const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
@@ -103,11 +112,7 @@ export const ContactForm = () => {
             type="text"
             id="name"
             placeholder="이름을 입력해주세요"
-            className={`rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5 ${
-              errors.name
-                ? 'border-red-500 ring-red-500'
-                : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10'
-            }`}
+            className={fieldClass(!!errors.name)}
           />
           {errors.name && (
             <p className="text-xs text-red-500">{errors.name.message}</p>
@@ -123,11 +128,7 @@ export const ContactForm = () => {
             type="email"
             id="email"
             placeholder="example@email.com"
-            className={`rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5 ${
-              errors.email
-                ? 'border-red-500 ring-red-500'
-                : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10'
-            }`}
+            className={fieldClass(!!errors.email)}
           />
           {errors.email && (
             <p className="text-xs text-red-500">{errors.email.message}</p>
@@ -143,11 +144,7 @@ export const ContactForm = () => {
             type="text"
             id="subject"
             placeholder="문의 제목을 입력해주세요"
-            className={`rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5 ${
-              errors.subject
-                ? 'border-red-500 ring-red-500'
-                : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10'
-            }`}
+            className={fieldClass(!!errors.subject)}
           />
           {errors.subject && (
             <p className="text-xs text-red-500">{errors.subject.message}</p>
@@ -163,11 +160,7 @@ export const ContactForm = () => {
             id="message"
             rows={5}
             placeholder="문의하실 내용을 입력해주세요"
-            className={`resize-none rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5 ${
-              errors.message
-                ? 'border-red-500 ring-red-500'
-                : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10'
-            }`}
+            className={cn(fieldClass(!!errors.message), 'resize-none')}
           ></textarea>
           {errors.message && (
             <p className="text-xs text-red-500">{errors.message.message}</p>
@@ -179,11 +172,12 @@ export const ContactForm = () => {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={isSubmitting}
-          className={`mt-4 w-full rounded-lg py-4 font-bold text-white transition-colors ${
+          className={cn(
+            'mt-4 w-full rounded-lg py-4 font-bold text-white transition-colors',
             isSubmitting
               ? 'cursor-not-allowed bg-gray-400'
-              : 'bg-purple-dark hover:bg-purple-darker dark:bg-purple-regular dark:hover:bg-purple-dark'
-          }`}
+              : 'bg-purple-dark hover:bg-purple-darker dark:bg-purple-regular dark:hover:bg-purple-dark',
+          )}
         >
           {isSubmitting ? '전송 중...' : '전송하기'}
         </motion.button>

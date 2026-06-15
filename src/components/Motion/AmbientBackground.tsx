@@ -113,7 +113,7 @@ export const AmbientBackground = () => {
         ))}
 
       {/* 히어로 영역과의 조화를 위한 하단 페이드 */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#fafafa] to-transparent dark:from-black" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-neutral-50 to-transparent dark:from-black" />
     </div>
   );
 };
