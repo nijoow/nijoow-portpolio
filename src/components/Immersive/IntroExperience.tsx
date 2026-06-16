@@ -2,9 +2,15 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { ParticleLogo } from './ParticleLogo';
+
+const fadeUp = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export default function IntroExperience() {
   return (
@@ -28,18 +34,34 @@ export default function IntroExperience() {
         </Canvas>
       </div>
 
-      {/* 인트로 카피 + 진입 CTA */}
+      {/* 인트로 카피 + 진입 CTA — 오브제가 모인 뒤 순차 페이드인 */}
       <div className="pointer-events-none fixed inset-0 z-10 flex flex-col items-center justify-end px-6 pb-24 text-center text-white sm:pb-28">
-        <p className="text-purple-light mb-3 text-sm tracking-[0.3em] uppercase">
+        <m.p
+          {...fadeUp}
+          transition={{ delay: 2, duration: 0.7 }}
+          className="text-purple-light mb-3 text-sm tracking-[0.3em] uppercase"
+        >
           creative frontend developer
-        </p>
-        <h1 className="text-6xl font-bold tracking-tight sm:text-8xl">
+        </m.p>
+        <m.h1
+          {...fadeUp}
+          transition={{ delay: 2.2, duration: 0.7 }}
+          className="text-6xl font-bold tracking-tight sm:text-8xl"
+        >
           nijoow
-        </h1>
-        <p className="mt-4 max-w-md text-sm break-keep text-white/50">
+        </m.h1>
+        <m.p
+          {...fadeUp}
+          transition={{ delay: 2.5, duration: 0.7 }}
+          className="mt-4 max-w-md text-sm break-keep text-white/50"
+        >
           몰입감 있는 UX와 인터랙션을 만드는 프론트엔드 개발자입니다.
-        </p>
-        <div className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-3">
+        </m.p>
+        <m.div
+          {...fadeUp}
+          transition={{ delay: 2.8, duration: 0.7 }}
+          className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
           <Link
             href="/works"
             className="bg-purple-medium hover:bg-purple-dark inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-medium transition-colors"
@@ -52,7 +74,14 @@ export default function IntroExperience() {
           >
             연락하기
           </Link>
-        </div>
+        </m.div>
+        <m.p
+          {...fadeUp}
+          transition={{ delay: 3.3, duration: 0.7 }}
+          className="mt-6 text-xs text-white/30"
+        >
+          화면을 움직이거나 클릭해보세요
+        </m.p>
       </div>
     </>
   );
