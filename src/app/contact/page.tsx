@@ -1,8 +1,7 @@
-import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
-import Section from '@/components/Section/Section';
-import SubTitle from '@/components/SubTitle/SubTitle';
 import { Metadata } from 'next';
-import { ContactForm } from './_container/ContactForm';
+import ClassicContact from './_contact/ClassicContact';
+import ContactExperience from './_contact/ContactExperience';
+import ContactImmersive from './_contact/ContactImmersive';
 
 export const metadata: Metadata = {
   title: 'Contact | nijoow',
@@ -11,14 +10,10 @@ export const metadata: Metadata = {
 
 const ContactPage = () => {
   return (
-    <TransitionPageWrapper>
-      <div className="flex flex-col gap-6">
-        <Section>
-          <SubTitle title="Contact Me" />
-          <ContactForm />
-        </Section>
-      </div>
-    </TransitionPageWrapper>
+    <ContactExperience
+      immersive={<ContactImmersive />}
+      classic={<ClassicContact />}
+    />
   );
 };
 
