@@ -2,13 +2,11 @@
 
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import type { MotionValue } from 'framer-motion';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
 const COUNT = 9000;
-const FOLLOW_DISTANCE = 4.2; // 카메라 앞 고정 거리
 
 interface NijoowGLTF {
   nodes: { Curve003: THREE.Mesh };
@@ -24,24 +22,6 @@ function mulberry32(seed: number) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
-}
-
-function ramp(x: number, a: number, b: number) {
-  return THREE.MathUtils.clamp((x - a) / (b - a), 0, 1);
-}
-
-// 섹션 경계(hero→works, works→contact)에서 분해, 섹션 안에선 모인 상태.
-function dissolveProgress(p: number) {
-  if (p < 0.22) return ramp(p, 0.1, 0.22); // hero → works: 분해
-  if (p < 0.78) return 1; // works: 분해 유지(갤러리 비춤)
-  return 1 - ramp(p, 0.78, 0.9); // works → contact: 재조립
-}
-
-// 작업물 구간에선 흐려져 갤러리를 가리지 않게, 양 끝(hero/contact)에선 또렷하게.
-function logoOpacity(p: number) {
-  if (p < 0.25) return THREE.MathUtils.lerp(1, 0.1, ramp(p, 0.12, 0.25));
-  if (p < 0.75) return 0.1;
-  return THREE.MathUtils.lerp(0.1, 1, ramp(p, 0.75, 0.92));
 }
 
 const vertexShader = /* glsl */ `
@@ -67,7 +47,6 @@ const vertexShader = /* glsl */ `
 const fragmentShader = /* glsl */ `
   uniform vec3 uColorA;
   uniform vec3 uColorB;
-  uniform float uOpacity;
   varying float vRand;
 
   void main() {
@@ -76,11 +55,12 @@ const fragmentShader = /* glsl */ `
     if (d > 0.5) discard;
     float alpha = smoothstep(0.5, 0.0, d);
     vec3 col = mix(uColorA, uColorB, vRand);
-    gl_FragColor = vec4(col, alpha * uOpacity);
+    gl_FragColor = vec4(col, alpha);
   }
 `;
 
-export function ParticleLogo({ scroll }: { scroll: MotionValue<number> }) {
+// 인트로 전용 — 입장 시 흩어진 파티클이 로고로 응집하고, 이후 은은히 호흡한다.
+export function ParticleLogo() {
   const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
@@ -110,7 +90,6 @@ export function ParticleLogo({ scroll }: { scroll: MotionValue<number> }) {
     }
     centroid.multiplyScalar(1 / COUNT);
 
-    // 로고를 그룹 원점에 정렬(카메라 추종 시 중앙에 오도록) + 분산 반경 산출.
     let maxR = 0.001;
     for (let i = 0; i < COUNT; i++) {
       const x = (positions[i * 3] ?? 0) - centroid.x;
@@ -123,7 +102,6 @@ export function ParticleLogo({ scroll }: { scroll: MotionValue<number> }) {
     }
 
     for (let i = 0; i < COUNT; i++) {
-      // 방사형 분산(구면 균등) — 사방으로 터지는 폭발/응집 연출.
       const u = rand() * 2 - 1;
       const theta = rand() * Math.PI * 2;
       const r = Math.sqrt(1 - u * u);
@@ -138,9 +116,8 @@ export function ParticleLogo({ scroll }: { scroll: MotionValue<number> }) {
 
   const uniforms = useMemo(
     () => ({
-      uProgress: { value: 0 },
+      uProgress: { value: 1 },
       uTime: { value: 0 },
-      uOpacity: { value: 1 },
       uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
       uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
     }),
@@ -148,24 +125,25 @@ export function ParticleLogo({ scroll }: { scroll: MotionValue<number> }) {
   );
 
   useFrame((state) => {
-    const cam = state.camera;
-    if (group.current) {
-      // 카메라 앞 고정 거리에 위치(추종) + 부드러운 부유. 정면 facing은 유지.
-      group.current.position.set(
-        cam.position.x,
-        cam.position.y + Math.sin(state.clock.elapsedTime * 0.6) * 0.15,
-        cam.position.z - FOLLOW_DISTANCE,
-      );
-    }
-    const p = scroll.get();
+    const t = state.clock.elapsedTime;
+    // 입장: 1.8초에 걸쳐 흩어진 상태(1) → 응집(0). 이후 은은한 호흡.
+    const entrance = 1 - THREE.MathUtils.clamp(t / 1.8, 0, 1);
+    const eased = entrance * entrance;
+    const idle = (Math.sin(t * 0.5) * 0.5 + 0.5) * 0.05;
+    const progress = Math.max(eased, idle);
+
     const mat = matRef.current;
     if (mat) {
       const uProgress = mat.uniforms.uProgress;
-      const uOpacity = mat.uniforms.uOpacity;
       const uTime = mat.uniforms.uTime;
-      if (uProgress) uProgress.value = dissolveProgress(p);
-      if (uOpacity) uOpacity.value = logoOpacity(p);
-      if (uTime) uTime.value = state.clock.elapsedTime;
+      if (uProgress) uProgress.value = progress;
+      if (uTime) uTime.value = t;
+    }
+
+    if (group.current) {
+      // 느린 자전 + 포인터 패럴랙스로 "살아있는" 느낌.
+      group.current.rotation.y = t * 0.12 + state.pointer.x * 0.3;
+      group.current.rotation.x = -state.pointer.y * 0.2;
     }
   });
 

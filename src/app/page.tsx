@@ -1,13 +1,10 @@
-import ImmersiveExperience from '@/components/Immersive/ImmersiveExperienceDynamic';
+import IntroExperience from '@/components/Immersive/IntroExperienceDynamic';
 import ClassicHome from './_home/ClassicHome';
 import HomeExperience from './_home/HomeExperience';
 
 const HomePage = () => {
   return (
-    <HomeExperience
-      immersive={<ImmersiveExperience />}
-      classic={<ClassicHome />}
-    />
+    <HomeExperience immersive={<IntroExperience />} classic={<ClassicHome />} />
   );
 };
 

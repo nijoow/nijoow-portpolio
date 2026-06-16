@@ -2,9 +2,9 @@
 
 import dynamic from 'next/dynamic';
 
-const ImmersiveExperience = dynamic(() => import('./ImmersiveExperience'), {
+const IntroExperience = dynamic(() => import('./IntroExperience'), {
   ssr: false,
   loading: () => <div className="fixed inset-0 z-0 bg-black" />,
 });
 
-export default ImmersiveExperience;
+export default IntroExperience;

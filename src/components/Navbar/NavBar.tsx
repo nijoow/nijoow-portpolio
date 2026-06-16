@@ -60,11 +60,31 @@ export default function NavBar() {
   const mode = useExperienceMode();
   const [isNavShow, setIsNavShow] = useState(false);
 
-  // 3D(이머시브) 모드에서는 헤더를 숨기고, 모드 전환용 최소 플로팅 토글만 노출.
+  // 3D(이머시브) 모드: 풀 헤더 대신 미니멀 플로팅 내비(로고 + 이동 + 모드 토글).
   if (mode === 'immersive') {
     return (
-      <div className="fixed top-4 right-4 z-50">
-        <ModeToggle />
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4">
+        <Link
+          href="/"
+          className="from-purple-light to-purple-medium pointer-events-auto bg-linear-to-br bg-clip-text text-lg font-bold tracking-tight text-transparent"
+        >
+          nijoow
+        </Link>
+        <div className="pointer-events-auto flex items-center gap-5">
+          <Link
+            href="/works"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+          >
+            Works
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+          >
+            Contact
+          </Link>
+          <ModeToggle />
+        </div>
       </div>
     );
   }
