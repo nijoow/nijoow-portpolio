@@ -2,18 +2,13 @@
 
 import { works } from '@/app/works/_container/worksData';
 import { prefix } from '@/config/config';
-import {
-  Edges,
-  Float,
-  Image,
-  RoundedBox,
-  Sparkles,
-  useGLTF,
-} from '@react-three/drei';
+import { Edges, Image, RoundedBox, Sparkles } from '@react-three/drei';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import type { MotionValue } from 'framer-motion';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
+import { ParticleLogo } from './ParticleLogo';
 
 const Z_STEP = 3;
 const FIRST_WORK_Z = -9;
@@ -41,41 +36,6 @@ const PANELS = works
       rotation: [0, -side * 0.45, 0] as [number, number, number],
     };
   });
-
-interface NijoowGLTF {
-  nodes: { Curve003: THREE.Mesh };
-}
-
-function SignatureModel() {
-  const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
-  const ref = useRef<THREE.Group>(null);
-
-  useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += delta * 0.3;
-  });
-
-  return (
-    <Float speed={1.4} rotationIntensity={0.3} floatIntensity={0.5}>
-      <group ref={ref}>
-        <mesh
-          geometry={nodes.Curve003.geometry}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={26}
-        >
-          <meshPhysicalMaterial
-            color="#8458b3"
-            roughness={0.15}
-            metalness={0.5}
-            clearcoat={1}
-            clearcoatRoughness={0.2}
-            emissive="#3a2b70"
-            emissiveIntensity={0.4}
-          />
-        </mesh>
-      </group>
-    </Float>
-  );
-}
 
 interface PanelProps {
   url: string;
@@ -177,7 +137,7 @@ export function ImmersiveScene({
       <pointLight position={[-6, -2, 2]} intensity={50} color="#8458b3" />
       <pointLight position={[6, 3, -2]} intensity={35} color="#c0a8eb" />
 
-      <SignatureModel />
+      <ParticleLogo scroll={scroll} />
 
       {PANELS.map((panel) => (
         <Panel
@@ -201,10 +161,18 @@ export function ImmersiveScene({
         opacity={0.5}
         position={[0, 0, CAMERA_END_Z / 2]}
       />
+
+      <EffectComposer>
+        <Bloom
+          intensity={1.1}
+          luminanceThreshold={0.15}
+          luminanceSmoothing={0.4}
+          mipmapBlur
+          radius={0.7}
+        />
+      </EffectComposer>
     </>
   );
 }
-
-useGLTF.preload('/3D/nijoowPurple.glb');
 
 export const PANEL_COUNT = PANELS.length;
