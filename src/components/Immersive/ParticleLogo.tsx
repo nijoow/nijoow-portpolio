@@ -80,7 +80,11 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-export function ParticleLogo() {
+export function ParticleLogo({
+  interactive = true,
+}: {
+  interactive?: boolean;
+}) {
   const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
@@ -165,26 +169,29 @@ export function ParticleLogo() {
     const burst = since >= 0 ? Math.max(0, 1 - since / BURST_SEC) : 0;
     const progress = Math.max(eased, idle, pulse, burst * burst * 0.9);
 
-    // 마우스를 z=0 평면에 투영해 월드 좌표 산출.
-    const cam = state.camera;
-    mouseWorld.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
-    mouseWorld.sub(cam.position);
-    const planeT = -cam.position.z / (mouseWorld.z || -1);
-    mouseWorld.multiplyScalar(planeT).add(cam.position);
-
     const mat = matRef.current;
     if (mat) {
       const uProgress = mat.uniforms.uProgress;
       const uTime = mat.uniforms.uTime;
-      const uMouse = mat.uniforms.uMouse;
       if (uProgress) uProgress.value = progress;
       if (uTime) uTime.value = t;
-      if (uMouse) uMouse.value.copy(mouseWorld);
+
+      if (interactive) {
+        // 마우스를 z=0 평면에 투영해 월드 좌표 산출(리펄전용).
+        const cam = state.camera;
+        mouseWorld.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
+        mouseWorld.sub(cam.position);
+        const planeT = -cam.position.z / (mouseWorld.z || -1);
+        mouseWorld.multiplyScalar(planeT).add(cam.position);
+        const uMouse = mat.uniforms.uMouse;
+        if (uMouse) uMouse.value.copy(mouseWorld);
+      }
     }
 
     if (group.current) {
-      group.current.rotation.y = t * 0.12 + state.pointer.x * 0.3;
-      group.current.rotation.x = -state.pointer.y * 0.2;
+      group.current.rotation.y =
+        t * 0.12 + (interactive ? state.pointer.x * 0.3 : 0);
+      group.current.rotation.x = interactive ? -state.pointer.y * 0.2 : 0;
     }
   });
 
@@ -216,15 +223,17 @@ export function ParticleLogo() {
       </group>
 
       {/* 클릭 캡처용 투명 평면(회전 비적용) → 어디를 클릭해도 버스트 */}
-      <mesh
-        position={[0, 0, -1]}
-        onPointerDown={() => {
-          burstRef.current = timeRef.current;
-        }}
-      >
-        <planeGeometry args={[60, 40]} />
-        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-      </mesh>
+      {interactive && (
+        <mesh
+          position={[0, 0, -1]}
+          onPointerDown={() => {
+            burstRef.current = timeRef.current;
+          }}
+        >
+          <planeGeometry args={[60, 40]} />
+          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+        </mesh>
+      )}
     </>
   );
 }
