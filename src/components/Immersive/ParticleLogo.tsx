@@ -6,12 +6,20 @@ import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
-const COUNT = 9000;
 const ENTRANCE_SEC = 3; // 입장 응집 길이
 const BURST_SEC = 1.6; // 클릭 버스트 감쇠 길이
 
 interface NijoowGLTF {
   nodes: { Curve003: THREE.Mesh };
+}
+
+interface ParticleLogoProps {
+  /** 마우스 리펄전·포인터 패럴랙스·클릭 버스트 사용 여부 */
+  interactive?: boolean;
+  /** 파티클 수(많을수록 글자가 또렷) */
+  count?: number;
+  /** 포인트 크기 배율 */
+  sizeScale?: number;
 }
 
 // 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
@@ -29,6 +37,7 @@ function mulberry32(seed: number) {
 const vertexShader = /* glsl */ `
   uniform float uProgress;
   uniform float uTime;
+  uniform float uSizeScale;
   uniform vec3 uMouse;
   uniform float uRadius;
   uniform float uStrength;
@@ -61,7 +70,7 @@ const vertexShader = /* glsl */ `
     vec4 mv = viewMatrix * world;
     gl_Position = projectionMatrix * mv;
     float size = mix(6.0, 13.0, aRandom);
-    gl_PointSize = size * (8.0 / -mv.z);
+    gl_PointSize = size * uSizeScale * (8.0 / -mv.z);
   }
 `;
 
@@ -82,9 +91,9 @@ const fragmentShader = /* glsl */ `
 
 export function ParticleLogo({
   interactive = true,
-}: {
-  interactive?: boolean;
-}) {
+  count = 9000,
+  sizeScale = 1,
+}: ParticleLogoProps) {
   const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
@@ -100,13 +109,13 @@ export function ParticleLogo({
       .makeRotationX(Math.PI / 2)
       .multiply(new THREE.Matrix4().makeScale(26, 26, 26));
 
-    const positions = new Float32Array(COUNT * 3);
-    const scatters = new Float32Array(COUNT * 3);
-    const randoms = new Float32Array(COUNT);
+    const positions = new Float32Array(count * 3);
+    const scatters = new Float32Array(count * 3);
+    const randoms = new Float32Array(count);
     const temp = new THREE.Vector3();
     const centroid = new THREE.Vector3();
 
-    for (let i = 0; i < COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       sampler.sample(temp);
       temp.applyMatrix4(transform);
       positions[i * 3] = temp.x;
@@ -115,10 +124,10 @@ export function ParticleLogo({
       centroid.add(temp);
       randoms[i] = rand();
     }
-    centroid.multiplyScalar(1 / COUNT);
+    centroid.multiplyScalar(1 / count);
 
     let maxR = 0.001;
-    for (let i = 0; i < COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       const x = (positions[i * 3] ?? 0) - centroid.x;
       const y = (positions[i * 3 + 1] ?? 0) - centroid.y;
       const z = (positions[i * 3 + 2] ?? 0) - centroid.z;
@@ -128,7 +137,7 @@ export function ParticleLogo({
       maxR = Math.max(maxR, Math.sqrt(x * x + y * y + z * z));
     }
 
-    for (let i = 0; i < COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       const u = rand() * 2 - 1;
       const theta = rand() * Math.PI * 2;
       const r = Math.sqrt(1 - u * u);
@@ -139,19 +148,20 @@ export function ParticleLogo({
     }
 
     return { positions, scatters, randoms };
-  }, [nodes]);
+  }, [nodes, count]);
 
   const uniforms = useMemo(
     () => ({
       uProgress: { value: 1 },
       uTime: { value: 0 },
+      uSizeScale: { value: sizeScale },
       uMouse: { value: new THREE.Vector3(999, 999, 999) },
       uRadius: { value: 1.3 },
       uStrength: { value: 0.9 },
       uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
       uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
     }),
-    [],
+    [sizeScale],
   );
 
   useFrame((state) => {
@@ -161,10 +171,11 @@ export function ParticleLogo({
     // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
     const entrance = 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1);
     const eased = entrance * entrance * entrance;
-    // 아이들 호흡 + 주기적 펄스(가만히 둬도 이따금 부풀며 반짝).
-    const idle = (Math.sin(t * 0.5) * 0.5 + 0.5) * 0.06;
-    const pulse = Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * 0.4;
-    // 클릭 버스트: 폭발 → 재조립.
+    // 비인터랙티브(클래식 로고)는 글자 가독성을 위해 흔들림을 최소화하고 펄스 없음.
+    const idle = (Math.sin(t * 0.5) * 0.5 + 0.5) * (interactive ? 0.06 : 0.025);
+    const pulse = interactive
+      ? Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * 0.4
+      : 0;
     const since = t - burstRef.current;
     const burst = since >= 0 ? Math.max(0, 1 - since / BURST_SEC) : 0;
     const progress = Math.max(eased, idle, pulse, burst * burst * 0.9);
@@ -189,8 +200,10 @@ export function ParticleLogo({
     }
 
     if (group.current) {
+      // 인터랙티브: 느린 자전 + 포인터 패럴랙스 / 비인터랙티브: 원래처럼 자전만.
       group.current.rotation.y =
-        t * 0.12 + (interactive ? state.pointer.x * 0.3 : 0);
+        t * (interactive ? 0.12 : 0.22) +
+        (interactive ? state.pointer.x * 0.3 : 0);
       group.current.rotation.x = interactive ? -state.pointer.y * 0.2 : 0;
     }
   });
