@@ -20,6 +20,10 @@ interface ParticleLogoProps {
   count?: number;
   /** 포인트 크기 배율 */
   sizeScale?: number;
+  /** additive=네온 글로우(겹치면 흰색), false=노멀 블렌딩(글자 구조 또렷) */
+  additive?: boolean;
+  /** 상시 난류 강도(0에 가까울수록 얇은 획이 또렷) */
+  jitter?: number;
 }
 
 // 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
@@ -38,6 +42,7 @@ const vertexShader = /* glsl */ `
   uniform float uProgress;
   uniform float uTime;
   uniform float uSizeScale;
+  uniform float uJitterBase;
   uniform vec3 uMouse;
   uniform float uRadius;
   uniform float uStrength;
@@ -58,7 +63,7 @@ const vertexShader = /* glsl */ `
 
     // 시간 기반 미세 난류(분해될수록 강해짐)
     float t = uTime * 0.6 + aRandom * 6.2831;
-    base += vec3(sin(t), cos(t * 1.3), sin(t * 0.7)) * (0.06 + 0.12 * p);
+    base += vec3(sin(t), cos(t * 1.3), sin(t * 0.7)) * (uJitterBase + 0.12 * p);
 
     // 월드 공간 마우스 리펄전(실시간 인터랙션)
     vec4 world = modelMatrix * vec4(base, 1.0);
@@ -93,6 +98,8 @@ export function ParticleLogo({
   interactive = true,
   count = 9000,
   sizeScale = 1,
+  additive = true,
+  jitter = 0.06,
 }: ParticleLogoProps) {
   const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
   const group = useRef<THREE.Group>(null);
@@ -155,13 +162,14 @@ export function ParticleLogo({
       uProgress: { value: 1 },
       uTime: { value: 0 },
       uSizeScale: { value: sizeScale },
+      uJitterBase: { value: jitter },
       uMouse: { value: new THREE.Vector3(999, 999, 999) },
       uRadius: { value: 1.3 },
       uStrength: { value: 0.9 },
       uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
       uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
     }),
-    [sizeScale],
+    [sizeScale, jitter],
   );
 
   useFrame((state) => {
@@ -200,11 +208,15 @@ export function ParticleLogo({
     }
 
     if (group.current) {
-      // 인터랙티브: 느린 자전 + 포인터 패럴랙스 / 비인터랙티브: 원래처럼 자전만.
-      group.current.rotation.y =
-        t * (interactive ? 0.12 : 0.22) +
-        (interactive ? state.pointer.x * 0.3 : 0);
-      group.current.rotation.x = interactive ? -state.pointer.y * 0.2 : 0;
+      if (interactive) {
+        // 인트로: 느린 자전 + 포인터 패럴랙스
+        group.current.rotation.y = t * 0.12 + state.pointer.x * 0.3;
+        group.current.rotation.x = -state.pointer.y * 0.2;
+      } else {
+        // 클래식 로고: 정면을 유지하는 부드러운 좌우 스윙(글자 가독성). 드래그는 OrbitControls.
+        group.current.rotation.y = Math.sin(t * 0.3) * 0.5;
+        group.current.rotation.x = 0;
+      }
     }
   });
 
@@ -229,8 +241,10 @@ export function ParticleLogo({
             vertexShader={vertexShader}
             fragmentShader={fragmentShader}
             transparent
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
+            depthWrite={!additive}
+            blending={
+              additive ? THREE.AdditiveBlending : THREE.NormalBlending
+            }
           />
         </points>
       </group>

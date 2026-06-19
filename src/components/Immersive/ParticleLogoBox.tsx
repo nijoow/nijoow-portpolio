@@ -6,34 +6,38 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { Suspense } from 'react';
 import { ParticleLogo } from './ParticleLogo';
 
-// 클래식 홈 상단의 반짝이는 파티클 로고 — 원래처럼 글자가 또렷, 회전 + OrbitControls.
+// 클래식 홈 상단 — 얇은 필기체 로고를 작은 파티클로 살린 "빛나는 서명".
 export default function ParticleLogoBox() {
   return (
     <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-3xl border border-white/10 bg-black sm:h-[320px]">
-      <Canvas camera={{ position: [0, 0, 3.6], fov: 45 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, 2.8], fov: 42 }} dpr={[1, 2]}>
         <ambientLight intensity={0.8} />
-        <OrbitControls enablePan={false} minDistance={2.4} maxDistance={6} />
+        <OrbitControls enablePan={false} minDistance={2} maxDistance={7} />
         <Suspense fallback={null}>
-          <group scale={1.5}>
-            {/* 밀도↑ + 포인트 크기↓ 로 글자 가독성 확보, 마우스 리펄전 없음 */}
-            <ParticleLogo interactive={false} count={18000} sizeScale={0.7} />
-          </group>
+          {/* 아주 작은 포인트로 얇은 획 유지, 노멀 블렌딩으로 손글씨가 또렷 */}
+          <ParticleLogo
+            interactive={false}
+            additive={false}
+            count={28000}
+            sizeScale={0.13}
+            jitter={0.004}
+          />
         </Suspense>
         <Sparkles
-          count={36}
+          count={30}
           scale={[9, 4.5, 4]}
-          size={1.6}
+          size={1.4}
           speed={0.3}
           color="#c0a8eb"
-          opacity={0.45}
+          opacity={0.4}
         />
         <EffectComposer>
           <Bloom
-            intensity={0.9}
-            luminanceThreshold={0.18}
-            luminanceSmoothing={0.4}
+            intensity={0.35}
+            luminanceThreshold={0.4}
+            luminanceSmoothing={0.3}
             mipmapBlur
-            radius={0.6}
+            radius={0.5}
           />
         </EffectComposer>
       </Canvas>
