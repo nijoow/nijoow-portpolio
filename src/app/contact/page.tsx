@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import ClassicContact from './_contact/ClassicContact';
-import ContactExperience from './_contact/ContactExperience';
-import ContactImmersive from './_contact/ContactImmersive';
 
 export const metadata: Metadata = {
   title: 'Contact | nijoow',
@@ -9,12 +7,7 @@ export const metadata: Metadata = {
 };
 
 const ContactPage = () => {
-  return (
-    <ContactExperience
-      immersive={<ContactImmersive />}
-      classic={<ClassicContact />}
-    />
-  );
+  return <ClassicContact />;
 };
 
 export default ContactPage;

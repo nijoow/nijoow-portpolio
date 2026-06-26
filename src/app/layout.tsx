@@ -101,7 +101,7 @@ export default function RootLayout({
                     <CustomCursor />
                     <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                       <NavBar />
-                      <main className="mx-auto w-full max-w-2xl flex-auto px-3 pt-10 pb-20">
+                      <main className="mx-auto w-full max-w-3xl flex-auto px-3 pt-10 pb-20">
                         {children}
                       </main>
                       <footer

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Circle, Coffee, Music } from 'lucide-react';
+import Image from 'next/image';
 
 const Introduce = () => {
   return (
@@ -59,19 +59,28 @@ const Introduce = () => {
       >
         <div className={'flex items-center gap-1'}>
           커피
-          <Coffee
-            size={16}
-            className="text-amber-900 transition-colors dark:text-amber-900"
+          <Image
+            src="/images/icons/coffee.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="inline-block"
           />
           와 농구
-          <Circle
-            size={16}
-            className="bounce text-amber-700 transition-colors dark:text-amber-600"
+          <Image
+            src="/images/icons/basketball.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="bounce inline-block"
           />
           , 힙합
-          <Music
-            size={16}
-            className="text-purple-dark dark:text-purple-light"
+          <Image
+            src="/images/icons/hiphop.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="inline-block"
           />
           을 좋아합니다.
         </div>

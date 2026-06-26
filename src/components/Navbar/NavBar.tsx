@@ -2,11 +2,10 @@
 
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
-import { setExperienceMode, useExperienceMode } from '@/context/ExperienceMode';
-import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
+import Logo from '../Logo/Logo';
 import NavListItem from './NavListItem';
 
 const navList = [
@@ -15,88 +14,23 @@ const navList = [
   { text: 'Contact', url: '/contact' },
 ];
 
-function ModeToggle({ className }: { className?: string }) {
-  const mode = useExperienceMode();
-  return (
-    <div
-      role="group"
-      aria-label="경험 모드 전환"
-      className={cn(
-        'flex items-center gap-1 rounded-full border border-white/15 bg-white/5 p-1 text-xs font-medium',
-        className,
-      )}
-    >
-      <button
-        type="button"
-        aria-pressed={mode === 'immersive'}
-        onClick={() => setExperienceMode('immersive')}
-        className={cn(
-          'rounded-full px-3 py-1 transition-colors',
-          mode === 'immersive'
-            ? 'bg-purple-medium text-white'
-            : 'text-white/55 hover:text-white',
-        )}
-      >
-        3D
-      </button>
-      <button
-        type="button"
-        aria-pressed={mode === 'classic'}
-        onClick={() => setExperienceMode('classic')}
-        className={cn(
-          'rounded-full px-3 py-1 transition-colors',
-          mode === 'classic'
-            ? 'bg-purple-medium text-white'
-            : 'text-white/55 hover:text-white',
-        )}
-      >
-        Classic
-      </button>
-    </div>
-  );
-}
-
 export default function NavBar() {
-  const mode = useExperienceMode();
   const [isNavShow, setIsNavShow] = useState(false);
-
-  // 3D(이머시브) 모드: 풀 헤더 대신 미니멀 플로팅 내비(로고 + 이동 + 모드 토글).
-  if (mode === 'immersive') {
-    return (
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4">
-        <Link
-          href="/"
-          className="from-purple-light to-purple-medium pointer-events-auto bg-linear-to-br bg-clip-text text-lg font-bold tracking-tight text-transparent"
-        >
-          nijoow
-        </Link>
-        <div className="pointer-events-auto flex items-center gap-5">
-          <Link
-            href="/works"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Works
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Contact
-          </Link>
-          <ModeToggle />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <nav className="sticky top-0 z-50 h-16 w-full border-b border-white/10 bg-black/40 font-medium backdrop-blur-xl md:h-14">
-      <div className="mx-auto flex h-full w-full max-w-5xl items-center px-5">
+      <div className="mx-auto flex h-full w-full max-w-3xl items-center px-5">
         <Magnetic strength={0.2}>
-          <Link href="/" className="group flex items-center gap-2">
-            <span className="from-purple-light to-purple-medium bg-linear-to-br bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity group-hover:opacity-80">
-              nijoow
-            </span>
+          <Link
+            href="/"
+            className="group flex items-center"
+            aria-label="nijoow 홈"
+          >
+            <Logo
+              width={64}
+              height={36}
+              className="transition-opacity group-hover:opacity-80"
+            />
           </Link>
         </Magnetic>
 
@@ -109,9 +43,6 @@ export default function NavBar() {
               </Magnetic>
             </li>
           ))}
-          <li className="list-none">
-            <ModeToggle />
-          </li>
         </ul>
 
         {/* Mobile */}
@@ -145,10 +76,6 @@ export default function NavBar() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="mt-2 flex items-center justify-between border-t border-white/10 px-4 pt-4">
-                <span className="text-sm text-white/60">모드</span>
-                <ModeToggle />
-              </div>
             </div>
           </motion.div>
         )}

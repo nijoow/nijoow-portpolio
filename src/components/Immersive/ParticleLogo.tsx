@@ -24,6 +24,10 @@ interface ParticleLogoProps {
   additive?: boolean;
   /** 상시 난류 강도(0에 가까울수록 얇은 획이 또렷) */
   jitter?: number;
+  /** 비인터랙티브일 때 좌우 스윙 회전 여부(false=완전 정지) */
+  rotate?: boolean;
+  /** 비인터랙티브여도 클릭하면 흩어졌다 다시 모이는 동작(홈 박스용) */
+  clickBurst?: boolean;
 }
 
 // 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
@@ -43,6 +47,7 @@ const vertexShader = /* glsl */ `
   uniform float uTime;
   uniform float uSizeScale;
   uniform float uJitterBase;
+  uniform float uMaxSize;
   uniform vec3 uMouse;
   uniform float uRadius;
   uniform float uStrength;
@@ -75,7 +80,8 @@ const vertexShader = /* glsl */ `
     vec4 mv = viewMatrix * world;
     gl_Position = projectionMatrix * mv;
     float size = mix(6.0, 13.0, aRandom);
-    gl_PointSize = size * uSizeScale * (8.0 / -mv.z);
+    // 카메라가 가까워져도 포인트가 거대한 원반으로 번지지 않도록 상한을 둔다.
+    gl_PointSize = min(size * uSizeScale * (8.0 / -mv.z), uMaxSize);
   }
 `;
 
@@ -88,7 +94,8 @@ const fragmentShader = /* glsl */ `
     vec2 c = gl_PointCoord - 0.5;
     float d = length(c);
     if (d > 0.5) discard;
-    float alpha = smoothstep(0.5, 0.0, d);
+    // 가운데는 또렷, 가장자리는 더 부드럽게 — 거친 원반 느낌 완화.
+    float alpha = pow(smoothstep(0.5, 0.0, d), 1.5);
     vec3 col = mix(uColorA, uColorB, vRand);
     gl_FragColor = vec4(col, alpha);
   }
@@ -96,11 +103,16 @@ const fragmentShader = /* glsl */ `
 
 export function ParticleLogo({
   interactive = true,
-  count = 9000,
-  sizeScale = 1,
+  count = 40000,
+  sizeScale = 0.07,
   additive = true,
-  jitter = 0.06,
+  jitter = 0.003,
+  rotate = true,
+  clickBurst = false,
 }: ParticleLogoProps) {
+  // 작고 또렷한 서명 스타일 — 포인트 최대 크기 상한(가까이서 원반화 방지).
+  const finalMaxSize = 15;
+
   const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
@@ -166,10 +178,11 @@ export function ParticleLogo({
       uMouse: { value: new THREE.Vector3(999, 999, 999) },
       uRadius: { value: 1.3 },
       uStrength: { value: 0.9 },
+      uMaxSize: { value: finalMaxSize },
       uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
       uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
     }),
-    [sizeScale, jitter],
+    [sizeScale, jitter, finalMaxSize],
   );
 
   useFrame((state) => {
@@ -179,8 +192,8 @@ export function ParticleLogo({
     // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
     const entrance = 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1);
     const eased = entrance * entrance * entrance;
-    // 비인터랙티브(클래식 로고)는 글자 가독성을 위해 흔들림을 최소화하고 펄스 없음.
-    const idle = (Math.sin(t * 0.5) * 0.5 + 0.5) * (interactive ? 0.06 : 0.025);
+    // 비인터랙티브(홈 로고/인트로)는 정지 시 글자가 또렷 — 상시 스캐터 없음.
+    const idle = interactive ? (Math.sin(t * 0.5) * 0.5 + 0.5) * 0.06 : 0;
     const pulse = interactive
       ? Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * 0.4
       : 0;
@@ -214,7 +227,8 @@ export function ParticleLogo({
         group.current.rotation.x = -state.pointer.y * 0.2;
       } else {
         // 클래식 로고: 정면을 유지하는 부드러운 좌우 스윙(글자 가독성). 드래그는 OrbitControls.
-        group.current.rotation.y = Math.sin(t * 0.3) * 0.5;
+        // rotate=false면 완전 정지(인트로용).
+        group.current.rotation.y = rotate ? Math.sin(t * 0.3) * 0.5 : 0;
         group.current.rotation.x = 0;
       }
     }
@@ -242,18 +256,16 @@ export function ParticleLogo({
             fragmentShader={fragmentShader}
             transparent
             depthWrite={!additive}
-            blending={
-              additive ? THREE.AdditiveBlending : THREE.NormalBlending
-            }
+            blending={additive ? THREE.AdditiveBlending : THREE.NormalBlending}
           />
         </points>
       </group>
 
-      {/* 클릭 캡처용 투명 평면(회전 비적용) → 어디를 클릭해도 버스트 */}
-      {interactive && (
+      {/* 클릭 캡처용 투명 평면 → 클릭하면 흩어졌다 복귀. onClick은 드래그(OrbitControls)와 구분된다. */}
+      {(interactive || clickBurst) && (
         <mesh
           position={[0, 0, -1]}
-          onPointerDown={() => {
+          onClick={() => {
             burstRef.current = timeRef.current;
           }}
         >
