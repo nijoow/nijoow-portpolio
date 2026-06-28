@@ -1,4 +1,3 @@
-import { prefix } from '@/config/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
@@ -9,7 +8,13 @@ const WorkImage = ({ url, imgSrc }: { url?: string; imgSrc: string }) => {
       {!imgSrc ? (
         <div className={''}>이미지가 없습니다</div>
       ) : (
-        <Image src={`${prefix}/images/works/${imgSrc}`} fill alt={imgSrc} priority />
+        <Image
+          src={`/images/works/${imgSrc}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
+          alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 스크린샷`}
+          priority
+        />
       )}
       {url && (
         <Link

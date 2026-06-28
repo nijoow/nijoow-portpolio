@@ -1,6 +1,5 @@
 'use client';
 
-import { prefix } from '@/config/config';
 import { AnimatePresence, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,22 +33,19 @@ const WorksList = () => {
             ) : (
               <>
                 <Image
-                  src={`${prefix}/images/works/${work.imgSrc}`}
+                  src={`/images/works/${work.imgSrc}`}
                   quality={10}
                   alt=""
                   fill
-                  objectFit="cover"
                   sizes="(max-width: 640px) 100vw, 336px"
-                  className="blur-md"
-                  preload
+                  className="object-cover blur-md"
                 />
                 <Image
-                  src={`${prefix}/images/works/${work.imgSrc}`}
+                  src={`/images/works/${work.imgSrc}`}
                   fill
-                  alt={work.name}
+                  alt={`${work.name} 작업 미리보기`}
                   sizes="(max-width: 640px) 100vw, 336px"
-                  objectFit="contain"
-                  preload
+                  className="object-contain"
                 />
               </>
             )}

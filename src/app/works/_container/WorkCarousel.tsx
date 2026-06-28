@@ -10,7 +10,6 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
-import { prefix } from '@/config/config';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -79,13 +78,12 @@ const WorkCarousel = ({
               onClick={() => setSelectedImg(imgSrc)}
             />
             <Image
-              src={`${prefix}/images/works/${imgSrc}`}
-              alt={imgSrc}
+              src={`/images/works/${imgSrc}`}
+              alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 이미지 ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-contain"
-              preload={index === 0}
-              fetchPriority={index === 0 ? "high" : "auto"}
+              priority={index === 0}
             />
           </SwiperSlide>
         ))}
@@ -126,8 +124,8 @@ const WorkCarousel = ({
               {/* Modal Image Container */}
               <div className="relative m-auto h-full w-full md:h-[96%] md:w-[84%]">
                 <Image
-                  src={`${prefix}/images/works/${selectedImg}`}
-                  alt={selectedImg}
+                  src={`/images/works/${selectedImg}`}
+                  alt={`${selectedImg.replace(/\.\w+$/, '')} 확대 이미지`}
                   fill
                   sizes="100vw"
                   className="object-contain"
