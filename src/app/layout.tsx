@@ -93,6 +93,40 @@ export default function RootLayout({
     <Redirect>
       <html lang="ko" className="h-full w-full" suppressHydrationWarning>
         <body className={`${binggrae.variable} h-full w-full`}>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@graph': [
+                  {
+                    '@type': 'Person',
+                    name: 'Lee Woo Jin',
+                    alternateName: 'nijoow',
+                    url: SITE_URL,
+                    jobTitle: 'Frontend Developer',
+                    description: SITE_DESCRIPTION,
+                    sameAs: ['https://github.com/nijoow'],
+                    knowsAbout: [
+                      'Next.js',
+                      'React',
+                      'TypeScript',
+                      'Three.js',
+                      'Web 3D',
+                      'Frontend',
+                    ],
+                  },
+                  {
+                    '@type': 'WebSite',
+                    name: 'nijoow | portfolio',
+                    url: SITE_URL,
+                    inLanguage: 'ko-KR',
+                    author: { '@type': 'Person', name: 'Lee Woo Jin' },
+                  },
+                ],
+              }),
+            }}
+          />
           <NuqsAdapter>
             <QueryProvider>
               <LazyMotion features={domAnimation}>
