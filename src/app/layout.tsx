@@ -1,3 +1,4 @@
+import ParticleLogoBox from '@/components/Immersive/ParticleLogoBoxDynamic';
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
@@ -102,6 +103,7 @@ export default function RootLayout({
                     <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                       <NavBar />
                       <main className="mx-auto w-full max-w-3xl flex-auto px-3 pt-10 pb-20">
+                        <ParticleLogoBox />
                         {children}
                       </main>
                       <footer

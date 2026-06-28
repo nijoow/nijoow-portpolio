@@ -3,7 +3,6 @@ import Informations from '@/app/_container/Information/Informations';
 import GreetingCard from '@/app/_container/Introduce/GreetingCard';
 import Introduce from '@/app/_container/Introduce/Introduce';
 import RecentlyPlayedMusic from '@/app/_container/RecentlyPlayedMusic/RecentlyPlayedMusic';
-import ParticleLogoBox from '@/components/Immersive/ParticleLogoBoxDynamic';
 import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
 import Section from '@/components/Section/Section';
 import SubTitle from '@/components/SubTitle/SubTitle';
@@ -12,7 +11,6 @@ import SubTitle from '@/components/SubTitle/SubTitle';
 export default function ClassicHome() {
   return (
     <TransitionPageWrapper>
-      <ParticleLogoBox />
       <div className="flex flex-col gap-6">
         <Section alignItems="items-start">
           <GreetingCard />

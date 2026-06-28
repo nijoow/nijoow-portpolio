@@ -7,7 +7,9 @@ import * as THREE from 'three';
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
 const ENTRANCE_SEC = 3; // 입장 응집 길이
-const BURST_SEC = 1.6; // 클릭 버스트 감쇠 길이
+const BURST_SEC = 2.4; // 버스트 1회 길이(모임→흩어짐→다시 모임)
+const BURST_PEAK = 0.95; // 버스트 최대 흩어짐 정도
+const AUTO_BURST_SEC = 10; // clickBurst일 때 자동 버스트 주기(초)
 
 interface NijoowGLTF {
   nodes: { Curve003: THREE.Mesh };
@@ -117,6 +119,7 @@ export function ParticleLogo({
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const burstRef = useRef(-Infinity);
+  const autoRef = useRef(0);
   const timeRef = useRef(0);
   const mouseWorld = useMemo(() => new THREE.Vector3(), []);
 
@@ -197,9 +200,16 @@ export function ParticleLogo({
     const pulse = interactive
       ? Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * 0.4
       : 0;
+    // 자동 버스트(clickBurst 전용): 마지막 버스트로부터 AUTO_BURST_SEC마다 1회.
+    if (clickBurst && t - autoRef.current >= AUTO_BURST_SEC) {
+      autoRef.current = t;
+      burstRef.current = t;
+    }
+    // 버스트 곡선: 모인 글자(0)에서 시작해 흩어졌다(피크) 다시 모인다(0).
     const since = t - burstRef.current;
-    const burst = since >= 0 ? Math.max(0, 1 - since / BURST_SEC) : 0;
-    const progress = Math.max(eased, idle, pulse, burst * burst * 0.9);
+    const bp = since >= 0 ? since / BURST_SEC : Infinity;
+    const burst = bp <= 1 ? Math.sin(Math.PI * bp) * BURST_PEAK : 0;
+    const progress = Math.max(eased, idle, pulse, burst);
 
     const mat = matRef.current;
     if (mat) {
@@ -261,12 +271,14 @@ export function ParticleLogo({
         </points>
       </group>
 
-      {/* 클릭 캡처용 투명 평면 → 클릭하면 흩어졌다 복귀. onClick은 드래그(OrbitControls)와 구분된다. */}
+      {/* 우클릭 캡처용 투명 평면 → 우클릭하면 흩어졌다 복귀(자동으로도 주기적 발동). */}
       {(interactive || clickBurst) && (
         <mesh
           position={[0, 0, -1]}
-          onClick={() => {
+          onContextMenu={(e) => {
+            e.nativeEvent.preventDefault();
             burstRef.current = timeRef.current;
+            autoRef.current = timeRef.current;
           }}
         >
           <planeGeometry args={[60, 40]} />
