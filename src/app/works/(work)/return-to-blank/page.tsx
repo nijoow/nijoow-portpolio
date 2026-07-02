@@ -84,7 +84,7 @@ const ReturnToBlankPage = () => {
         href="https://www.youtube.com/watch?v=11Wplgnpt90"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
       >
         <span>졸업전시회 시연 영상</span>
       </Link>
@@ -92,7 +92,7 @@ const ReturnToBlankPage = () => {
         href="https://github.com/nijoow/return-to-blank"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
+        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
       >
         <GithubIcon size={20} />
         <span>Github</span>

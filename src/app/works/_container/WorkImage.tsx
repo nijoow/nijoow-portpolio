@@ -1,29 +1,40 @@
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
 
 const WorkImage = ({ url, imgSrc }: { url?: string; imgSrc: string }) => {
   return (
-    <div className="group relative h-0 w-full max-w-3xl overflow-hidden rounded-lg pb-[56.25%] shadow-md">
+    <div className="group relative h-0 w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 pb-[56.25%] shadow-md">
       {!imgSrc ? (
-        <div className={''}>이미지가 없습니다</div>
+        <div>이미지가 없습니다</div>
       ) : (
-        <Image
-          src={`/images/works/${imgSrc}`}
-          fill
-          sizes="(max-width: 768px) 100vw, 768px"
-          alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 스크린샷`}
-          priority
-        />
+        <>
+          <Image
+            src={`/images/works/${imgSrc}`}
+            quality={10}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover blur-md"
+          />
+          <Image
+            src={`/images/works/${imgSrc}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 768px"
+            alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 스크린샷`}
+            priority
+            className="object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+        </>
       )}
       {url && (
         <Link
           href={url}
           target="_blank"
-          className="absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 group-hover:opacity-100"
+          className="absolute inset-0 flex h-full w-full items-center justify-center bg-black/60 opacity-0 backdrop-blur-xs transition-all duration-300 group-hover:opacity-100 focus-visible:opacity-100"
         >
-          <span className="flex items-center text-2xl text-white">
-            사이트 바로가기 <ChevronRight size={30} />
+          <span className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-base font-bold text-white backdrop-blur-md">
+            사이트 바로가기 <ExternalLink size={16} />
           </span>
         </Link>
       )}

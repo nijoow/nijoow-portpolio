@@ -64,7 +64,7 @@ const WorkCarousel = ({
         }}
         loop
         className={cn(
-          '[&_.swiper-pagination-bullet-active]:bg-purple-regular relative w-full max-w-3xl overflow-hidden rounded-lg shadow-md',
+          '[&_.swiper-pagination-bullet-active]:bg-purple-regular relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-md',
           aspectRatio === 'video' ? 'aspect-video' : 'aspect-square',
         )}
       >

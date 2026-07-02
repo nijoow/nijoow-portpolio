@@ -65,7 +65,7 @@ const MemoryPage = () => {
         href="https://nijoow.github.io/PNUDT12/pages/about.html"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
+        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -73,7 +73,7 @@ const MemoryPage = () => {
         href="https://github.com/nijoow/PNUDT12"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
+        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
       >
         <GithubIcon size={20} />
         <span>Github</span>
