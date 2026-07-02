@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, m } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
@@ -52,10 +53,29 @@ const WorksList = () => {
             <Link
               href={`/works/${work.pageName}`}
               aria-label={`${work.name} 작업 상세 보기`}
-              className={`focus-visible:ring-purple-light absolute inset-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition-all duration-300 outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-inset`}
+              className={`focus-visible:ring-purple-light absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-0.5 bg-black/70 px-3 text-center opacity-0 transition-all duration-300 outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-inset`}
             >
               <span className="text-lg text-white">{work.name} &gt;</span>
+              {work.period && (
+                <span className="text-xs text-white/60">{work.period}</span>
+              )}
+              {work.description && (
+                <span className="line-clamp-2 text-xs text-white/70">
+                  {work.description}
+                </span>
+              )}
             </Link>
+            {work.liveUrl && (
+              <a
+                href={work.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${work.name} 라이브 사이트 열기`}
+                className="absolute top-2 right-2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-black/50 text-white/80 opacity-0 backdrop-blur-sm transition-all group-hover:opacity-100 hover:bg-black/70 hover:text-white focus-visible:opacity-100"
+              >
+                <ExternalLink size={14} />
+              </a>
+            )}
           </m.div>
         ))}
       </AnimatePresence>

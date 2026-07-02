@@ -9,7 +9,7 @@ import Logo from '../Logo/Logo';
 import NavListItem from './NavListItem';
 
 const navList = [
-  { text: 'Home', url: '/' },
+  { text: 'About', url: '/' },
   { text: 'Works', url: '/works' },
   { text: 'Contact', url: '/contact' },
 ];
