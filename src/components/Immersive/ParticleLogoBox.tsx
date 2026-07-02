@@ -4,6 +4,7 @@ import { OrbitControls, Sparkles } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useReducedMotion } from 'framer-motion';
+import { MouseRight, Move3d } from 'lucide-react';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { ParticleLogo } from './ParticleLogo';
 
@@ -79,9 +80,23 @@ export default function ParticleLogoBox() {
             </span>
           </span>
         </div>
-        <span className="hidden text-xs text-white/35 sm:block">
-          드래그 · 우클릭으로 파티클을 흩어보세요
-        </span>
+        <div
+          className="hidden items-center gap-1.5 sm:flex"
+          aria-label="드래그로 회전, 우클릭으로 파티클 흩기"
+        >
+          <span
+            title="드래그로 회전"
+            className="flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm"
+          >
+            <Move3d size={15} />
+          </span>
+          <span
+            title="우클릭으로 파티클 흩기"
+            className="flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm"
+          >
+            <MouseRight size={15} />
+          </span>
+        </div>
       </div>
     </div>
   );

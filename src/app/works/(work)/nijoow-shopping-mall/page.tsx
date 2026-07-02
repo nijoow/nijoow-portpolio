@@ -69,7 +69,7 @@ const NijoowShoppingMallPage = () => {
         href="https://nijoow-shopping-mall.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -77,7 +77,7 @@ const NijoowShoppingMallPage = () => {
         href="https://github.com/nijoow/shopping-mall"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <GithubIcon size={20} />
         <span>Github</span>

@@ -69,13 +69,13 @@ const SVGDrawingPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: 도형이 회전되어 있는 상태에서 크기를 조절할 때, 실제 드래그
             거리와 도형의 크기 변화가 일치하지 않는 현상 발생
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="text-purple-light/90 text-sm break-keep">
             해결책: 중심점을 기준으로 각 꼭짓점의 상대 좌표를 계산하고, 회전각을
             적용한 벡터 연산을 통해 크기 조절 로직을 보정하여 해결
           </p>
@@ -90,7 +90,7 @@ const SVGDrawingPage = () => {
         href="https://nijoow-drawing.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -98,7 +98,7 @@ const SVGDrawingPage = () => {
         href="https://github.com/nijoow/svg-drawing"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <GithubIcon size={20} />
         <span>Github</span>

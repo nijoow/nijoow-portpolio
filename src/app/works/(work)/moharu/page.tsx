@@ -59,13 +59,13 @@ const MoharuPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: 백엔드(NCP)와 프론트엔드(Vercel) 배포 환경이 다른 상태에서,
             LTE 모바일 네트워크 접속 시 간헐적으로 SSL_PROTOCOL_ERROR 발생
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             해결책: NCP 서브 도메인의 DNS Records를 Vercel 도메인 설정에
             추가하여 네트워크 경로상의 IP 불일치 문제를 해결
           </p>
@@ -80,7 +80,7 @@ const MoharuPage = () => {
         href="https://bside.best/projects/detail/P240514222247"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <span>상세 설명 바로가기</span>
       </Link>
@@ -89,7 +89,7 @@ const MoharuPage = () => {
         href="https://github.com/poten-moharu/moharu-frontend"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <GithubIcon size={20} />
         <span>Github</span>

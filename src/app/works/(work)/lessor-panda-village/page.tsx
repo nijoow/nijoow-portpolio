@@ -105,13 +105,13 @@ const LessorPandaVillagePage = () => {
           <strong className="font-bold">하이드레이션(Hydration) 에러</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: 랜덤 파티클 배치 시 서버와 클라이언트의 렌더링 결과가
             불일치하여 발생하는 하이드레이션 오류
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="text-purple-light/90 text-sm break-keep">
             해결책: useEffect 내 상태 초기화 및 dynamic import를 통해 클라이언트
             사이드 렌더링 시점에만 해당 로직이 활성화되도록 수정
           </p>
@@ -123,13 +123,13 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: Html 컴포넌트로 구현된 닉네임이 캐릭터의 움직임을 따라가지
             못하고 고정되지 않는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="text-purple-light/90 text-sm break-keep">
             해결책: Html 대신 3D 씬 내부에 포함되는 Text 컴포넌트를 사용하여
             정확한 3D 좌표 동기화 구현
           </p>
@@ -141,13 +141,13 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: Supabase Realtime 통신 시 과도한 업데이트로 인한 네트워크 부하
             및 리렌더링 성능 저하
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="text-purple-light/90 text-sm break-keep">
             해결책: 위치 정보를 useRef로 관리하여 리렌더링을 방지하고, 전송
             주기를 100ms로 조절하여 트래픽 80% 절감
           </p>
@@ -160,7 +160,7 @@ const LessorPandaVillagePage = () => {
         href="https://lessor-panda-village.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -168,7 +168,7 @@ const LessorPandaVillagePage = () => {
         href="https://github.com/nijoow/lessor-panda-village"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <GithubIcon size={20} />
         <span>Github</span>

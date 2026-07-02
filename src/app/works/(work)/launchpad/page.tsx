@@ -52,13 +52,13 @@ const LaunchpadPage = () => {
           <strong className="font-bold">연속 클릭 시 사운드 중첩 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm break-keep text-white/50">
             이슈: onClick 이벤트를 통해 사운드를 재생할 때, 빠른 속도로 연속
             클릭 시 사운드가 끊기지 않고 부자연스럽게 중첩되는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="text-purple-light/90 text-sm break-keep">
             해결책: 마우스를 누를 때와 뗄 때의 이벤트를 분리하고, 모바일 환경을
             위해 Touch 이벤트를 개별 처리하여 사운드 재생 시점 제어
           </p>
@@ -71,7 +71,7 @@ const LaunchpadPage = () => {
         href="https://nijoow-launchpad.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <span>사이트 바로가기</span>
       </Link>
@@ -79,7 +79,7 @@ const LaunchpadPage = () => {
         href="https://github.com/nijoow/launchpad"
         target="_blank"
         rel="noopener noreferrer"
-        className="from-purple-medium to-purple-darker flex items-center justify-center gap-2 rounded-full bg-linear-to-r px-6 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110"
+        className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 flex items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors"
       >
         <GithubIcon size={20} />
         <span>Github</span>

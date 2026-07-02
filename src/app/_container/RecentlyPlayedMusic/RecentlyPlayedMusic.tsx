@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -234,6 +235,16 @@ const RecentlyPlayedMusic = () => {
             />
           ))}
         </div>
+      </div>
+
+      {/* Spotify로 이동하는 카드임을 알리는 우측 어포던스 */}
+      <div className="hidden shrink-0 flex-col items-center gap-1.5 self-center md:flex">
+        <span className="group-hover:border-purple-light/40 group-hover:text-purple-light flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 backdrop-blur-sm transition-colors">
+          <ExternalLink size={16} />
+        </span>
+        <span className="text-xs font-bold tracking-widest text-white/35 uppercase">
+          Spotify
+        </span>
       </div>
     </Link>
   );

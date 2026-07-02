@@ -173,10 +173,10 @@ export const ContactForm = () => {
           type="submit"
           disabled={isSubmitting}
           className={cn(
-            'mt-2 w-full rounded-xl py-3.5 font-bold text-white transition-all',
+            'mt-2 w-full rounded-xl border py-3.5 font-bold text-white backdrop-blur-xl transition-colors',
             isSubmitting
-              ? 'cursor-not-allowed bg-gray-500/60'
-              : 'from-purple-medium to-purple-darker bg-linear-to-r shadow-lg hover:brightness-110',
+              ? 'cursor-not-allowed border-white/10 bg-gray-500/40'
+              : 'border-purple-light/25 bg-purple-medium/25 hover:bg-purple-medium/40',
           )}
         >
           {isSubmitting ? '전송 중...' : '전송하기'}
