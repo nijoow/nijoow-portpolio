@@ -80,22 +80,26 @@ export default function ParticleLogoBox() {
             </span>
           </span>
         </div>
-        <div
-          className="hidden items-center gap-1.5 sm:flex"
-          aria-label="드래그로 회전, 우클릭으로 파티클 흩기"
-        >
-          <span
-            title="드래그로 회전"
-            className="flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm"
-          >
-            <Move3d size={15} />
-          </span>
-          <span
-            title="우클릭으로 파티클 흩기"
-            className="flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm"
-          >
-            <MouseRight size={15} />
-          </span>
+        <div className="pointer-events-auto hidden items-center gap-1.5 sm:flex">
+          {[
+            { icon: <Move3d size={15} />, tip: '드래그해서 회전' },
+            { icon: <MouseRight size={15} />, tip: '우클릭으로 파티클 흩기' },
+          ].map(({ icon, tip }) => (
+            <span
+              key={tip}
+              tabIndex={0}
+              aria-label={tip}
+              className="group/tip hover:border-purple-light/40 hover:text-purple-light relative flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm transition-colors"
+            >
+              {icon}
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute right-0 bottom-full mb-2 rounded-lg border border-white/10 bg-black/85 px-2.5 py-1 text-xs whitespace-nowrap text-white/80 opacity-0 backdrop-blur-md transition-opacity group-hover/tip:opacity-100 group-focus-visible/tip:opacity-100"
+              >
+                {tip}
+              </span>
+            </span>
+          ))}
         </div>
       </div>
     </div>

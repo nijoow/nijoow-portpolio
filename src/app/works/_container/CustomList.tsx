@@ -1,13 +1,14 @@
+import GlassCard from '@/components/Motion/GlassCard';
 import React from 'react';
 
 const CustomList = ({ children }: { children: React.ReactNode }) => (
-  <ul className="flex w-full flex-col gap-1.5 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl sm:p-5">
-    {children}
-  </ul>
+  <GlassCard lift={false} className="w-full">
+    <ul className="flex w-full flex-col gap-1.5 p-4 sm:p-5">{children}</ul>
+  </GlassCard>
 );
 
 const MainListItem = ({ children }: { children: React.ReactNode }) => (
-  <li className="mt-1.5 flex gap-2.5 text-[15px] break-keep first:mt-0">
+  <li className="mt-3 flex gap-2.5 text-[15px] break-keep first:mt-0">
     <span className="bg-purple-light/80 mt-2 size-1.5 shrink-0 rounded-full" />
     <div className="min-w-0">{children}</div>
   </li>

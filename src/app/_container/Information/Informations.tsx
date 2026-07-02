@@ -2,6 +2,7 @@
 
 import { Calendar, Mail, Pencil, User } from 'lucide-react';
 import { GithubIcon } from '@/components/Icons/GithubIcon';
+import GlassCard from '@/components/Motion/GlassCard';
 import InformationItem from './InformationItem';
 
 const informationList = [
@@ -34,17 +35,19 @@ const informationList = [
 
 const Informations = () => {
   return (
-    <div className="grid w-full grid-cols-1 gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:grid-cols-2 sm:gap-5 sm:p-6">
-      {informationList.map(({ icon, list, contents, link }) => (
-        <InformationItem
-          key={list}
-          icon={icon}
-          list={list}
-          contents={contents}
-          link={link}
-        />
-      ))}
-    </div>
+    <GlassCard className="w-full">
+      <div className="grid w-full grid-cols-1 gap-4 p-5 sm:grid-cols-2 sm:gap-5 sm:p-6">
+        {informationList.map(({ icon, list, contents, link }) => (
+          <InformationItem
+            key={list}
+            icon={icon}
+            list={list}
+            contents={contents}
+            link={link}
+          />
+        ))}
+      </div>
+    </GlassCard>
   );
 };
 

@@ -1,10 +1,10 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import GlassCard from '@/components/Motion/GlassCard';
+import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
 import { useNowPlaying } from './useNowPlaying';
 
 // 이퀄라이저 막대 애니메이션 설정은 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지).
@@ -22,230 +22,143 @@ const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
 const RecentlyPlayedMusic = () => {
   const { data: music, isPending } = useNowPlaying();
 
-  const cardRef = useRef<HTMLAnchorElement>(null);
-
-  // Mouse tracking for interactive glow
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  // Transformations for dynamic movement
-  const blobX = useTransform(springX, [0, 1], ['15%', '-15%']);
-  const blobY = useTransform(springY, [0, 1], ['15%', '-15%']);
-
-  const cursorBlobX = useTransform(springX, [0, 1], ['0%', '100%']);
-  const cursorBlobY = useTransform(springY, [0, 1], ['0%', '100%']);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!cardRef.current) return;
-    const { left, top, width, height } =
-      cardRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - left) / width);
-    mouseY.set((e.clientY - top) / height);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0.5);
-    mouseY.set(0.5);
-  };
-
   if (isPending)
     return (
-      <div
-        className={
-          'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all md:gap-8 md:px-8 dark:border-white/10'
-        }
-      >
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
-        <div
-          className={
-            'bg-purple-medium/30 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl md:size-40'
-          }
-        />
-        <div className={'relative size-20 shrink-0 md:size-32'}>
-          <motion.div
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className={
-              'relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-black/5 shadow-lg md:size-32 dark:bg-white/5'
-            }
-          >
-            <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
-              🎵
+      <GlassCard className="w-full">
+        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
+          <div className="bg-purple-medium/25 absolute top-0 -left-4 size-32 rounded-full blur-3xl md:size-40" />
+          <div className="relative size-20 shrink-0 md:size-32">
+            <motion.div
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-white/5 shadow-lg md:size-32"
+            >
+              <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
+                🎵
+              </div>
+            </motion.div>
+          </div>
+          <div className="flex h-20 flex-auto flex-col justify-center">
+            <div className="animate-pulse">
+              <div className="mb-2 h-5 w-32 rounded-full bg-white/10" />
+              <div className="h-4 w-48 rounded-full bg-white/5" />
             </div>
-          </motion.div>
-        </div>
-        <div className={'flex h-20 flex-auto flex-col justify-center'}>
-          <div className="animate-pulse">
-            <div className="mb-2 h-5 w-32 rounded-full bg-gray-200 dark:bg-white/10" />
-            <div className="h-4 w-48 rounded-full bg-gray-100 dark:bg-white/5" />
           </div>
         </div>
-      </div>
+      </GlassCard>
     );
 
   if (!music)
     return (
-      <div
-        className={
-          'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all md:gap-8 md:px-8 dark:border-white/10'
-        }
-      >
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
-        <div
-          className={
-            'bg-purple-medium/30 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl md:size-40'
-          }
-        />
-        <div className={'relative size-20 shrink-0 md:size-32'}>
-          <div
-            className={
-              'relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-black/5 shadow-lg md:size-32 dark:bg-white/5'
-            }
-          >
-            <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
-              😭
+      <GlassCard className="w-full">
+        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
+          <div className="bg-purple-medium/25 absolute top-0 -left-4 size-32 rounded-full blur-3xl md:size-40" />
+          <div className="relative size-20 shrink-0 md:size-32">
+            <div className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-white/5 shadow-lg md:size-32">
+              <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
+                😭
+              </div>
+            </div>
+          </div>
+          <div className="flex h-20 flex-auto flex-col justify-center">
+            <div className="text-base font-bold text-white">
+              현재 곡을 표시할 수 없습니다
+            </div>
+            <div className="text-purple-light/60 text-sm">
+              나중에 다시 확인해 주세요ㅠㅠ
             </div>
           </div>
         </div>
-        <div className={'flex h-20 flex-auto flex-col justify-center'}>
-          <div className="text-base font-bold text-gray-900 dark:text-white">
-            현재 곡을 표시할 수 없습니다
-          </div>
-          <div className="dark:text-purple-light/60 text-sm text-gray-500">
-            나중에 다시 확인해 주세요ㅠㅠ
-          </div>
-        </div>
-      </div>
+      </GlassCard>
     );
 
   return (
     <Link
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       href={music.songUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={
-        'group relative flex w-full items-center justify-center gap-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-lg backdrop-blur-xl transition-all hover:bg-white/10 md:gap-8 md:px-8 dark:border-white/10'
-      }
+      className="group block w-full"
     >
-      {/* Specular Highlight */}
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-40" />
+      <GlassCard className="w-full">
+        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
+          {/* 앨범 아트 뒤 퍼플 글로우 — 카드 정체성 컬러 */}
+          <div className="bg-purple-medium/25 group-hover:bg-purple-medium/40 absolute top-0 -left-4 size-32 rounded-full blur-3xl transition-colors md:size-40" />
 
-      {/* Static Background Blob (As requested to keep) */}
-      <div
-        className={
-          'bg-purple-medium/30 group-hover:bg-purple-medium/50 absolute top-0 -left-4 -z-10 size-32 rounded-full blur-3xl transition-opacity md:size-40'
-        }
-      />
-
-      {/* Interactive Mouse Follower Blob */}
-      <motion.div
-        style={{
-          left: cursorBlobX,
-          top: cursorBlobY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        className="bg-purple-medium/20 pointer-events-none absolute -z-10 size-48 rounded-full opacity-0 blur-3xl transition-opacity group-hover:opacity-100"
-      />
-
-      <div className={'relative size-20 shrink-0 md:size-32'}>
-        <motion.div
-          layoutId="glow"
-          style={{ x: blobX, y: blobY }}
-          className={
-            'bg-purple-light/50 absolute inset-0 -z-10 rounded-full blur-xl'
-          }
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          animate={{ rotate: [0, 360] }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className={
-            'relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 shadow-lg md:size-32'
-          }
-        >
-          <Image
-            src={music.albumImageUrl}
-            fill
-            alt={music.title}
-            className={'object-cover'}
-          />
-          <div
-            className={
-              'absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-gray-900 shadow-inner'
-            }
-          />
-        </motion.div>
-      </div>
-
-      <div className={'flex h-20 flex-auto flex-col justify-center truncate'}>
-        <div className={'flex items-center gap-2'}>
-          <span
-            className={
-              'flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]'
-            }
-          />
-          <div
-            className={
-              'truncate text-base font-bold text-gray-900 dark:text-white'
-            }
-          >
-            {music.title}
-          </div>
-        </div>
-        <div
-          className={
-            'dark:text-purple-light/80 mb-2 truncate text-sm font-semibold text-gray-500'
-          }
-        >
-          {music.artist}
-        </div>
-
-        <div className="flex h-5 w-full items-end gap-0.5 overflow-hidden pb-1">
-          {EQUALIZER_BARS.map((bar) => (
+          <div className="relative size-20 shrink-0 md:size-32">
             <motion.div
-              key={bar.id}
-              className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
-              animate={{ height: bar.heights }}
+              className="bg-purple-light/50 absolute inset-0 rounded-full blur-xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
               transition={{
+                duration: 2,
                 repeat: Infinity,
-                duration: bar.duration,
-                delay: bar.delay,
                 ease: 'easeInOut',
               }}
             />
-          ))}
-        </div>
-      </div>
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 shadow-lg md:size-32"
+            >
+              <Image
+                src={music.albumImageUrl}
+                fill
+                alt={music.title}
+                className="object-cover"
+              />
+              <div className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-gray-900 shadow-inner" />
+            </motion.div>
+          </div>
 
-      {/* Spotify로 이동하는 카드임을 알리는 우측 어포던스 */}
-      <div className="hidden shrink-0 flex-col items-center gap-1.5 self-center md:flex">
-        <span className="group-hover:border-purple-light/40 group-hover:text-purple-light flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 backdrop-blur-sm transition-colors">
-          <ExternalLink size={16} />
-        </span>
-        <span className="text-xs font-bold tracking-widest text-white/35 uppercase">
-          Spotify
-        </span>
-      </div>
+          <div className="flex h-20 min-w-0 flex-auto flex-col justify-center truncate">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+              <div className="truncate text-base font-bold text-white">
+                {music.title}
+              </div>
+            </div>
+            <div className="text-purple-light/80 mb-2 truncate text-sm font-semibold">
+              {music.artist}
+            </div>
+
+            <div className="flex h-5 w-full items-end gap-0.5 overflow-hidden pb-1">
+              {EQUALIZER_BARS.map((bar) => (
+                <motion.div
+                  key={bar.id}
+                  className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
+                  animate={{ height: bar.heights }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: bar.duration,
+                    delay: bar.delay,
+                    ease: 'easeInOut',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Spotify로 이동하는 카드임을 알리는 우측 어포던스 */}
+          <div className="hidden shrink-0 flex-col items-center gap-1.5 self-center md:flex">
+            <span className="group-hover:border-purple-light/40 group-hover:text-purple-light flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 backdrop-blur-sm transition-colors">
+              <ExternalLink size={16} />
+            </span>
+            <span className="text-xs font-bold tracking-widest text-white/35 uppercase">
+              Spotify
+            </span>
+          </div>
+        </div>
+      </GlassCard>
     </Link>
   );
 };

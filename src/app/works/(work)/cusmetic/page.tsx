@@ -84,13 +84,13 @@ const CusmeticPage = () => {
           <strong className="font-bold">서버 컴포넌트 데이터 캐싱 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm break-keep text-white/50">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: fetch 함수에 no-store 옵션을 적용했음에도 클라이언트 Router
             Cache로 인해 약 30초간 새로운 데이터를 불러오지 못하는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-light/90 text-sm break-keep">
+          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 페이지 진입 시 router.refresh()를 호출하여 클라이언트 측
             캐시를 강제로 무효화함으로써 최신 데이터 보장
           </p>
@@ -100,13 +100,13 @@ const CusmeticPage = () => {
           <strong className="font-bold">Next/Image 로딩 성능 저하</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm break-keep text-white/50">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: layout=&apos;fill&apos; 사용 시 너무 많은 srcSet이 생성되어
             이미지 로딩 속도가 느려지는 문제 발생
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-light/90 text-sm break-keep">
+          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
             해결책: next.config.js에서 imageSizes 및 deviceSizes를 최적화하여
             불필요한 이미지 생성을 방지
           </p>

@@ -69,13 +69,13 @@ const SVGDrawingPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm break-keep text-white/50">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: 도형이 회전되어 있는 상태에서 크기를 조절할 때, 실제 드래그
             거리와 도형의 크기 변화가 일치하지 않는 현상 발생
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-light/90 text-sm break-keep">
+          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 중심점을 기준으로 각 꼭짓점의 상대 좌표를 계산하고, 회전각을
             적용한 벡터 연산을 통해 크기 조절 로직을 보정하여 해결
           </p>

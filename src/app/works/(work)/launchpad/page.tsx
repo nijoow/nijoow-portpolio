@@ -52,13 +52,13 @@ const LaunchpadPage = () => {
           <strong className="font-bold">연속 클릭 시 사운드 중첩 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm break-keep text-white/50">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: onClick 이벤트를 통해 사운드를 재생할 때, 빠른 속도로 연속
             클릭 시 사운드가 끊기지 않고 부자연스럽게 중첩되는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-light/90 text-sm break-keep">
+          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 마우스를 누를 때와 뗄 때의 이벤트를 분리하고, 모바일 환경을
             위해 Touch 이벤트를 개별 처리하여 사운드 재생 시점 제어
           </p>
