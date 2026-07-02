@@ -18,8 +18,8 @@ export default function NavBar() {
   const [isNavShow, setIsNavShow] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 h-16 w-full border-b border-white/10 bg-black/40 font-medium backdrop-blur-xl md:h-14">
-      <div className="mx-auto flex h-full w-full max-w-3xl items-center px-5">
+    <nav className="fixed inset-x-0 top-4 z-50 px-4">
+      <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between rounded-full border border-white/10 bg-black/50 px-5 shadow-lg backdrop-blur-xl">
         <Magnetic strength={0.2}>
           <Link
             href="/"
@@ -27,15 +27,15 @@ export default function NavBar() {
             aria-label="nijoow 홈"
           >
             <Logo
-              width={64}
-              height={36}
+              width={56}
+              height={32}
               className="transition-opacity group-hover:opacity-80"
             />
           </Link>
         </Magnetic>
 
         {/* Desktop */}
-        <ul className="hidden h-full items-center gap-7 md:ml-auto md:flex">
+        <ul className="hidden items-center gap-1 md:flex">
           {navList.map(({ text, url }) => (
             <li className="list-none" key={text}>
               <Magnetic strength={0.3}>
@@ -46,7 +46,7 @@ export default function NavBar() {
         </ul>
 
         {/* Mobile */}
-        <div className="ml-auto md:hidden">
+        <div className="md:hidden">
           <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function NavBar() {
                   <Link
                     href={url}
                     onClick={() => setIsNavShow(false)}
-                    className="flex h-12 w-full items-center px-4 text-lg font-medium text-white transition-colors hover:bg-white/10"
+                    className="flex h-12 w-full items-center rounded-xl px-4 text-lg font-medium text-white transition-colors hover:bg-white/10"
                   >
                     {text}
                   </Link>

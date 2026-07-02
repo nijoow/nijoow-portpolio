@@ -3,6 +3,7 @@ import Informations from '@/app/_container/Information/Informations';
 import GreetingCard from '@/app/_container/Introduce/GreetingCard';
 import Introduce from '@/app/_container/Introduce/Introduce';
 import RecentlyPlayedMusic from '@/app/_container/RecentlyPlayedMusic/RecentlyPlayedMusic';
+import Reveal from '@/components/Motion/Reveal';
 import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
 import Section from '@/components/Section/Section';
 import SubTitle from '@/components/SubTitle/SubTitle';
@@ -11,7 +12,7 @@ import SubTitle from '@/components/SubTitle/SubTitle';
 export default function ClassicHome() {
   return (
     <TransitionPageWrapper>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-14">
         <Section alignItems="items-start">
           <GreetingCard />
         </Section>
@@ -19,16 +20,22 @@ export default function ClassicHome() {
           <Introduce />
         </Section>
         <Section>
-          <SubTitle title="Information" />
-          <Informations />
+          <Reveal>
+            <SubTitle eyebrow="Profile" title="Information" />
+            <Informations />
+          </Reveal>
         </Section>
         <Section>
-          <SubTitle title="Recently Played Music" />
-          <RecentlyPlayedMusic />
+          <Reveal>
+            <SubTitle eyebrow="Music" title="Recently Played" />
+            <RecentlyPlayedMusic />
+          </Reveal>
         </Section>
         <Section>
-          <SubTitle title="Github Commit Log" />
-          <GithubCommitLog />
+          <Reveal>
+            <SubTitle eyebrow="GitHub" title="Commit Log" />
+            <GithubCommitLog />
+          </Reveal>
         </Section>
       </div>
     </TransitionPageWrapper>

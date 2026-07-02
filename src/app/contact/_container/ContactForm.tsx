@@ -10,10 +10,10 @@ import { z } from 'zod';
 
 const fieldClass = (hasError: boolean) =>
   cn(
-    'rounded-lg border bg-white/50 p-3 transition-all outline-none focus:ring-2 dark:bg-white/5',
+    'rounded-xl border bg-white/5 p-3.5 text-sm transition-all outline-none placeholder:text-white/30 focus:ring-2',
     hasError
       ? 'border-red-500 ring-red-500'
-      : 'border-purple-dark/20 ring-purple-regular dark:ring-purple-light dark:border-white/10',
+      : 'border-white/10 ring-purple-light focus:border-transparent',
   );
 
 const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
@@ -101,7 +101,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <div className="w-full py-6">
+    <div className="w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-sm font-semibold">
@@ -173,10 +173,10 @@ export const ContactForm = () => {
           type="submit"
           disabled={isSubmitting}
           className={cn(
-            'mt-4 w-full rounded-lg py-4 font-bold text-white transition-colors',
+            'mt-2 w-full rounded-xl py-3.5 font-bold text-white transition-all',
             isSubmitting
-              ? 'cursor-not-allowed bg-gray-400'
-              : 'bg-purple-dark hover:bg-purple-darker dark:bg-purple-regular dark:hover:bg-purple-dark',
+              ? 'cursor-not-allowed bg-gray-500/60'
+              : 'from-purple-medium to-purple-darker bg-linear-to-r shadow-lg hover:brightness-110',
           )}
         >
           {isSubmitting ? '전송 중...' : '전송하기'}

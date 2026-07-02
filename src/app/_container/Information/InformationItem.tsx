@@ -15,28 +15,25 @@ export default function InformationItem({
   link,
 }: InformationItemProps) {
   return (
-    <div className={'flex w-full items-center'}>
-      <div
-        className={
-          'flex flex-3 items-center justify-start gap-1 text-sm font-semibold sm:flex-2'
-        }
-      >
+    <div className="flex items-center gap-3">
+      <div className="text-purple-light flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
         {icon}
-        <span>{list}</span>
       </div>
-      <div className={'flex-7 text-sm font-semibold sm:flex-8 sm:text-lg'}>
-        :{' '}
+      <div className="flex min-w-0 flex-col">
+        <span className="text-xs font-semibold text-white/45">{list}</span>
         {link ? (
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={'text-purple-medium dark:text-purple-light'}
+            className="text-purple-light truncate text-sm font-bold hover:underline sm:text-base"
           >
             {contents}
           </Link>
         ) : (
-          <span>{contents}</span>
+          <span className="truncate text-sm font-bold sm:text-base">
+            {contents}
+          </span>
         )}
       </div>
     </div>

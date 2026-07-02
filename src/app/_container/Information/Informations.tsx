@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Calendar,
-  Mail,
-  Pencil,
-  User,
-} from 'lucide-react';
+import { Calendar, Mail, Pencil, User } from 'lucide-react';
 import { GithubIcon } from '@/components/Icons/GithubIcon';
 import InformationItem from './InformationItem';
 
@@ -39,7 +34,7 @@ const informationList = [
 
 const Informations = () => {
   return (
-    <div className="flex w-full flex-col gap-1">
+    <div className="grid w-full grid-cols-1 gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:grid-cols-2 sm:gap-5 sm:p-6">
       {informationList.map(({ icon, list, contents, link }) => (
         <InformationItem
           key={list}

@@ -13,7 +13,7 @@ interface SectionProps {
 const Section = ({ children, alignItems = 'items-center' }: SectionProps) => {
   return (
     <div
-      className={`mx-auto flex w-full max-w-3xl flex-col gap-2 ${alignItems}`}
+      className={`mx-auto flex w-full max-w-4xl flex-col gap-2 ${alignItems}`}
     >
       {children}
     </div>

@@ -136,17 +136,34 @@ export default function RootLayout({
                     <CustomCursor />
                     <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                       <NavBar />
-                      <main className="mx-auto w-full max-w-3xl flex-auto px-3 pt-10 pb-20">
+                      <main className="mx-auto w-full max-w-4xl flex-auto px-4 pt-24 pb-24">
                         <ParticleLogoBox />
                         {children}
                       </main>
-                      <footer
-                        className={
-                          'flex w-full items-center justify-center py-5 text-sm'
-                        }
-                      >
-                        &copy; {new Date().getFullYear()} Lee Woo Jin. All
-                        Rights Reserved.
+                      <footer className="mt-auto w-full border-t border-white/10">
+                        <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-between gap-3 px-4 py-7 sm:flex-row">
+                          <span className="text-sm text-white/50">
+                            &copy; {new Date().getFullYear()} Lee Woo Jin. All
+                            Rights Reserved.
+                          </span>
+                          <div className="flex items-center gap-4 text-sm font-semibold text-white/60">
+                            <a
+                              href="https://github.com/nijoow"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="transition-colors hover:text-white"
+                            >
+                              GitHub
+                            </a>
+                            <span className="text-white/20">|</span>
+                            <a
+                              href="mailto:nijoow1127@gmail.com"
+                              className="transition-colors hover:text-white"
+                            >
+                              nijoow1127@gmail.com
+                            </a>
+                          </div>
+                        </div>
                       </footer>
                     </div>
                   </Theme>

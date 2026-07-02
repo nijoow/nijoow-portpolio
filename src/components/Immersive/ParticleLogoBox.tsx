@@ -28,7 +28,7 @@ export default function ParticleLogoBox() {
   return (
     <div
       ref={wrapRef}
-      className="relative mb-8 h-[200px] w-full overflow-hidden rounded-3xl border border-white/10 bg-black sm:h-[360px]"
+      className="relative mb-10 h-[240px] w-full overflow-hidden rounded-3xl border border-white/10 bg-black sm:h-[400px]"
     >
       <Canvas
         camera={{ position: [0, 0, 2.8], fov: 42 }}
@@ -64,6 +64,25 @@ export default function ParticleLogoBox() {
         </EffectComposer>
       </Canvas>
       <div className="pointer-events-none absolute inset-0 rounded-3xl shadow-[inset_0_10px_40px_rgba(0,0,0,0.55)]" />
+
+      {/* 하단 스크림 + 브랜딩 오버레이 — 캔버스 인터랙션을 막지 않도록 pointer-events-none */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 rounded-b-3xl bg-linear-to-t from-black/70 to-transparent" />
+      <div className="pointer-events-none absolute right-5 bottom-4 left-5 flex items-end justify-between gap-4 sm:right-7 sm:bottom-6 sm:left-7">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-purple-light/80 text-[10px] font-bold tracking-widest uppercase sm:text-xs">
+            Frontend Developer
+          </span>
+          <span className="text-lg font-black text-white sm:text-2xl">
+            이우진 <span className="text-white/40">·</span>{' '}
+            <span className="from-purple-light to-purple-regular bg-linear-to-r bg-clip-text text-transparent">
+              nijoow
+            </span>
+          </span>
+        </div>
+        <span className="hidden text-xs text-white/35 sm:block">
+          드래그 · 우클릭으로 파티클을 흩어보세요
+        </span>
+      </div>
     </div>
   );
 }
