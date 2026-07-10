@@ -3,15 +3,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: 'cusmetic',
-  description: 'cusmetic — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'cusmetic';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const CusmeticPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkCarousel
         imgSrcList={[
           'cusmetic/landing.webp',

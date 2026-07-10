@@ -5,8 +5,9 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
-import { works } from './worksData';
-const reversedWorks = [...works].reverse();
+import { publicWorks } from './worksData';
+
+const reversedWorks = [...publicWorks].reverse();
 
 const WorksList = () => {
   const [selectedTag] = useQueryState('tag');

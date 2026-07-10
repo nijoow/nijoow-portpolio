@@ -5,15 +5,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: 'Midnight Lo-fi 3D Youtube Player',
-  description: 'Midnight Lo-fi 3D Youtube Player — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'ml3yp';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const TelevisionPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage url="https://ml3yp.vercel.app/" imgSrc="ml3yp.webp" />
 
       <div className="my-3" />

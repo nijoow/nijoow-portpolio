@@ -3,15 +3,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: '모임특별시',
-  description: '모임특별시 — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'moimcity';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const MoimcityPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkCarousel
         imgSrcList={[
           'moimcity/moimcity.webp',

@@ -5,15 +5,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: 'CATCH THE CANDY',
-  description: 'CATCH THE CANDY — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'catch-the-candy';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const CatchTheCandyPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow.github.io/CatchTheCandy_p5/"
         imgSrc="catchTheCandy.webp"

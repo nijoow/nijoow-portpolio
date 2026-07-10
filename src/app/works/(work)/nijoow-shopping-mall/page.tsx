@@ -5,10 +5,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'nijoow-shopping-mall';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const NijoowShoppingMallPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow-shopping-mall.vercel.app/"
         imgSrc="nijoow-shopping-mall.webp"

@@ -5,15 +5,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: '레서판다 빌리지',
-  description: '레서판다 빌리지 — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'lessor-panda-village';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const LessorPandaVillagePage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://lessor-panda-village.vercel.app/"
         imgSrc="lessor-panda-village.webp"
