@@ -4,15 +4,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
 
-export const metadata = {
-  title: '프로미스나인 스티커 꾸미기',
-  description: '프로미스나인 스티커 꾸미기 — nijoow 포트폴리오 작업물',
-};
+const PAGE_NAME = 'fromis9-stickers';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const Fromis9StickersPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://fromis9-stickers.vercel.app/"
         imgSrc="fromis9-stickers.webp"
