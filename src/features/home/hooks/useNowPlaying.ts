@@ -1,4 +1,4 @@
-import { Music } from '@/type/interface';
+import type { Music } from '@/type/interface';
 import { useQuery } from '@tanstack/react-query';
 
 interface SpotifyResponse {

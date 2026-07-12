@@ -1,11 +1,11 @@
 'use client';
 
 import GlassCard from '@/components/Motion/GlassCard';
-import { motion } from 'framer-motion';
+import { useNowPlaying } from '@/features/home/hooks/useNowPlaying';
+import { m } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useNowPlaying } from './useNowPlaying';
 
 // 이퀄라이저 막대 애니메이션 설정은 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지).
 const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
@@ -19,7 +19,7 @@ const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
   delay: i * 0.02,
 }));
 
-const RecentlyPlayedMusic = () => {
+export function RecentlyPlayedMusic() {
   const { data: music, isPending } = useNowPlaying();
 
   if (isPending)
@@ -28,7 +28,7 @@ const RecentlyPlayedMusic = () => {
         <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
           <div className="bg-purple-medium/25 absolute top-0 -left-4 size-32 rounded-full blur-3xl md:size-40" />
           <div className="relative size-20 shrink-0 md:size-32">
-            <motion.div
+            <m.div
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{
                 duration: 1.5,
@@ -40,7 +40,7 @@ const RecentlyPlayedMusic = () => {
               <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
                 🎵
               </div>
-            </motion.div>
+            </m.div>
           </div>
           <div className="flex h-20 flex-auto flex-col justify-center">
             <div className="animate-pulse">
@@ -89,7 +89,7 @@ const RecentlyPlayedMusic = () => {
           <div className="bg-purple-medium/25 group-hover:bg-purple-medium/40 absolute top-0 -left-4 size-32 rounded-full blur-3xl transition-colors md:size-40" />
 
           <div className="relative size-20 shrink-0 md:size-32">
-            <motion.div
+            <m.div
               className="bg-purple-light/50 absolute inset-0 rounded-full blur-xl"
               animate={{
                 scale: [1, 1.3, 1],
@@ -101,7 +101,7 @@ const RecentlyPlayedMusic = () => {
                 ease: 'easeInOut',
               }}
             />
-            <motion.div
+            <m.div
               animate={{ rotate: [0, 360] }}
               transition={{
                 duration: 10,
@@ -114,10 +114,11 @@ const RecentlyPlayedMusic = () => {
                 src={music.albumImageUrl}
                 fill
                 alt={music.title}
+                sizes="(max-width: 768px) 80px, 128px"
                 className="object-cover"
               />
               <div className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-gray-900 shadow-inner" />
-            </motion.div>
+            </m.div>
           </div>
 
           <div className="flex h-20 min-w-0 flex-auto flex-col justify-center truncate">
@@ -133,7 +134,7 @@ const RecentlyPlayedMusic = () => {
 
             <div className="flex h-5 w-full items-end gap-0.5 overflow-hidden pb-1">
               {EQUALIZER_BARS.map((bar) => (
-                <motion.div
+                <m.div
                   key={bar.id}
                   className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
                   animate={{ height: bar.heights }}
@@ -161,6 +162,4 @@ const RecentlyPlayedMusic = () => {
       </GlassCard>
     </Link>
   );
-};
-
-export default RecentlyPlayedMusic;
+}
