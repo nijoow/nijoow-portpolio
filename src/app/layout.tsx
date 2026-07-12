@@ -1,4 +1,4 @@
-import ParticleLogoBox from '@/components/Immersive/ParticleLogoBoxDynamic';
+import SignatureExperience from '@/components/Immersive/SignatureExperienceDynamic';
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
@@ -130,7 +130,7 @@ export default function RootLayout({
                   <div className="relative flex min-h-screen w-full flex-col bg-transparent text-black transition-all duration-300 dark:text-white">
                     <NavBar />
                     <main className="mx-auto w-full max-w-4xl flex-auto px-4 pt-24 pb-24">
-                      <ParticleLogoBox />
+                      <SignatureExperience />
                       {children}
                     </main>
                     <footer className="mt-auto w-full border-t border-white/10">

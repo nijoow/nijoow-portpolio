@@ -11,10 +11,6 @@ const BURST_SEC = 2.4; // 버스트 1회 길이(모임→흩어짐→다시 모�
 const BURST_PEAK = 0.95; // 버스트 최대 흩어짐 정도
 const AUTO_BURST_SEC = 10; // clickBurst일 때 자동 버스트 주기(초)
 
-interface NijoowGLTF {
-  nodes: { Curve003: THREE.Mesh };
-}
-
 interface ParticleLogoProps {
   /** 마우스 리펄전·포인터 패럴랙스·클릭 버스트 사용 여부 */
   interactive?: boolean;
@@ -30,6 +26,10 @@ interface ParticleLogoProps {
   rotate?: boolean;
   /** 비인터랙티브여도 클릭하면 흩어졌다 다시 모이는 동작(홈 박스용) */
   clickBurst?: boolean;
+  /** HTML 컨트롤에서 버스트를 요청할 때 증가시키는 값. */
+  burstSignal?: number;
+  /** 파티클 좌표는 유지한 채 입장 응집 애니메이션을 다시 시작하는 값. */
+  entranceSignal?: number;
 }
 
 // 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
@@ -111,21 +111,32 @@ export function ParticleLogo({
   jitter = 0.003,
   rotate = true,
   clickBurst = false,
+  burstSignal = 0,
+  entranceSignal = 0,
 }: ParticleLogoProps) {
   // 작고 또렷한 서명 스타일 — 포인트 최대 크기 상한(가까이서 원반화 방지).
   const finalMaxSize = 15;
 
-  const { nodes } = useGLTF('/3D/nijoowPurple.glb') as unknown as NijoowGLTF;
+  const { nodes } = useGLTF('/3D/nijoowPurple.glb');
+  const logoMesh = nodes.Curve003;
+  if (!(logoMesh instanceof THREE.Mesh)) {
+    throw new Error('nijoow 로고 메시를 찾을 수 없습니다.');
+  }
+
   const group = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const burstRef = useRef(-Infinity);
   const autoRef = useRef(0);
   const timeRef = useRef(0);
+  const startedAtRef = useRef<number | null>(null);
+  const rotationStartedAtRef = useRef<number | null>(null);
+  const lastBurstSignalRef = useRef(burstSignal);
+  const lastEntranceSignalRef = useRef(entranceSignal);
   const mouseWorld = useMemo(() => new THREE.Vector3(), []);
 
   const { positions, scatters, randoms } = useMemo(() => {
     const rand = mulberry32(0x9e3779b9);
-    const mesh = new THREE.Mesh(nodes.Curve003.geometry);
+    const mesh = new THREE.Mesh(logoMesh.geometry);
     const sampler = new MeshSurfaceSampler(mesh).build();
     const transform = new THREE.Matrix4()
       .makeRotationX(Math.PI / 2)
@@ -170,7 +181,7 @@ export function ParticleLogo({
     }
 
     return { positions, scatters, randoms };
-  }, [nodes, count]);
+  }, [logoMesh, count]);
 
   const uniforms = useMemo(
     () => ({
@@ -189,7 +200,15 @@ export function ParticleLogo({
   );
 
   useFrame((state) => {
-    const t = state.clock.elapsedTime;
+    const absoluteTime = state.clock.elapsedTime;
+    if (entranceSignal !== lastEntranceSignalRef.current) {
+      lastEntranceSignalRef.current = entranceSignal;
+      startedAtRef.current = absoluteTime;
+      burstRef.current = -Infinity;
+      autoRef.current = 0;
+    }
+    startedAtRef.current ??= absoluteTime;
+    const t = absoluteTime - startedAtRef.current;
     timeRef.current = t;
 
     // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
@@ -202,6 +221,11 @@ export function ParticleLogo({
       : 0;
     // 자동 버스트(clickBurst 전용): 마지막 버스트로부터 AUTO_BURST_SEC마다 1회.
     if (clickBurst && t - autoRef.current >= AUTO_BURST_SEC) {
+      autoRef.current = t;
+      burstRef.current = t;
+    }
+    if (clickBurst && burstSignal !== lastBurstSignalRef.current) {
+      lastBurstSignalRef.current = burstSignal;
       autoRef.current = t;
       burstRef.current = t;
     }
@@ -238,7 +262,14 @@ export function ParticleLogo({
       } else {
         // 클래식 로고: 정면을 유지하는 부드러운 좌우 스윙(글자 가독성). 드래그는 OrbitControls.
         // rotate=false면 완전 정지(인트로용).
-        group.current.rotation.y = rotate ? Math.sin(t * 0.3) * 0.5 : 0;
+        if (rotate) {
+          rotationStartedAtRef.current ??= absoluteTime;
+          const rotationTime = absoluteTime - rotationStartedAtRef.current;
+          group.current.rotation.y = Math.sin(rotationTime * 0.3) * 0.5;
+        } else {
+          rotationStartedAtRef.current = null;
+          group.current.rotation.y = 0;
+        }
         group.current.rotation.x = 0;
       }
     }
