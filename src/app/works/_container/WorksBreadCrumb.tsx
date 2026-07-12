@@ -1,7 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import type { Work } from './worksData';
+import type { Work } from '@/features/works/data/worksData';
 
 interface WorksBreadCrumbProps {
   /** worksData에 항목이 없는 페이지는 slug만으로 렌더링한다. */

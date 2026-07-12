@@ -224,3 +224,9 @@ export const publicWorks = works.filter((work) => work.status !== 'draft');
 
 export const getWork = (pageName: string): Work | undefined =>
   works.find((w) => w.pageName === pageName);
+
+export const getWorks = (pageNames: readonly string[]): Work[] =>
+  pageNames.flatMap((pageName) => {
+    const work = getWork(pageName);
+    return work ? [work] : [];
+  });

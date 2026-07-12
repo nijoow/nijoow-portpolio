@@ -1,6 +1,6 @@
 import { PERSON_ID, SITE_NAME, SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
-import { getWork, type Work } from './worksData';
+import { getWork, type Work } from '@/features/works/data/worksData';
 
 const FALLBACK_DESCRIPTION =
   '프론트엔드 개발자 이우진(nijoow)의 포트폴리오 작업물입니다.';

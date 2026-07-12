@@ -5,7 +5,7 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
-import { publicWorks } from './worksData';
+import { publicWorks } from '@/features/works/data/worksData';
 
 const reversedWorks = [...publicWorks].reverse();
 
