@@ -4,10 +4,11 @@ import Section from '@/components/Section/Section';
 import { CapabilityGrid } from '@/features/home/components/CapabilityGrid';
 import { ContactCta } from '@/features/home/components/ContactCta';
 import { FeaturedWorks } from '@/features/home/components/FeaturedWorks';
-import { GithubCommitLog } from '@/features/home/components/GithubCommitLog';
+import { GithubActivity } from '@/features/home/components/GithubActivity';
 import { LivePersonality } from '@/features/home/components/LivePersonality';
 import { PositioningStatement } from '@/features/home/components/PositioningStatement';
 import { RecentlyPlayedMusic } from '@/features/home/components/RecentlyPlayedMusic';
+import { TechStackFocus } from '@/features/home/components/TechStackFocus';
 import { FEATURED_WORK_PAGE_NAMES } from '@/features/home/data/homeContent';
 import { getWorks } from '@/features/works/data/worksData';
 
@@ -29,6 +30,11 @@ export default function ClassicHome() {
         </Section>
         <Section>
           <Reveal>
+            <TechStackFocus />
+          </Reveal>
+        </Section>
+        <Section>
+          <Reveal>
             <FeaturedWorks works={featuredWorks} />
           </Reveal>
         </Section>
@@ -36,7 +42,7 @@ export default function ClassicHome() {
           <Reveal>
             <LivePersonality
               music={<RecentlyPlayedMusic />}
-              github={<GithubCommitLog />}
+              github={<GithubActivity />}
             />
           </Reveal>
         </Section>

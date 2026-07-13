@@ -109,10 +109,7 @@ function CapabilityPreview({ type }: { type: Capability['preview'] }) {
 export function CapabilityGrid() {
   return (
     <section className="w-full">
-      <SubTitle
-        eyebrow="Design × Development"
-        title="작업할 때 중요하게 생각하는 것"
-      />
+      <SubTitle eyebrow="Design × Development" title="핵심 가치" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {capabilities.map(({ title, description, Icon, preview }) => (
           <GlassCard key={title} className="h-full">

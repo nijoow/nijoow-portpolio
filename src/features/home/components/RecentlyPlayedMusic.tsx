@@ -18,19 +18,41 @@ const EQUALIZER_BARS = Array.from({ length: 24 }, (_, index) => ({
   delay: index * 0.035,
 }));
 
-function MusicArtwork({ music }: { music: Music }) {
+function MusicArtwork({
+  music,
+  isPlaying,
+  shouldReduceMotion,
+}: {
+  music: Music;
+  isPlaying: boolean;
+  shouldReduceMotion: boolean;
+}) {
   return (
-    <div className="relative size-20 shrink-0 sm:size-24">
+    <div className="relative size-20 shrink-0 sm:size-22">
       <div className="bg-purple-light/30 absolute inset-2 rounded-full blur-xl" />
-      <div className="relative size-full overflow-hidden rounded-2xl border border-white/15 shadow-xl">
+      <m.div
+        animate={isPlaying && !shouldReduceMotion ? { rotate: 360 } : undefined}
+        transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+        className="relative size-full overflow-hidden rounded-full border-2 border-white/15 bg-black shadow-xl ring-1 ring-white/10"
+      >
         <Image
           src={music.albumImageUrl}
           fill
           alt={`${music.title} 앨범 커버`}
-          sizes="(max-width: 640px) 80px, 96px"
+          sizes="(max-width: 640px) 80px, 88px"
           className="object-cover"
         />
-      </div>
+        <span
+          aria-hidden="true"
+          className="absolute inset-1 rounded-full border border-white/10"
+        />
+        <span
+          aria-hidden="true"
+          className="bg-cosmic-ink absolute top-1/2 left-1/2 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white/20 shadow-inner"
+        >
+          <span className="size-1.5 rounded-full bg-white/15" />
+        </span>
+      </m.div>
     </div>
   );
 }
@@ -74,7 +96,7 @@ function MusicCardSkeleton() {
     <GlassCard className="h-full min-h-96 bg-black/30">
       <div className="flex h-full animate-pulse flex-col gap-5 p-5">
         <div className="flex gap-4">
-          <div className="size-24 rounded-2xl bg-white/10" />
+          <div className="size-20 rounded-full bg-white/10 sm:size-22" />
           <div className="flex flex-1 flex-col justify-center gap-3">
             <div className="h-3 w-20 rounded-full bg-white/10" />
             <div className="h-5 w-2/3 rounded-full bg-white/10" />
@@ -126,7 +148,11 @@ export function RecentlyPlayedMusic() {
           rel="noopener noreferrer"
           className="group/current focus-visible:ring-purple-light relative flex min-w-0 items-center gap-4 rounded-2xl outline-none focus-visible:ring-2"
         >
-          <MusicArtwork music={current} />
+          <MusicArtwork
+            music={current}
+            isPlaying={isPlaying}
+            shouldReduceMotion={Boolean(shouldReduceMotion)}
+          />
           <div className="min-w-0 flex-1">
             <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/40 uppercase">
               <span className="bg-purple-light shadow-purple-light/70 size-2 rounded-full shadow-sm" />

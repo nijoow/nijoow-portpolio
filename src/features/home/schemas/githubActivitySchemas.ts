@@ -1,31 +1,28 @@
 import { z } from 'zod';
 
-export const githubEventsSchema = z.array(
+export const githubRepositoriesSchema = z.array(
   z.object({
-    type: z.string(),
-    repo: z.object({
-      name: z.string(),
-    }),
-    created_at: z.string(),
-    payload: z.object({
-      commits: z
-        .array(
-          z.object({
-            sha: z.string(),
-            message: z.string(),
-          }),
-        )
-        .optional(),
-    }),
+    id: z.number(),
+    name: z.string(),
+    html_url: z.string().url(),
+    description: z.string().nullable(),
+    language: z.string().nullable(),
+    stargazers_count: z.number(),
+    pushed_at: z.string(),
+    fork: z.boolean(),
+    topics: z.array(z.string()).default([]),
   }),
 );
 
-export const githubCommitSchema = z.object({
-  sha: z.string(),
-  message: z.string(),
-  repository: z.string(),
-  committedAt: z.string(),
+export const githubRepositorySchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string().nullable(),
   url: z.string().url(),
+  language: z.string().nullable(),
+  stars: z.number(),
+  pushedAt: z.string(),
+  topics: z.array(z.string()),
 });
 
 const apiErrorSchema = z.object({
@@ -39,9 +36,9 @@ const apiErrorSchema = z.object({
 export const githubActivityResponseSchema = z.discriminatedUnion('success', [
   z.object({
     success: z.literal(true),
-    data: z.array(githubCommitSchema),
+    data: z.array(githubRepositorySchema),
   }),
   apiErrorSchema,
 ]);
 
-export type GithubCommit = z.infer<typeof githubCommitSchema>;
+export type GithubRepository = z.infer<typeof githubRepositorySchema>;
