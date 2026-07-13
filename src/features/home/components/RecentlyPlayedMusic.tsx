@@ -2,142 +2,152 @@
 
 import GlassCard from '@/components/Motion/GlassCard';
 import { useNowPlaying } from '@/features/home/hooks/useNowPlaying';
-import { m } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import type { Music } from '@/features/home/schemas/spotifySchemas';
+import { m, useReducedMotion } from 'framer-motion';
+import { ExternalLink, History, Music2 } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
-// 이퀄라이저 막대 애니메이션 설정은 모듈 로드 시 1회만 생성한다 (렌더 중 Math.random 호출 방지).
-const EQUALIZER_BARS = Array.from({ length: 64 }, (_, i) => ({
-  id: i,
+const EQUALIZER_BARS = Array.from({ length: 24 }, (_, index) => ({
+  id: index,
   heights: [
-    `${40 + Math.random() * 80}%`,
-    `${30 + Math.random() * 40}%`,
-    `${40 + Math.random() * 80}%`,
+    `${28 + Math.round(Math.abs(Math.sin(index)) * 55)}%`,
+    `${36 + Math.round(Math.abs(Math.cos(index * 0.7)) * 60)}%`,
+    `${24 + Math.round(Math.abs(Math.sin(index * 1.3)) * 68)}%`,
   ],
-  duration: 0.8 + Math.random() * 0.7,
-  delay: i * 0.02,
+  duration: 0.9 + (index % 5) * 0.12,
+  delay: index * 0.035,
 }));
 
-export function RecentlyPlayedMusic() {
-  const { data: music, isPending } = useNowPlaying();
-
-  if (isPending)
-    return (
-      <GlassCard className="w-full">
-        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
-          <div className="bg-purple-medium/25 absolute top-0 -left-4 size-32 rounded-full blur-3xl md:size-40" />
-          <div className="relative size-20 shrink-0 md:size-32">
-            <m.div
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-white/5 shadow-lg md:size-32"
-            >
-              <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
-                🎵
-              </div>
-            </m.div>
-          </div>
-          <div className="flex h-20 flex-auto flex-col justify-center">
-            <div className="animate-pulse">
-              <div className="mb-2 h-5 w-32 rounded-full bg-white/10" />
-              <div className="h-4 w-48 rounded-full bg-white/5" />
-            </div>
-          </div>
-        </div>
-      </GlassCard>
-    );
-
-  if (!music)
-    return (
-      <GlassCard className="w-full">
-        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
-          <div className="bg-purple-medium/25 absolute top-0 -left-4 size-32 rounded-full blur-3xl md:size-40" />
-          <div className="relative size-20 shrink-0 md:size-32">
-            <div className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-white/5 shadow-lg md:size-32">
-              <div className="flex h-full w-full items-center justify-center text-4xl opacity-50">
-                😭
-              </div>
-            </div>
-          </div>
-          <div className="flex h-20 flex-auto flex-col justify-center">
-            <div className="text-base font-bold text-white">
-              현재 곡을 표시할 수 없습니다
-            </div>
-            <div className="text-purple-light/60 text-sm">
-              나중에 다시 확인해 주세요ㅠㅠ
-            </div>
-          </div>
-        </div>
-      </GlassCard>
-    );
-
+function MusicArtwork({ music }: { music: Music }) {
   return (
-    <Link
+    <div className="relative size-20 shrink-0 sm:size-24">
+      <div className="bg-purple-light/30 absolute inset-2 rounded-full blur-xl" />
+      <div className="relative size-full overflow-hidden rounded-2xl border border-white/15 shadow-xl">
+        <Image
+          src={music.albumImageUrl}
+          fill
+          alt={`${music.title} 앨범 커버`}
+          sizes="(max-width: 640px) 80px, 96px"
+          className="object-cover"
+        />
+      </div>
+    </div>
+  );
+}
+
+function RecentTrack({ music, index }: { music: Music; index: number }) {
+  return (
+    <a
       href={music.songUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block w-full"
+      className="group/track focus-visible:ring-purple-light flex min-w-0 items-center gap-3 rounded-xl px-2 py-2 transition-colors outline-none hover:bg-white/5 focus-visible:ring-2"
     >
-      <GlassCard className="w-full">
-        <div className="flex w-full items-center justify-center gap-6 px-4 py-4 md:gap-8 md:px-8">
-          {/* 앨범 아트 뒤 퍼플 글로우 — 카드 정체성 컬러 */}
-          <div className="bg-purple-medium/25 group-hover:bg-purple-medium/40 absolute top-0 -left-4 size-32 rounded-full blur-3xl transition-colors md:size-40" />
+      <span className="w-4 shrink-0 text-center text-[10px] font-bold text-white/25">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+        <Image
+          src={music.albumImageUrl}
+          fill
+          alt=""
+          sizes="40px"
+          className="object-cover"
+        />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="group-hover/track:text-purple-light truncate text-sm font-bold transition-colors">
+          {music.title}
+        </p>
+        <p className="truncate text-xs text-white/40">{music.artist}</p>
+      </div>
+      <ExternalLink
+        aria-hidden="true"
+        className="size-3.5 shrink-0 text-white/20 transition-colors group-hover/track:text-white/60"
+      />
+    </a>
+  );
+}
 
-          <div className="relative size-20 shrink-0 md:size-32">
-            <m.div
-              className="bg-purple-light/50 absolute inset-0 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-            <m.div
-              animate={{ rotate: [0, 360] }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="relative size-20 shrink-0 overflow-hidden rounded-full border-2 border-white/20 shadow-lg md:size-32"
-            >
-              <Image
-                src={music.albumImageUrl}
-                fill
-                alt={music.title}
-                sizes="(max-width: 768px) 80px, 128px"
-                className="object-cover"
-              />
-              <div className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-gray-900 shadow-inner" />
-            </m.div>
+function MusicCardSkeleton() {
+  return (
+    <GlassCard className="h-full min-h-96 bg-black/30">
+      <div className="flex h-full animate-pulse flex-col gap-5 p-5">
+        <div className="flex gap-4">
+          <div className="size-24 rounded-2xl bg-white/10" />
+          <div className="flex flex-1 flex-col justify-center gap-3">
+            <div className="h-3 w-20 rounded-full bg-white/10" />
+            <div className="h-5 w-2/3 rounded-full bg-white/10" />
+            <div className="h-3 w-1/2 rounded-full bg-white/5" />
           </div>
+        </div>
+        <div className="h-px bg-white/10" />
+        {Array.from({ length: 3 }, (_, index) => (
+          <div key={index} className="flex items-center gap-3">
+            <div className="size-10 rounded-lg bg-white/5" />
+            <div className="h-3 flex-1 rounded-full bg-white/5" />
+          </div>
+        ))}
+      </div>
+    </GlassCard>
+  );
+}
 
-          <div className="flex h-20 min-w-0 flex-auto flex-col justify-center truncate">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-              <div className="truncate text-base font-bold text-white">
-                {music.title}
-              </div>
-            </div>
-            <div className="text-purple-light/80 mb-2 truncate text-sm font-semibold">
-              {music.artist}
-            </div>
+export function RecentlyPlayedMusic() {
+  const { data, isPending } = useNowPlaying();
+  const shouldReduceMotion = useReducedMotion();
 
-            <div className="flex h-5 w-full items-end gap-0.5 overflow-hidden pb-1">
+  if (isPending) return <MusicCardSkeleton />;
+
+  if (!data?.current) {
+    return (
+      <GlassCard className="h-full min-h-96 bg-black/30">
+        <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
+          <span className="bg-purple-medium/20 text-purple-light flex size-12 items-center justify-center rounded-2xl border border-white/10">
+            <Music2 size={20} />
+          </span>
+          <p className="font-bold">재생 정보를 표시할 수 없습니다</p>
+          <p className="text-sm text-white/40">잠시 후 다시 확인해 주세요.</p>
+        </div>
+      </GlassCard>
+    );
+  }
+
+  const { current, recent, isPlaying } = data;
+
+  return (
+    <GlassCard className="h-full min-h-96 bg-black/30">
+      <div className="relative flex h-full flex-col overflow-hidden p-5">
+        <div className="bg-purple-medium/20 absolute -top-16 -left-14 size-48 rounded-full blur-3xl" />
+
+        <a
+          href={current.songUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/current focus-visible:ring-purple-light relative flex min-w-0 items-center gap-4 rounded-2xl outline-none focus-visible:ring-2"
+        >
+          <MusicArtwork music={current} />
+          <div className="min-w-0 flex-1">
+            <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/40 uppercase">
+              <span className="bg-purple-light shadow-purple-light/70 size-2 rounded-full shadow-sm" />
+              {isPlaying ? 'Now Playing' : 'Last Played'}
+            </div>
+            <h3 className="group-hover/current:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
+              {current.title}
+            </h3>
+            <p className="text-purple-light/75 truncate text-sm font-semibold">
+              {current.artist}
+            </p>
+            <div className="mt-3 flex h-5 max-w-44 items-end gap-1 overflow-hidden">
               {EQUALIZER_BARS.map((bar) => (
-                <m.div
+                <m.span
                   key={bar.id}
                   className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
-                  animate={{ height: bar.heights }}
+                  animate={
+                    isPlaying && !shouldReduceMotion
+                      ? { height: bar.heights }
+                      : { height: bar.heights[0] }
+                  }
                   transition={{
                     repeat: Infinity,
                     duration: bar.duration,
@@ -148,18 +158,36 @@ export function RecentlyPlayedMusic() {
               ))}
             </div>
           </div>
+          <ExternalLink className="size-4 shrink-0 self-start text-white/30 transition-colors group-hover/current:text-white/70" />
+        </a>
 
-          {/* Spotify로 이동하는 카드임을 알리는 우측 어포던스 */}
-          <div className="hidden shrink-0 flex-col items-center gap-1.5 self-center md:flex">
-            <span className="group-hover:border-purple-light/40 group-hover:text-purple-light flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 backdrop-blur-sm transition-colors">
-              <ExternalLink size={16} />
-            </span>
-            <span className="text-xs font-bold tracking-widest text-white/35 uppercase">
-              Spotify
-            </span>
-          </div>
+        <div className="relative my-5 h-px bg-white/10" />
+
+        <div className="relative flex items-center justify-between px-2">
+          <span className="flex items-center gap-2 text-xs font-extrabold text-white/55">
+            <History size={13} /> 최근 재생
+          </span>
+          <span className="text-[10px] font-bold tracking-widest text-white/25 uppercase">
+            Spotify
+          </span>
         </div>
-      </GlassCard>
-    </Link>
+
+        <div className="relative mt-2 flex flex-1 flex-col justify-center">
+          {recent.length > 0 ? (
+            recent.map((music, index) => (
+              <RecentTrack
+                key={`${music.songUrl}-${index}`}
+                music={music}
+                index={index}
+              />
+            ))
+          ) : (
+            <p className="px-2 py-5 text-sm text-white/35">
+              최근 재생 목록이 아직 없습니다.
+            </p>
+          )}
+        </div>
+      </div>
+    </GlassCard>
   );
 }

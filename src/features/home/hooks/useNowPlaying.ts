@@ -1,29 +1,61 @@
-import type { Music } from '@/type/interface';
+import {
+  currentMusicResponseSchema,
+  recentMusicResponseSchema,
+  type Music,
+} from '@/features/home/schemas/spotifySchemas';
 import { useQuery } from '@tanstack/react-query';
 
-interface SpotifyResponse {
-  payload: Music | null;
+interface MusicActivity {
+  current: Music | null;
+  recent: Music[];
+  isPlaying: boolean;
 }
 
-// 현재 재생 중인 곡을 우선 조회하고, 없으면 최근 재생 곡으로 폴백한다.
-const fetchNowPlaying = async (): Promise<Music | null> => {
-  const currentlyPlaying: SpotifyResponse = await fetch(
-    '/api/spotify/currently-playing',
-  ).then((res) => res.json());
-  if (currentlyPlaying.payload) return currentlyPlaying.payload;
+const fetchMusicActivity = async (): Promise<MusicActivity> => {
+  const [currentResponse, recentResponse] = await Promise.all([
+    fetch('/api/spotify/currently-playing'),
+    fetch('/api/spotify/recently-played'),
+  ]);
 
-  const recentlyPlayed: SpotifyResponse = await fetch(
-    '/api/spotify/recently-played',
-  ).then((res) => res.json());
-  return recentlyPlayed.payload ?? null;
+  const currentResult = currentMusicResponseSchema.safeParse(
+    await currentResponse.json(),
+  );
+  const recentResult = recentMusicResponseSchema.safeParse(
+    await recentResponse.json(),
+  );
+
+  const currentMusic =
+    currentResult.success && currentResult.data.success
+      ? currentResult.data.data
+      : null;
+  const recentMusic =
+    recentResult.success && recentResult.data.success
+      ? recentResult.data.data
+      : [];
+
+  if (!currentResult.success && !recentResult.success) {
+    throw new Error('재생 정보를 확인할 수 없습니다.');
+  }
+
+  const isPlaying = currentMusic !== null;
+  const current = currentMusic ?? recentMusic[0] ?? null;
+  const recent = recentMusic
+    .filter((music) => music.songUrl !== current?.songUrl)
+    .slice(0, 3);
+
+  return { current, recent, isPlaying };
 };
 
-export const nowPlayingQueryKey = ['spotify', 'now-playing'] as const;
+export const spotifyQueryKeys = {
+  all: ['spotify'] as const,
+  activity: () => [...spotifyQueryKeys.all, 'activity'] as const,
+};
 
 export function useNowPlaying() {
   return useQuery({
-    queryKey: nowPlayingQueryKey,
-    queryFn: fetchNowPlaying,
+    queryKey: spotifyQueryKeys.activity(),
+    queryFn: fetchMusicActivity,
+    staleTime: 30 * 1000,
     refetchInterval: 30 * 1000,
     refetchOnWindowFocus: false,
   });

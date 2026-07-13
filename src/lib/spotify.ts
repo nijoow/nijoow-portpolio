@@ -36,10 +36,10 @@ export const getCurrentlyPlayingApi = async () => {
   });
 };
 
-export const getRecentlyPlayedApi = async () => {
+export const getRecentlyPlayedApi = async (limit = 6) => {
   const { access_token } = await getAccessTokenApi();
 
-  const response = await fetch(RECENTLY_PLAYED_ENDPOINT, {
+  const response = await fetch(`${RECENTLY_PLAYED_ENDPOINT}?limit=${limit}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },

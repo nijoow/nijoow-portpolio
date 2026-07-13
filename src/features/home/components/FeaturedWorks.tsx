@@ -1,6 +1,5 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
-import { cn } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,72 +18,38 @@ interface FeaturedWorksProps {
   works: FeaturedWork[];
 }
 
-function FeaturedWorkCard({
-  work,
-  isPrimary,
-}: {
-  work: FeaturedWork;
-  isPrimary: boolean;
-}) {
+function FeaturedWorkCard({ work }: { work: FeaturedWork }) {
   return (
-    <GlassCard
-      className={cn(
-        'group/work h-full',
-        isPrimary ? 'md:col-span-3 md:row-span-2' : 'md:col-span-2',
-      )}
-    >
+    <GlassCard className="group/work h-full">
       <Link
         href={`/works/${work.pageName}`}
         aria-label={`${work.name} 작업 상세 보기`}
         className="focus-visible:ring-purple-light flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
       >
-        <div
-          className={cn(
-            'relative w-full overflow-hidden border-b border-white/10 bg-black/30',
-            isPrimary ? 'aspect-4/3 sm:aspect-video md:flex-1' : 'aspect-video',
-          )}
-        >
+        <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-black/30">
           <Image
             src={`/images/works/${work.imgSrc}`}
             alt=""
             fill
-            sizes={
-              isPrimary
-                ? '(max-width: 768px) 100vw, 520px'
-                : '(max-width: 768px) 100vw, 340px'
-            }
+            sizes="(max-width: 768px) 100vw, 424px"
             className="scale-110 object-cover opacity-25 blur-xl"
           />
           <Image
             src={`/images/works/${work.imgSrc}`}
             alt={`${work.name} 작업 미리보기`}
             fill
-            sizes={
-              isPrimary
-                ? '(max-width: 768px) 100vw, 520px'
-                : '(max-width: 768px) 100vw, 340px'
-            }
+            sizes="(max-width: 768px) 100vw, 424px"
             className="object-contain transition-transform duration-500 group-hover/work:scale-105"
           />
           <span className="absolute top-3 left-3 rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[10px] font-bold tracking-wider text-white/70 uppercase backdrop-blur-sm">
-            {isPrimary ? 'Featured' : (work.role ?? 'Project')}
+            {work.role ?? 'Project'}
           </span>
         </div>
 
-        <div
-          className={cn(
-            'flex flex-col gap-2',
-            isPrimary ? 'p-5 sm:p-6' : 'p-4',
-          )}
-        >
+        <div className="flex flex-1 flex-col gap-2 p-5">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h2
-                className={cn(
-                  'group-hover/work:text-purple-light truncate font-black transition-colors',
-                  isPrimary ? 'text-xl sm:text-2xl' : 'text-base',
-                )}
-              >
+              <h2 className="group-hover/work:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
                 {work.name}
               </h2>
               {work.description ? (
@@ -133,13 +98,9 @@ export function FeaturedWorks({ works }: FeaturedWorksProps) {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-5 md:grid-rows-2">
-        {works.map((work, index) => (
-          <FeaturedWorkCard
-            key={work.pageName}
-            work={work}
-            isPrimary={index === 0}
-          />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {works.map((work) => (
+          <FeaturedWorkCard key={work.pageName} work={work} />
         ))}
       </div>
     </section>

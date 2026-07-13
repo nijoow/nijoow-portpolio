@@ -1,12 +1,18 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
-import { Blocks, Code2, PanelsTopLeft, type LucideIcon } from 'lucide-react';
+import {
+  Blocks,
+  Bot,
+  Code2,
+  PanelsTopLeft,
+  type LucideIcon,
+} from 'lucide-react';
 
 interface Capability {
   title: string;
   description: string;
   Icon: LucideIcon;
-  preview: 'structure' | 'code' | 'interaction';
+  preview: 'structure' | 'code' | 'interaction' | 'ai';
 }
 
 const capabilities: Capability[] = [
@@ -30,6 +36,13 @@ const capabilities: Capability[] = [
       '웹 인터랙션과 3D를 활용해 화면의 사용감과 디테일을 다듬습니다.',
     Icon: Blocks,
     preview: 'interaction',
+  },
+  {
+    title: 'AI 활용',
+    description:
+      'AI Agent를 활용한 탐색·구현·검증 흐름에 익숙하며, 결과를 직접 확인하고 다듬습니다.',
+    Icon: Bot,
+    preview: 'ai',
   },
 ];
 
@@ -56,18 +69,38 @@ function CapabilityPreview({ type }: { type: Capability['preview'] }) {
     );
   }
 
-  return (
-    <div className="flex h-24 flex-col justify-center gap-5 rounded-xl border border-white/10 bg-black/20 p-4">
-      <div className="flex items-center justify-between">
-        <span className="bg-purple-medium/35 border-purple-light/20 rounded-full border px-4 py-1 text-[10px] text-white/70">
-          Button
-        </span>
-        <span className="relative h-5 w-9 rounded-full border border-white/15 bg-white/5">
-          <span className="bg-purple-light absolute top-1/2 right-0.5 size-4 -translate-y-1/2 rounded-full" />
-        </span>
+  if (type === 'interaction') {
+    return (
+      <div className="flex h-24 flex-col justify-center gap-5 rounded-xl border border-white/10 bg-black/20 p-4">
+        <div className="flex items-center justify-between">
+          <span className="bg-purple-medium/35 border-purple-light/20 rounded-full border px-4 py-1 text-[10px] text-white/70">
+            Button
+          </span>
+          <span className="relative h-5 w-9 rounded-full border border-white/15 bg-white/5">
+            <span className="bg-purple-light absolute top-1/2 right-0.5 size-4 -translate-y-1/2 rounded-full" />
+          </span>
+        </div>
+        <div className="bg-purple-medium/25 relative h-1 rounded-full">
+          <span className="bg-purple-light absolute top-1/2 left-2/3 size-3 -translate-y-1/2 rounded-full" />
+        </div>
       </div>
-      <div className="bg-purple-medium/25 relative h-1 rounded-full">
-        <span className="bg-purple-light absolute top-1/2 left-2/3 size-3 -translate-y-1/2 rounded-full" />
+    );
+  }
+
+  return (
+    <div className="flex h-24 flex-col justify-center gap-2 rounded-xl border border-white/10 bg-black/30 p-4">
+      <div className="flex items-center gap-2 text-[10px] text-white/40">
+        <span className="bg-purple-light size-1.5 rounded-full" />
+        AGENT WORKFLOW
+      </div>
+      <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
+        <span className="text-purple-light text-xs">›</span>
+        <span className="h-1.5 flex-1 rounded-full bg-white/15" />
+        <span className="bg-purple-medium/50 h-1.5 w-10 rounded-full" />
+      </div>
+      <div className="flex gap-1.5">
+        <span className="bg-purple-medium/20 h-1.5 w-1/3 rounded-full" />
+        <span className="h-1.5 w-1/4 rounded-full bg-white/10" />
       </div>
     </div>
   );
@@ -80,7 +113,7 @@ export function CapabilityGrid() {
         eyebrow="Design × Development"
         title="작업할 때 중요하게 생각하는 것"
       />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {capabilities.map(({ title, description, Icon, preview }) => (
           <GlassCard key={title} className="h-full">
             <div className="flex h-full flex-col gap-4 p-5">
