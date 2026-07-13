@@ -12,10 +12,10 @@ const coreStack = [
 
 const currentFocus = [
   'Web 3D / Three.js',
-  'AI 활용 개발',
+  'AI 협업',
   'UI/UX',
   '인터랙션',
-  '성능 최적화',
+  '웹 성능',
 ];
 
 interface StackGroupProps {
@@ -59,19 +59,19 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
 export function TechStackFocus() {
   return (
     <section className="w-full">
-      <SubTitle eyebrow="Toolkit & Focus" title="기술 스택과 관심 분야" />
+      <SubTitle eyebrow="Toolkit" title="기술과 관심 분야" />
       <GlassCard lift={false}>
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <StackGroup
-            title="주요 기술"
-            description="실제 프로젝트의 구현과 운영에 사용하는 기술입니다."
+            title="주로 쓰는 기술"
+            description="프로젝트에서 꾸준히 사용해 온 기술입니다."
             items={coreStack}
             type="stack"
           />
           <div className="border-t border-white/10 sm:border-t-0 sm:border-l">
             <StackGroup
-              title="현재 관심 분야"
-              description="더 좋은 사용감과 개발 방식을 위해 계속 탐구하고 있습니다."
+              title="요즘 관심 있는 것"
+              description="최근 더 깊게 살펴보고 있는 주제입니다."
               items={currentFocus}
               type="focus"
             />

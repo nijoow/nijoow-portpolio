@@ -42,7 +42,7 @@ function FeaturedRepository({ repository }: { repository: GithubRepository }) {
       className="group/featured border-purple-light/15 bg-purple-medium/10 hover:border-purple-light/35 focus-visible:ring-purple-light block rounded-2xl border p-4 transition-colors outline-none focus-visible:ring-2"
     >
       <span className="text-purple-light/75 mb-3 flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
-        <Hammer size={12} /> Currently Building
+        <Hammer size={12} /> 최근 업데이트
       </span>
       <span className="flex items-start justify-between gap-3">
         <span className="min-w-0">
@@ -50,8 +50,7 @@ function FeaturedRepository({ repository }: { repository: GithubRepository }) {
             {repository.name}
           </span>
           <span className="mt-1 line-clamp-2 min-h-10 text-sm leading-relaxed text-white/45">
-            {repository.description ??
-              '최근 집중해서 작업하고 있는 프로젝트입니다.'}
+            {repository.description ?? '요즘 손보고 있는 프로젝트입니다.'}
           </span>
         </span>
         <ExternalLink className="size-4 shrink-0 text-white/25 transition-colors group-hover/featured:text-white/65" />
@@ -129,8 +128,10 @@ export function GithubActivity() {
               <GithubIcon size={18} />
             </span>
             <div>
-              <h3 className="text-sm font-extrabold">What I&apos;m Building</h3>
-              <p className="text-xs text-white/35">최근 업데이트한 프로젝트</p>
+              <h3 className="text-sm font-extrabold">최근 작업</h3>
+              <p className="text-xs text-white/35">
+                GitHub에서 최근 업데이트한 프로젝트
+              </p>
             </div>
           </div>
           <a
@@ -149,7 +150,7 @@ export function GithubActivity() {
             <GithubActivitySkeleton />
           ) : isError || !featuredRepository ? (
             <div className="flex min-h-56 items-center justify-center text-center text-sm text-white/35">
-              최근 프로젝트를 표시할 수 없습니다.
+              GitHub 작업을 불러오지 못했습니다.
             </div>
           ) : (
             <div className="mt-4 flex flex-col gap-1">

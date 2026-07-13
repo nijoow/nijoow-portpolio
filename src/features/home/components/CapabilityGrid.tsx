@@ -19,28 +19,28 @@ const capabilities: Capability[] = [
   {
     title: 'UX/UI 이해',
     description:
-      '디자인 전공 경험을 바탕으로 화면의 목적과 정보 구조를 이해합니다.',
+      '디자인 전공 경험을 바탕으로 기획자·디자이너와 소통하며 함께 고민하고, 의도와 흐름에 맞는 사용자 경험을 구현합니다.',
     Icon: PanelsTopLeft,
     preview: 'structure',
   },
   {
-    title: '프론트엔드 구현',
+    title: '프론트엔드 개발',
     description:
-      'Next.js와 TypeScript를 중심으로 초기 세팅부터 배포·운영까지 경험했습니다.',
+      'Next.js와 TypeScript를 중심으로 개발 세팅부터 빌드·배포까지 전반적으로 안정성 있는 서비스를 구현합니다.',
     Icon: Code2,
     preview: 'code',
   },
   {
     title: '인터랙션과 디테일',
     description:
-      '웹 인터랙션과 3D를 활용해 화면의 사용감과 디테일을 다듬습니다.',
+      '레이아웃 간격과 모션의 디테일을 다듬고, 3D나 인터랙티브 요소를 활용해 시선을 사로잡는 감각적이고 개성 있는 화면을 만드는 것을 즐깁니다.',
     Icon: Blocks,
     preview: 'interaction',
   },
   {
-    title: 'AI 활용',
+    title: 'AI 페어 프로그래밍',
     description:
-      'AI Agent를 활용한 탐색·구현·검증 흐름에 익숙하며, 결과를 직접 확인하고 다듬습니다.',
+      'AI Agent를 적극적으로 워크플로우에 통합해 신속하게 지식을 탐색·검증하고, 개발 생산성을 극대화합니다.',
     Icon: Bot,
     preview: 'ai',
   },
@@ -109,7 +109,7 @@ function CapabilityPreview({ type }: { type: Capability['preview'] }) {
 export function CapabilityGrid() {
   return (
     <section className="w-full">
-      <SubTitle eyebrow="Design × Development" title="핵심 가치" />
+      <SubTitle eyebrow="Design × Development" title="강점과 작업 방식" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {capabilities.map(({ title, description, Icon, preview }) => (
           <GlassCard key={title} className="h-full">

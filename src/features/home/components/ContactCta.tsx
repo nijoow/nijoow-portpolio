@@ -30,10 +30,11 @@ export function ContactCta() {
               Contact
             </span>
             <h2 className="mt-2 text-2xl font-black break-keep sm:text-3xl">
-              프로젝트나 협업에 관한 이야기를 나눠요.
+              새로운 기회나 아이디어는 언제나 환영입니다.
             </h2>
             <p className="mt-2 text-sm leading-relaxed break-keep text-white/50">
-              궁금한 점이나 제안이 있다면 편하게 연락해 주세요.
+              협업에 관한 구체적인 제안부터 가벼운 커피 챗까지 모두 편하게 남겨
+              주세요.
             </p>
           </div>
 
@@ -63,9 +64,9 @@ export function ContactCta() {
             ))}
             <Link
               href="/contact"
-              className="mt-1 text-center text-xs font-bold text-white/40 transition-colors hover:text-white"
+              className="mt-3 text-center text-xs font-bold text-white/40 transition-colors hover:text-white"
             >
-              Contact 페이지에서 메시지 남기기
+              메일 보내기
             </Link>
           </div>
         </div>

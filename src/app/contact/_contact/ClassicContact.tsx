@@ -33,7 +33,8 @@ export default function ClassicContact() {
           </span>
           <h1 className="text-3xl font-black sm:text-4xl">Contact</h1>
           <p className="text-sm break-keep text-white/50">
-            프로젝트·협업 제안 등 어떤 이야기든 편하게 남겨주세요.
+            협업에 관한 구체적인 제안부터 가벼운 커피 챗까지 모두 편하게 남겨
+            주세요.
           </p>
           <div className="from-purple-medium/70 mt-3 h-px w-full bg-linear-to-r to-transparent" />
         </div>

@@ -41,7 +41,7 @@ const fetchMusicActivity = async (): Promise<MusicActivity> => {
   const current = currentMusic ?? recentMusic[0] ?? null;
   const recent = recentMusic
     .filter((music) => music.songUrl !== current?.songUrl)
-    .slice(0, 3);
+    .slice(0, 5);
 
   return { current, recent, isPlaying };
 };

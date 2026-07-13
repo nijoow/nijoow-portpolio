@@ -128,8 +128,8 @@ export function RecentlyPlayedMusic() {
           <span className="bg-purple-medium/20 text-purple-light flex size-12 items-center justify-center rounded-2xl border border-white/10">
             <Music2 size={20} />
           </span>
-          <p className="font-bold">재생 정보를 표시할 수 없습니다</p>
-          <p className="text-sm text-white/40">잠시 후 다시 확인해 주세요.</p>
+          <p className="font-bold">재생 정보를 불러오지 못했습니다</p>
+          <p className="text-sm text-white/40">잠시 후 다시 시도해 주세요.</p>
         </div>
       </GlassCard>
     );
@@ -156,7 +156,7 @@ export function RecentlyPlayedMusic() {
           <div className="min-w-0 flex-1">
             <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/40 uppercase">
               <span className="bg-purple-light shadow-purple-light/70 size-2 rounded-full shadow-sm" />
-              {isPlaying ? 'Now Playing' : 'Last Played'}
+              {isPlaying ? '지금 듣는 중' : '마지막으로 들은 곡'}
             </div>
             <h3 className="group-hover/current:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
               {current.title}
@@ -191,7 +191,7 @@ export function RecentlyPlayedMusic() {
 
         <div className="relative flex items-center justify-between px-2">
           <span className="flex items-center gap-2 text-xs font-extrabold text-white/55">
-            <History size={13} /> 최근 재생
+            <History size={13} /> 최근 들은 음악
           </span>
           <span className="text-[10px] font-bold tracking-widest text-white/25 uppercase">
             Spotify
@@ -209,7 +209,7 @@ export function RecentlyPlayedMusic() {
             ))
           ) : (
             <p className="px-2 py-5 text-sm text-white/35">
-              최근 재생 목록이 아직 없습니다.
+              최근 들은 음악이 아직 없습니다.
             </p>
           )}
         </div>

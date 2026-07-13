@@ -57,10 +57,7 @@ export const ContactForm = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    const toastId = toast.loading(
-      '문의 내용을 전송하고 있습니다...',
-      toastStyle,
-    );
+    const toastId = toast.loading('메일을 보내는 중입니다...', toastStyle);
 
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
@@ -77,21 +74,21 @@ export const ContactForm = () => {
       const resultData = await response.json();
 
       if (resultData.success) {
-        toast.success('문의 내용이 성공적으로 전달되었습니다!', {
+        toast.success('메일을 보냈습니다.', {
           id: toastId,
           ...toastStyle,
         });
         reset();
       } else {
         console.log('Error', resultData);
-        toast.error(
-          resultData.message || '문의 내용 전달 중 오류가 발생했습니다.',
-          { id: toastId, ...toastStyle },
-        );
+        toast.error(resultData.message || '메일을 보내지 못했습니다.', {
+          id: toastId,
+          ...toastStyle,
+        });
       }
     } catch (error) {
       console.log('Error', error);
-      toast.error('서버와의 통신 중 오류가 발생했습니다.', {
+      toast.error('서버에 연결하지 못했습니다.', {
         id: toastId,
         ...toastStyle,
       });
@@ -111,7 +108,7 @@ export const ContactForm = () => {
             {...register('name')}
             type="text"
             id="name"
-            placeholder="이름을 입력해주세요"
+            placeholder="이름을 입력해 주세요"
             className={fieldClass(!!errors.name)}
           />
           {errors.name && (
@@ -143,7 +140,7 @@ export const ContactForm = () => {
             {...register('subject')}
             type="text"
             id="subject"
-            placeholder="문의 제목을 입력해주세요"
+            placeholder="제목을 입력해 주세요"
             className={fieldClass(!!errors.subject)}
           />
           {errors.subject && (
@@ -159,7 +156,7 @@ export const ContactForm = () => {
             {...register('message')}
             id="message"
             rows={5}
-            placeholder="문의하실 내용을 입력해주세요"
+            placeholder="내용을 입력해 주세요"
             className={cn(fieldClass(!!errors.message), 'resize-none')}
           ></textarea>
           {errors.message && (
@@ -179,7 +176,7 @@ export const ContactForm = () => {
               : 'border-purple-light/25 bg-purple-medium/25 hover:bg-purple-medium/40',
           )}
         >
-          {isSubmitting ? '전송 중...' : '전송하기'}
+          {isSubmitting ? '보내는 중...' : '메일 보내기'}
         </motion.button>
       </form>
     </div>
