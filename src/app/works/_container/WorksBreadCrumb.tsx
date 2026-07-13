@@ -1,7 +1,8 @@
+import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
+import type { Work } from '@/features/works/data/worksData';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import type { Work } from '@/features/works/data/worksData';
 
 interface WorksBreadCrumbProps {
   /** worksData에 항목이 없는 페이지는 slug만으로 렌더링한다. */
@@ -27,8 +28,12 @@ const WorksBreadCrumb = ({ work, slug }: WorksBreadCrumbProps) => {
           <span className="text-sm text-white/40">{work.period}</span>
         )}
       </div>
-      {work?.tags && (
-        <div className="mt-1 flex flex-wrap gap-1.5">
+      {work ? (
+        <div className="mt-1 flex flex-wrap items-center gap-1.5">
+          <ProjectTypeChip
+            projectType={work.projectType}
+            isFreelance={work.isFreelance}
+          />
           {work.tags.map((tag) => (
             <span
               key={tag}
@@ -38,7 +43,7 @@ const WorksBreadCrumb = ({ work, slug }: WorksBreadCrumbProps) => {
             </span>
           ))}
         </div>
-      )}
+      ) : null}
       <div className="from-purple-medium/70 mt-3 h-px w-full bg-linear-to-r to-transparent" />
     </div>
   );

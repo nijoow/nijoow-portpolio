@@ -1,24 +1,16 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
+import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
+import type { Work } from '@/features/works/data/worksData';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface FeaturedWork {
-  pageName: string;
-  name: string;
-  imgSrc: string;
-  tags: string[];
-  description?: string;
-  role?: string;
-  period?: string;
-}
-
 interface FeaturedWorksProps {
-  works: FeaturedWork[];
+  works: Work[];
 }
 
-function FeaturedWorkCard({ work }: { work: FeaturedWork }) {
+function FeaturedWorkCard({ work }: { work: Work }) {
   return (
     <GlassCard className="group/work h-full">
       <Link
@@ -41,8 +33,11 @@ function FeaturedWorkCard({ work }: { work: FeaturedWork }) {
             sizes="(max-width: 768px) 100vw, 424px"
             className="object-contain transition-transform duration-500 group-hover/work:scale-105"
           />
-          <span className="absolute top-3 left-3 rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[10px] font-bold tracking-wider text-white/70 uppercase backdrop-blur-sm">
-            {work.role ?? 'Project'}
+          <span className="absolute top-3 left-3">
+            <ProjectTypeChip
+              projectType={work.projectType}
+              isFreelance={work.isFreelance}
+            />
           </span>
         </div>
 
@@ -88,12 +83,12 @@ export function FeaturedWorks({ works }: FeaturedWorksProps) {
   return (
     <section className="w-full">
       <div className="flex items-end justify-between gap-4">
-        <SubTitle eyebrow="Selected Works" title="주요 작업" />
+        <SubTitle eyebrow="Featured Projects" title="주요 작업" />
         <Link
           href="/works"
           className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 mb-6 flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white/70 backdrop-blur-xl transition-colors hover:text-white"
         >
-          More Works
+          모든 작업 보기
           <ArrowUpRight size={14} />
         </Link>
       </div>

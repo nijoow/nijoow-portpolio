@@ -105,7 +105,7 @@ function markIntroSeen() {
 
 function getRouteCopy(pathname: string) {
   if (pathname === '/works') {
-    return { eyebrow: 'Selected Works', title: 'Design × Development' };
+    return { eyebrow: 'Archived Project', title: 'Design × Development' };
   }
   if (pathname === '/contact') {
     return { eyebrow: 'Let’s Connect', title: 'Ideas into experience' };
