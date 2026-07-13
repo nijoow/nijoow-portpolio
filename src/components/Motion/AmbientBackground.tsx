@@ -15,27 +15,37 @@ interface StarParticle {
   left: string;
   top: string;
   opacity: number;
-  size: number;
+  dimOpacity: number;
+  size: string;
   duration: number;
   delay: number;
 }
 
-function seededValue(index: number, salt: number) {
+function seededValue(index: number, salt: number): number {
   const value = Math.sin(index * 91.37 + salt * 47.11) * 10000;
   return value - Math.floor(value);
 }
 
+function roundParticleValue(value: number): number {
+  return Number(value.toFixed(4));
+}
+
 const STAR_PARTICLES: StarParticle[] = Array.from(
   { length: 30 },
-  (_, index) => ({
-    id: index,
-    left: `${seededValue(index, 1) * 100}%`,
-    top: `${seededValue(index, 2) * 100}%`,
-    opacity: 0.18 + seededValue(index, 3) * 0.48,
-    size: 1 + seededValue(index, 4) * 1.6,
-    duration: 5 + seededValue(index, 5) * 7,
-    delay: seededValue(index, 6) * 4,
-  }),
+  (_, index) => {
+    const opacity = roundParticleValue(0.18 + seededValue(index, 3) * 0.48);
+
+    return {
+      id: index,
+      left: `${roundParticleValue(seededValue(index, 1) * 100)}%`,
+      top: `${roundParticleValue(seededValue(index, 2) * 100)}%`,
+      opacity,
+      dimOpacity: roundParticleValue(opacity * 0.45),
+      size: `${roundParticleValue(1 + seededValue(index, 4) * 1.6)}px`,
+      duration: roundParticleValue(5 + seededValue(index, 5) * 7),
+      delay: roundParticleValue(seededValue(index, 6) * 4),
+    };
+  },
 );
 
 export const AmbientBackground = () => {
@@ -117,16 +127,16 @@ export const AmbientBackground = () => {
       {STAR_PARTICLES.map((particle) => (
         <m.span
           key={particle.id}
-          initial={{ opacity: particle.opacity * 0.45 }}
+          initial={{ opacity: particle.dimOpacity }}
           animate={
             shouldReduceMotion
               ? { opacity: particle.opacity }
               : {
                   y: [-5, 7, -5],
                   opacity: [
-                    particle.opacity * 0.45,
+                    particle.dimOpacity,
                     particle.opacity,
-                    particle.opacity * 0.45,
+                    particle.dimOpacity,
                   ],
                 }
           }
