@@ -1,5 +1,5 @@
+import { ContactPageContent } from '@/features/contact/components/ContactPageContent';
 import { Metadata } from 'next';
-import ClassicContact from './_contact/ClassicContact';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const ContactPage = () => {
-  return <ClassicContact />;
+  return <ContactPageContent />;
 };
 
 export default ContactPage;
