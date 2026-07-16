@@ -13,6 +13,10 @@
   --color-cosmic-ink: #06060c;
   --color-cosmic-navy: #101a3a;
   --color-cosmic-violet: #25154d;
+  --color-glass-panel: #100d1c;
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --default-transition-duration: 220ms;
+  --default-transition-timing-function: var(--ease-emphasized);
 }
 
 html,
@@ -152,4 +156,96 @@ body {
 }
 .bounce {
   animation: bounce 1s infinite;
+}
+
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-popover-in {
+  animation: popover-in 180ms var(--ease-emphasized) both;
+}
+
+[data-placement='top'].animate-popover-in {
+  animation-name: popover-in-top;
+}
+
+@keyframes popover-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.micro-scene-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(white 4%, transparent 4%),
+    linear-gradient(90deg, white 4%, transparent 4%);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+  opacity: 0.07;
+}
+
+.interest-object {
+  transition: transform 420ms var(--ease-emphasized);
+}
+
+.group\/interest:hover .interest-object-bounce,
+.group\/interest:focus-visible .interest-object-bounce,
+.group\/interest[aria-expanded='true'] .interest-object-bounce {
+  animation: interest-bounce 820ms var(--ease-emphasized) infinite;
+}
+
+.group\/interest:hover .interest-object-pulse,
+.group\/interest:focus-visible .interest-object-pulse,
+.group\/interest[aria-expanded='true'] .interest-object-pulse {
+  animation: interest-pulse 680ms ease-in-out infinite;
+}
+
+@keyframes interest-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  44% {
+    transform: translateY(-12px) rotate(7deg);
+  }
+  68% {
+    transform: translateY(1px) rotate(-2deg) scaleY(0.94);
+  }
+}
+
+@keyframes interest-pulse {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg) scale(1);
+  }
+  35% {
+    transform: translateY(-3px) rotate(3deg) scale(1.07);
+  }
+  70% {
+    transform: translateY(-1px) rotate(-3deg) scale(1.025);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group\/interest:hover .interest-object,
+  .group\/interest:focus-visible .interest-object,
+  .group\/interest[aria-expanded='true'] .interest-object {
+    animation: none;
+  }
 }

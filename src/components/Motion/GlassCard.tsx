@@ -38,14 +38,14 @@ const GlassCard = ({ children, className, lift = true }: GlassCardProps) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group/glass hover:border-purple-light/30 relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-xl transition duration-300',
+        'group/glass hover:border-purple-light/30 focus-within:border-purple-light/30 ease-emphasized relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-xl transition-[border-color,transform] duration-300',
         lift && 'hover:-translate-y-0.5',
         className,
       )}
     >
       <m.div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/glass:opacity-100"
+        className="ease-emphasized pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/glass:opacity-100"
         style={{ backgroundImage: spotlight }}
       />
       <div className="relative h-full w-full">{children}</div>

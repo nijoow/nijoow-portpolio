@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { REVEAL_TRANSITION } from '@/lib/motion';
 import { m } from 'framer-motion';
 
 interface RevealProps {
@@ -17,7 +18,7 @@ const Reveal = ({ children, delay = 0, className }: RevealProps) => {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+      transition={{ ...REVEAL_TRANSITION, delay }}
       className={cn('w-full', className)}
     >
       {children}

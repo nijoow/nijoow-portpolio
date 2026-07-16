@@ -1,13 +1,23 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { FINE_POINTER_MEDIA_QUERY, useMediaQuery } from '@/hooks/useMediaQuery';
 import { m, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import { useEffect, useState } from 'react';
+
+const CURSOR_SEGMENTS = [
+  { size: 'h-8 w-8', offset: '-top-4 -left-4' },
+  { size: 'h-6 w-6', offset: '-top-3 -left-3' },
+  { size: 'h-5 w-5', offset: '-top-2.5 -left-2.5' },
+  { size: 'h-4 w-4', offset: '-top-2 -left-2' },
+  { size: 'h-3 w-3', offset: '-top-1.5 -left-1.5' },
+] as const;
 
 const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const hasFinePointer = useMediaQuery(FINE_POINTER_MEDIA_QUERY);
+  const prefersReducedMotion = Boolean(useReducedMotion());
+  const isEnabled = hasFinePointer && !prefersReducedMotion;
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -72,14 +82,18 @@ const CustomCursor = () => {
   const springsY = [spring1Y, spring2Y, spring3Y, spring4Y, spring5Y];
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+    if (!isEnabled) return;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseX.set(event.clientX);
+      mouseY.set(event.clientY);
+      setIsVisible(true);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+    const handleMouseOver = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+
+      const target = event.target;
       const isInteractive =
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
@@ -97,10 +111,9 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [isEnabled, mouseX, mouseY]);
 
-  if (prefersReducedMotion) return null;
-  if (typeof window !== 'undefined' && 'ontouchstart' in window) return null;
+  if (!isEnabled) return null;
 
   return (
     <>
@@ -134,34 +147,14 @@ const CustomCursor = () => {
             transform: 'translateZ(0)',
           }}
         >
-          {springsX.map((_, index) => {
+          {CURSOR_SEGMENTS.map((segment, index) => {
             const isMain = index === 0;
-            // Progressively smaller sizes for physical teardrop effect
-            const sizes = [
-              'h-8 w-8',
-              'h-6 w-6',
-              'h-5 w-5',
-              'h-4 w-4',
-              'h-3 w-3',
-            ];
-            const offsets = [
-              '-top-4 -left-4',
-              '-top-3 -left-3',
-              '-top-2.5 -left-2.5',
-              '-top-2 -left-2',
-              '-top-1.5 -left-1.5',
-            ];
-
-            const sizeClass = sizes[index];
-            const offset = offsets[index];
             const baseScale = 1 - index * 0.05;
 
             return (
               <m.div
                 key={index}
-                className={cn(
-                  `absolute ${offset} ${sizeClass} bg-purple-light rounded-full will-change-transform`,
-                )}
+                className={`bg-purple-light absolute rounded-full will-change-transform ${segment.offset} ${segment.size}`}
                 style={{ x: springsX[index], y: springsY[index] }}
                 animate={{ scale: isHovering ? (isMain ? 2.5 : 0) : baseScale }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}

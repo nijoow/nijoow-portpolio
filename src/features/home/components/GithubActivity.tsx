@@ -163,7 +163,7 @@ export function GithubActivity() {
         </div>
 
         <div className="relative mt-3 border-t border-white/10 pt-3">
-          <div className="relative h-16 overflow-hidden rounded-xl bg-black/20 sm:h-20">
+          <div className="relative aspect-880/192 w-full overflow-hidden rounded-xl bg-black/20">
             <Image
               src="https://raw.githubusercontent.com/nijoow/nijoow/output/snake.svg"
               alt="GitHub 기여 그래프 애니메이션"

@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 
 /**
  * ESLint Flat Config (ESLint v9+).
- * conventions.md §3: next/core-web-vitals + @typescript-eslint, no-explicit-any: error.
+ * AGENTS.md 완료 기준: next/core-web-vitals + @typescript-eslint, no-explicit-any: error.
  * eslint-config-next/core-web-vitals 에 typescript-eslint·import·jsx-a11y 플러그인이 포함되어 있다.
  */
 const config = [

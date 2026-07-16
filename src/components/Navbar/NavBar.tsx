@@ -2,7 +2,7 @@
 
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import Logo from '../Logo/Logo';
@@ -53,7 +53,7 @@ export default function NavBar() {
 
       <AnimatePresence>
         {isNavShow && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -61,7 +61,7 @@ export default function NavBar() {
           >
             <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/90 p-4 shadow-2xl backdrop-blur-xl">
               {navList.map(({ text, url }, i) => (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 }}
@@ -74,10 +74,10 @@ export default function NavBar() {
                   >
                     {text}
                   </Link>
-                </motion.div>
+                </m.div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

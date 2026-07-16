@@ -7,7 +7,7 @@ import { m, useReducedMotion } from 'framer-motion';
 import { ExternalLink, History, Music2 } from 'lucide-react';
 import Image from 'next/image';
 
-const EQUALIZER_BARS = Array.from({ length: 24 }, (_, index) => ({
+const EQUALIZER_BARS = Array.from({ length: 32 }, (_, index) => ({
   id: index,
   heights: [
     `${28 + Math.round(Math.abs(Math.sin(index)) * 55)}%`,
@@ -164,11 +164,11 @@ export function RecentlyPlayedMusic() {
             <p className="text-purple-light/75 truncate text-sm font-semibold">
               {current.artist}
             </p>
-            <div className="mt-3 flex h-5 max-w-44 items-end gap-1 overflow-hidden">
+            <div className="mt-3 flex h-5 items-end gap-0.5 overflow-hidden">
               {EQUALIZER_BARS.map((bar) => (
                 <m.span
                   key={bar.id}
-                  className="from-purple-medium to-purple-light w-1 rounded-full bg-linear-to-t"
+                  className="from-purple-medium to-purple-light w-1.5 rounded-t-xs bg-linear-to-t"
                   animate={
                     isPlaying && !shouldReduceMotion
                       ? { height: bar.heights }
