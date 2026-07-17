@@ -27,7 +27,7 @@ export function createWorkMetadata(
   const base: Metadata = {
     title: work.name,
     description,
-    keywords: work.tags,
+    keywords: [...work.tags],
     alternates: { canonical: canonicalPath },
     robots: { index: isIndexable, follow: isIndexable },
     openGraph: {

@@ -93,13 +93,13 @@ export function ContactPageContent() {
                         {icon}
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <span className="text-xs font-semibold text-white/40">
+                        <span className="text-xs font-semibold text-white/55">
                           {label}
                         </span>
                         <span className="group-hover:text-purple-light truncate text-sm font-black transition-colors">
                           {value}
                         </span>
-                        <span className="mt-1 text-xs text-white/35">
+                        <span className="mt-1 text-xs text-white/60">
                           {description}
                         </span>
                       </div>
@@ -132,7 +132,7 @@ export function ContactPageContent() {
                 Send a message
               </span>
               <h2 className="mt-2 text-2xl font-black">문의 남기기</h2>
-              <p className="mt-2 mb-6 text-sm leading-relaxed break-keep text-white/45">
+              <p className="mt-2 mb-6 text-sm leading-relaxed break-keep text-white/60">
                 필요한 내용을 남겨주시면 확인 후 이메일로 답장드릴게요.
               </p>
               <ContactForm />

@@ -30,6 +30,8 @@ interface ParticleLogoProps {
   burstSignal?: number;
   /** 파티클 좌표는 유지한 채 입장 응집 애니메이션을 다시 시작하는 값. */
   entranceSignal?: number;
+  /** reduced-motion 환경처럼 입장 응집 모션을 생략할지 여부. */
+  animateEntrance?: boolean;
 }
 
 // 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
@@ -113,6 +115,7 @@ export function ParticleLogo({
   clickBurst = false,
   burstSignal = 0,
   entranceSignal = 0,
+  animateEntrance = true,
 }: ParticleLogoProps) {
   // 작고 또렷한 서명 스타일 — 포인트 최대 크기 상한(가까이서 원반화 방지).
   const finalMaxSize = 15;
@@ -185,7 +188,7 @@ export function ParticleLogo({
 
   const uniforms = useMemo(
     () => ({
-      uProgress: { value: 1 },
+      uProgress: { value: animateEntrance ? 1 : 0 },
       uTime: { value: 0 },
       uSizeScale: { value: sizeScale },
       uJitterBase: { value: jitter },
@@ -196,7 +199,7 @@ export function ParticleLogo({
       uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
       uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
     }),
-    [sizeScale, jitter, finalMaxSize],
+    [animateEntrance, sizeScale, jitter, finalMaxSize],
   );
 
   useFrame((state) => {
@@ -212,7 +215,9 @@ export function ParticleLogo({
     timeRef.current = t;
 
     // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
-    const entrance = 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1);
+    const entrance = animateEntrance
+      ? 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1)
+      : 0;
     const eased = entrance * entrance * entrance;
     // 비인터랙티브(홈 로고/인트로)는 정지 시 글자가 또렷 — 상시 스캐터 없음.
     const idle = interactive ? (Math.sin(t * 0.5) * 0.5 + 0.5) * 0.06 : 0;

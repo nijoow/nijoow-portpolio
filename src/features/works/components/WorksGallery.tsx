@@ -81,13 +81,13 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
               {work.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/45"
+                  className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/60"
                 >
                   {tag}
                 </span>
               ))}
               {work.period ? (
-                <span className="ml-auto text-xs text-white/35">
+                <span className="ml-auto text-xs text-white/55">
                   {work.period}
                 </span>
               ) : null}
@@ -101,7 +101,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${work.name} 라이브 사이트 열기`}
-            className="focus-visible:ring-purple-light absolute top-3 right-3 z-20 flex size-9 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white/80 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
+            className="focus-visible:ring-purple-light absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white/80 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
           >
             <ExternalLink size={15} />
           </a>
@@ -126,7 +126,7 @@ export function WorksGallery() {
 
   function getFilterClass(isActive: boolean): string {
     return cn(
-      'rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-colors',
+      'min-h-11 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-purple-light',
       isActive
         ? 'border-purple-light/40 bg-purple-medium/35 text-white'
         : 'hover:border-purple-light/25 hover:bg-purple-medium/15 border-white/10 bg-white/5 text-white/55 hover:text-white',

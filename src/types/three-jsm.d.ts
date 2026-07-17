@@ -1,5 +1,5 @@
 declare module 'three/examples/jsm/math/MeshSurfaceSampler.js' {
-  import { Mesh, Vector3 } from 'three';
+  import type { Mesh, Vector3 } from 'three';
 
   export class MeshSurfaceSampler {
     constructor(mesh: Mesh);

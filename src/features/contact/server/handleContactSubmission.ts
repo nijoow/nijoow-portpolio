@@ -1,12 +1,15 @@
 import { contactFormSchema } from '@/features/contact/schemas/contactSchema';
+import { createApiError, createApiSuccess } from '@/lib/api';
 import { createHash } from 'node:crypto';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const DUPLICATE_WINDOW_MS = 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 3;
+const MAX_TRACKED_RECORDS = 500;
 const REQUEST_TIMEOUT_MS = 10_000;
 
 interface RateLimitRecord {
@@ -19,7 +22,6 @@ const recentSubmissions = new Map<string, number>();
 
 const contactEnvSchema = z.object({
   WEB3FORMS_ACCESS_KEY: z.string().min(1).optional(),
-  NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: z.string().min(1).optional(),
 });
 
 const web3FormsResponseSchema = z
@@ -40,29 +42,17 @@ function errorResponse(
   message: string,
   details?: unknown,
 ) {
-  return NextResponse.json(
-    {
-      success: false,
-      error: {
-        code,
-        message,
-        ...(details === undefined ? {} : { details }),
-      },
-    },
-    { status },
-  );
+  return NextResponse.json(createApiError(code, message, details), { status });
 }
 
 function successResponse(message: string) {
-  return NextResponse.json({ success: true, data: { message } });
+  return NextResponse.json(createApiSuccess({ message }));
 }
 
 function getAccessKey(): string | null {
-  const env = contactEnvSchema.parse(process.env);
+  const parsed = contactEnvSchema.safeParse(process.env);
 
-  return (
-    env.WEB3FORMS_ACCESS_KEY ?? env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? null
-  );
+  return parsed.success ? (parsed.data.WEB3FORMS_ACCESS_KEY ?? null) : null;
 }
 
 function getClientAddress(request: NextRequest): string {
@@ -76,18 +66,25 @@ function createIdentifier(value: string): string {
   return createHash('sha256').update(value).digest('hex');
 }
 
+function trimOldestRecords<T>(records: Map<string, T>) {
+  while (records.size >= MAX_TRACKED_RECORDS) {
+    const oldestKey = records.keys().next().value;
+    if (oldestKey === undefined) return;
+    records.delete(oldestKey);
+  }
+}
+
 function pruneExpiredRecords(now: number) {
-  if (rateLimitRecords.size > 500) {
-    for (const [key, record] of rateLimitRecords) {
-      if (record.expiresAt <= now) rateLimitRecords.delete(key);
-    }
+  for (const [key, record] of rateLimitRecords) {
+    if (record.expiresAt <= now) rateLimitRecords.delete(key);
   }
 
-  if (recentSubmissions.size > 500) {
-    for (const [key, expiresAt] of recentSubmissions) {
-      if (expiresAt <= now) recentSubmissions.delete(key);
-    }
+  for (const [key, expiresAt] of recentSubmissions) {
+    if (expiresAt <= now) recentSubmissions.delete(key);
   }
+
+  trimOldestRecords(rateLimitRecords);
+  trimOldestRecords(recentSubmissions);
 }
 
 function isRateLimited(key: string, now: number): boolean {
@@ -139,11 +136,10 @@ export async function handleContactSubmission(request: NextRequest) {
 
   const now = Date.now();
   const clientAddress = getClientAddress(request);
-  const rateLimitKey = createIdentifier(
-    `${clientAddress}:${contact.email.toLowerCase()}`,
-  );
+  const normalizedEmail = contact.email.toLowerCase();
+  const rateLimitKey = createIdentifier(`${clientAddress}:${normalizedEmail}`);
   const duplicateKey = createIdentifier(
-    `${clientAddress}:${contact.email}:${contact.subject}:${contact.message}`,
+    `${clientAddress}:${normalizedEmail}:${contact.subject}:${contact.message}`,
   );
 
   pruneExpiredRecords(now);

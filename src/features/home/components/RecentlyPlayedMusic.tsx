@@ -3,9 +3,10 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import { useNowPlaying } from '@/features/home/hooks/useNowPlaying';
 import type { Music } from '@/features/home/schemas/spotifySchemas';
-import { m, useReducedMotion } from 'framer-motion';
+import { m, useInView, useReducedMotion } from 'framer-motion';
 import { ExternalLink, History, Music2 } from 'lucide-react';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 const EQUALIZER_BARS = Array.from({ length: 32 }, (_, index) => ({
   id: index,
@@ -20,18 +21,16 @@ const EQUALIZER_BARS = Array.from({ length: 32 }, (_, index) => ({
 
 function MusicArtwork({
   music,
-  isPlaying,
-  shouldReduceMotion,
+  shouldAnimate,
 }: {
   music: Music;
-  isPlaying: boolean;
-  shouldReduceMotion: boolean;
+  shouldAnimate: boolean;
 }) {
   return (
     <div className="relative size-20 shrink-0 sm:size-22">
       <div className="bg-purple-light/30 absolute inset-2 rounded-full blur-xl" />
       <m.div
-        animate={isPlaying && !shouldReduceMotion ? { rotate: 360 } : undefined}
+        animate={shouldAnimate ? { rotate: 360 } : undefined}
         transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
         className="relative size-full overflow-hidden rounded-full border-2 border-white/15 bg-black shadow-xl ring-1 ring-white/10"
       >
@@ -65,7 +64,7 @@ function RecentTrack({ music, index }: { music: Music; index: number }) {
       rel="noopener noreferrer"
       className="group/track focus-visible:ring-purple-light flex min-w-0 items-center gap-3 rounded-xl px-2 py-2 transition-colors outline-none hover:bg-white/5 focus-visible:ring-2"
     >
-      <span className="w-4 shrink-0 text-center text-[10px] font-bold text-white/25">
+      <span className="w-4 shrink-0 text-center text-[10px] font-bold text-white/50">
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5">
@@ -81,7 +80,7 @@ function RecentTrack({ music, index }: { music: Music; index: number }) {
         <p className="group-hover/track:text-purple-light truncate text-sm font-bold transition-colors">
           {music.title}
         </p>
-        <p className="truncate text-xs text-white/40">{music.artist}</p>
+        <p className="truncate text-xs text-white/55">{music.artist}</p>
       </div>
       <ExternalLink
         aria-hidden="true"
@@ -118,6 +117,8 @@ function MusicCardSkeleton() {
 export function RecentlyPlayedMusic() {
   const { data, isPending } = useNowPlaying();
   const shouldReduceMotion = useReducedMotion();
+  const animationRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(animationRef, { margin: '120px' });
 
   if (isPending) return <MusicCardSkeleton />;
 
@@ -129,91 +130,90 @@ export function RecentlyPlayedMusic() {
             <Music2 size={20} />
           </span>
           <p className="font-bold">재생 정보를 불러오지 못했습니다</p>
-          <p className="text-sm text-white/40">잠시 후 다시 시도해 주세요.</p>
+          <p className="text-sm text-white/60">잠시 후 다시 시도해 주세요.</p>
         </div>
       </GlassCard>
     );
   }
 
   const { current, recent, isPlaying } = data;
+  const shouldAnimate = isPlaying && isInView && !shouldReduceMotion;
 
   return (
-    <GlassCard className="h-full min-h-96 bg-black/30">
-      <div className="relative flex h-full flex-col overflow-hidden p-5">
-        <div className="bg-purple-medium/20 absolute -top-16 -left-14 size-48 rounded-full blur-3xl" />
+    <div ref={animationRef} className="h-full">
+      <GlassCard className="h-full min-h-96 bg-black/30">
+        <div className="relative flex h-full flex-col overflow-hidden p-5">
+          <div className="bg-purple-medium/20 absolute -top-16 -left-14 size-48 rounded-full blur-3xl" />
 
-        <a
-          href={current.songUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/current focus-visible:ring-purple-light relative flex min-w-0 items-center gap-4 rounded-2xl outline-none focus-visible:ring-2"
-        >
-          <MusicArtwork
-            music={current}
-            isPlaying={isPlaying}
-            shouldReduceMotion={Boolean(shouldReduceMotion)}
-          />
-          <div className="min-w-0 flex-1">
-            <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/40 uppercase">
-              <span className="bg-purple-light shadow-purple-light/70 size-2 rounded-full shadow-sm" />
-              {isPlaying ? '지금 듣는 중' : '마지막으로 들은 곡'}
+          <a
+            href={current.songUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/current focus-visible:ring-purple-light relative flex min-w-0 items-center gap-4 rounded-2xl outline-none focus-visible:ring-2"
+          >
+            <MusicArtwork music={current} shouldAnimate={shouldAnimate} />
+            <div className="min-w-0 flex-1">
+              <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/55 uppercase">
+                <span className="bg-purple-light shadow-purple-light/70 size-2 rounded-full shadow-sm" />
+                {isPlaying ? '지금 듣는 중' : '마지막으로 들은 곡'}
+              </div>
+              <h3 className="group-hover/current:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
+                {current.title}
+              </h3>
+              <p className="text-purple-light/75 truncate text-sm font-semibold">
+                {current.artist}
+              </p>
+              <div className="mt-3 flex h-5 items-end gap-0.5 overflow-hidden">
+                {EQUALIZER_BARS.map((bar) => (
+                  <m.span
+                    key={bar.id}
+                    className="from-purple-medium to-purple-light w-1.5 rounded-t-xs bg-linear-to-t"
+                    animate={
+                      shouldAnimate
+                        ? { height: bar.heights }
+                        : { height: bar.heights[0] }
+                    }
+                    transition={{
+                      repeat: Infinity,
+                      duration: bar.duration,
+                      delay: bar.delay,
+                      ease: 'easeInOut',
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-            <h3 className="group-hover/current:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
-              {current.title}
-            </h3>
-            <p className="text-purple-light/75 truncate text-sm font-semibold">
-              {current.artist}
-            </p>
-            <div className="mt-3 flex h-5 items-end gap-0.5 overflow-hidden">
-              {EQUALIZER_BARS.map((bar) => (
-                <m.span
-                  key={bar.id}
-                  className="from-purple-medium to-purple-light w-1.5 rounded-t-xs bg-linear-to-t"
-                  animate={
-                    isPlaying && !shouldReduceMotion
-                      ? { height: bar.heights }
-                      : { height: bar.heights[0] }
-                  }
-                  transition={{
-                    repeat: Infinity,
-                    duration: bar.duration,
-                    delay: bar.delay,
-                    ease: 'easeInOut',
-                  }}
-                />
-              ))}
-            </div>
+            <ExternalLink className="size-4 shrink-0 self-start text-white/30 transition-colors group-hover/current:text-white/70" />
+          </a>
+
+          <div className="relative my-5 h-px bg-white/10" />
+
+          <div className="relative flex items-center justify-between px-2">
+            <span className="flex items-center gap-2 text-xs font-extrabold text-white/55">
+              <History size={13} /> 최근 들은 음악
+            </span>
+            <span className="text-[10px] font-bold tracking-widest text-white/55 uppercase">
+              Spotify
+            </span>
           </div>
-          <ExternalLink className="size-4 shrink-0 self-start text-white/30 transition-colors group-hover/current:text-white/70" />
-        </a>
 
-        <div className="relative my-5 h-px bg-white/10" />
-
-        <div className="relative flex items-center justify-between px-2">
-          <span className="flex items-center gap-2 text-xs font-extrabold text-white/55">
-            <History size={13} /> 최근 들은 음악
-          </span>
-          <span className="text-[10px] font-bold tracking-widest text-white/25 uppercase">
-            Spotify
-          </span>
+          <div className="relative mt-2 flex flex-1 flex-col justify-center">
+            {recent.length > 0 ? (
+              recent.map((music, index) => (
+                <RecentTrack
+                  key={`${music.songUrl}-${index}`}
+                  music={music}
+                  index={index}
+                />
+              ))
+            ) : (
+              <p className="px-2 py-5 text-sm text-white/60">
+                최근 들은 음악이 아직 없습니다.
+              </p>
+            )}
+          </div>
         </div>
-
-        <div className="relative mt-2 flex flex-1 flex-col justify-center">
-          {recent.length > 0 ? (
-            recent.map((music, index) => (
-              <RecentTrack
-                key={`${music.songUrl}-${index}`}
-                music={music}
-                index={index}
-              />
-            ))
-          ) : (
-            <p className="px-2 py-5 text-sm text-white/35">
-              최근 들은 음악이 아직 없습니다.
-            </p>
-          )}
-        </div>
-      </div>
-    </GlassCard>
+      </GlassCard>
+    </div>
   );
 }

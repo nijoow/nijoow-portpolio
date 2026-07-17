@@ -23,7 +23,7 @@ export interface Work {
   projectType: ProjectType;
   /** business 프로젝트 중 프리랜서 작업 여부. */
   isFreelance?: boolean;
-  tags: string[];
+  tags: readonly string[];
   /** 한 줄 소개(문제·역할·성과). 채우면 카드/목록에 노출. */
   description?: string;
   /** 담당 역할 요약(예: 'Frontend'). */
@@ -38,7 +38,7 @@ export interface Work {
   status: 'published' | 'archive' | 'draft';
 }
 
-export const works: Work[] = [
+export const works: readonly Work[] = [
   {
     pageName: 'return-to-blank',
     name: 'return-to-blank',
@@ -240,11 +240,13 @@ export const works: Work[] = [
 
 export const publicWorks = works.filter((work) => work.status !== 'draft');
 
-export const getWork = (pageName: string): Work | undefined =>
-  works.find((w) => w.pageName === pageName);
+export function getWork(pageName: string): Work | undefined {
+  return works.find((work) => work.pageName === pageName);
+}
 
-export const getWorks = (pageNames: readonly string[]): Work[] =>
-  pageNames.flatMap((pageName) => {
+export function getWorks(pageNames: readonly string[]): readonly Work[] {
+  return pageNames.flatMap((pageName) => {
     const work = getWork(pageName);
     return work ? [work] : [];
   });
+}

@@ -45,11 +45,11 @@ export function ContactCta() {
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="group border-purple-light/20 bg-purple-medium/15 hover:bg-purple-medium/30 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm backdrop-blur-xl transition-colors"
+                className="group border-purple-light/20 bg-purple-medium/15 hover:bg-purple-medium/30 focus-visible:ring-purple-light flex min-h-11 items-center gap-3 rounded-xl border px-4 py-3 text-sm backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
               >
                 <span className="text-purple-light">{icon}</span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[10px] font-bold tracking-wider text-white/35 uppercase">
+                  <span className="block text-[10px] font-bold tracking-wider text-white/55 uppercase">
                     {label}
                   </span>
                   <span className="block truncate font-bold text-white/75 group-hover:text-white">
@@ -64,7 +64,7 @@ export function ContactCta() {
             ))}
             <Link
               href="/contact"
-              className="mt-3 text-center text-xs font-bold text-white/40 transition-colors hover:text-white"
+              className="focus-visible:ring-purple-light mt-3 flex min-h-11 items-center justify-center rounded-lg text-center text-xs font-bold text-white/60 transition-colors outline-none hover:text-white focus-visible:ring-2"
             >
               메일 보내기
             </Link>

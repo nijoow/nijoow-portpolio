@@ -43,7 +43,6 @@ export function GlassPopover({
   const id = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const lastPointerTypeRef = useRef('');
   const closeTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState<PopoverPosition>({
@@ -163,9 +162,6 @@ export function GlassPopover({
         aria-haspopup="dialog"
         aria-controls={isOpen ? id : undefined}
         aria-label={ariaLabel}
-        onPointerDown={(event) => {
-          lastPointerTypeRef.current = event.pointerType;
-        }}
         onPointerEnter={(event) => {
           if (event.pointerType === 'mouse') open();
         }}
@@ -174,9 +170,7 @@ export function GlassPopover({
         }}
         onFocus={open}
         onBlur={scheduleClose}
-        onClick={() => {
-          if (lastPointerTypeRef.current !== 'mouse') open();
-        }}
+        onClick={open}
         className={className}
       >
         {children}

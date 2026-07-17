@@ -1,8 +1,8 @@
 interface Props {
-  stacks: string[];
+  stacks: readonly string[];
 }
 
-const TechStack = ({ stacks }: Props) => {
+function TechStack({ stacks }: Props) {
   return (
     <div className="flex flex-wrap gap-1.5">
       {stacks.map((stack) => (
@@ -15,6 +15,6 @@ const TechStack = ({ stacks }: Props) => {
       ))}
     </div>
   );
-};
+}
 
 export default TechStack;

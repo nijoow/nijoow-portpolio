@@ -1,6 +1,7 @@
 import Reveal from '@/components/Motion/Reveal';
 import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
 import Section from '@/components/Section/Section';
+import { QueryProvider } from '@/context/QueryProvider';
 import { CapabilityGrid } from '@/features/home/components/CapabilityGrid';
 import { ContactCta } from '@/features/home/components/ContactCta';
 import { FeaturedWorks } from '@/features/home/components/FeaturedWorks';
@@ -40,10 +41,12 @@ export default function ClassicHome() {
         </Section>
         <Section>
           <Reveal>
-            <LivePersonality
-              music={<RecentlyPlayedMusic />}
-              github={<GithubActivity />}
-            />
+            <QueryProvider>
+              <LivePersonality
+                music={<RecentlyPlayedMusic />}
+                github={<GithubActivity />}
+              />
+            </QueryProvider>
           </Reveal>
         </Section>
         <Section>

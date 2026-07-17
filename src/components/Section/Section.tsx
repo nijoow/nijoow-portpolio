@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 interface SectionProps {
-  children: React.ReactNode;
+  children: ReactNode;
   alignItems?:
     | 'items-start'
     | 'items-end'
@@ -10,7 +10,7 @@ interface SectionProps {
     | 'items-stretch';
 }
 
-const Section = ({ children, alignItems = 'items-center' }: SectionProps) => {
+function Section({ children, alignItems = 'items-center' }: SectionProps) {
   return (
     <div
       className={`mx-auto flex w-full max-w-4xl flex-col gap-2 ${alignItems}`}
@@ -18,6 +18,6 @@ const Section = ({ children, alignItems = 'items-center' }: SectionProps) => {
       {children}
     </div>
   );
-};
+}
 
 export default Section;

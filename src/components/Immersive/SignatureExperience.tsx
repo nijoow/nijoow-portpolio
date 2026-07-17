@@ -244,7 +244,7 @@ export default function SignatureExperience() {
           <SignatureErrorBoundary fallback={<SignatureFallbackArt />}>
             <View
               className="absolute inset-0"
-              frames={Infinity}
+              frames={reduced ? 1 : Infinity}
               visible={isInView || isCinematic}
             >
               <ambientLight intensity={0.8} />
@@ -263,6 +263,8 @@ export default function SignatureExperience() {
                   clickBurst={isHero && !reduced}
                   burstSignal={burstSignal}
                   entranceSignal={introRun}
+                  animateEntrance={!reduced}
+                  jitter={reduced ? 0 : 0.003}
                 />
               </Suspense>
               <Sparkles
@@ -339,7 +341,7 @@ export default function SignatureExperience() {
                   <span
                     aria-label="드래그해서 회전"
                     title="드래그해서 회전"
-                    className="hidden size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 backdrop-blur-sm sm:flex"
+                    className="hidden size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 backdrop-blur-sm sm:flex"
                   >
                     <Move3d size={15} />
                   </span>
@@ -349,7 +351,7 @@ export default function SignatureExperience() {
                       onClick={handleBurst}
                       aria-label="파티클 흩기"
                       title="파티클 흩기"
-                      className="hover:border-purple-light/40 hover:text-purple-light flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 backdrop-blur-sm transition-colors"
+                      className="hover:border-purple-light/40 hover:text-purple-light focus-visible:ring-purple-light flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 backdrop-blur-sm transition-colors outline-none focus-visible:ring-2"
                     >
                       <SparklesIcon size={15} />
                     </button>
@@ -364,7 +366,7 @@ export default function SignatureExperience() {
           <button
             type="button"
             onClick={handleLanding}
-            className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 absolute top-5 right-5 z-10 rounded-full border px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur-xl transition-colors hover:text-white"
+            className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 focus-visible:ring-purple-light absolute top-5 right-5 z-10 min-h-11 rounded-full border px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur-xl transition-colors outline-none hover:text-white focus-visible:ring-2"
           >
             건너뛰기
           </button>
@@ -376,7 +378,9 @@ export default function SignatureExperience() {
           <Canvas
             camera={CAMERA_CONFIG}
             dpr={config.dpr}
-            frameloop={isInView || isCinematic ? 'always' : 'never'}
+            frameloop={
+              reduced ? 'demand' : isInView || isCinematic ? 'always' : 'never'
+            }
             gl={CANVAS_GL_CONFIG}
             onCreated={makeCanvasTransparent}
             className={cn(
@@ -395,7 +399,7 @@ export default function SignatureExperience() {
           onClick={handleReplay}
           aria-label="인트로 다시 보기"
           title="인트로 다시 보기"
-          className="group border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border text-white/70 shadow-lg backdrop-blur-xl transition-colors hover:text-white"
+          className="group border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 focus-visible:ring-purple-light fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border text-white/70 shadow-lg backdrop-blur-xl transition-colors outline-none hover:text-white focus-visible:ring-2"
         >
           <RotateCcw
             size={18}

@@ -124,7 +124,7 @@ function StackDetails({
         {item.contexts.map((context) => (
           <li
             key={context}
-            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/45"
+            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/60"
           >
             {context}
           </li>
@@ -157,7 +157,7 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
             <GlassPopover
               ariaLabel={`${item.label} 자세히 보기`}
               content={<StackDetails item={item} type={type} />}
-              className="focus-visible:ring-purple-light hover:border-purple-light/35 hover:bg-purple-medium/25 hover:text-purple-light rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-semibold text-white/55 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+              className="focus-visible:ring-purple-light hover:border-purple-light/35 hover:bg-purple-medium/25 hover:text-purple-light min-h-11 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-semibold text-white/60 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
             >
               {item.label}
             </GlassPopover>
@@ -165,7 +165,7 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
         ))}
       </ul>
 
-      <p className="mt-auto text-[10px] font-bold tracking-wide text-white/25">
+      <p className="mt-auto text-[10px] font-bold tracking-wide text-white/55">
         칩에 마우스를 올려 자세히 보기
       </p>
     </div>

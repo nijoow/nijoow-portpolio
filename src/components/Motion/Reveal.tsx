@@ -3,16 +3,17 @@
 import { cn } from '@/lib/utils';
 import { REVEAL_TRANSITION } from '@/lib/motion';
 import { m } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 interface RevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   delay?: number;
   className?: string;
 }
 
 // 스크롤 진입 시 아래에서 떠오르는 공용 리빌 래퍼.
 // reduced-motion은 루트 MotionConfig(reducedMotion="user")가 일괄 처리한다.
-const Reveal = ({ children, delay = 0, className }: RevealProps) => {
+function Reveal({ children, delay = 0, className }: RevealProps) {
   return (
     <m.div
       initial={{ opacity: 0, y: 24 }}
@@ -24,6 +25,6 @@ const Reveal = ({ children, delay = 0, className }: RevealProps) => {
       {children}
     </m.div>
   );
-};
+}
 
 export default Reveal;

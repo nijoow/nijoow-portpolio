@@ -5,7 +5,7 @@ const spotifyArtistSchema = z.object({
 });
 
 const spotifyImageSchema = z.object({
-  url: z.string().url(),
+  url: z.url(),
 });
 
 export const spotifyTrackSchema = z.object({
@@ -15,19 +15,20 @@ export const spotifyTrackSchema = z.object({
     images: z.array(spotifyImageSchema),
   }),
   external_urls: z.object({
-    spotify: z.string().url(),
+    spotify: z.url(),
   }),
 });
 
 export const spotifyCurrentlyPlayingSchema = z.object({
   item: spotifyTrackSchema.nullable(),
+  is_playing: z.boolean(),
 });
 
 export const spotifyRecentlyPlayedSchema = z.object({
   items: z.array(
     z.object({
       track: spotifyTrackSchema,
-      played_at: z.string(),
+      played_at: z.iso.datetime(),
     }),
   ),
 });
@@ -35,34 +36,17 @@ export const spotifyRecentlyPlayedSchema = z.object({
 export const musicSchema = z.object({
   title: z.string(),
   artist: z.string(),
-  albumImageUrl: z.string().url(),
-  songUrl: z.string().url(),
-  playedAt: z.string().nullable(),
+  albumImageUrl: z.url(),
+  songUrl: z.url(),
+  playedAt: z.iso.datetime().nullable(),
 });
 
-const apiErrorSchema = z.object({
-  success: z.literal(false),
-  error: z.object({
-    code: z.string(),
-    message: z.string(),
-  }),
+export const musicActivitySchema = z.object({
+  current: musicSchema.nullable(),
+  recent: z.array(musicSchema),
+  isPlaying: z.boolean(),
 });
-
-export const currentMusicResponseSchema = z.discriminatedUnion('success', [
-  z.object({
-    success: z.literal(true),
-    data: musicSchema.nullable(),
-  }),
-  apiErrorSchema,
-]);
-
-export const recentMusicResponseSchema = z.discriminatedUnion('success', [
-  z.object({
-    success: z.literal(true),
-    data: z.array(musicSchema),
-  }),
-  apiErrorSchema,
-]);
 
 export type Music = z.infer<typeof musicSchema>;
+export type MusicActivity = z.infer<typeof musicActivitySchema>;
 export type SpotifyTrack = z.infer<typeof spotifyTrackSchema>;

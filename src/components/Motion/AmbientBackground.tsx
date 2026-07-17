@@ -2,6 +2,8 @@
 
 import {
   m,
+  type MotionValue,
+  type Transition,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -48,7 +50,9 @@ const STAR_PARTICLES: StarParticle[] = Array.from(
   },
 );
 
-export const AmbientBackground = () => {
+const STATIC_TRANSITION = { duration: 0 } as const;
+
+export function AmbientBackground() {
   const shouldReduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
   const smoothPointerX = useSpring(pointerX, { stiffness: 45, damping: 24 });
@@ -59,6 +63,11 @@ export const AmbientBackground = () => {
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -240]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 170]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -120]);
+
+  const resolveTransition = (transition: Transition): Transition =>
+    shouldReduceMotion ? STATIC_TRANSITION : transition;
+  const resolveParallax = (value: MotionValue<number>) =>
+    shouldReduceMotion ? 0 : value;
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -79,46 +88,66 @@ export const AmbientBackground = () => {
       <div className="cosmic-grid absolute inset-0 opacity-35" />
 
       <m.div
-        style={{ x: blobX1, y: y1 }}
+        style={{ x: resolveParallax(blobX1), y: resolveParallax(y1) }}
         animate={
           shouldReduceMotion
             ? undefined
             : { scale: [1, 1.12, 1], opacity: [0.58, 0.78, 0.58] }
         }
-        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+        transition={resolveTransition({
+          duration: 14,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        })}
         className="bg-cosmic-violet/55 absolute -top-32 -left-40 size-[34rem] rounded-full blur-3xl"
       />
       <m.div
-        style={{ x: blobX2, y: y2 }}
+        style={{ x: resolveParallax(blobX2), y: resolveParallax(y2) }}
         animate={
           shouldReduceMotion
             ? undefined
             : { scale: [1.08, 0.96, 1.08], opacity: [0.42, 0.68, 0.42] }
         }
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+        transition={resolveTransition({
+          duration: 20,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        })}
         className="bg-cosmic-navy/70 absolute top-[24%] -right-56 size-[42rem] rounded-full blur-3xl"
       />
       <m.div
-        style={{ x: blobX3, y: y3 }}
+        style={{ x: resolveParallax(blobX3), y: resolveParallax(y3) }}
         animate={
           shouldReduceMotion
             ? undefined
             : { scale: [0.96, 1.1, 0.96], opacity: [0.38, 0.6, 0.38] }
         }
-        transition={{ duration: 17, repeat: Infinity, ease: 'easeInOut' }}
+        transition={resolveTransition({
+          duration: 17,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        })}
         className="bg-purple-darker/35 absolute top-[62%] left-[4%] size-[38rem] rounded-full blur-3xl"
       />
 
       <m.div
         animate={shouldReduceMotion ? undefined : { rotate: 360 }}
-        transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+        transition={resolveTransition({
+          duration: 80,
+          repeat: Infinity,
+          ease: 'linear',
+        })}
         className="border-purple-light/10 absolute top-[10%] left-[55%] size-96 -translate-x-1/2 rounded-full border"
       >
         <span className="bg-purple-light absolute top-1/2 -left-1 size-2 rounded-full opacity-50" />
       </m.div>
       <m.div
         animate={shouldReduceMotion ? undefined : { rotate: -360 }}
-        transition={{ duration: 110, repeat: Infinity, ease: 'linear' }}
+        transition={resolveTransition({
+          duration: 110,
+          repeat: Infinity,
+          ease: 'linear',
+        })}
         className="border-purple-medium/10 absolute top-[48%] -left-28 size-[30rem] rounded-full border"
       >
         <span className="bg-purple-medium absolute right-16 bottom-6 size-1.5 rounded-full opacity-45" />
@@ -127,7 +156,9 @@ export const AmbientBackground = () => {
       {STAR_PARTICLES.map((particle) => (
         <m.span
           key={particle.id}
-          initial={{ opacity: particle.dimOpacity }}
+          initial={
+            shouldReduceMotion ? false : { opacity: particle.dimOpacity }
+          }
           animate={
             shouldReduceMotion
               ? { opacity: particle.opacity }
@@ -140,12 +171,12 @@ export const AmbientBackground = () => {
                   ],
                 }
           }
-          transition={{
+          transition={resolveTransition({
             duration: particle.duration,
             repeat: Infinity,
             ease: 'easeInOut',
             delay: particle.delay,
-          }}
+          })}
           className="bg-purple-light absolute rounded-full"
           style={{
             left: particle.left,
@@ -160,4 +191,4 @@ export const AmbientBackground = () => {
       <div className="from-cosmic-ink absolute inset-x-0 bottom-0 h-48 bg-linear-to-t to-transparent" />
     </div>
   );
-};
+}

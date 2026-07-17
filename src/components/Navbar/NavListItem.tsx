@@ -2,15 +2,13 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const NavListItem = ({
-  text,
-  url,
-  onClick,
-}: {
+interface NavListItemProps {
   text: string;
   url: string;
   onClick?: () => void;
-}) => {
+}
+
+function NavListItem({ text, url, onClick }: NavListItemProps) {
   const pathname = usePathname();
   const isActive =
     pathname === url || (url !== '/' && pathname.startsWith(url));
@@ -21,7 +19,7 @@ const NavListItem = ({
       onClick={onClick}
       aria-current={isActive ? 'page' : undefined}
       className={cn(
-        'rounded-full px-4 py-1.5 text-sm font-bold transition-colors',
+        'focus-visible:ring-purple-light flex min-h-11 items-center rounded-full px-4 py-1.5 text-sm font-bold transition-colors outline-none focus-visible:ring-2',
         isActive
           ? 'bg-white/10 text-white'
           : 'text-white/55 hover:bg-white/5 hover:text-white',
@@ -30,5 +28,5 @@ const NavListItem = ({
       {text}
     </Link>
   );
-};
+}
 export default NavListItem;

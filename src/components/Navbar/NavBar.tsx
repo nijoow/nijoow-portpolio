@@ -4,7 +4,7 @@ import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
 import { AnimatePresence, m } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Logo from '../Logo/Logo';
 import NavListItem from './NavListItem';
 
@@ -16,14 +16,28 @@ const navList = [
 
 export default function NavBar() {
   const [isNavShow, setIsNavShow] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isNavShow) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setIsNavShow(false);
+      toggleRef.current?.focus();
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isNavShow]);
 
   return (
-    <nav className="fixed inset-x-0 top-4 z-50 px-4">
+    <nav aria-label="주요 메뉴" className="fixed inset-x-0 top-4 z-50 px-4">
       <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between rounded-full border border-white/10 bg-black/50 px-5 shadow-lg backdrop-blur-xl">
         <Magnetic strength={0.2}>
           <Link
             href="/"
-            className="group flex items-center"
+            className="focus-visible:ring-purple-light group flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-2"
             aria-label="nijoow 홈"
           >
             <Logo
@@ -46,14 +60,17 @@ export default function NavBar() {
         </ul>
 
         {/* Mobile */}
-        <div className="md:hidden">
-          <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
-        </div>
+        <NavToggle
+          ref={toggleRef}
+          isNavShow={isNavShow}
+          onToggle={() => setIsNavShow((isOpen) => !isOpen)}
+        />
       </div>
 
       <AnimatePresence>
         {isNavShow && (
           <m.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -70,7 +87,7 @@ export default function NavBar() {
                   <Link
                     href={url}
                     onClick={() => setIsNavShow(false)}
-                    className="flex h-12 w-full items-center rounded-xl px-4 text-lg font-medium text-white transition-colors hover:bg-white/10"
+                    className="focus-visible:ring-purple-light flex h-12 w-full items-center rounded-xl px-4 text-lg font-medium text-white transition-colors outline-none hover:bg-white/10 focus-visible:ring-2"
                   >
                     {text}
                   </Link>

@@ -24,7 +24,7 @@ const BUTTON_TAP = { scale: 0.98 };
 
 function fieldClass(hasError: boolean) {
   return cn(
-    'w-full rounded-xl border bg-black/20 p-3.5 text-sm text-white transition-colors outline-none placeholder:text-white/25 focus:ring-2',
+    'w-full rounded-xl border bg-black/20 p-3.5 text-sm text-white transition-colors outline-none placeholder:text-white/50 focus:ring-2',
     hasError
       ? 'border-red-400/70 focus:border-red-400 focus:ring-red-400/30'
       : 'focus:border-purple-light/45 focus:ring-purple-light/20 border-white/10',
@@ -147,7 +147,7 @@ export function ContactForm() {
           <label htmlFor="message" className="text-sm font-bold text-white/80">
             내용 <span className="text-purple-light">*</span>
           </label>
-          <span className="text-xs text-white/30">최대 1000자</span>
+          <span className="text-xs text-white/55">최대 1000자</span>
         </div>
         <textarea
           {...register('message')}

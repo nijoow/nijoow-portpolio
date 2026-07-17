@@ -24,20 +24,7 @@ export const contactFormSchema = z.object({
   website: z.string().max(200).optional().default(''),
 });
 
-export const contactApiResponseSchema = z.discriminatedUnion('success', [
-  z.object({
-    success: z.literal(true),
-    data: z.object({ message: z.string() }),
-  }),
-  z.object({
-    success: z.literal(false),
-    error: z.object({
-      code: z.string(),
-      message: z.string(),
-      details: z.unknown().optional(),
-    }),
-  }),
-]);
+export const contactApiDataSchema = z.object({ message: z.string() });
 
 export type ContactFormInput = z.input<typeof contactFormSchema>;
 export type ContactFormData = z.output<typeof contactFormSchema>;

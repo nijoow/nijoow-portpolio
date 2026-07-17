@@ -9,7 +9,7 @@ const Logo = (props: LogoProps) => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 192 108"
     {...props}
-    className={`fill-purple-medium stroke-purple-medium dark:fill-white dark:stroke-white ${props.className}`}
+    className={`fill-white stroke-white ${props.className}`}
   >
     <path
       className="a"

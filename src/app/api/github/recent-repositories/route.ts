@@ -1,4 +1,5 @@
 import { githubRepositoriesSchema } from '@/features/home/schemas/githubActivitySchemas';
+import { createApiError, createApiSuccess } from '@/lib/api';
 import { NextResponse } from 'next/server';
 
 const GITHUB_REPOSITORIES_URL =
@@ -12,17 +13,15 @@ export async function GET() {
         'X-GitHub-Api-Version': '2022-11-28',
       },
       next: { revalidate: 15 * 60 },
+      signal: AbortSignal.timeout(8_000),
     });
 
     if (!response.ok) {
       return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'INTERNAL_GITHUB_ACTIVITY',
-            message: 'GitHub 프로젝트를 불러오지 못했습니다.',
-          },
-        },
+        createApiError(
+          'INTERNAL_GITHUB_ACTIVITY',
+          'GitHub 프로젝트를 불러오지 못했습니다.',
+        ),
         { status: 502 },
       );
     }
@@ -44,16 +43,13 @@ export async function GET() {
         topics: repository.topics.slice(0, 3),
       }));
 
-    return NextResponse.json({ success: true, data: repositories });
+    return NextResponse.json(createApiSuccess(repositories));
   } catch {
     return NextResponse.json(
-      {
-        success: false,
-        error: {
-          code: 'INTERNAL_GITHUB_ACTIVITY',
-          message: 'GitHub 프로젝트를 불러오지 못했습니다.',
-        },
-      },
+      createApiError(
+        'INTERNAL_GITHUB_ACTIVITY',
+        'GitHub 프로젝트를 불러오지 못했습니다.',
+      ),
       { status: 500 },
     );
   }

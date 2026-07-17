@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface FeaturedWorksProps {
-  works: Work[];
+  works: readonly Work[];
 }
 
 function FeaturedWorkCard({ work }: { work: Work }) {
@@ -62,13 +62,13 @@ function FeaturedWorkCard({ work }: { work: Work }) {
             {work.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/45"
+                className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/60"
               >
                 {tag}
               </span>
             ))}
             {work.period ? (
-              <span className="ml-auto text-xs text-white/35">
+              <span className="ml-auto text-xs text-white/55">
                 {work.period}
               </span>
             ) : null}

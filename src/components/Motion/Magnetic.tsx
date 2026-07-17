@@ -1,6 +1,6 @@
 'use client';
 
-import { m, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import { type MouseEvent, type ReactNode, useRef } from 'react';
 
 interface MagneticProps {
@@ -8,8 +8,9 @@ interface MagneticProps {
   strength?: number;
 }
 
-const Magnetic = ({ children, strength = 0.5 }: MagneticProps) => {
+function Magnetic({ children, strength = 0.5 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = Boolean(useReducedMotion());
   const targetX = useMotionValue(0);
   const targetY = useMotionValue(0);
   const x = useSpring(targetX, {
@@ -24,16 +25,13 @@ const Magnetic = ({ children, strength = 0.5 }: MagneticProps) => {
   });
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || shouldReduceMotion) return;
 
     const { clientX, clientY } = event;
     const { height, width, left, top } = ref.current.getBoundingClientRect();
 
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-
-    const x = (clientX - centerX) * strength;
-    const y = (clientY - centerY) * strength;
 
     targetX.set((clientX - centerX) * strength);
     targetY.set((clientY - centerY) * strength);
@@ -55,6 +53,6 @@ const Magnetic = ({ children, strength = 0.5 }: MagneticProps) => {
       {children}
     </m.div>
   );
-};
+}
 
 export default Magnetic;

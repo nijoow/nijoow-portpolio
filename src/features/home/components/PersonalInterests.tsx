@@ -65,7 +65,7 @@ function InterestDetails({ interest }: { interest: Interest }) {
         {interest.notes.map((note) => (
           <li
             key={note}
-            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/45"
+            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/60"
           >
             {note}
           </li>
@@ -202,7 +202,7 @@ function InterestObject({ interest }: { interest: Interest }) {
         </span>
         <span className="relative text-center">
           <span className="block text-sm font-extrabold">{interest.label}</span>
-          <span className="mt-0.5 block text-[10px] font-bold tracking-widest text-white/30 uppercase">
+          <span className="mt-0.5 block text-[10px] font-bold tracking-widest text-white/55 uppercase">
             {interest.englishLabel}
           </span>
         </span>
@@ -223,7 +223,7 @@ export function PersonalInterests() {
           <p className="text-sm leading-relaxed break-keep text-white/50">
             개인적이고 소소한 취미들입니다.
           </p>
-          <span className="mt-1 text-[10px] font-bold tracking-wide text-white/25">
+          <span className="mt-1 text-[10px] font-bold tracking-wide text-white/55">
             오브젝트에 마우스를 올려 자세히 보기
           </span>
         </div>

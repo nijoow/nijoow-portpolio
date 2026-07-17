@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   --color-purple-light: #c0a8eb;
   --color-purple-medium: #8458b3;
@@ -34,6 +32,16 @@ body,
   *::before,
   *::after {
     cursor: none !important;
+  }
+
+  input,
+  textarea,
+  [contenteditable='true'] {
+    cursor: text !important;
+  }
+
+  select {
+    cursor: default !important;
   }
 }
 

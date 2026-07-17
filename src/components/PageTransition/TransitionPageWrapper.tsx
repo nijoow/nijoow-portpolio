@@ -2,9 +2,13 @@
 
 import { STANDARD_TRANSITION } from '@/lib/motion';
 import { m } from 'framer-motion';
-import React from 'react';
+import type { ReactNode } from 'react';
 
-const TransitionPageWrapper = ({ children }: { children: React.ReactNode }) => {
+interface TransitionPageWrapperProps {
+  children: ReactNode;
+}
+
+function TransitionPageWrapper({ children }: TransitionPageWrapperProps) {
   return (
     <m.div
       initial={{ y: -20, opacity: 0 }}
@@ -15,6 +19,6 @@ const TransitionPageWrapper = ({ children }: { children: React.ReactNode }) => {
       {children}
     </m.div>
   );
-};
+}
 
 export default TransitionPageWrapper;

@@ -1,34 +1,46 @@
 import GlassCard from '@/components/Motion/GlassCard';
-import React from 'react';
+import type { ReactNode } from 'react';
 
-const CustomList = ({ children }: { children: React.ReactNode }) => (
-  <GlassCard lift={false} className="w-full">
-    <ul className="flex w-full flex-col gap-1.5 p-4 sm:p-5">{children}</ul>
-  </GlassCard>
-);
+interface ChildrenProps {
+  children: ReactNode;
+}
 
-const MainListItem = ({ children }: { children: React.ReactNode }) => (
-  <li className="mt-3 flex gap-2.5 text-[15px] break-keep first:mt-0">
-    <span className="bg-purple-light/80 mt-2 size-1.5 shrink-0 rounded-full" />
-    <div className="min-w-0">{children}</div>
-  </li>
-);
-const SubListItem = ({
+function CustomList({ children }: ChildrenProps) {
+  return (
+    <GlassCard lift={false} className="w-full">
+      <ul className="flex w-full flex-col gap-1.5 p-4 sm:p-5">{children}</ul>
+    </GlassCard>
+  );
+}
+
+function MainListItem({ children }: ChildrenProps) {
+  return (
+    <li className="mt-3 flex gap-2.5 text-[15px] break-keep first:mt-0">
+      <span className="bg-purple-light/80 mt-2 size-1.5 shrink-0 rounded-full" />
+      <div className="min-w-0">{children}</div>
+    </li>
+  );
+}
+
+function SubListItem({
   children,
   showBullet = true,
-}: {
-  children: React.ReactNode;
+}: ChildrenProps & {
   showBullet?: boolean;
-}) => (
-  <li className="flex gap-2.5 pl-4 text-sm leading-relaxed break-keep text-white/60">
-    {showBullet && (
-      <span className="mt-2 size-1 shrink-0 rounded-full bg-white/40" />
-    )}
-    <div className="min-w-0">{children}</div>
-  </li>
-);
+}) {
+  return (
+    <li className="flex gap-2.5 pl-4 text-sm leading-relaxed break-keep text-white/60">
+      {showBullet ? (
+        <span className="mt-2 size-1 shrink-0 rounded-full bg-white/40" />
+      ) : null}
+      <div className="min-w-0">{children}</div>
+    </li>
+  );
+}
 
-export default Object.assign(CustomList, {
+const CompoundCustomList = Object.assign(CustomList, {
   MainListItem,
   SubListItem,
 });
+
+export default CompoundCustomList;
