@@ -4,7 +4,7 @@ import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
 import { PERSON_ID, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import { Analytics } from '@vercel/analytics/next';
-import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
+import { LazyMotion, MotionConfig, domMax } from 'framer-motion';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import type { ReactNode } from 'react';
@@ -116,7 +116,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             }),
           }}
         />
-        <LazyMotion features={domAnimation}>
+        <LazyMotion features={domMax}>
           <MotionConfig reducedMotion="user">
             <AmbientBackground />
             <CustomCursor />

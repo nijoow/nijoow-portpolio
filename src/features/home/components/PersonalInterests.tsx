@@ -54,7 +54,7 @@ function InterestDetails({ interest }: { interest: Interest }) {
       <span className="text-purple-light/70 text-[10px] font-black tracking-widest uppercase">
         {interest.englishLabel}
       </span>
-      <h4 className="mt-1 text-base font-black">{interest.label}</h4>
+      <h4 className="mt-1 text-base font-bold text-white">{interest.label}</h4>
       <p className="mt-2 text-xs leading-relaxed break-keep text-white/65">
         {interest.detail}
       </p>

@@ -113,7 +113,7 @@ function StackDetails({
       <span className="text-purple-light/70 text-[10px] font-black tracking-widest uppercase">
         {type === 'stack' ? 'Main Toolkit' : 'Current Focus'}
       </span>
-      <h4 className="mt-1 text-base font-black">{item.label}</h4>
+      <h4 className="mt-1 text-base font-bold text-white">{item.label}</h4>
       <p className="mt-2 text-xs leading-relaxed break-keep text-white/65">
         {item.detail}
       </p>

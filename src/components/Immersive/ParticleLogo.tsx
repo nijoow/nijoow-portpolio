@@ -2,7 +2,7 @@
 
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
@@ -18,8 +18,6 @@ interface ParticleLogoProps {
   count?: number;
   /** 포인트 크기 배율 */
   sizeScale?: number;
-  /** additive=네온 글로우(겹치면 흰색), false=노멀 블렌딩(글자 구조 또렷) */
-  additive?: boolean;
   /** 상시 난류 강도(0에 가까울수록 얇은 획이 또렷) */
   jitter?: number;
   /** 비인터랙티브일 때 좌우 스윙 회전 여부(false=완전 정지) */
@@ -58,6 +56,8 @@ const vertexShader = /* glsl */ `
   attribute vec3 aScatter;
   attribute float aRandom;
   varying float vRand;
+  varying float vDepth;
+  varying float vMotion;
 
   void main() {
     vRand = aRandom;
@@ -83,24 +83,84 @@ const vertexShader = /* glsl */ `
 
     vec4 mv = viewMatrix * world;
     gl_Position = projectionMatrix * mv;
-    float size = mix(6.0, 13.0, aRandom);
+    vDepth = smoothstep(-1.8, 1.8, base.z);
+    vMotion = uProgress;
+
+    // 흩어지는 동안 크기를 보강해 넓게 퍼진 입자도 사라지지 않게 한다.
+    float glint = smoothstep(0.86, 1.0, aRandom);
+    float size = (mix(6.2, 11.8, aRandom) + glint * 1.6) * mix(1.0, 1.28, uProgress);
     // 카메라가 가까워져도 포인트가 거대한 원반으로 번지지 않도록 상한을 둔다.
     gl_PointSize = min(size * uSizeScale * (8.0 / -mv.z), uMaxSize);
   }
 `;
 
 const fragmentShader = /* glsl */ `
-  uniform vec3 uColorA;
-  uniform vec3 uColorB;
+  uniform vec3 uColorDeep;
+  uniform vec3 uColorMid;
+  uniform vec3 uColorCool;
+  uniform vec3 uColorGlint;
   varying float vRand;
+  varying float vDepth;
+  varying float vMotion;
 
   void main() {
     vec2 c = gl_PointCoord - 0.5;
     float d = length(c);
     if (d > 0.5) discard;
-    // 가운데는 또렷, 가장자리는 더 부드럽게 — 거친 원반 느낌 완화.
-    float alpha = pow(smoothstep(0.5, 0.0, d), 1.5);
-    vec3 col = mix(uColorA, uColorB, vRand);
+
+    // 딥 바이올렛 몸체에 쿨 블루 깊이감과 라일락 반사광을 겹친다.
+    float palette = fract(vRand * 1.618 + vDepth * 0.24);
+    vec3 col = palette < 0.62
+      ? mix(uColorDeep, uColorMid, palette / 0.62)
+      : mix(uColorMid, uColorCool, (palette - 0.62) / 0.38);
+
+    float body = pow(smoothstep(0.5, 0.02, d), 1.35);
+    float rim = smoothstep(0.49, 0.34, d) - smoothstep(0.31, 0.16, d);
+    float glintSeed = smoothstep(0.86, 1.0, vRand);
+    float specular = pow(
+      smoothstep(0.22, 0.0, length(c - vec2(-0.14, 0.14))),
+      2.4
+    ) * glintSeed;
+
+    // 모든 입자를 발광시키지 않고 가장자리와 일부 반사점만 밝힌다.
+    float reflection = min(rim * 0.2 + specular * 0.72, 0.78);
+    col = mix(col, uColorGlint, reflection);
+
+    // 응집 상태는 반투명하게, 흩어진 상태는 더 선명하게 유지한다.
+    float density = mix(0.7, 0.92, fract(vRand * 7.13));
+    float alpha = min(
+      body * density * mix(0.82, 1.12, vMotion) + rim * 0.08 + specular * 0.12,
+      0.94
+    );
+    gl_FragColor = vec4(col, alpha);
+  }
+`;
+
+const glintFragmentShader = /* glsl */ `
+  uniform vec3 uColorCool;
+  uniform vec3 uColorGlint;
+  varying float vRand;
+  varying float vDepth;
+  varying float vMotion;
+
+  void main() {
+    float glintSeed = smoothstep(0.86, 1.0, vRand);
+    if (glintSeed <= 0.01) discard;
+
+    vec2 c = gl_PointCoord - 0.5;
+    float d = length(c);
+    if (d > 0.5) discard;
+
+    float body = pow(smoothstep(0.5, 0.0, d), 1.65);
+    float specular = pow(
+      smoothstep(0.25, 0.0, length(c - vec2(-0.14, 0.14))),
+      2.1
+    );
+    vec3 col = mix(uColorCool, uColorGlint, min(specular + vDepth * 0.2, 1.0));
+    float alpha = min(
+      (body * 0.34 + specular * 0.72) * glintSeed * mix(0.78, 1.2, vMotion),
+      0.88
+    );
     gl_FragColor = vec4(col, alpha);
   }
 `;
@@ -109,7 +169,6 @@ export function ParticleLogo({
   interactive = true,
   count = 40000,
   sizeScale = 0.07,
-  additive = true,
   jitter = 0.003,
   rotate = true,
   clickBurst = false,
@@ -127,17 +186,15 @@ export function ParticleLogo({
   }
 
   const group = useRef<THREE.Group>(null);
-  const matRef = useRef<THREE.ShaderMaterial>(null);
   const burstRef = useRef(-Infinity);
   const autoRef = useRef(0);
-  const timeRef = useRef(0);
   const startedAtRef = useRef<number | null>(null);
   const rotationStartedAtRef = useRef<number | null>(null);
   const lastBurstSignalRef = useRef(burstSignal);
   const lastEntranceSignalRef = useRef(entranceSignal);
   const mouseWorld = useMemo(() => new THREE.Vector3(), []);
 
-  const { positions, scatters, randoms } = useMemo(() => {
+  const geometry = useMemo(() => {
     const rand = mulberry32(0x9e3779b9);
     const mesh = new THREE.Mesh(logoMesh.geometry);
     const sampler = new MeshSurfaceSampler(mesh).build();
@@ -183,8 +240,14 @@ export function ParticleLogo({
       scatters[i * 3 + 2] = u * dist;
     }
 
-    return { positions, scatters, randoms };
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aScatter', new THREE.BufferAttribute(scatters, 3));
+    geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+    return geometry;
   }, [logoMesh, count]);
+
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   const uniforms = useMemo(
     () => ({
@@ -196,8 +259,18 @@ export function ParticleLogo({
       uRadius: { value: 1.3 },
       uStrength: { value: 0.9 },
       uMaxSize: { value: finalMaxSize },
-      uColorA: { value: new THREE.Color('#d8c7ff').multiplyScalar(1.5) },
-      uColorB: { value: new THREE.Color('#8458b3').multiplyScalar(1.4) },
+      uColorDeep: {
+        value: new THREE.Color('#8b68df').multiplyScalar(1.15),
+      },
+      uColorMid: {
+        value: new THREE.Color('#c4a5f0').multiplyScalar(1.15),
+      },
+      uColorCool: {
+        value: new THREE.Color('#98a7f5').multiplyScalar(1.1),
+      },
+      uColorGlint: {
+        value: new THREE.Color('#f0e5ff').multiplyScalar(1.25),
+      },
     }),
     [animateEntrance, sizeScale, jitter, finalMaxSize],
   );
@@ -212,7 +285,6 @@ export function ParticleLogo({
     }
     startedAtRef.current ??= absoluteTime;
     const t = absoluteTime - startedAtRef.current;
-    timeRef.current = t;
 
     // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
     const entrance = animateEntrance
@@ -240,23 +312,17 @@ export function ParticleLogo({
     const burst = bp <= 1 ? Math.sin(Math.PI * bp) * BURST_PEAK : 0;
     const progress = Math.max(eased, idle, pulse, burst);
 
-    const mat = matRef.current;
-    if (mat) {
-      const uProgress = mat.uniforms.uProgress;
-      const uTime = mat.uniforms.uTime;
-      if (uProgress) uProgress.value = progress;
-      if (uTime) uTime.value = t;
+    uniforms.uProgress.value = progress;
+    uniforms.uTime.value = t;
 
-      if (interactive) {
-        // 마우스를 z=0 평면에 투영해 월드 좌표 산출(리펄전용).
-        const cam = state.camera;
-        mouseWorld.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
-        mouseWorld.sub(cam.position);
-        const planeT = -cam.position.z / (mouseWorld.z || -1);
-        mouseWorld.multiplyScalar(planeT).add(cam.position);
-        const uMouse = mat.uniforms.uMouse;
-        if (uMouse) uMouse.value.copy(mouseWorld);
-      }
+    if (interactive) {
+      // 마우스를 z=0 평면에 투영해 월드 좌표 산출(리펄전용).
+      const cam = state.camera;
+      mouseWorld.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
+      mouseWorld.sub(cam.position);
+      const planeT = -cam.position.z / (mouseWorld.z || -1);
+      mouseWorld.multiplyScalar(planeT).add(cam.position);
+      uniforms.uMouse.value.copy(mouseWorld);
     }
 
     if (group.current) {
@@ -281,47 +347,28 @@ export function ParticleLogo({
   });
 
   return (
-    <>
-      <group ref={group}>
-        <points>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              args={[positions, 3]}
-            />
-            <bufferAttribute
-              attach="attributes-aScatter"
-              args={[scatters, 3]}
-            />
-            <bufferAttribute attach="attributes-aRandom" args={[randoms, 1]} />
-          </bufferGeometry>
-          <shaderMaterial
-            ref={matRef}
-            uniforms={uniforms}
-            vertexShader={vertexShader}
-            fragmentShader={fragmentShader}
-            transparent
-            depthWrite={!additive}
-            blending={additive ? THREE.AdditiveBlending : THREE.NormalBlending}
-          />
-        </points>
-      </group>
-
-      {/* 우클릭 캡처용 투명 평면 → 우클릭하면 흩어졌다 복귀(자동으로도 주기적 발동). */}
-      {(interactive || clickBurst) && (
-        <mesh
-          position={[0, 0, -1]}
-          onContextMenu={(e) => {
-            e.nativeEvent.preventDefault();
-            burstRef.current = timeRef.current;
-            autoRef.current = timeRef.current;
-          }}
-        >
-          <planeGeometry args={[60, 40]} />
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-        </mesh>
-      )}
-    </>
+    <group ref={group} dispose={null}>
+      <points geometry={geometry}>
+        <shaderMaterial
+          uniforms={uniforms}
+          vertexShader={vertexShader}
+          fragmentShader={fragmentShader}
+          transparent
+          depthWrite={false}
+          blending={THREE.NormalBlending}
+        />
+      </points>
+      <points geometry={geometry}>
+        <shaderMaterial
+          uniforms={uniforms}
+          vertexShader={vertexShader}
+          fragmentShader={glintFragmentShader}
+          transparent
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
+    </group>
   );
 }
 

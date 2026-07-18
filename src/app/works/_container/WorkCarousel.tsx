@@ -1,16 +1,10 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { AnimatePresence, m } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
-import {
-  type KeyboardEvent as ReactKeyboardEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { Dialog } from 'radix-ui';
+import { type KeyboardEvent, useCallback, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -54,8 +48,6 @@ export function WorkCarousel({
 }: WorkCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const selectedImage =
     selectedIndex === null ? null : (imgSrcList[selectedIndex] ?? null);
   const isModalOpen = selectedImage !== null;
@@ -74,31 +66,7 @@ export function WorkCarousel({
     [selectedIndex, imgSrcList.length, swiper],
   );
 
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    previouslyFocusedRef.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    closeButtonRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      previouslyFocusedRef.current?.focus();
-      previouslyFocusedRef.current = null;
-    };
-  }, [isModalOpen]);
-
-  function handleModalKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      closeModal();
-      return;
-    }
-
+  function handleModalKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === 'ArrowLeft' && imgSrcList.length > 1) {
       event.preventDefault();
       moveSelection(-1);
@@ -108,27 +76,6 @@ export function WorkCarousel({
     if (event.key === 'ArrowRight' && imgSrcList.length > 1) {
       event.preventDefault();
       moveSelection(1);
-      return;
-    }
-
-    if (event.key !== 'Tab') return;
-
-    const controls = Array.from(
-      event.currentTarget.querySelectorAll<HTMLElement>(
-        'button:not([disabled])',
-      ),
-    );
-    const firstControl = controls[0];
-    const lastControl = controls.at(-1);
-
-    if (!firstControl || !lastControl) return;
-
-    if (event.shiftKey && document.activeElement === firstControl) {
-      event.preventDefault();
-      lastControl.focus();
-    } else if (!event.shiftKey && document.activeElement === lastControl) {
-      event.preventDefault();
-      firstControl.focus();
     }
   }
 
@@ -141,7 +88,12 @@ export function WorkCarousel({
   }
 
   return (
-    <>
+    <Dialog.Root
+      open={isModalOpen}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) closeModal();
+      }}
+    >
       <Swiper
         onSwiper={setSwiper}
         modules={[Pagination]}
@@ -165,13 +117,14 @@ export function WorkCarousel({
               className="object-contain"
               priority={index === 0}
             />
-            <button
-              type="button"
-              aria-label={`${index + 1}번 이미지 크게 보기`}
-              aria-haspopup="dialog"
-              onClick={() => setSelectedIndex(index)}
-              className="focus-visible:ring-purple-light absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
-            />
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                aria-label={`${index + 1}번 이미지 크게 보기`}
+                onClick={() => setSelectedIndex(index)}
+                className="focus-visible:ring-purple-light absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
+              />
+            </Dialog.Trigger>
           </SwiperSlide>
         ))}
 
@@ -183,73 +136,61 @@ export function WorkCarousel({
         ) : null}
       </Swiper>
 
-      <AnimatePresence>
-        {isModalOpen ? (
-          <m.div
-            role="dialog"
-            aria-modal="true"
-            aria-label="작업 이미지 확대 보기"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+      {selectedImage ? (
+        <Dialog.Portal>
+          <Dialog.Overlay className="work-dialog-overlay fixed inset-0 z-100 cursor-zoom-out bg-black/75 backdrop-blur-sm" />
+          <Dialog.Content
             onKeyDown={handleModalKeyDown}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) closeModal();
-            }}
-            className="fixed inset-0 z-100 flex cursor-zoom-out items-center justify-center bg-black/75 backdrop-blur-sm md:p-8"
+            className="work-dialog-content fixed top-1/2 left-1/2 z-101 flex h-full w-full overflow-hidden rounded-2xl bg-gray-500/30 outline-none md:max-h-[90vh] md:max-w-[86vw]"
           >
-            <m.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative flex h-full w-full cursor-default overflow-hidden rounded-2xl bg-gray-500/30 md:max-h-[90vh] md:max-w-[86vw]"
-            >
+            <Dialog.Title className="sr-only">
+              작업 이미지 확대 보기
+            </Dialog.Title>
+
+            <Dialog.Close asChild>
               <button
-                ref={closeButtonRef}
                 type="button"
                 aria-label="확대 이미지 닫기"
                 className="focus-visible:ring-purple-light absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 text-white/75 transition-colors outline-none hover:text-white focus-visible:ring-2"
-                onClick={closeModal}
               >
                 <X aria-hidden size={24} />
               </button>
+            </Dialog.Close>
 
-              <div className="relative m-auto h-full w-full md:h-[96%] md:w-[84%]">
-                <Image
-                  src={`/images/works/${selectedImage}`}
-                  alt={`${selectedImage.replace(/\.\w+$/, '')} 확대 이미지`}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                />
-              </div>
+            <div className="relative m-auto h-full w-full md:h-[96%] md:w-[84%]">
+              <Image
+                src={`/images/works/${selectedImage}`}
+                alt={`${selectedImage.replace(/\.\w+$/, '')} 확대 이미지`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
+            </div>
 
-              {imgSrcList.length > 1 ? (
-                <>
-                  <button
-                    type="button"
-                    aria-label="이전 확대 이미지"
-                    className="focus-visible:ring-purple-light absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
-                    onClick={() => moveSelection(-1)}
-                  >
-                    <ChevronLeft aria-hidden className="size-8" />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="다음 확대 이미지"
-                    className="focus-visible:ring-purple-light absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
-                    onClick={() => moveSelection(1)}
-                  >
-                    <ChevronRight aria-hidden className="size-8" />
-                  </button>
-                </>
-              ) : null}
-            </m.div>
-          </m.div>
-        ) : null}
-      </AnimatePresence>
-    </>
+            {imgSrcList.length > 1 ? (
+              <>
+                <button
+                  type="button"
+                  aria-label="이전 확대 이미지"
+                  className="focus-visible:ring-purple-light absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
+                  onClick={() => moveSelection(-1)}
+                >
+                  <ChevronLeft aria-hidden className="size-8" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="다음 확대 이미지"
+                  className="focus-visible:ring-purple-light absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
+                  onClick={() => moveSelection(1)}
+                >
+                  <ChevronRight aria-hidden className="size-8" />
+                </button>
+              </>
+            ) : null}
+          </Dialog.Content>
+        </Dialog.Portal>
+      ) : null}
+    </Dialog.Root>
   );
 }
 

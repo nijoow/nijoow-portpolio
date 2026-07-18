@@ -181,7 +181,7 @@ body {
   animation: popover-in 180ms var(--ease-emphasized) both;
 }
 
-[data-placement='top'].animate-popover-in {
+[data-side='top'].animate-popover-in {
   animation-name: popover-in-top;
 }
 
@@ -194,6 +194,66 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+@keyframes work-dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes work-dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes work-dialog-content-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes work-dialog-content-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+.work-dialog-overlay[data-state='open'] {
+  animation: work-dialog-overlay-in 180ms ease-out both;
+}
+
+.work-dialog-overlay[data-state='closed'] {
+  animation: work-dialog-overlay-out 140ms ease-in both;
+}
+
+.work-dialog-content {
+  transform: translate(-50%, -50%);
+}
+
+.work-dialog-content[data-state='open'] {
+  animation: work-dialog-content-in 320ms var(--ease-emphasized) both;
+}
+
+.work-dialog-content[data-state='closed'] {
+  animation: work-dialog-content-out 180ms ease-in both;
 }
 
 .micro-scene-grid {

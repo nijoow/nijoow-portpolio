@@ -11,6 +11,7 @@ import {
   Component,
   type ComponentRef,
   type ErrorInfo,
+  type MouseEvent as ReactMouseEvent,
   type ReactNode,
   Suspense,
   useEffect,
@@ -221,6 +222,12 @@ export default function SignatureExperience() {
 
   const handleBurst = () => setBurstSignal((signal) => signal + 1);
 
+  const handleContextMenu = (event: ReactMouseEvent<HTMLElement>) => {
+    if (!isHero || reduced || !config) return;
+    event.preventDefault();
+    handleBurst();
+  };
+
   return (
     <>
       <m.section
@@ -232,6 +239,7 @@ export default function SignatureExperience() {
           layout: { duration: 1.35, ease: [0.16, 1, 0.3, 1] },
           borderRadius: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
         }}
+        onContextMenu={handleContextMenu}
         aria-label="nijoow 시그니처 로고"
         className={cn(
           'overflow-hidden bg-black',
