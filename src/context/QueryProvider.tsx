@@ -8,7 +8,6 @@ interface QueryProviderProps {
 }
 
 export function QueryProvider({ children }: QueryProviderProps) {
-  // QueryClient는 컴포넌트 생애주기당 1회만 생성한다 (리렌더 시 재생성 방지).
   const [queryClient] = useState(
     () =>
       new QueryClient({

@@ -94,7 +94,7 @@ const CusmeticPage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 페이지 진입 시 router.refresh()를 호출하여 클라이언트 측
             캐시를 강제로 무효화함으로써 최신 데이터 보장
           </p>
@@ -110,7 +110,7 @@ const CusmeticPage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: next.config.js에서 imageSizes 및 deviceSizes를 최적화하여
             불필요한 이미지 생성을 방지
           </p>

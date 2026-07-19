@@ -2,6 +2,7 @@ import SignatureExperience from '@/components/Immersive/SignatureExperienceDynam
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
+import { COLOR_TOKENS, PALETTE_CSS_VARIABLES } from '@/lib/designTokens';
 import { PERSON_ID, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import { Analytics } from '@vercel/analytics/next';
 import { LazyMotion, MotionConfig, domMax } from 'framer-motion';
@@ -67,16 +68,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#06060c',
+  themeColor: COLOR_TOKENS.surface.ink,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko" className="h-full w-full">
+    <html lang="ko" className="h-full w-full" style={PALETTE_CSS_VARIABLES}>
       <body className={`${binggrae.variable} h-full w-full`}>
         <a
           href="#main-content"
-          className="focus:bg-cosmic-ink focus:ring-purple-light fixed top-3 left-3 z-9999 -translate-y-24 rounded-lg px-4 py-3 font-bold text-white transition-transform outline-none focus:translate-y-0 focus:ring-2"
+          className="focus:bg-surface-ink focus:ring-brand-lavender fixed top-3 left-3 z-9999 -translate-y-24 rounded-lg px-4 py-3 font-bold text-white transition-transform outline-none focus:translate-y-0 focus:ring-2"
         >
           본문으로 건너뛰기
         </a>
@@ -140,14 +141,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                       href="https://github.com/nijoow"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="focus-visible:ring-purple-light rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
+                      className="focus-visible:ring-brand-lavender rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
                     >
                       GitHub
                     </a>
                     <span className="text-white/20">|</span>
                     <a
                       href="mailto:nijoow1127@gmail.com"
-                      className="focus-visible:ring-purple-light rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
+                      className="focus-visible:ring-brand-lavender rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
                     >
                       nijoow1127@gmail.com
                     </a>

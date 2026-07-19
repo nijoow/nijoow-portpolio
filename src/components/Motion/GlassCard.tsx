@@ -16,15 +16,15 @@ interface GlassCardProps {
   lift?: boolean;
 }
 
-// 마우스를 따라오는 퍼플 스포트라이트 + 보더 하이라이트를 주는 공용 글래스 패널.
-// 뿌연 흰색 오버레이 대신 낮은 알파의 퍼플 라디얼만 얹어 유리 질감을 유지한다.
+// 모든 주요 카드가 공유하는 프로스티드 글래스 패널.
+// 재질은 전역 frosted-glass 규칙에 두고, 여기서는 포인터 반응만 담당한다.
 function GlassCard({ children, className, lift = true }: GlassCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = Boolean(useReducedMotion());
   const mouseX = useMotionValue(-9999);
   const mouseY = useMotionValue(-9999);
 
-  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${mouseX}px ${mouseY}px, rgba(192, 168, 235, 0.13), transparent 70%)`;
+  const spotlight = useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, color-mix(in srgb, var(--color-brand-lavender) 11%, transparent), transparent 72%)`;
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     if (shouldReduceMotion) return;
@@ -45,11 +45,15 @@ function GlassCard({ children, className, lift = true }: GlassCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group/glass hover:border-purple-light/30 focus-within:border-purple-light/30 ease-emphasized relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-xl transition-[border-color,transform] duration-300',
+        'frosted-glass group/glass ease-emphasized focus-within:border-brand-lavender/25 hover:border-brand-lavender/20 relative overflow-hidden rounded-2xl border transition-[border-color,transform,box-shadow] duration-300 hover:shadow-2xl',
         lift && 'hover:-translate-y-0.5',
         className,
       )}
     >
+      <div
+        aria-hidden
+        className="from-brand-lavender/0 via-brand-lavender/22 to-accent/0 pointer-events-none absolute inset-x-8 top-0 h-px bg-linear-to-r opacity-80"
+      />
       <m.div
         aria-hidden
         className="ease-emphasized pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/glass:opacity-100"

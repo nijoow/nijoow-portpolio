@@ -1,6 +1,7 @@
 'use client';
 
 import type { CapabilityPreviewProps } from '@/features/home/components/capability/types';
+import { COLOR_TOKENS, withAlpha } from '@/lib/designTokens';
 import { AnimatePresence, m } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -30,9 +31,9 @@ export function FrontendPreview({
       <div className="grid h-full grid-cols-[1.2fr_20px_1fr] items-center gap-1">
         <div className="flex h-full flex-col rounded-lg border border-white/5 bg-zinc-950/70 p-2 font-mono text-[7px] text-zinc-400">
           <div className="mb-1.5 flex items-center gap-1 border-b border-white/5 pb-1">
-            <span className="size-1.5 rounded-full bg-red-500/60" />
-            <span className="size-1.5 rounded-full bg-yellow-500/60" />
-            <span className="size-1.5 rounded-full bg-green-500/60" />
+            <span className="bg-status-danger/60 size-1.5 rounded-full" />
+            <span className="bg-status-warning/60 size-1.5 rounded-full" />
+            <span className="bg-status-success/60 size-1.5 rounded-full" />
             <span className="ml-1 text-[6px] text-zinc-600">Button.tsx</span>
           </div>
 
@@ -40,11 +41,12 @@ export function FrontendPreview({
             {!showCode && (
               <div className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-1 opacity-25 select-none">
                 <span>
-                  const <span className="text-blue-400">Btn</span> = () =&gt; (
+                  const <span className="text-brand-cool">Btn</span> = () =&gt;
+                  (
                 </span>
                 <span className="pl-2 text-zinc-500">
-                  &lt;<span className="text-pink-400">button</span>{' '}
-                  <span className="text-yellow-500">glow</span> /&gt;
+                  &lt;<span className="text-accent-light">button</span>{' '}
+                  <span className="text-status-warning">glow</span> /&gt;
                 </span>
                 <span>);</span>
               </div>
@@ -57,10 +59,10 @@ export function FrontendPreview({
                     initial={{ opacity: 0, x: -3 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-purple-400"
+                    className="text-brand-lavender"
                   >
-                    const <span className="text-blue-400">Btn</span> = () =&gt;
-                    (
+                    const <span className="text-brand-cool">Btn</span> = ()
+                    =&gt; (
                   </m.span>
                 )}
               </AnimatePresence>
@@ -74,8 +76,8 @@ export function FrontendPreview({
                     exit={{ opacity: 0 }}
                     className="pl-2 text-zinc-500"
                   >
-                    &lt;<span className="text-pink-400">button</span>{' '}
-                    <span className="text-yellow-500">glow</span> /&gt;
+                    &lt;<span className="text-accent-light">button</span>{' '}
+                    <span className="text-status-warning">glow</span> /&gt;
                   </m.span>
                 )}
               </AnimatePresence>
@@ -87,7 +89,7 @@ export function FrontendPreview({
                     initial={{ opacity: 0, x: -3 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-purple-400"
+                    className="text-brand-lavender"
                   >
                     );
                   </m.span>
@@ -110,7 +112,7 @@ export function FrontendPreview({
                 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.38, ease: 'easeInOut' }}
-                className="absolute top-1/2 left-0 z-10 size-2 rounded-full bg-linear-to-r from-purple-400 to-pink-400 shadow-lg shadow-purple-500 blur-[1px]"
+                className="bg-accent shadow-accent/50 absolute top-1/2 left-0 z-10 size-2 rounded-full shadow-lg blur-[1px]"
               />
             )}
           </AnimatePresence>
@@ -119,7 +121,7 @@ export function FrontendPreview({
         <m.div
           animate={{
             borderColor: renderUi
-              ? 'rgba(168, 85, 247, 0.25)'
+              ? withAlpha(COLOR_TOKENS.brand.cool, 0.25)
               : 'rgba(255, 255, 255, 0.05)',
           }}
           className="relative flex h-full flex-col items-center justify-center rounded-lg border bg-zinc-900/40 p-2"
@@ -138,11 +140,11 @@ export function FrontendPreview({
                 exit={{ scale: 0.7, opacity: 0, y: -10 }}
                 className="flex flex-col items-center gap-1.5"
               >
-                <div className="relative flex h-8 w-17 items-center justify-center rounded-md border border-purple-500/30 bg-purple-950/20 shadow-md shadow-purple-500/10">
+                <div className="border-brand-cool/30 bg-atmosphere-navy/25 relative flex h-8 w-17 items-center justify-center rounded-md border shadow-md shadow-black/20">
                   <span className="text-[7px] font-extrabold text-white">
                     Click Me
                   </span>
-                  <span className="absolute -top-px right-1/4 left-1/4 h-px bg-linear-to-r from-transparent via-purple-400 to-transparent" />
+                  <span className="bg-brand-cool absolute -top-px right-1/4 left-1/4 h-px" />
                 </div>
                 <span className="text-[6px] font-bold text-zinc-500">
                   Active

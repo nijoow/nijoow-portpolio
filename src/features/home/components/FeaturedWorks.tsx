@@ -16,7 +16,7 @@ function FeaturedWorkCard({ work }: { work: Work }) {
       <Link
         href={`/works/${work.pageName}`}
         aria-label={`${work.name} 작업 상세 보기`}
-        className="focus-visible:ring-purple-light flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
+        className="focus-visible:ring-brand-lavender flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
       >
         <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-black/30">
           <Image
@@ -44,16 +44,16 @@ function FeaturedWorkCard({ work }: { work: Work }) {
         <div className="flex flex-1 flex-col gap-2 p-5">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h2 className="group-hover/work:text-purple-light truncate text-lg font-black transition-colors sm:text-xl">
+              <h3 className="group-hover/work:text-brand-lavender truncate text-lg font-black text-white/90 transition-colors sm:text-xl">
                 {work.name}
-              </h2>
+              </h3>
               {work.description ? (
                 <p className="mt-1 line-clamp-2 text-sm leading-relaxed break-keep text-white/50">
                   {work.description}
                 </p>
               ) : null}
             </div>
-            <span className="group-hover/work:border-purple-light/40 group-hover/work:text-purple-light flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 transition-colors">
+            <span className="group-hover/work:border-brand-lavender/40 group-hover/work:text-brand-lavender flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 transition-colors">
               <ArrowUpRight size={14} />
             </span>
           </div>
@@ -82,16 +82,19 @@ function FeaturedWorkCard({ work }: { work: Work }) {
 export function FeaturedWorks({ works }: FeaturedWorksProps) {
   return (
     <section className="w-full">
-      <div className="flex items-end justify-between gap-4">
-        <SubTitle eyebrow="Featured Projects" title="주요 작업" />
-        <Link
-          href="/works"
-          className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 mb-6 flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white/70 backdrop-blur-xl transition-colors hover:text-white"
-        >
-          모든 작업 보기
-          <ArrowUpRight size={14} />
-        </Link>
-      </div>
+      <SubTitle
+        eyebrow="Featured Projects"
+        title="주요 작업"
+        trailing={
+          <Link
+            href="/works"
+            className="hover:border-brand-lavender/30 focus-visible:ring-brand-lavender flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/70 backdrop-blur-xl transition-colors outline-none hover:text-white focus-visible:ring-2"
+          >
+            모든 작업 보기
+            <ArrowUpRight size={14} aria-hidden />
+          </Link>
+        }
+      />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {works.map((work) => (

@@ -1,38 +1,16 @@
-// 작업 데이터 — 카드/목록과 구조화에 쓰이는 단일 소스(Single Source of Truth).
-// 선택 필드(description·role·period·repoUrl)는 채우는 즉시 UI에 반영됩니다(비어 있으면 렌더 안 함).
-// 채우기 예시:
-//   {
-//     pageName: 'treenow',
-//     name: 'Treenow',
-//     imgSrc: 'treenow.webp',
-//     projectType: 'business',
-//     tags: ['Web', 'Frontend'],
-//     description: '한 줄 소개 — 문제/역할/성과를 간결하게',
-//     role: 'Frontend',
-//     period: '2024.01 – 2024.03',
-//     liveUrl: 'https://...',
-//     repoUrl: 'https://github.com/nijoow/...',
-//   },
 export type ProjectType = 'business' | 'side';
 
 export interface Work {
   pageName: string;
   name: string;
   imgSrc: string;
-  /** 카드와 상세 제목에 표시할 프로젝트 성격. */
   projectType: ProjectType;
-  /** business 프로젝트 중 프리랜서 작업 여부. */
   isFreelance?: boolean;
   tags: readonly string[];
-  /** 한 줄 소개(문제·역할·성과). 채우면 카드/목록에 노출. */
   description?: string;
-  /** 담당 역할 요약(예: 'Frontend'). */
   role?: string;
-  /** 진행 기간(예: '2024.01 – 2024.03'). */
   period?: string;
-  /** 라이브 사이트/데모 URL. */
   liveUrl?: string;
-  /** 소스 저장소 URL. */
   repoUrl?: string;
   /** 공개 상태. draft는 목록·sitemap에서 제외하고 noindex 처리한다. */
   status: 'published' | 'archive' | 'draft';

@@ -26,7 +26,7 @@ export function ContactCta() {
       <GlassCard lift={false} className="w-full">
         <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-lg">
-            <span className="text-purple-light/80 text-xs font-bold tracking-widest uppercase">
+            <span className="text-brand-lavender/85 text-xs font-bold tracking-widest uppercase">
               Contact
             </span>
             <h2 className="mt-2 text-2xl font-black break-keep sm:text-3xl">
@@ -45,9 +45,9 @@ export function ContactCta() {
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="group border-purple-light/20 bg-purple-medium/15 hover:bg-purple-medium/30 focus-visible:ring-purple-light flex min-h-11 items-center gap-3 rounded-xl border px-4 py-3 text-sm backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
+                className="frosted-glass-subtle group border-accent/20 hover:border-accent/35 focus-visible:ring-brand-lavender flex min-h-11 items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors outline-none focus-visible:ring-2"
               >
-                <span className="text-purple-light">{icon}</span>
+                <span className="text-accent-light">{icon}</span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[10px] font-bold tracking-wider text-white/55 uppercase">
                     {label}
@@ -64,7 +64,7 @@ export function ContactCta() {
             ))}
             <Link
               href="/contact"
-              className="focus-visible:ring-purple-light mt-3 flex min-h-11 items-center justify-center rounded-lg text-center text-xs font-bold text-white/60 transition-colors outline-none hover:text-white focus-visible:ring-2"
+              className="focus-visible:ring-brand-lavender mt-3 flex min-h-11 items-center justify-center rounded-lg text-center text-xs font-bold text-white/60 transition-colors outline-none hover:text-white focus-visible:ring-2"
             >
               메일 보내기
             </Link>

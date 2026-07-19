@@ -8,7 +8,7 @@ const spotifyImageSchema = z.object({
   url: z.url(),
 });
 
-export const spotifyTrackSchema = z.object({
+const spotifyTrackSchema = z.object({
   name: z.string(),
   artists: z.array(spotifyArtistSchema),
   album: z.object({
@@ -33,7 +33,7 @@ export const spotifyRecentlyPlayedSchema = z.object({
   ),
 });
 
-export const musicSchema = z.object({
+const musicSchema = z.object({
   title: z.string(),
   artist: z.string(),
   albumImageUrl: z.url(),

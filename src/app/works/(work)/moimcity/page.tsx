@@ -91,7 +91,7 @@ const MoimcityPage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: <strong className="font-bold">Knip</strong> 라이브러리
             도입을 통한 프로젝트 내 미사용 파일, 익스포트, 의존성을 정리
           </p>
@@ -110,7 +110,7 @@ const MoimcityPage = () => {
         </CustomList.SubListItem>
 
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 뷰포트 단위를 dvh로 변경하고, 전반적인 레이아웃을 구성하는
             height 및 overflow 속성 최적화
           </p>

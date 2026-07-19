@@ -12,7 +12,7 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
 const NAV_BUTTON_CLASSES =
-  'focus-visible:ring-purple-light absolute top-1/2 z-20 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/25 text-purple-regular outline-none transition-colors hover:bg-black/45 focus-visible:ring-2';
+  'focus-visible:ring-brand-lavender absolute top-1/2 z-20 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/25 text-brand-muted outline-none transition-colors hover:bg-black/45 focus-visible:ring-2';
 
 interface WorkCarouselProps {
   imgSrcList: string[];
@@ -100,7 +100,7 @@ export function WorkCarousel({
         pagination={{ clickable: true }}
         loop={imgSrcList.length > 1}
         className={cn(
-          '[&_.swiper-pagination-bullet-active]:bg-purple-regular relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-md',
+          '[&_.swiper-pagination-bullet-active]:bg-brand-muted relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-md',
           aspectRatio === 'video' ? 'aspect-video' : 'aspect-square',
         )}
       >
@@ -122,7 +122,7 @@ export function WorkCarousel({
                 type="button"
                 aria-label={`${index + 1}번 이미지 크게 보기`}
                 onClick={() => setSelectedIndex(index)}
-                className="focus-visible:ring-purple-light absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
+                className="focus-visible:ring-brand-lavender absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
               />
             </Dialog.Trigger>
           </SwiperSlide>
@@ -151,7 +151,7 @@ export function WorkCarousel({
               <button
                 type="button"
                 aria-label="확대 이미지 닫기"
-                className="focus-visible:ring-purple-light absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 text-white/75 transition-colors outline-none hover:text-white focus-visible:ring-2"
+                className="focus-visible:ring-brand-lavender absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 text-white/75 transition-colors outline-none hover:text-white focus-visible:ring-2"
               >
                 <X aria-hidden size={24} />
               </button>
@@ -172,7 +172,7 @@ export function WorkCarousel({
                 <button
                   type="button"
                   aria-label="이전 확대 이미지"
-                  className="focus-visible:ring-purple-light absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
+                  className="focus-visible:ring-brand-lavender absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
                   onClick={() => moveSelection(-1)}
                 >
                   <ChevronLeft aria-hidden className="size-8" />
@@ -180,7 +180,7 @@ export function WorkCarousel({
                 <button
                   type="button"
                   aria-label="다음 확대 이미지"
-                  className="focus-visible:ring-purple-light absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
+                  className="focus-visible:ring-brand-lavender absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
                   onClick={() => moveSelection(1)}
                 >
                   <ChevronRight aria-hidden className="size-8" />

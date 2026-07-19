@@ -157,8 +157,8 @@ export function GlassPopover({
           onFocusCapture={clearCloseTimer}
           onBlurCapture={scheduleClose}
           className={cn(
-            'animate-popover-in bg-glass-panel/90 z-100 max-h-[min(70vh,28rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto overscroll-contain rounded-2xl border border-white/15 p-4 text-left shadow-2xl shadow-black/50 backdrop-blur-2xl outline-none',
-            "before:border-purple-light/15 before:pointer-events-none before:absolute before:inset-px before:rounded-[15px] before:border before:content-['']",
+            'frosted-glass animate-popover-in relative z-100 max-h-[min(70vh,28rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto overscroll-contain rounded-2xl border p-4 text-left outline-none',
+            "before:border-brand-lavender/15 before:pointer-events-none before:absolute before:inset-px before:rounded-[15px] before:border before:content-['']",
             contentClassName,
           )}
         >

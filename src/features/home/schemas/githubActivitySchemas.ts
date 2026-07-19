@@ -14,7 +14,7 @@ export const githubRepositoriesSchema = z.array(
   }),
 );
 
-export const githubRepositorySchema = z.object({
+const githubRepositorySchema = z.object({
   id: z.number(),
   name: z.string(),
   description: z.string().nullable(),

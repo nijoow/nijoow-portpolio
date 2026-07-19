@@ -1,16 +1,13 @@
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import sonarjs from 'eslint-plugin-sonarjs';
 import tseslint from 'typescript-eslint';
 
-/**
- * ESLint Flat Config (ESLint v9+).
- * AGENTS.md 완료 기준: next/core-web-vitals + @typescript-eslint, no-explicit-any: error.
- * eslint-config-next/core-web-vitals 에 typescript-eslint·import·jsx-a11y 플러그인이 포함되어 있다.
- */
 const config = [
   {
     ignores: ['.next/**', 'out/**', 'node_modules/**', 'public/**'],
   },
   ...nextCoreWebVitals,
+  sonarjs.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     plugins: { '@typescript-eslint': tseslint.plugin },
@@ -26,6 +23,10 @@ const config = [
       ],
       eqeqeq: ['error', 'always'],
       'prefer-const': 'error',
+      complexity: ['warn', 15],
+      'max-depth': ['warn', 4],
+      'max-nested-callbacks': ['warn', 3],
+      'max-params': ['warn', 4],
     },
   },
 ];

@@ -1,3 +1,4 @@
+import { COLOR_TOKENS } from '@/lib/designTokens';
 import { ImageResponse } from 'next/og';
 
 export const alt = 'nijoow | portfolio';
@@ -15,8 +16,7 @@ export default function OpengraphImage() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background:
-            'radial-gradient(circle at 30% 20%, #443483 0%, #111111 60%)',
+          background: `radial-gradient(circle at 30% 20%, ${COLOR_TOKENS.brand.deep} 0%, ${COLOR_TOKENS.surface.ink} 64%)`,
           color: '#ffffff',
         }}
       >
@@ -25,9 +25,7 @@ export default function OpengraphImage() {
             fontSize: 120,
             fontWeight: 700,
             letterSpacing: '-0.04em',
-            background: 'linear-gradient(135deg, #c0a8eb 0%, #8458b3 100%)',
-            backgroundClip: 'text',
-            color: 'transparent',
+            color: COLOR_TOKENS.brand.lavender,
           }}
         >
           nijoow
@@ -36,7 +34,7 @@ export default function OpengraphImage() {
           style={{
             marginTop: 16,
             fontSize: 40,
-            color: '#c0a8eb',
+            color: COLOR_TOKENS.accent.light,
             opacity: 0.9,
           }}
         >

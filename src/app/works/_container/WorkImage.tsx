@@ -33,7 +33,7 @@ function WorkImage({ url, imgSrc }: { url?: string; imgSrc: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="프로젝트 사이트 새 창에서 열기"
-          className="focus-visible:ring-purple-light absolute inset-0 flex h-full w-full items-center justify-center bg-black/60 opacity-0 backdrop-blur-xs transition-all duration-300 outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-inset"
+          className="focus-visible:ring-brand-lavender absolute inset-0 flex h-full w-full items-center justify-center bg-black/60 opacity-0 backdrop-blur-xs transition-all duration-300 outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-inset"
         >
           <span className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-base font-bold text-white backdrop-blur-md">
             사이트 바로가기 <ExternalLink size={16} />

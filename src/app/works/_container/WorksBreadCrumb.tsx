@@ -12,10 +12,10 @@ interface WorksBreadCrumbProps {
 function WorksBreadCrumb({ work, slug }: WorksBreadCrumbProps) {
   return (
     <div className="mb-6 flex w-full flex-col gap-1.5">
-      <div className="text-purple-light/80 flex items-center gap-1 text-xs font-bold tracking-widest uppercase">
+      <div className="text-brand-lavender/70 flex items-center gap-1 text-xs font-bold tracking-widest uppercase">
         <Link
           href="/works"
-          className="focus-visible:ring-purple-light rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
+          className="focus-visible:ring-brand-lavender rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
         >
           Works
         </Link>
@@ -46,7 +46,7 @@ function WorksBreadCrumb({ work, slug }: WorksBreadCrumbProps) {
           ))}
         </div>
       ) : null}
-      <div className="from-purple-medium/70 mt-3 h-px w-full bg-linear-to-r to-transparent" />
+      <div className="from-brand-muted/45 mt-3 h-px w-full bg-linear-to-r to-transparent" />
     </div>
   );
 }

@@ -34,30 +34,28 @@ export function ContactPageContent() {
   return (
     <TransitionPageWrapper>
       <Section>
-        <section className="relative mb-2 w-full overflow-hidden rounded-3xl border border-white/10 bg-black/35 p-6 shadow-xl backdrop-blur-xl sm:p-10">
+        <section className="frosted-glass relative mb-2 w-full overflow-hidden rounded-3xl border p-6 sm:p-10">
           <div
             aria-hidden
             className="cosmic-stars absolute inset-0 opacity-45"
           />
           <div
             aria-hidden
-            className="bg-purple-darker/30 absolute -top-24 -right-20 size-80 rounded-full blur-3xl"
+            className="bg-brand-deep/30 absolute -top-24 -right-20 size-80 rounded-full blur-3xl"
           />
           <div
             aria-hidden
-            className="border-purple-light/10 absolute -right-16 -bottom-48 size-96 rounded-full border"
+            className="border-brand-lavender/10 absolute -right-16 -bottom-48 size-96 rounded-full border"
           />
 
           <div className="relative max-w-3xl">
-            <div className="text-purple-light/80 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-              <span className="bg-purple-light size-1.5 rounded-full shadow-lg" />
+            <div className="text-brand-lavender/85 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
+              <span className="bg-brand-violet size-1.5 rounded-full shadow-lg" />
               Contact · Open to conversation
             </div>
             <h1 className="mt-5 text-3xl leading-tight font-black break-keep sm:text-5xl">
               새로운 기회나 아이디어는{' '}
-              <span className="from-purple-light to-purple-regular bg-linear-to-r bg-clip-text text-transparent">
-                언제나 환영입니다.
-              </span>
+              <span className="text-brand-lavender">언제나 환영입니다.</span>
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed break-keep text-white/55 sm:text-base">
               함께 만들고 싶은 서비스, 프론트엔드 협업, 가볍게 나누고 싶은
@@ -85,18 +83,18 @@ export function ContactPageContent() {
                   href={href}
                   target={external ? '_blank' : undefined}
                   rel={external ? 'noopener noreferrer' : undefined}
-                  className="group focus-visible:ring-purple-light rounded-2xl outline-none focus-visible:ring-2"
+                  className="group focus-visible:ring-brand-lavender rounded-2xl outline-none focus-visible:ring-2"
                 >
                   <GlassCard className="w-full">
                     <div className="flex items-center gap-3 p-5">
-                      <div className="text-purple-light flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                      <div className="text-accent-light flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
                         {icon}
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
                         <span className="text-xs font-semibold text-white/55">
                           {label}
                         </span>
-                        <span className="group-hover:text-purple-light truncate text-sm font-black transition-colors">
+                        <span className="group-hover:text-accent-light truncate text-sm font-black transition-colors">
                           {value}
                         </span>
                         <span className="mt-1 text-xs text-white/60">
@@ -114,9 +112,9 @@ export function ContactPageContent() {
               ),
             )}
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+            <div className="frosted-glass-subtle rounded-2xl border p-5">
               <MessageCircleMore
-                className="text-purple-light"
+                className="text-accent-light"
                 size={20}
                 aria-hidden
               />
@@ -128,7 +126,7 @@ export function ContactPageContent() {
 
           <GlassCard lift={false} className="lg:col-span-3">
             <div className="p-5 sm:p-7">
-              <span className="text-purple-light/65 text-xs font-black tracking-widest uppercase">
+              <span className="text-brand-lavender/75 text-xs font-black tracking-widest uppercase">
                 Send a message
               </span>
               <h2 className="mt-2 text-2xl font-black">문의 남기기</h2>

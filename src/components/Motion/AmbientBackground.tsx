@@ -83,9 +83,20 @@ export function AmbientBackground() {
   }, [pointerX, shouldReduceMotion]);
 
   return (
-    <div className="bg-cosmic-ink pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none">
+    <div className="bg-surface-ink pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none">
       <div className="cosmic-stars absolute inset-0 opacity-75" />
-      <div className="cosmic-grid absolute inset-0 opacity-35" />
+      <div className="cosmic-grid absolute inset-0 opacity-50" />
+
+      <div className="cosmic-orbit-map absolute top-[12%] -left-[18%] h-[34rem] w-[72rem] -rotate-12 opacity-75" />
+      <div className="cosmic-orbit-map absolute top-[58%] -right-[24%] h-[38rem] w-[78rem] rotate-8 opacity-65" />
+      <div className="cosmic-aurora absolute top-[26%] -left-[12%] h-40 w-[124%] -rotate-8 opacity-85" />
+      <div className="cosmic-aurora absolute top-[72%] -left-[16%] h-44 w-[132%] rotate-6 opacity-70" />
+      <div className="cosmic-glass-light-brand absolute top-[14%] left-[18%] h-80 w-[34rem] -rotate-12 opacity-75" />
+      <div className="cosmic-glass-light-accent absolute top-[54%] right-[12%] h-72 w-[30rem] rotate-12 opacity-70" />
+      <div className="cosmic-glass-ribbon absolute top-[31%] -left-[14%] h-24 w-[128%] -rotate-8 opacity-90" />
+      <div className="cosmic-glass-ribbon absolute top-[68%] -left-[10%] h-20 w-[124%] rotate-6 opacity-70" />
+      <div className="cosmic-prism-line absolute top-[38%] -left-[10%] h-px w-[70%] -rotate-12 opacity-75" />
+      <div className="cosmic-prism-line absolute top-[81%] right-[-8%] h-px w-[64%] rotate-9 opacity-60" />
 
       <m.div
         style={{ x: resolveParallax(blobX1), y: resolveParallax(y1) }}
@@ -99,7 +110,7 @@ export function AmbientBackground() {
           repeat: Infinity,
           ease: 'easeInOut',
         })}
-        className="bg-cosmic-violet/55 absolute -top-32 -left-40 size-[34rem] rounded-full blur-3xl"
+        className="bg-atmosphere-violet/65 absolute -top-32 -left-40 size-[34rem] rounded-full blur-3xl"
       />
       <m.div
         style={{ x: resolveParallax(blobX2), y: resolveParallax(y2) }}
@@ -113,7 +124,7 @@ export function AmbientBackground() {
           repeat: Infinity,
           ease: 'easeInOut',
         })}
-        className="bg-cosmic-navy/70 absolute top-[24%] -right-56 size-[42rem] rounded-full blur-3xl"
+        className="bg-atmosphere-navy/80 absolute top-[24%] -right-56 size-[42rem] rounded-full blur-3xl"
       />
       <m.div
         style={{ x: resolveParallax(blobX3), y: resolveParallax(y3) }}
@@ -127,7 +138,7 @@ export function AmbientBackground() {
           repeat: Infinity,
           ease: 'easeInOut',
         })}
-        className="bg-purple-darker/35 absolute top-[62%] left-[4%] size-[38rem] rounded-full blur-3xl"
+        className="bg-accent-deep/12 absolute top-[62%] left-[4%] size-[38rem] rounded-full blur-3xl"
       />
 
       <m.div
@@ -137,9 +148,9 @@ export function AmbientBackground() {
           repeat: Infinity,
           ease: 'linear',
         })}
-        className="border-purple-light/10 absolute top-[10%] left-[55%] size-96 -translate-x-1/2 rounded-full border"
+        className="absolute top-[10%] left-[55%] size-96 -translate-x-1/2 rounded-full border border-white/7"
       >
-        <span className="bg-purple-light absolute top-1/2 -left-1 size-2 rounded-full opacity-50" />
+        <span className="bg-brand-lavender absolute top-1/2 -left-1 size-2 rounded-full opacity-50" />
       </m.div>
       <m.div
         animate={shouldReduceMotion ? undefined : { rotate: -360 }}
@@ -148,9 +159,9 @@ export function AmbientBackground() {
           repeat: Infinity,
           ease: 'linear',
         })}
-        className="border-purple-medium/10 absolute top-[48%] -left-28 size-[30rem] rounded-full border"
+        className="border-accent/10 absolute top-[48%] -left-28 size-[30rem] rounded-full border"
       >
-        <span className="bg-purple-medium absolute right-16 bottom-6 size-1.5 rounded-full opacity-45" />
+        <span className="bg-accent absolute right-16 bottom-6 size-1.5 rounded-full opacity-40" />
       </m.div>
 
       {STAR_PARTICLES.map((particle) => (
@@ -177,7 +188,7 @@ export function AmbientBackground() {
             ease: 'easeInOut',
             delay: particle.delay,
           })}
-          className="bg-purple-light absolute rounded-full"
+          className="bg-brand-lavender absolute rounded-full"
           style={{
             left: particle.left,
             top: particle.top,
@@ -188,7 +199,7 @@ export function AmbientBackground() {
       ))}
 
       <div className="cosmic-vignette absolute inset-0" />
-      <div className="from-cosmic-ink absolute inset-x-0 bottom-0 h-48 bg-linear-to-t to-transparent" />
+      <div className="from-surface-ink absolute inset-x-0 bottom-0 h-48 bg-linear-to-t to-transparent" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const apiErrorSchema = z.object({
+const apiErrorSchema = z.object({
   success: z.literal(false),
   error: z.object({
     code: z.string(),
@@ -9,7 +9,7 @@ export const apiErrorSchema = z.object({
   }),
 });
 
-export function createApiResponseSchema<T extends z.ZodType>(dataSchema: T) {
+function createApiResponseSchema<T extends z.ZodType>(dataSchema: T) {
   return z.discriminatedUnion('success', [
     z.object({ success: z.literal(true), data: dataSchema }),
     apiErrorSchema,

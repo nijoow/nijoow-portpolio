@@ -9,14 +9,11 @@ const fetchGithubActivity = () =>
     invalidResponseMessage: 'GitHub 프로젝트를 확인할 수 없습니다.',
   });
 
-export const githubQueryKeys = {
-  all: ['github'] as const,
-  activity: () => [...githubQueryKeys.all, 'activity'] as const,
-};
+const GITHUB_ACTIVITY_QUERY_KEY = ['github', 'activity'] as const;
 
 export function useGithubActivity() {
   return useQuery({
-    queryKey: githubQueryKeys.activity(),
+    queryKey: GITHUB_ACTIVITY_QUERY_KEY,
     queryFn: fetchGithubActivity,
     staleTime: 15 * 60 * 1000,
     refetchOnWindowFocus: false,

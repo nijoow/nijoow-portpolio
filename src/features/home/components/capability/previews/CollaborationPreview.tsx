@@ -1,4 +1,5 @@
 import type { CapabilityPreviewProps } from '@/features/home/components/capability/types';
+import { COLOR_TOKENS, withAlpha } from '@/lib/designTokens';
 import { cn } from '@/lib/utils';
 import { m } from 'framer-motion';
 
@@ -7,8 +8,8 @@ const CURSORS = [
     label: 'Designer',
     active: { x: 84, y: 34 },
     idle: { x: 34, y: 18 },
-    color: 'bg-purple-500',
-    fill: '#a855f7',
+    color: 'bg-brand-violet',
+    fill: COLOR_TOKENS.brand.violet,
     idleOffset: 4,
     idleDuration: 2.5,
   },
@@ -16,8 +17,8 @@ const CURSORS = [
     label: 'Developer',
     active: { x: 224, y: 64 },
     idle: { x: 272, y: 92 },
-    color: 'bg-pink-500',
-    fill: '#ec4899',
+    color: 'bg-accent',
+    fill: COLOR_TOKENS.accent.base,
     idleOffset: -4,
     idleDuration: 3,
   },
@@ -36,13 +37,13 @@ export function CollaborationPreview({
       <div className="pointer-events-none absolute inset-0">
         <div
           className={cn(
-            'absolute top-1/2 right-0 left-0 h-px border-t border-dashed border-purple-400/10 transition-opacity duration-300',
+            'absolute top-1/2 right-0 left-0 h-px border-t border-dashed border-white/10 transition-opacity duration-300',
             showResult ? 'opacity-40' : 'opacity-10',
           )}
         />
         <div
           className={cn(
-            'absolute top-0 bottom-0 left-1/2 w-px border-l border-dashed border-purple-400/10 transition-opacity duration-300',
+            'absolute top-0 bottom-0 left-1/2 w-px border-l border-dashed border-white/10 transition-opacity duration-300',
             showResult ? 'opacity-40' : 'opacity-10',
           )}
         />
@@ -53,13 +54,13 @@ export function CollaborationPreview({
           animate={{
             scale: showResult ? 1.08 : 1,
             borderColor: showResult
-              ? 'rgba(168, 85, 247, 0.4)'
+              ? withAlpha(COLOR_TOKENS.brand.lavender, 0.4)
               : 'rgba(255, 255, 255, 0.1)',
             backgroundColor: showResult
-              ? 'rgba(168, 85, 247, 0.16)'
+              ? withAlpha(COLOR_TOKENS.brand.violet, 0.16)
               : 'rgba(255, 255, 255, 0.07)',
             boxShadow: showResult
-              ? '0 8px 32px rgba(168, 85, 247, 0.25)'
+              ? `0 8px 32px ${withAlpha(COLOR_TOKENS.brand.deep, 0.3)}`
               : '0 2px 10px rgba(0, 0, 0, 0.1)',
           }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -83,11 +84,11 @@ export function CollaborationPreview({
             className="pointer-events-none absolute inset-0 flex items-center justify-between px-3"
           >
             <div className="flex items-center gap-2">
-              <div className="flex size-5 items-center justify-center rounded border border-purple-500/40 bg-purple-500/20">
+              <div className="border-brand-lavender/40 bg-brand-deep/30 flex size-5 items-center justify-center rounded border">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <path
                     d="M5 1L9 5L5 9L1 5L5 1Z"
-                    stroke="#c084fc"
+                    stroke={COLOR_TOKENS.brand.lavender}
                     strokeWidth="1.2"
                     strokeLinejoin="round"
                   />
@@ -97,7 +98,7 @@ export function CollaborationPreview({
                 Button
               </span>
             </div>
-            <div className="flex h-5 items-center justify-center rounded-md bg-linear-to-r from-purple-500 to-indigo-500 px-2 text-[7px] font-extrabold text-white shadow-lg shadow-purple-500/30">
+            <div className="bg-accent-deep text-accent-light shadow-accent-deep/40 border-accent/25 flex h-5 items-center justify-center rounded-md border px-2 text-[7px] font-extrabold shadow-lg">
               Deploy
             </div>
           </m.div>
@@ -107,7 +108,7 @@ export function CollaborationPreview({
               initial={{ scale: 0.8, opacity: 0.8 }}
               animate={{ scale: 1.4, opacity: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="pointer-events-none absolute inset-0 rounded-lg border border-purple-400"
+              className="border-brand-lavender pointer-events-none absolute inset-0 rounded-lg border"
             />
           )}
         </m.div>

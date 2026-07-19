@@ -9,9 +9,11 @@ import {
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { m } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
 import { AlertCircle, CheckCircle2, LoaderCircle, Send } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import type { FieldError } from 'react-hook-form';
 
 type SubmissionState =
   | { status: 'idle' }
@@ -26,8 +28,101 @@ function fieldClass(hasError: boolean) {
   return cn(
     'w-full rounded-xl border bg-black/20 p-3.5 text-sm text-white transition-colors outline-none placeholder:text-white/50 focus:ring-2',
     hasError
-      ? 'border-red-400/70 focus:border-red-400 focus:ring-red-400/30'
-      : 'focus:border-purple-light/45 focus:ring-purple-light/20 border-white/10',
+      ? 'border-status-danger/70 focus:border-status-danger focus:ring-status-danger/30'
+      : 'focus:border-brand-lavender/45 focus:ring-brand-lavender/20 border-white/10',
+  );
+}
+
+function FieldErrorMessage({ id, error }: { id: string; error?: FieldError }) {
+  if (!error) return null;
+
+  return (
+    <p id={id} className="text-status-danger text-xs">
+      {error.message}
+    </p>
+  );
+}
+
+interface BannerStyle {
+  icon: LucideIcon;
+  role: 'alert' | 'status';
+  className: string;
+  iconClassName?: string;
+}
+
+const BANNER_STYLES: Record<
+  Exclude<SubmissionState['status'], 'idle'>,
+  BannerStyle
+> = {
+  submitting: {
+    icon: LoaderCircle,
+    role: 'status',
+    className:
+      'border-brand-lavender/20 bg-brand-deep/20 text-brand-lavender/80',
+    iconClassName: 'animate-spin',
+  },
+  success: {
+    icon: CheckCircle2,
+    role: 'status',
+    className:
+      'border-status-success/20 bg-status-success/10 text-status-success',
+  },
+  error: {
+    icon: AlertCircle,
+    role: 'alert',
+    className: 'border-status-danger/20 bg-status-danger/10 text-status-danger',
+  },
+};
+
+function SubmissionBanner({ state }: { state: SubmissionState }) {
+  if (state.status === 'idle') return null;
+
+  const {
+    icon: Icon,
+    role,
+    className,
+    iconClassName,
+  } = BANNER_STYLES[state.status];
+
+  return (
+    <div
+      role={role}
+      className={cn(
+        'flex items-start gap-2 rounded-xl border px-3.5 py-3 text-sm leading-relaxed',
+        className,
+      )}
+    >
+      <Icon
+        className={cn('mt-0.5 shrink-0', iconClassName)}
+        size={16}
+        aria-hidden
+      />
+      <span>{state.message}</span>
+    </div>
+  );
+}
+
+function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
+  return (
+    <m.button
+      whileHover={isSubmitting ? undefined : BUTTON_HOVER}
+      whileTap={isSubmitting ? undefined : BUTTON_TAP}
+      type="submit"
+      disabled={isSubmitting}
+      className={cn(
+        'focus-visible:ring-brand-lavender flex w-full items-center justify-center gap-2 rounded-xl border py-3.5 font-bold text-white backdrop-blur-xl transition-colors focus-visible:ring-2 focus-visible:outline-none',
+        isSubmitting
+          ? 'cursor-not-allowed border-white/10 bg-white/5 text-white/40'
+          : 'border-brand-lavender/30 bg-brand-deep/60 hover:bg-brand-deep/80',
+      )}
+    >
+      {isSubmitting ? (
+        <LoaderCircle className="animate-spin" size={17} aria-hidden />
+      ) : (
+        <Send size={17} aria-hidden />
+      )}
+      {isSubmitting ? '보내는 중...' : '문의 보내기'}
+    </m.button>
   );
 }
 
@@ -77,10 +172,11 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-sm font-bold text-white/80">
-            이름 <span className="text-purple-light">*</span>
+            이름 <span className="text-brand-lavender">*</span>
           </label>
           <input
             {...register('name')}
+            suppressHydrationWarning
             type="text"
             id="name"
             autoComplete="name"
@@ -90,19 +186,16 @@ export function ContactForm() {
             aria-describedby={errors.name ? 'name-error' : undefined}
             className={fieldClass(Boolean(errors.name))}
           />
-          {errors.name ? (
-            <p id="name-error" className="text-xs text-red-300">
-              {errors.name.message}
-            </p>
-          ) : null}
+          <FieldErrorMessage id="name-error" error={errors.name} />
         </div>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="text-sm font-bold text-white/80">
-            이메일 <span className="text-purple-light">*</span>
+            이메일 <span className="text-brand-lavender">*</span>
           </label>
           <input
             {...register('email')}
+            suppressHydrationWarning
             type="email"
             id="email"
             inputMode="email"
@@ -113,20 +206,17 @@ export function ContactForm() {
             aria-describedby={errors.email ? 'email-error' : undefined}
             className={fieldClass(Boolean(errors.email))}
           />
-          {errors.email ? (
-            <p id="email-error" className="text-xs text-red-300">
-              {errors.email.message}
-            </p>
-          ) : null}
+          <FieldErrorMessage id="email-error" error={errors.email} />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="subject" className="text-sm font-bold text-white/80">
-          제목 <span className="text-purple-light">*</span>
+          제목 <span className="text-brand-lavender">*</span>
         </label>
         <input
           {...register('subject')}
+          suppressHydrationWarning
           type="text"
           id="subject"
           maxLength={100}
@@ -135,22 +225,19 @@ export function ContactForm() {
           aria-describedby={errors.subject ? 'subject-error' : undefined}
           className={fieldClass(Boolean(errors.subject))}
         />
-        {errors.subject ? (
-          <p id="subject-error" className="text-xs text-red-300">
-            {errors.subject.message}
-          </p>
-        ) : null}
+        <FieldErrorMessage id="subject-error" error={errors.subject} />
       </div>
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-3">
           <label htmlFor="message" className="text-sm font-bold text-white/80">
-            내용 <span className="text-purple-light">*</span>
+            내용 <span className="text-brand-lavender">*</span>
           </label>
           <span className="text-xs text-white/55">최대 1000자</span>
         </div>
         <textarea
           {...register('message')}
+          suppressHydrationWarning
           id="message"
           rows={6}
           maxLength={1000}
@@ -159,17 +246,14 @@ export function ContactForm() {
           aria-describedby={errors.message ? 'message-error' : undefined}
           className={cn(fieldClass(Boolean(errors.message)), 'resize-y')}
         />
-        {errors.message ? (
-          <p id="message-error" className="text-xs text-red-300">
-            {errors.message.message}
-          </p>
-        ) : null}
+        <FieldErrorMessage id="message-error" error={errors.message} />
       </div>
 
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website">웹사이트</label>
         <input
           {...register('website')}
+          suppressHydrationWarning
           type="text"
           id="website"
           tabIndex={-1}
@@ -178,54 +262,10 @@ export function ContactForm() {
       </div>
 
       <div aria-live="polite" aria-atomic="true" className="min-h-11">
-        {submissionState.status !== 'idle' ? (
-          <div
-            role={submissionState.status === 'error' ? 'alert' : 'status'}
-            className={cn(
-              'flex items-start gap-2 rounded-xl border px-3.5 py-3 text-sm leading-relaxed',
-              submissionState.status === 'success' &&
-                'border-emerald-400/20 bg-emerald-400/10 text-emerald-200',
-              submissionState.status === 'error' &&
-                'border-red-400/20 bg-red-400/10 text-red-200',
-              submissionState.status === 'submitting' &&
-                'border-purple-light/20 bg-purple-medium/15 text-white/65',
-            )}
-          >
-            {submissionState.status === 'success' ? (
-              <CheckCircle2 className="mt-0.5 shrink-0" size={16} aria-hidden />
-            ) : submissionState.status === 'error' ? (
-              <AlertCircle className="mt-0.5 shrink-0" size={16} aria-hidden />
-            ) : (
-              <LoaderCircle
-                className="mt-0.5 shrink-0 animate-spin"
-                size={16}
-                aria-hidden
-              />
-            )}
-            <span>{submissionState.message}</span>
-          </div>
-        ) : null}
+        <SubmissionBanner state={submissionState} />
       </div>
 
-      <m.button
-        whileHover={isSubmitting ? undefined : BUTTON_HOVER}
-        whileTap={isSubmitting ? undefined : BUTTON_TAP}
-        type="submit"
-        disabled={isSubmitting}
-        className={cn(
-          'focus-visible:ring-purple-light flex w-full items-center justify-center gap-2 rounded-xl border py-3.5 font-bold text-white backdrop-blur-xl transition-colors focus-visible:ring-2 focus-visible:outline-none',
-          isSubmitting
-            ? 'cursor-not-allowed border-white/10 bg-white/5 text-white/40'
-            : 'border-purple-light/30 bg-purple-medium/30 hover:bg-purple-medium/45',
-        )}
-      >
-        {isSubmitting ? (
-          <LoaderCircle className="animate-spin" size={17} aria-hidden />
-        ) : (
-          <Send size={17} aria-hidden />
-        )}
-        {isSubmitting ? '보내는 중...' : '문의 보내기'}
-      </m.button>
+      <SubmitButton isSubmitting={isSubmitting} />
     </form>
   );
 }

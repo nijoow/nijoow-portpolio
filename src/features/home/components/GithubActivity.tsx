@@ -34,7 +34,7 @@ function RepositoryMeta({ repository }: { repository: GithubRepository }) {
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-white/55">
       {repository.language ? (
         <span className="flex items-center gap-1.5">
-          <span className="bg-purple-light size-1.5 rounded-full" />
+          <span className="bg-accent size-1.5 rounded-full" />
           {repository.language}
         </span>
       ) : null}
@@ -56,14 +56,14 @@ function FeaturedRepository({ repository }: { repository: GithubRepository }) {
       href={repository.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group/featured border-purple-light/15 bg-purple-medium/10 hover:border-purple-light/35 focus-visible:ring-purple-light block rounded-2xl border p-4 transition-colors outline-none focus-visible:ring-2"
+      className="frosted-glass-subtle group/featured border-accent/15 hover:border-accent/40 focus-visible:ring-brand-lavender block rounded-2xl border p-4 transition-colors outline-none focus-visible:ring-2"
     >
-      <span className="text-purple-light/75 mb-3 flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
+      <span className="text-accent-light/80 mb-3 flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
         <Hammer size={12} /> 최근 업데이트
       </span>
       <span className="flex items-start justify-between gap-3">
         <span className="min-w-0">
-          <span className="group-hover/featured:text-purple-light block truncate text-base font-black transition-colors">
+          <span className="group-hover/featured:text-accent-light block truncate text-base font-black transition-colors">
             {repository.name}
           </span>
           <span className="mt-1 line-clamp-2 min-h-10 text-sm leading-relaxed text-white/60">
@@ -99,13 +99,13 @@ function RepositoryRow({ repository }: { repository: GithubRepository }) {
       href={repository.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group/repo hover:border-purple-light/20 focus-visible:ring-purple-light flex min-w-0 items-center gap-3 rounded-xl border border-transparent px-2 py-2.5 transition-colors outline-none focus-visible:ring-2"
+      className="group/repo hover:border-accent/25 focus-visible:ring-brand-lavender flex min-w-0 items-center gap-3 rounded-xl border border-transparent px-2 py-2.5 transition-colors outline-none focus-visible:ring-2"
     >
-      <span className="bg-purple-medium/15 text-purple-light flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10">
+      <span className="bg-atmosphere-navy/40 text-accent-light flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10">
         <FolderGit2 size={15} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="group-hover/repo:text-purple-light block truncate text-sm font-bold transition-colors">
+        <span className="group-hover/repo:text-accent-light block truncate text-sm font-bold transition-colors">
           {repository.name}
         </span>
         <RepositoryMeta repository={repository} />
@@ -129,6 +129,38 @@ function GithubActivitySkeleton() {
   );
 }
 
+interface RepositoryContentProps {
+  repositories: readonly GithubRepository[] | undefined;
+  isPending: boolean;
+  isError: boolean;
+}
+
+function RepositoryContent({
+  repositories,
+  isPending,
+  isError,
+}: RepositoryContentProps) {
+  if (isPending) return <GithubActivitySkeleton />;
+
+  const featuredRepository = repositories?.[0];
+  if (isError || !featuredRepository) {
+    return (
+      <div className="flex min-h-56 items-center justify-center text-center text-sm text-white/60">
+        GitHub 작업을 불러오지 못했습니다.
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 flex flex-col gap-1">
+      <FeaturedRepository repository={featuredRepository} />
+      {repositories.slice(1, 3).map((repository) => (
+        <RepositoryRow key={repository.id} repository={repository} />
+      ))}
+    </div>
+  );
+}
+
 function StaticContributionPreview() {
   return (
     <div
@@ -140,7 +172,7 @@ function StaticContributionPreview() {
         <span
           key={cell.id}
           aria-hidden="true"
-          className="bg-purple-light aspect-square rounded-[2px]"
+          className="bg-accent aspect-square rounded-[2px]"
           style={{ opacity: cell.opacity }}
         />
       ))}
@@ -170,17 +202,15 @@ function ContributionPreview() {
 
 export function GithubActivity() {
   const { data: repositories, isPending, isError } = useGithubActivity();
-  const featuredRepository = repositories?.[0];
-  const recentRepositories = repositories?.slice(1, 3) ?? [];
 
   return (
-    <GlassCard className="h-full min-h-96 bg-black/30">
+    <GlassCard className="h-full min-h-96">
       <div className="relative flex h-full min-h-96 flex-col overflow-hidden p-5">
-        <div className="bg-purple-darker/20 absolute -top-20 -right-16 size-56 rounded-full blur-3xl" />
+        <div className="bg-atmosphere-navy/35 absolute -top-20 -right-16 size-56 rounded-full blur-3xl" />
 
         <div className="relative flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70">
+            <span className="text-accent-light flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
               <GithubIcon size={18} />
             </span>
             <div>
@@ -195,31 +225,22 @@ export function GithubActivity() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="nijoow GitHub 프로필 열기"
-            className="hover:border-purple-light/40 hover:text-purple-light focus-visible:ring-purple-light flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition-colors outline-none focus-visible:ring-2"
+            className="hover:border-accent/40 hover:text-accent-light focus-visible:ring-brand-lavender flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition-colors outline-none focus-visible:ring-2"
           >
             <ExternalLink size={14} />
           </a>
         </div>
 
         <div className="relative flex-1">
-          {isPending ? (
-            <GithubActivitySkeleton />
-          ) : isError || !featuredRepository ? (
-            <div className="flex min-h-56 items-center justify-center text-center text-sm text-white/60">
-              GitHub 작업을 불러오지 못했습니다.
-            </div>
-          ) : (
-            <div className="mt-4 flex flex-col gap-1">
-              <FeaturedRepository repository={featuredRepository} />
-              {recentRepositories.map((repository) => (
-                <RepositoryRow key={repository.id} repository={repository} />
-              ))}
-            </div>
-          )}
+          <RepositoryContent
+            repositories={repositories}
+            isPending={isPending}
+            isError={isError}
+          />
         </div>
 
         <div className="relative mt-3 border-t border-white/10 pt-3">
-          <div className="relative aspect-880/192 w-full overflow-hidden rounded-xl bg-black/20">
+          <div className="frosted-glass-subtle relative aspect-880/192 w-full overflow-hidden rounded-xl border">
             <ContributionPreview />
           </div>
         </div>

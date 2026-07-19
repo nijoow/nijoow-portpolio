@@ -16,7 +16,7 @@ function CustomList({ children }: ChildrenProps) {
 function MainListItem({ children }: ChildrenProps) {
   return (
     <li className="mt-3 flex gap-2.5 text-[15px] break-keep first:mt-0">
-      <span className="bg-purple-light/80 mt-2 size-1.5 shrink-0 rounded-full" />
+      <span className="bg-brand-lavender/80 mt-2 size-1.5 shrink-0 rounded-full" />
       <div className="min-w-0">{children}</div>
     </li>
   );

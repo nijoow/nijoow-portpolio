@@ -101,7 +101,7 @@ export function InteractionPreview({
               ? { duration: 12, repeat: Infinity, ease: 'linear' }
               : { duration: 0.2 }
           }
-          className="absolute h-36 w-40 rounded-full border border-dashed border-purple-500/20"
+          className="border-brand-cool/20 absolute h-36 w-40 rounded-full border border-dashed"
         />
 
         <m.div
@@ -117,7 +117,7 @@ export function InteractionPreview({
               ? { duration: 9, repeat: Infinity, ease: 'linear' }
               : { duration: 0.2 }
           }
-          className="absolute h-32 w-36 rounded-full border border-purple-400/15"
+          className="border-brand-lavender/15 absolute h-32 w-36 rounded-full border"
         />
 
         <m.div
@@ -135,9 +135,9 @@ export function InteractionPreview({
           >
             <m.div
               style={{ x: 9, y: 14, z: bottomLayerZ }}
-              className="absolute inset-0 flex items-center justify-center rounded-lg border border-purple-500/20 bg-zinc-950/40 p-1.5 shadow-md [transform-style:preserve-3d]"
+              className="bg-surface-panel/45 border-brand-cool/20 absolute inset-0 flex items-center justify-center rounded-lg border p-1.5 shadow-md [transform-style:preserve-3d]"
             >
-              <div className="h-full w-full rounded border border-dashed border-purple-500/30 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:6px_6px] opacity-40" />
+              <div className="border-brand-cool/25 h-full w-full rounded border border-dashed bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:6px_6px] opacity-40" />
             </m.div>
 
             <m.div
@@ -146,16 +146,16 @@ export function InteractionPreview({
             >
               <div className="h-1.5 w-8 rounded bg-white/20" />
               <div className="flex gap-1">
-                <div className="h-4 w-7 rounded border border-purple-500/30 bg-purple-500/10" />
+                <div className="border-brand-cool/30 bg-atmosphere-navy/30 h-4 w-7 rounded border" />
                 <div className="h-4 w-7 rounded border border-white/10 bg-white/5" />
               </div>
             </m.div>
 
             <m.div
               style={{ z: topLayerZ }}
-              className="absolute inset-0 flex flex-col justify-between rounded-lg border border-purple-400/30 bg-purple-950/10 p-2 shadow-[0_0_15px_rgba(168,85,247,0.15)] backdrop-blur-[1px] [transform-style:preserve-3d]"
+              className="border-brand-lavender/30 bg-brand-deep/15 shadow-brand-deep/30 absolute inset-0 flex flex-col justify-between rounded-lg border p-2 shadow-lg backdrop-blur-[1px] [transform-style:preserve-3d]"
             >
-              <div className="h-1.5 w-6 rounded bg-purple-400/40" />
+              <div className="bg-brand-lavender/40 h-1.5 w-6 rounded" />
               <div className="flex justify-end">
                 <m.div
                   animate={
@@ -163,7 +163,7 @@ export function InteractionPreview({
                       ? { scale: 1.05, filter: 'brightness(1.2)' }
                       : { scale: 1, filter: 'brightness(1)' }
                   }
-                  className="flex h-4 w-10 items-center justify-center rounded bg-linear-to-r from-purple-500 to-pink-500 text-[5px] font-black text-white shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                  className="bg-accent-deep text-accent-light shadow-accent-deep/50 border-accent/30 flex h-4 w-10 items-center justify-center rounded border text-[5px] font-black shadow-md"
                 >
                   Glow
                 </m.div>
@@ -173,7 +173,7 @@ export function InteractionPreview({
         </m.div>
       </div>
 
-      <span className="absolute right-2 bottom-1.5 text-[6px] font-black tracking-wider text-purple-400/40">
+      <span className="absolute right-2 bottom-1.5 text-[6px] font-black tracking-wider text-white/30">
         3D EXPLODED DECK
       </span>
     </div>

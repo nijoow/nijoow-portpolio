@@ -1,6 +1,7 @@
 'use client';
 
-import Logo from '@/components/Logo/Logo';
+import { Logo } from '@/components/Logo/Logo';
+import { COLOR_TOKENS } from '@/lib/designTokens';
 import { cn } from '@/lib/utils';
 import { OrbitControls, Sparkles, View } from '@react-three/drei';
 import { Canvas, type RootState } from '@react-three/fiber';
@@ -13,6 +14,7 @@ import {
   type ErrorInfo,
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
+  type RefObject,
   Suspense,
   useEffect,
   useRef,
@@ -53,6 +55,14 @@ const HERO_SPARKLES_SCALE: [number, number, number] = [9, 4.5, 4];
 
 function makeCanvasTransparent({ gl }: RootState) {
   gl.setClearColor('#000000', 0);
+}
+
+function resolveFrameLoop(
+  reduced: boolean,
+  isSceneVisible: boolean,
+): 'always' | 'demand' | 'never' {
+  if (reduced) return 'demand';
+  return isSceneVisible ? 'always' : 'never';
 }
 
 function canUseWebGL() {
@@ -104,7 +114,12 @@ function markIntroSeen() {
   }
 }
 
-function getRouteCopy(pathname: string) {
+interface RouteCopy {
+  eyebrow: string;
+  title: ReactNode;
+}
+
+function getRouteCopy(pathname: string): RouteCopy {
   if (pathname === '/works') {
     return { eyebrow: 'Archived Project', title: 'Design × Development' };
   }
@@ -114,17 +129,25 @@ function getRouteCopy(pathname: string) {
   if (pathname.startsWith('/works/')) {
     return { eyebrow: 'Case Study', title: 'Designed with intent' };
   }
-  return { eyebrow: 'Frontend Developer', title: '이우진 · nijoow' };
+  return {
+    eyebrow: 'Frontend Developer',
+    title: (
+      <>
+        이우진 <span className="text-white/40">·</span>{' '}
+        <span className="text-brand-lavender">nijoow</span>
+      </>
+    ),
+  };
 }
 
 function SignatureFallbackArt() {
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-black">
-      <div className="bg-purple-medium/15 absolute size-56 rounded-full blur-3xl" />
+      <div className="bg-brand-lavender/12 absolute size-56 rounded-full blur-3xl" />
       <Logo
         width={240}
         height={135}
-        className="relative opacity-90 drop-shadow-2xl"
+        className="text-brand-lavender relative opacity-90 drop-shadow-2xl"
       />
     </div>
   );
@@ -158,6 +181,200 @@ class SignatureErrorBoundary extends Component<
   }
 }
 
+interface SignatureStageProps {
+  config: QualityConfig | null;
+  reduced: boolean;
+  heroInteractive: boolean;
+  isIntro: boolean;
+  isSceneVisible: boolean;
+  burstSignal: number;
+  introRun: number;
+  orbitControlsRef: RefObject<ComponentRef<typeof OrbitControls> | null>;
+}
+
+/** View 내부의 3D 장면 — WebGL 불가 시 정적 폴백 아트로 대체한다. */
+function SignatureStage({
+  config,
+  reduced,
+  heroInteractive,
+  isIntro,
+  isSceneVisible,
+  burstSignal,
+  introRun,
+  orbitControlsRef,
+}: SignatureStageProps) {
+  if (!config) return <SignatureFallbackArt />;
+
+  return (
+    <SignatureErrorBoundary fallback={<SignatureFallbackArt />}>
+      <View
+        className="absolute inset-0"
+        frames={reduced ? 1 : Infinity}
+        visible={isSceneVisible}
+      >
+        <ambientLight intensity={0.8} />
+        <OrbitControls
+          ref={orbitControlsRef}
+          enabled={heroInteractive}
+          enablePan={false}
+          minDistance={1.8}
+          maxDistance={3}
+        />
+        <Suspense fallback={null}>
+          <ParticleLogo
+            count={config.count}
+            interactive={false}
+            rotate={heroInteractive}
+            clickBurst={heroInteractive}
+            burstSignal={burstSignal}
+            entranceSignal={introRun}
+            animateEntrance={!reduced}
+            jitter={reduced ? 0 : 0.003}
+          />
+        </Suspense>
+        <Sparkles
+          count={config.sparkles}
+          scale={isIntro ? INTRO_SPARKLES_SCALE : HERO_SPARKLES_SCALE}
+          size={1.4}
+          speed={reduced ? 0 : 0.3}
+          color={COLOR_TOKENS.brand.lavender}
+          opacity={0.4}
+        />
+      </View>
+    </SignatureErrorBoundary>
+  );
+}
+
+interface HeroOverlayProps {
+  isVisible: boolean;
+  isLanding: boolean;
+  routeCopy: RouteCopy;
+  showBurstButton: boolean;
+  onBurst: () => void;
+}
+
+/** 히어로 하단의 라우트 카피와 인터랙션 컨트롤 오버레이. */
+function HeroOverlay({
+  isVisible,
+  isLanding,
+  routeCopy,
+  showBurstButton,
+  onBurst,
+}: HeroOverlayProps) {
+  return (
+    <AnimatePresence>
+      {isVisible ? (
+        <m.div
+          key="hero-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.65, delay: isLanding ? 0.45 : 0 }}
+          className="pointer-events-none absolute inset-0"
+        >
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/70 to-transparent" />
+          <div className="absolute right-5 bottom-4 left-5 flex items-end justify-between gap-4 sm:right-7 sm:bottom-6 sm:left-7">
+            <m.div
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: isLanding ? 0.65 : 0 }}
+              className="flex flex-col gap-0.5"
+            >
+              <span className="text-brand-lavender/70 text-[10px] font-bold tracking-widest uppercase sm:text-xs">
+                {routeCopy.eyebrow}
+              </span>
+              <span className="text-lg font-black text-white sm:text-2xl">
+                {routeCopy.title}
+              </span>
+            </m.div>
+
+            <div className="pointer-events-auto flex items-center gap-1.5">
+              <span
+                aria-label="드래그해서 회전"
+                title="드래그해서 회전"
+                className="hidden size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 backdrop-blur-sm sm:flex"
+              >
+                <Move3d size={15} />
+              </span>
+              {showBurstButton ? (
+                <button
+                  type="button"
+                  onClick={onBurst}
+                  aria-label="파티클 흩기"
+                  title="파티클 흩기"
+                  className="hover:border-brand-lavender/40 hover:text-brand-lavender focus-visible:ring-brand-lavender flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 backdrop-blur-sm transition-colors outline-none focus-visible:ring-2"
+                >
+                  <SparklesIcon size={15} />
+                </button>
+              ) : null}
+            </div>
+          </div>
+        </m.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+interface SignatureViewCanvasProps {
+  config: QualityConfig | null;
+  reduced: boolean;
+  isSceneVisible: boolean;
+  isCinematic: boolean;
+}
+
+/** View.Port를 그리는 전역 고정 캔버스 — 화면 밖에서는 프레임루프를 멈춘다. */
+function SignatureViewCanvas({
+  config,
+  reduced,
+  isSceneVisible,
+  isCinematic,
+}: SignatureViewCanvasProps) {
+  if (!config) return null;
+
+  return (
+    <SignatureErrorBoundary fallback={null}>
+      <Canvas
+        camera={CAMERA_CONFIG}
+        dpr={config.dpr}
+        frameloop={resolveFrameLoop(reduced, isSceneVisible)}
+        gl={CANVAS_GL_CONFIG}
+        onCreated={makeCanvasTransparent}
+        className={cn(
+          '!pointer-events-none !fixed !inset-0 !h-screen !w-screen',
+          isCinematic ? 'z-101' : 'z-11',
+        )}
+      >
+        <View.Port />
+      </Canvas>
+    </SignatureErrorBoundary>
+  );
+}
+
+function ReplayButton({
+  show,
+  onReplay,
+}: {
+  show: boolean;
+  onReplay: () => void;
+}) {
+  if (!show) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={onReplay}
+      aria-label="인트로 다시 보기"
+      title="인트로 다시 보기"
+      className="group focus-visible:ring-brand-lavender hover:border-brand-lavender/35 hover:text-brand-lavender fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 shadow-lg backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
+    >
+      <RotateCcw
+        size={18}
+        className="transition-transform duration-500 group-hover:-rotate-180"
+      />
+    </button>
+  );
+}
+
 export default function SignatureExperience() {
   const pathname = usePathname();
   const reduced = useReducedMotion();
@@ -181,6 +398,11 @@ export default function SignatureExperience() {
   const isHero = phase === 'hero';
   const isCinematic = phase !== 'hero';
   const config = quality === 'fallback' ? null : QUALITY_CONFIG[quality];
+  const heroInteractive = isHero && !reduced;
+  const isSceneVisible = isInView || isCinematic;
+  const showBurstButton = !reduced && config !== null;
+  const showReplayButton =
+    pathname === '/' && heroInteractive && isInView && config !== null;
 
   useEffect(() => {
     const element = wrapRef.current;
@@ -248,46 +470,16 @@ export default function SignatureExperience() {
             : 'relative z-10 mb-10 h-[240px] w-full border border-white/10 sm:h-[400px]',
         )}
       >
-        {config ? (
-          <SignatureErrorBoundary fallback={<SignatureFallbackArt />}>
-            <View
-              className="absolute inset-0"
-              frames={reduced ? 1 : Infinity}
-              visible={isInView || isCinematic}
-            >
-              <ambientLight intensity={0.8} />
-              <OrbitControls
-                ref={orbitControlsRef}
-                enabled={isHero && !reduced}
-                enablePan={false}
-                minDistance={1.8}
-                maxDistance={3}
-              />
-              <Suspense fallback={null}>
-                <ParticleLogo
-                  count={config.count}
-                  interactive={false}
-                  rotate={isHero && !reduced}
-                  clickBurst={isHero && !reduced}
-                  burstSignal={burstSignal}
-                  entranceSignal={introRun}
-                  animateEntrance={!reduced}
-                  jitter={reduced ? 0 : 0.003}
-                />
-              </Suspense>
-              <Sparkles
-                count={config.sparkles}
-                scale={isIntro ? INTRO_SPARKLES_SCALE : HERO_SPARKLES_SCALE}
-                size={1.4}
-                speed={reduced ? 0 : 0.3}
-                color="#c0a8eb"
-                opacity={0.4}
-              />
-            </View>
-          </SignatureErrorBoundary>
-        ) : (
-          <SignatureFallbackArt />
-        )}
+        <SignatureStage
+          config={config}
+          reduced={Boolean(reduced)}
+          heroInteractive={heroInteractive}
+          isIntro={isIntro}
+          isSceneVisible={isSceneVisible}
+          burstSignal={burstSignal}
+          introRun={introRun}
+          orbitControlsRef={orbitControlsRef}
+        />
 
         <div className="pointer-events-none absolute inset-0 shadow-[inset_0_10px_40px_rgba(0,0,0,0.55)]" />
 
@@ -299,122 +491,38 @@ export default function SignatureExperience() {
               animate={{ x: '140%', opacity: [0, 0.9, 0] }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
-              className="via-purple-light/25 pointer-events-none absolute inset-y-0 w-1/2 -skew-x-12 bg-linear-to-r from-transparent to-transparent blur-xl"
+              className="via-brand-lavender/25 pointer-events-none absolute inset-y-0 w-1/2 -skew-x-12 bg-linear-to-r from-transparent to-transparent blur-xl"
             />
           ) : null}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {!isIntro ? (
-            <m.div
-              key="hero-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.65,
-                delay: phase === 'landing' ? 0.45 : 0,
-              }}
-              className="pointer-events-none absolute inset-0"
-            >
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/70 to-transparent" />
-              <div className="absolute right-5 bottom-4 left-5 flex items-end justify-between gap-4 sm:right-7 sm:bottom-6 sm:left-7">
-                <m.div
-                  initial={{ y: 12, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: phase === 'landing' ? 0.65 : 0,
-                  }}
-                  className="flex flex-col gap-0.5"
-                >
-                  <span className="text-purple-light/80 text-[10px] font-bold tracking-widest uppercase sm:text-xs">
-                    {routeCopy.eyebrow}
-                  </span>
-                  <span className="text-lg font-black text-white sm:text-2xl">
-                    {routeCopy.title === '이우진 · nijoow' ? (
-                      <>
-                        이우진 <span className="text-white/40">·</span>{' '}
-                        <span className="from-purple-light to-purple-regular bg-linear-to-r bg-clip-text text-transparent">
-                          nijoow
-                        </span>
-                      </>
-                    ) : (
-                      routeCopy.title
-                    )}
-                  </span>
-                </m.div>
-
-                <div className="pointer-events-auto flex items-center gap-1.5">
-                  <span
-                    aria-label="드래그해서 회전"
-                    title="드래그해서 회전"
-                    className="hidden size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 backdrop-blur-sm sm:flex"
-                  >
-                    <Move3d size={15} />
-                  </span>
-                  {!reduced && config ? (
-                    <button
-                      type="button"
-                      onClick={handleBurst}
-                      aria-label="파티클 흩기"
-                      title="파티클 흩기"
-                      className="hover:border-purple-light/40 hover:text-purple-light focus-visible:ring-purple-light flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 backdrop-blur-sm transition-colors outline-none focus-visible:ring-2"
-                    >
-                      <SparklesIcon size={15} />
-                    </button>
-                  ) : null}
-                </div>
-              </div>
-            </m.div>
-          ) : null}
-        </AnimatePresence>
+        <HeroOverlay
+          isVisible={!isIntro}
+          isLanding={phase === 'landing'}
+          routeCopy={routeCopy}
+          showBurstButton={showBurstButton}
+          onBurst={handleBurst}
+        />
 
         {isIntro ? (
           <button
             type="button"
             onClick={handleLanding}
-            className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 focus-visible:ring-purple-light absolute top-5 right-5 z-10 min-h-11 rounded-full border px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur-xl transition-colors outline-none hover:text-white focus-visible:ring-2"
+            className="focus-visible:ring-brand-lavender absolute top-5 right-5 z-10 min-h-11 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur-xl transition-colors outline-none hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:ring-2"
           >
             건너뛰기
           </button>
         ) : null}
       </m.section>
 
-      {config ? (
-        <SignatureErrorBoundary fallback={null}>
-          <Canvas
-            camera={CAMERA_CONFIG}
-            dpr={config.dpr}
-            frameloop={
-              reduced ? 'demand' : isInView || isCinematic ? 'always' : 'never'
-            }
-            gl={CANVAS_GL_CONFIG}
-            onCreated={makeCanvasTransparent}
-            className={cn(
-              '!pointer-events-none !fixed !inset-0 !h-screen !w-screen',
-              isCinematic ? 'z-101' : 'z-11',
-            )}
-          >
-            <View.Port />
-          </Canvas>
-        </SignatureErrorBoundary>
-      ) : null}
+      <SignatureViewCanvas
+        config={config}
+        reduced={Boolean(reduced)}
+        isSceneVisible={isSceneVisible}
+        isCinematic={isCinematic}
+      />
 
-      {pathname === '/' && isHero && isInView && !reduced && config ? (
-        <button
-          type="button"
-          onClick={handleReplay}
-          aria-label="인트로 다시 보기"
-          title="인트로 다시 보기"
-          className="group border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 focus-visible:ring-purple-light fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border text-white/70 shadow-lg backdrop-blur-xl transition-colors outline-none hover:text-white focus-visible:ring-2"
-        >
-          <RotateCcw
-            size={18}
-            className="transition-transform duration-500 group-hover:-rotate-180"
-          />
-        </button>
-      ) : null}
+      <ReplayButton show={showReplayButton} onReplay={handleReplay} />
     </>
   );
 }

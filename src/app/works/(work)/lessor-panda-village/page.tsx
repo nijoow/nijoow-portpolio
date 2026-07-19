@@ -114,7 +114,7 @@ const LessorPandaVillagePage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: useEffect 내 상태 초기화 및 dynamic import를 통해 클라이언트
             사이드 렌더링 시점에만 해당 로직이 활성화되도록 수정
           </p>
@@ -132,7 +132,7 @@ const LessorPandaVillagePage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: Html 대신 3D 씬 내부에 포함되는 Text 컴포넌트를 사용하여
             정확한 3D 좌표 동기화 구현
           </p>
@@ -150,7 +150,7 @@ const LessorPandaVillagePage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 위치 정보를 useRef로 관리하여 리렌더링을 방지하고, 전송
             주기를 100ms로 조절하여 트래픽 80% 절감
           </p>

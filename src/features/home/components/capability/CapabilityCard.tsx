@@ -15,7 +15,7 @@ import {
   PanelsTopLeft,
   type LucideIcon,
 } from 'lucide-react';
-import { type FocusEvent, type PointerEvent, useRef, useState } from 'react';
+import { useRef, useState, type FocusEvent, type PointerEvent } from 'react';
 
 const CAPABILITY_ICONS: Record<CapabilityIconType, LucideIcon> = {
   design: PanelsTopLeft,
@@ -68,7 +68,7 @@ export function CapabilityCard({
         className="flex h-full flex-col gap-4 p-5 sm:p-6"
       >
         <div className="flex items-start gap-3">
-          <div className="text-purple-light group-hover/capability:border-purple-light/25 group-hover/capability:bg-purple-medium/15 group-focus-within/capability:border-purple-light/25 group-focus-within/capability:bg-purple-medium/15 flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition-colors">
+          <div className="text-brand-violet group-hover/capability:border-brand-lavender/25 group-hover/capability:bg-brand-violet/15 group-focus-within/capability:border-brand-lavender/25 group-focus-within/capability:bg-brand-violet/15 flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition-colors">
             <Icon size={19} />
           </div>
           <div className="flex flex-col gap-1.5">

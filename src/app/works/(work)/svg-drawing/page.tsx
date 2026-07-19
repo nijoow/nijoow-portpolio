@@ -78,7 +78,7 @@ const SVGDrawingPage = () => {
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-purple-light/40 text-purple-light/90 border-l-2 pl-3 text-sm break-keep">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 중심점을 기준으로 각 꼭짓점의 상대 좌표를 계산하고, 회전각을
             적용한 벡터 연산을 통해 크기 조절 로직을 보정하여 해결
           </p>

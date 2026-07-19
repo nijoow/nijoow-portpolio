@@ -1,20 +1,26 @@
 'use client';
 
+import { Logo } from '@/components/Logo/Logo';
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
 import { AnimatePresence, m } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import Logo from '../Logo/Logo';
-import NavListItem from './NavListItem';
+import { NavListItem } from './NavListItem';
 
 const navList = [
   { text: 'About', url: '/' },
   { text: 'Works', url: '/works' },
   { text: 'Contact', url: '/contact' },
-];
+] as const;
+
+function isActiveRoute(pathname: string, url: string) {
+  return pathname === url || (url !== '/' && pathname.startsWith(`${url}/`));
+}
 
 export default function NavBar() {
+  const pathname = usePathname();
   const [isNavShow, setIsNavShow] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -37,7 +43,7 @@ export default function NavBar() {
         <Magnetic strength={0.2}>
           <Link
             href="/"
-            className="focus-visible:ring-purple-light group flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-2"
+            className="focus-visible:ring-brand-lavender text-brand-lavender group flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-2"
             aria-label="nijoow 홈"
           >
             <Logo
@@ -48,18 +54,20 @@ export default function NavBar() {
           </Link>
         </Magnetic>
 
-        {/* Desktop */}
         <ul className="hidden items-center gap-1 md:flex">
           {navList.map(({ text, url }) => (
             <li className="list-none" key={text}>
               <Magnetic strength={0.3}>
-                <NavListItem text={text} url={url} />
+                <NavListItem
+                  text={text}
+                  url={url}
+                  isActive={isActiveRoute(pathname, url)}
+                />
               </Magnetic>
             </li>
           ))}
         </ul>
 
-        {/* Mobile */}
         <NavToggle
           ref={toggleRef}
           isNavShow={isNavShow}
@@ -76,24 +84,25 @@ export default function NavBar() {
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-18 left-0 w-full overflow-hidden px-4 md:hidden"
           >
-            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/90 p-4 shadow-2xl backdrop-blur-xl">
+            <ul className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/90 p-4 shadow-2xl backdrop-blur-xl">
               {navList.map(({ text, url }, i) => (
-                <m.div
+                <m.li
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 }}
                   key={text}
+                  className="list-none"
                 >
-                  <Link
-                    href={url}
+                  <NavListItem
+                    text={text}
+                    url={url}
+                    isActive={isActiveRoute(pathname, url)}
+                    variant="mobile"
                     onClick={() => setIsNavShow(false)}
-                    className="focus-visible:ring-purple-light flex h-12 w-full items-center rounded-xl px-4 text-lg font-medium text-white transition-colors outline-none hover:bg-white/10 focus-visible:ring-2"
-                  >
-                    {text}
-                  </Link>
-                </m.div>
+                  />
+                </m.li>
               ))}
-            </div>
+            </ul>
           </m.div>
         )}
       </AnimatePresence>

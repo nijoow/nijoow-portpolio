@@ -1,6 +1,7 @@
 'use client';
 
 import type { CapabilityPreviewProps } from '@/features/home/components/capability/types';
+import { COLOR_TOKENS, withAlpha } from '@/lib/designTokens';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, m } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -13,24 +14,24 @@ const SUCCESS_DELAY = 900;
 const NODES = [
   {
     label: 'ANALYZE',
-    activeColor: '#a855f7',
-    idleBackground: 'rgba(168, 85, 247, 0.2)',
-    idleBorder: 'rgba(168, 85, 247, 0.35)',
-    idleShadow: '0 0 4px rgba(168, 85, 247, 0.15)',
+    activeColor: COLOR_TOKENS.brand.violet,
+    idleBackground: withAlpha(COLOR_TOKENS.brand.violet, 0.2),
+    idleBorder: withAlpha(COLOR_TOKENS.brand.violet, 0.35),
+    idleShadow: `0 0 4px ${withAlpha(COLOR_TOKENS.brand.violet, 0.15)}`,
   },
   {
     label: 'OPTIMIZE',
-    activeColor: '#ec4899',
-    idleBackground: 'rgba(236, 72, 153, 0.2)',
-    idleBorder: 'rgba(236, 72, 153, 0.35)',
-    idleShadow: '0 0 4px rgba(236, 72, 153, 0.15)',
+    activeColor: COLOR_TOKENS.accent.base,
+    idleBackground: withAlpha(COLOR_TOKENS.accent.base, 0.2),
+    idleBorder: withAlpha(COLOR_TOKENS.accent.base, 0.35),
+    idleShadow: `0 0 4px ${withAlpha(COLOR_TOKENS.accent.base, 0.15)}`,
   },
   {
     label: 'VERIFY',
-    activeColor: '#10b981',
-    idleBackground: 'rgba(16, 185, 129, 0.2)',
-    idleBorder: 'rgba(16, 185, 129, 0.35)',
-    idleShadow: '0 0 4px rgba(16, 185, 129, 0.15)',
+    activeColor: COLOR_TOKENS.status.success,
+    idleBackground: withAlpha(COLOR_TOKENS.status.success, 0.2),
+    idleBorder: withAlpha(COLOR_TOKENS.status.success, 0.35),
+    idleShadow: `0 0 4px ${withAlpha(COLOR_TOKENS.status.success, 0.15)}`,
   },
 ] as const;
 
@@ -81,20 +82,20 @@ export function AiPreview({
   return (
     <div className="relative h-full w-full p-2.5">
       <div className="flex h-full flex-col justify-between">
-        <div className="relative flex min-h-4.5 items-center rounded border border-white/5 bg-zinc-950/65 px-2 py-1 font-mono text-[7px] text-purple-300">
+        <div className="bg-surface-panel/65 text-brand-cool relative flex min-h-4.5 items-center rounded border border-white/5 px-2 py-1 font-mono text-[7px]">
           <div className="flex w-full items-center gap-1.5">
             <span className="text-zinc-600">&gt;</span>
             <span className="flex min-h-2.5 flex-1 items-center text-[7.5px] font-bold text-white">
               {displayedPrompt}
               {isActive && !shouldReduceMotion && (
-                <span className="ml-0.5 inline-block h-2.5 w-1 animate-pulse bg-purple-400/80" />
+                <span className="bg-brand-lavender/80 ml-0.5 inline-block h-2.5 w-1 animate-pulse" />
               )}
             </span>
           </div>
         </div>
 
         <div className="relative my-1 flex items-center justify-between px-4">
-          <div className="absolute top-1/2 right-6 left-6 z-0 h-px -translate-y-1/2 bg-purple-500/10" />
+          <div className="absolute top-1/2 right-6 left-6 z-0 h-px -translate-y-1/2 bg-white/10" />
 
           {NODES.map((node, index) => {
             const isNodeActive = displayedNode >= index + 1;
@@ -145,7 +146,7 @@ export function AiPreview({
                 initial={{ opacity: 0, y: 3 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center gap-1 font-mono text-[7px] font-bold text-green-400"
+                className="text-status-success flex items-center gap-1 font-mono text-[7px] font-bold"
               >
                 <span>✔</span>
                 <span>prompt execution successful</span>

@@ -46,6 +46,24 @@ interface CursorSegmentProps {
   segment: (typeof CURSOR_SEGMENTS)[number];
 }
 
+function resolveSegmentScale(
+  isHovering: boolean,
+  isMain: boolean,
+  baseScale: number,
+) {
+  if (!isHovering) return baseScale;
+  return isMain ? 2.5 : 0;
+}
+
+function resolveCursorOpacity(
+  isVisible: boolean,
+  isNativeCursorTarget: boolean,
+  isHovering: boolean,
+) {
+  if (!isVisible || isNativeCursorTarget) return 0;
+  return isHovering ? 0.2 : 0.7;
+}
+
 function CursorSegment({
   index,
   isHovering,
@@ -57,12 +75,13 @@ function CursorSegment({
   const y = useSpring(mouseY, segment.spring);
   const isMain = index === 0;
   const baseScale = 1 - index * 0.05;
+  const scale = resolveSegmentScale(isHovering, isMain, baseScale);
 
   return (
     <m.div
-      className={`bg-purple-light absolute rounded-full will-change-transform ${segment.offset} ${segment.size}`}
+      className={`bg-brand-lavender absolute rounded-full will-change-transform ${segment.offset} ${segment.size}`}
       style={{ x, y }}
-      animate={{ scale: isHovering ? (isMain ? 2.5 : 0) : baseScale }}
+      animate={{ scale }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
     />
   );
@@ -78,6 +97,11 @@ function CustomCursor() {
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
+  const opacity = resolveCursorOpacity(
+    isVisible,
+    isNativeCursorTarget,
+    isHovering,
+  );
 
   useEffect(() => {
     if (!isEnabled) return;
@@ -136,8 +160,7 @@ function CustomCursor() {
       <div
         className="pointer-events-none fixed inset-0 z-9999 transition-opacity duration-300"
         style={{
-          opacity:
-            isVisible && !isNativeCursorTarget ? (isHovering ? 0.2 : 0.7) : 0,
+          opacity,
           willChange: 'opacity',
         }}
       >

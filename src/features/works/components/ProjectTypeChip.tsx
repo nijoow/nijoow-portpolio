@@ -7,18 +7,20 @@ interface ProjectTypeChipProps {
 }
 
 const PROJECT_TYPE_STYLES: Record<ProjectType, string> = {
-  business: 'border-purple-light/45 bg-purple-darker/90 text-purple-light',
-  side: 'border-white/20 bg-cosmic-navy/90 text-white/75',
+  business: 'border-brand-lavender/45 bg-brand-deep/90 text-brand-lavender',
+  side: 'border-accent/40 bg-accent-deep/80 text-accent-light',
 };
+
+function getProjectTypeLabel(projectType: ProjectType, isFreelance: boolean) {
+  if (projectType === 'side') return 'Side Project';
+  return isFreelance ? 'Business Project (Freelancer)' : 'Business Project';
+}
 
 export function ProjectTypeChip({
   projectType,
   isFreelance = false,
 }: ProjectTypeChipProps) {
-  const label =
-    projectType === 'business'
-      ? `Business Project${isFreelance ? ' (Freelancer)' : ''}`
-      : 'Side Project';
+  const label = getProjectTypeLabel(projectType, isFreelance);
 
   return (
     <span

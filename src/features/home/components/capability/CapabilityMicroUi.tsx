@@ -40,17 +40,16 @@ export function CapabilityMicroUi({
   return (
     <div
       className={cn(
-        'relative h-30 w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-950/40 backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-300',
+        'bg-surface-panel/45 relative h-30 w-full overflow-hidden rounded-xl border border-white/10 backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-300',
         isActive &&
-          'border-purple-500/30 bg-zinc-950/60 shadow-lg shadow-purple-500/5',
+          'bg-surface-panel/70 border-brand-lavender/25 shadow-lg shadow-black/20',
       )}
     >
       <div
         aria-hidden="true"
         className={cn(
-          'pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_15%,rgba(168,85,247,0.08),transparent_40%)] transition-opacity duration-500',
-          isActive &&
-            'bg-[radial-gradient(circle_at_72%_15%,rgba(168,85,247,0.18),transparent_45%)]',
+          'capability-preview-glow pointer-events-none absolute inset-0 opacity-45 transition-opacity duration-500',
+          isActive && 'opacity-100',
         )}
       />
       <div className="micro-scene-grid" aria-hidden="true" />

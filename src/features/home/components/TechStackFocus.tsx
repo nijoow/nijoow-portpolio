@@ -3,6 +3,7 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
 import { GlassPopover } from '@/components/ui/GlassPopover';
+import { cn } from '@/lib/utils';
 import { Braces, Compass } from 'lucide-react';
 
 interface StackItem {
@@ -110,7 +111,12 @@ function StackDetails({
 }) {
   return (
     <div className="relative">
-      <span className="text-purple-light/70 text-[10px] font-black tracking-widest uppercase">
+      <span
+        className={cn(
+          'text-[10px] font-black tracking-widest uppercase',
+          type === 'stack' ? 'text-brand-lavender/75' : 'text-accent-light/80',
+        )}
+      >
         {type === 'stack' ? 'Main Toolkit' : 'Current Focus'}
       </span>
       <h4 className="mt-1 text-base font-bold text-white">{item.label}</h4>
@@ -140,11 +146,16 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
   return (
     <div className="flex h-full flex-col gap-5 p-5 sm:p-6">
       <div className="flex items-start gap-3">
-        <div className="text-purple-light flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+        <div
+          className={cn(
+            'flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5',
+            type === 'stack' ? 'text-brand-violet' : 'text-accent-light',
+          )}
+        >
           <Icon size={19} />
         </div>
         <div className="flex flex-col gap-1">
-          <h2 className="font-extrabold">{title}</h2>
+          <h3 className="font-extrabold">{title}</h3>
           <p className="text-sm leading-relaxed break-keep text-white/50">
             {description}
           </p>
@@ -157,17 +168,18 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
             <GlassPopover
               ariaLabel={`${item.label} 자세히 보기`}
               content={<StackDetails item={item} type={type} />}
-              className="focus-visible:ring-purple-light hover:border-purple-light/35 hover:bg-purple-medium/25 hover:text-purple-light min-h-11 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-semibold text-white/60 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+              className={cn(
+                'focus-visible:ring-brand-lavender min-h-11 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-semibold text-white/60 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none',
+                type === 'stack'
+                  ? 'hover:border-brand-lavender/35 hover:bg-brand-deep/35 hover:text-brand-lavender'
+                  : 'hover:border-accent/35 hover:bg-accent-deep/30 hover:text-accent-light',
+              )}
             >
               {item.label}
             </GlassPopover>
           </li>
         ))}
       </ul>
-
-      <p className="mt-auto text-[10px] font-bold tracking-wide text-white/55">
-        칩에 마우스를 올려 자세히 보기
-      </p>
     </div>
   );
 }
@@ -175,7 +187,18 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
 export function TechStackFocus() {
   return (
     <section className="w-full">
-      <SubTitle eyebrow="Toolkit" title="기술 스택과 관심 분야" />
+      <SubTitle
+        eyebrow="Toolkit"
+        title="기술 스택과 관심 분야"
+        trailing={
+          <span className="text-accent-light/65 text-[10px] font-bold tracking-wide">
+            <span className="hidden sm:inline">
+              칩에 마우스를 올려 자세히 보기
+            </span>
+            <span className="sm:hidden">칩을 눌러 자세히 보기</span>
+          </span>
+        }
+      />
       <GlassCard lift={false}>
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <StackGroup

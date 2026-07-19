@@ -1,15 +1,35 @@
 'use client';
 
+import { COLOR_TOKENS } from '@/lib/designTokens';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import type { RootState } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
-const ENTRANCE_SEC = 3; // 입장 응집 길이
-const BURST_SEC = 2.4; // 버스트 1회 길이(모임→흩어짐→다시 모임)
-const BURST_PEAK = 0.95; // 버스트 최대 흩어짐 정도
-const AUTO_BURST_SEC = 10; // clickBurst일 때 자동 버스트 주기(초)
+const ENTRANCE_SEC = 3;
+const BURST_SEC = 2.4;
+const BURST_PEAK = 0.95;
+const AUTO_BURST_SEC = 10;
+const IDLE_WAVE_AMP = 0.06;
+const PULSE_AMP = 0.4;
+const INTRO_SPIN_SPEED = 0.12;
+const POINTER_TILT_X = 0.3;
+const POINTER_TILT_Y = 0.2;
+const SWING_SPEED = 0.3;
+const SWING_AMP = 0.5;
+
+const MAX_POINT_SIZE = 15;
+const GLINT_THRESHOLD = 0.86;
+
+// 정적 팔레트 — props와 무관하므로 모듈 수준에서 1회 생성해 모든 인스턴스가 공유한다.
+const PARTICLE_COLORS = {
+  deep: new THREE.Color(COLOR_TOKENS.brand.violet).multiplyScalar(1.08),
+  mid: new THREE.Color(COLOR_TOKENS.brand.lavender).multiplyScalar(1.08),
+  cool: new THREE.Color(COLOR_TOKENS.brand.cool).multiplyScalar(1.05),
+  glint: new THREE.Color(COLOR_TOKENS.brand.lavender).multiplyScalar(1.14),
+} as const;
 
 interface ParticleLogoProps {
   /** 마우스 리펄전·포인터 패럴랙스·클릭 버스트 사용 여부 */
@@ -42,6 +62,37 @@ function mulberry32(seed: number) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+}
+
+/** 입장 응집: ENTRANCE_SEC 동안 1→0, 큐빅 이즈로 천천히 안착. */
+function entranceEnvelope(t: number): number {
+  const entrance = 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1);
+  return entrance * entrance * entrance;
+}
+
+/** 인터랙티브 유휴 시 미세 흩어짐 파형. */
+function idleWave(t: number): number {
+  return (Math.sin(t * 0.5) * 0.5 + 0.5) * IDLE_WAVE_AMP;
+}
+
+/** 인터랙티브 주기적 펄스(간헐적으로 크게 숨쉬는 효과). */
+function pulseWave(t: number): number {
+  return Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * PULSE_AMP;
+}
+
+/** 버스트 곡선: 모인 글자(0)→흩어짐(피크)→다시 모임(0). */
+function burstEnvelope(sinceBurst: number): number {
+  const bp = sinceBurst / BURST_SEC;
+  return bp >= 0 && bp <= 1 ? Math.sin(Math.PI * bp) * BURST_PEAK : 0;
+}
+
+/** 포인터(NDC)를 z=0 평면의 월드 좌표로 투영한다(리펄전용). */
+function projectPointerToWorld(state: RootState, out: THREE.Vector3) {
+  const cam = state.camera;
+  out.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
+  out.sub(cam.position);
+  const planeT = -cam.position.z / (out.z || -1);
+  out.multiplyScalar(planeT).add(cam.position);
 }
 
 const vertexShader = /* glsl */ `
@@ -136,6 +187,8 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
+// glint 패스는 GLINT_THRESHOLD를 넘는 입자만 담은 서브셋 geometry로 그리므로
+// 셰이더에서 나머지 입자를 discard할 필요가 없다.
 const glintFragmentShader = /* glsl */ `
   uniform vec3 uColorCool;
   uniform vec3 uColorGlint;
@@ -144,13 +197,11 @@ const glintFragmentShader = /* glsl */ `
   varying float vMotion;
 
   void main() {
-    float glintSeed = smoothstep(0.86, 1.0, vRand);
-    if (glintSeed <= 0.01) discard;
-
     vec2 c = gl_PointCoord - 0.5;
     float d = length(c);
     if (d > 0.5) discard;
 
+    float glintSeed = smoothstep(0.86, 1.0, vRand);
     float body = pow(smoothstep(0.5, 0.0, d), 1.65);
     float specular = pow(
       smoothstep(0.25, 0.0, length(c - vec2(-0.14, 0.14))),
@@ -176,9 +227,6 @@ export function ParticleLogo({
   entranceSignal = 0,
   animateEntrance = true,
 }: ParticleLogoProps) {
-  // 작고 또렷한 서명 스타일 — 포인트 최대 크기 상한(가까이서 원반화 방지).
-  const finalMaxSize = 15;
-
   const { nodes } = useGLTF('/3D/nijoowPurple.glb');
   const logoMesh = nodes.Curve003;
   if (!(logoMesh instanceof THREE.Mesh)) {
@@ -186,15 +234,21 @@ export function ParticleLogo({
   }
 
   const group = useRef<THREE.Group>(null);
+  const bodyMaterialRef = useRef<THREE.ShaderMaterial>(null);
+  const glintMaterialRef = useRef<THREE.ShaderMaterial>(null);
   const burstRef = useRef(-Infinity);
   const autoRef = useRef(0);
   const startedAtRef = useRef<number | null>(null);
   const rotationStartedAtRef = useRef<number | null>(null);
   const lastBurstSignalRef = useRef(burstSignal);
   const lastEntranceSignalRef = useRef(entranceSignal);
-  const mouseWorld = useMemo(() => new THREE.Vector3(), []);
+  // 매 프레임 통째로 덮어쓰는 스크래치 버퍼 — 캐싱이 아니라 안정된 정체성이
+  // 목적이므로 useMemo가 아닌 ref로 유지한다.
+  const mouseWorldRef = useRef(new THREE.Vector3());
 
-  const geometry = useMemo(() => {
+  // 로고 표면을 샘플링해 본체 geometry와, 반짝임 입자만 담은 서브셋 geometry를 만든다.
+  // 서브셋 덕분에 glint 패스는 전체(count)가 아닌 ~14%의 버텍스만 처리한다.
+  const geometries = useMemo(() => {
     const rand = mulberry32(0x9e3779b9);
     const mesh = new THREE.Mesh(logoMesh.geometry);
     const sampler = new MeshSurfaceSampler(mesh).build();
@@ -240,15 +294,59 @@ export function ParticleLogo({
       scatters[i * 3 + 2] = u * dist;
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('aScatter', new THREE.BufferAttribute(scatters, 3));
-    geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
-    return geometry;
+    const full = new THREE.BufferGeometry();
+    full.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    full.setAttribute('aScatter', new THREE.BufferAttribute(scatters, 3));
+    full.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+
+    const glintIndices: number[] = [];
+    for (let i = 0; i < count; i++) {
+      if ((randoms[i] ?? 0) > GLINT_THRESHOLD) glintIndices.push(i);
+    }
+    const glintCount = glintIndices.length;
+    const glintPositions = new Float32Array(glintCount * 3);
+    const glintScatters = new Float32Array(glintCount * 3);
+    const glintRandoms = new Float32Array(glintCount);
+    glintIndices.forEach((src, dst) => {
+      glintPositions[dst * 3] = positions[src * 3] ?? 0;
+      glintPositions[dst * 3 + 1] = positions[src * 3 + 1] ?? 0;
+      glintPositions[dst * 3 + 2] = positions[src * 3 + 2] ?? 0;
+      glintScatters[dst * 3] = scatters[src * 3] ?? 0;
+      glintScatters[dst * 3 + 1] = scatters[src * 3 + 1] ?? 0;
+      glintScatters[dst * 3 + 2] = scatters[src * 3 + 2] ?? 0;
+      glintRandoms[dst] = randoms[src] ?? 0;
+    });
+    const glint = new THREE.BufferGeometry();
+    glint.setAttribute(
+      'position',
+      new THREE.BufferAttribute(glintPositions, 3),
+    );
+    glint.setAttribute('aScatter', new THREE.BufferAttribute(glintScatters, 3));
+    glint.setAttribute('aRandom', new THREE.BufferAttribute(glintRandoms, 1));
+
+    return { full, glint };
   }, [logoMesh, count]);
 
-  useEffect(() => () => geometry.dispose(), [geometry]);
+  useEffect(
+    () => () => {
+      geometries.full.dispose();
+      geometries.glint.dispose();
+    },
+    [geometries],
+  );
 
+  // group에 dispose={null}을 걸어 r3f 자동 정리를 껐으므로 material도 직접 정리한다.
+  useEffect(() => {
+    const bodyMaterial = bodyMaterialRef.current;
+    const glintMaterial = glintMaterialRef.current;
+    return () => {
+      bodyMaterial?.dispose();
+      glintMaterial?.dispose();
+    };
+  }, []);
+
+  // 두 material이 같은 uniforms 객체를 공유한다 — useFrame에서 한 번만 갱신하면
+  // 본체·glint 패스에 동시에 반영된다. 실수로 분리하지 말 것.
   const uniforms = useMemo(
     () => ({
       uProgress: { value: animateEntrance ? 1 : 0 },
@@ -258,25 +356,18 @@ export function ParticleLogo({
       uMouse: { value: new THREE.Vector3(999, 999, 999) },
       uRadius: { value: 1.3 },
       uStrength: { value: 0.9 },
-      uMaxSize: { value: finalMaxSize },
-      uColorDeep: {
-        value: new THREE.Color('#8b68df').multiplyScalar(1.15),
-      },
-      uColorMid: {
-        value: new THREE.Color('#c4a5f0').multiplyScalar(1.15),
-      },
-      uColorCool: {
-        value: new THREE.Color('#98a7f5').multiplyScalar(1.1),
-      },
-      uColorGlint: {
-        value: new THREE.Color('#f0e5ff').multiplyScalar(1.25),
-      },
+      uMaxSize: { value: MAX_POINT_SIZE },
+      uColorDeep: { value: PARTICLE_COLORS.deep },
+      uColorMid: { value: PARTICLE_COLORS.mid },
+      uColorCool: { value: PARTICLE_COLORS.cool },
+      uColorGlint: { value: PARTICLE_COLORS.glint },
     }),
-    [animateEntrance, sizeScale, jitter, finalMaxSize],
+    [animateEntrance, sizeScale, jitter],
   );
 
   useFrame((state) => {
     const absoluteTime = state.clock.elapsedTime;
+
     if (entranceSignal !== lastEntranceSignalRef.current) {
       lastEntranceSignalRef.current = entranceSignal;
       startedAtRef.current = absoluteTime;
@@ -286,17 +377,6 @@ export function ParticleLogo({
     startedAtRef.current ??= absoluteTime;
     const t = absoluteTime - startedAtRef.current;
 
-    // 입장: ENTRANCE_SEC 동안 흩어진 상태(1) → 응집(0), 큐빅 이즈로 천천히 안착.
-    const entrance = animateEntrance
-      ? 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1)
-      : 0;
-    const eased = entrance * entrance * entrance;
-    // 비인터랙티브(홈 로고/인트로)는 정지 시 글자가 또렷 — 상시 스캐터 없음.
-    const idle = interactive ? (Math.sin(t * 0.5) * 0.5 + 0.5) * 0.06 : 0;
-    const pulse = interactive
-      ? Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * 0.4
-      : 0;
-    // 자동 버스트(clickBurst 전용): 마지막 버스트로부터 AUTO_BURST_SEC마다 1회.
     if (clickBurst && t - autoRef.current >= AUTO_BURST_SEC) {
       autoRef.current = t;
       burstRef.current = t;
@@ -306,50 +386,48 @@ export function ParticleLogo({
       autoRef.current = t;
       burstRef.current = t;
     }
-    // 버스트 곡선: 모인 글자(0)에서 시작해 흩어졌다(피크) 다시 모인다(0).
-    const since = t - burstRef.current;
-    const bp = since >= 0 ? since / BURST_SEC : Infinity;
-    const burst = bp <= 1 ? Math.sin(Math.PI * bp) * BURST_PEAK : 0;
-    const progress = Math.max(eased, idle, pulse, burst);
 
+    // progress = 여러 모션 소스(입장·유휴·펄스·버스트) 중 가장 큰 흩어짐.
+    const progress = Math.max(
+      animateEntrance ? entranceEnvelope(t) : 0,
+      interactive ? idleWave(t) : 0,
+      interactive ? pulseWave(t) : 0,
+      burstEnvelope(t - burstRef.current),
+    );
     uniforms.uProgress.value = progress;
     uniforms.uTime.value = t;
 
     if (interactive) {
-      // 마우스를 z=0 평면에 투영해 월드 좌표 산출(리펄전용).
-      const cam = state.camera;
-      mouseWorld.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
-      mouseWorld.sub(cam.position);
-      const planeT = -cam.position.z / (mouseWorld.z || -1);
-      mouseWorld.multiplyScalar(planeT).add(cam.position);
-      uniforms.uMouse.value.copy(mouseWorld);
+      projectPointerToWorld(state, mouseWorldRef.current);
+      uniforms.uMouse.value.copy(mouseWorldRef.current);
     }
 
-    if (group.current) {
-      if (interactive) {
-        // 인트로: 느린 자전 + 포인터 패럴랙스
-        group.current.rotation.y = t * 0.12 + state.pointer.x * 0.3;
-        group.current.rotation.x = -state.pointer.y * 0.2;
+    if (!group.current) return;
+    if (interactive) {
+      // 인트로: 느린 자전 + 포인터 패럴랙스
+      group.current.rotation.y =
+        t * INTRO_SPIN_SPEED + state.pointer.x * POINTER_TILT_X;
+      group.current.rotation.x = -state.pointer.y * POINTER_TILT_Y;
+    } else {
+      // 클래식 로고: 정면 유지 좌우 스윙(가독성). rotate=false면 완전 정지(인트로용).
+      if (rotate) {
+        rotationStartedAtRef.current ??= absoluteTime;
+        const rotationTime = absoluteTime - rotationStartedAtRef.current;
+        group.current.rotation.y =
+          Math.sin(rotationTime * SWING_SPEED) * SWING_AMP;
       } else {
-        // 클래식 로고: 정면을 유지하는 부드러운 좌우 스윙(글자 가독성). 드래그는 OrbitControls.
-        // rotate=false면 완전 정지(인트로용).
-        if (rotate) {
-          rotationStartedAtRef.current ??= absoluteTime;
-          const rotationTime = absoluteTime - rotationStartedAtRef.current;
-          group.current.rotation.y = Math.sin(rotationTime * 0.3) * 0.5;
-        } else {
-          rotationStartedAtRef.current = null;
-          group.current.rotation.y = 0;
-        }
-        group.current.rotation.x = 0;
+        rotationStartedAtRef.current = null;
+        group.current.rotation.y = 0;
       }
+      group.current.rotation.x = 0;
     }
   });
 
   return (
     <group ref={group} dispose={null}>
-      <points geometry={geometry}>
+      <points geometry={geometries.full}>
         <shaderMaterial
+          ref={bodyMaterialRef}
           uniforms={uniforms}
           vertexShader={vertexShader}
           fragmentShader={fragmentShader}
@@ -358,8 +436,9 @@ export function ParticleLogo({
           blending={THREE.NormalBlending}
         />
       </points>
-      <points geometry={geometry}>
+      <points geometry={geometries.glint}>
         <shaderMaterial
+          ref={glintMaterialRef}
           uniforms={uniforms}
           vertexShader={vertexShader}
           fragmentShader={glintFragmentShader}

@@ -51,7 +51,7 @@ const interests: readonly Interest[] = [
 function InterestDetails({ interest }: { interest: Interest }) {
   return (
     <div className="relative">
-      <span className="text-purple-light/70 text-[10px] font-black tracking-widest uppercase">
+      <span className="text-accent-light/80 text-[10px] font-black tracking-widest uppercase">
         {interest.englishLabel}
       </span>
       <h4 className="mt-1 text-base font-bold text-white">{interest.label}</h4>
@@ -90,7 +90,8 @@ function CoffeeIcon({ isActive }: { isActive: boolean }) {
       <m.path
         d="M9.8 3.4c-.7.7-.7 1.5 0 2.2s.7 1.5 0 2.2"
         style={{ x: -1.2 }}
-        stroke="#b9a3d6"
+        initial={{ y: 0, opacity: 0.4 }}
+        stroke="var(--color-accent-light)"
         strokeWidth="1.4"
         strokeLinecap="round"
         animate={
@@ -110,7 +111,8 @@ function CoffeeIcon({ isActive }: { isActive: boolean }) {
       <m.path
         d="M13.3 3.4c-.7.7-.7 1.5 0 2.2s.7 1.5 0 2.2"
         style={{ x: -1.2 }}
-        stroke="#b9a3d6"
+        initial={{ y: 0, opacity: 0.3 }}
+        stroke="var(--color-accent-light)"
         strokeWidth="1.4"
         strokeLinecap="round"
         animate={
@@ -176,11 +178,11 @@ function InterestObject({ interest }: { interest: Interest }) {
         ariaLabel={`${interest.label} 취향 자세히 보기`}
         content={<InterestDetails interest={interest} />}
         onOpenChange={setIsPopoverOpen}
-        className="group/interest focus-visible:ring-purple-light hover:border-purple-light/30 hover:bg-purple-medium/10 relative flex min-h-32 w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-white/10 bg-black/20 px-3 py-5 transition-[border-color,background-color,transform] hover:-translate-y-1 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
+        className="frosted-glass-subtle group/interest focus-visible:ring-brand-lavender hover:border-accent/30 relative flex min-h-32 w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border px-3 py-5 transition-[border-color,transform,box-shadow] hover:-translate-y-1 hover:shadow-xl focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
       >
         <span
           aria-hidden="true"
-          className="bg-purple-medium/20 absolute size-20 rounded-full blur-2xl transition-transform duration-500 group-hover/interest:scale-125 group-focus-visible/interest:scale-125"
+          className="bg-accent-deep/20 absolute size-20 rounded-full blur-2xl transition-transform duration-500 group-hover/interest:scale-125 group-focus-visible/interest:scale-125"
         />
         <span
           className={cn(
@@ -213,10 +215,10 @@ function InterestObject({ interest }: { interest: Interest }) {
 
 export function PersonalInterests() {
   return (
-    <GlassCard lift={false} className="mt-4 bg-black/25">
+    <GlassCard lift={false} className="mt-4">
       <div className="grid grid-cols-1 gap-5 p-5 sm:p-6 lg:grid-cols-[1fr_1.8fr] lg:items-center">
         <div className="flex flex-col gap-2">
-          <span className="text-purple-light/75 text-[10px] font-black tracking-widest uppercase">
+          <span className="text-brand-lavender/80 text-[10px] font-black tracking-widest uppercase">
             Favorites
           </span>
           <h3 className="text-xl font-black sm:text-2xl">좋아하는 것들</h3>
@@ -224,7 +226,10 @@ export function PersonalInterests() {
             개인적이고 소소한 취미들입니다.
           </p>
           <span className="mt-1 text-[10px] font-bold tracking-wide text-white/55">
-            오브젝트에 마우스를 올려 자세히 보기
+            <span className="hidden sm:inline">
+              오브젝트에 마우스를 올려 자세히 보기
+            </span>
+            <span className="sm:hidden">오브젝트를 눌러 자세히 보기</span>
           </span>
         </div>
 

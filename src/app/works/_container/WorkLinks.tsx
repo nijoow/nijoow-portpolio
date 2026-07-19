@@ -3,7 +3,7 @@ import { getWork } from '@/features/works/data/worksData';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
-export interface WorkLink {
+interface WorkLink {
   href: string;
   label: string;
   kind?: 'site' | 'github' | 'reference';
@@ -37,7 +37,7 @@ export function WorkLinks({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="border-purple-light/25 bg-purple-medium/20 hover:bg-purple-medium/35 focus-visible:ring-purple-light flex min-h-11 items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
+      className="border-brand-lavender/25 bg-brand-violet/20 hover:bg-brand-violet/35 focus-visible:ring-brand-lavender flex min-h-11 items-center justify-center gap-2 rounded-full border px-6 py-2.5 text-sm font-bold text-white backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
     >
       {kind === 'github' ? (
         <GithubIcon aria-hidden size={20} />

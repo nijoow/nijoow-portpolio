@@ -41,9 +41,9 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
         <Link
           href={`/works/${work.pageName}`}
           aria-label={`${work.name} 작업 상세 보기`}
-          className="focus-visible:ring-purple-light flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
+          className="focus-visible:ring-brand-lavender flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
         >
-          <div className="from-purple-medium/15 to-purple-darker/30 relative aspect-video w-full overflow-hidden border-b border-white/10 bg-linear-to-br via-black/20">
+          <div className="from-atmosphere-navy/20 relative aspect-video w-full overflow-hidden border-b border-white/10 bg-linear-to-br via-black/20 to-white/5">
             <Image
               src={`/images/works/${work.imgSrc}`}
               alt={`${work.name} 작업 미리보기`}
@@ -63,7 +63,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
           <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="group-hover/work:text-purple-light truncate text-lg font-black transition-colors">
+                <h2 className="group-hover/work:text-brand-lavender truncate text-lg font-black text-white/90 transition-colors">
                   {work.name}
                 </h2>
                 {work.description ? (
@@ -72,7 +72,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
                   </p>
                 ) : null}
               </div>
-              <span className="group-hover/work:border-purple-light/40 group-hover/work:text-purple-light flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 transition-colors">
+              <span className="group-hover/work:border-brand-lavender/40 group-hover/work:text-brand-lavender flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 transition-colors">
                 <ArrowUpRight size={14} />
               </span>
             </div>
@@ -101,7 +101,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${work.name} 라이브 사이트 열기`}
-            className="focus-visible:ring-purple-light absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white/80 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
+            className="focus-visible:ring-brand-lavender absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white/80 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
           >
             <ExternalLink size={15} />
           </a>
@@ -126,10 +126,10 @@ export function WorksGallery() {
 
   function getFilterClass(isActive: boolean): string {
     return cn(
-      'min-h-11 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-purple-light',
+      'min-h-11 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-lavender',
       isActive
-        ? 'border-purple-light/40 bg-purple-medium/35 text-white'
-        : 'hover:border-purple-light/25 hover:bg-purple-medium/15 border-white/10 bg-white/5 text-white/55 hover:text-white',
+        ? 'border-brand-lavender/35 bg-brand-deep/55 text-white'
+        : 'border-white/10 bg-white/5 text-white/55 hover:border-white/20 hover:bg-white/8 hover:text-white',
     );
   }
 

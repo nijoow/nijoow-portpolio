@@ -7,7 +7,7 @@ interface NavToggleProps {
   onToggle: () => void;
 }
 
-const BAR_BASE = 'bg-purple-regular h-0.5 rounded';
+const BAR_BASE = 'bg-brand-muted h-0.5 rounded';
 
 function NavToggle({ ref, isNavShow, onToggle }: NavToggleProps) {
   return (
@@ -18,7 +18,7 @@ function NavToggle({ ref, isNavShow, onToggle }: NavToggleProps) {
       aria-label={isNavShow ? '메뉴 닫기' : '메뉴 열기'}
       aria-expanded={isNavShow}
       aria-controls="mobile-navigation"
-      className="focus-visible:ring-purple-light ml-auto flex size-11 items-center justify-center rounded-full transition-colors outline-none hover:bg-white/10 focus-visible:ring-2 md:hidden"
+      className="focus-visible:ring-brand-lavender ml-auto flex size-11 items-center justify-center rounded-full transition-colors outline-none hover:bg-white/10 focus-visible:ring-2 md:hidden"
     >
       <span
         aria-hidden="true"
