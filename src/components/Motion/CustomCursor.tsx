@@ -10,12 +10,12 @@ import {
 } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const CURSOR_SEGMENTS = [
-  {
-    size: 'h-8 w-8',
-    offset: '-top-4 -left-4',
-    spring: { damping: 20, stiffness: 400, mass: 0.2 },
-  },
+const LEAD_CURSOR_SEGMENT = {
+  size: 'h-8 w-8',
+  offset: '-top-4 -left-4',
+} as const;
+
+const TRAILING_CURSOR_SEGMENTS = [
   {
     size: 'h-6 w-6',
     offset: '-top-3 -left-3',
@@ -38,21 +38,25 @@ const CURSOR_SEGMENTS = [
   },
 ] as const;
 
-interface CursorSegmentProps {
+const CURSOR_SCALE_TRANSITION = {
+  duration: 0.2,
+  ease: 'easeOut',
+} as const;
+
+interface CursorShapeProps {
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+  offset: string;
+  scale: number;
+  size: string;
+}
+
+interface TrailingCursorSegmentProps {
   index: number;
   isHovering: boolean;
   mouseX: MotionValue<number>;
   mouseY: MotionValue<number>;
-  segment: (typeof CURSOR_SEGMENTS)[number];
-}
-
-function resolveSegmentScale(
-  isHovering: boolean,
-  isMain: boolean,
-  baseScale: number,
-) {
-  if (!isHovering) return baseScale;
-  return isMain ? 2.5 : 0;
+  segment: (typeof TRAILING_CURSOR_SEGMENTS)[number];
 }
 
 function resolveCursorOpacity(
@@ -64,25 +68,40 @@ function resolveCursorOpacity(
   return isHovering ? 0.2 : 0.7;
 }
 
-function CursorSegment({
+function CursorShape({
+  mouseX,
+  mouseY,
+  offset,
+  scale,
+  size,
+}: CursorShapeProps) {
+  return (
+    <m.div
+      className={`bg-brand-lavender absolute rounded-full will-change-transform ${offset} ${size}`}
+      style={{ x: mouseX, y: mouseY }}
+      animate={{ scale }}
+      transition={CURSOR_SCALE_TRANSITION}
+    />
+  );
+}
+
+function TrailingCursorSegment({
   index,
   isHovering,
   mouseX,
   mouseY,
   segment,
-}: CursorSegmentProps) {
+}: TrailingCursorSegmentProps) {
   const x = useSpring(mouseX, segment.spring);
   const y = useSpring(mouseY, segment.spring);
-  const isMain = index === 0;
-  const baseScale = 1 - index * 0.05;
-  const scale = resolveSegmentScale(isHovering, isMain, baseScale);
 
   return (
-    <m.div
-      className={`bg-brand-lavender absolute rounded-full will-change-transform ${segment.offset} ${segment.size}`}
-      style={{ x, y }}
-      animate={{ scale }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+    <CursorShape
+      mouseX={x}
+      mouseY={y}
+      offset={segment.offset}
+      scale={isHovering ? 0 : 0.95 - index * 0.05}
+      size={segment.size}
     />
   );
 }
@@ -172,8 +191,15 @@ function CustomCursor() {
             transform: 'translateZ(0)',
           }}
         >
-          {CURSOR_SEGMENTS.map((segment, index) => (
-            <CursorSegment
+          <CursorShape
+            mouseX={mouseX}
+            mouseY={mouseY}
+            offset={LEAD_CURSOR_SEGMENT.offset}
+            scale={isHovering ? 2.5 : 1}
+            size={LEAD_CURSOR_SEGMENT.size}
+          />
+          {TRAILING_CURSOR_SEGMENTS.map((segment, index) => (
+            <TrailingCursorSegment
               key={segment.size}
               index={index}
               isHovering={isHovering}

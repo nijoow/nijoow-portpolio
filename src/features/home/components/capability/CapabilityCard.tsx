@@ -72,7 +72,7 @@ export function CapabilityCard({
             <Icon size={19} />
           </div>
           <div className="flex flex-col gap-1.5">
-            <h2 className="font-extrabold">{title}</h2>
+            <h3 className="font-extrabold">{title}</h3>
             <p className="text-sm leading-relaxed break-keep text-white/55">
               {description}
             </p>

@@ -8,7 +8,7 @@ const CURSORS = [
     label: 'Designer',
     active: { x: 84, y: 34 },
     idle: { x: 34, y: 18 },
-    color: 'bg-brand-violet',
+    color: 'bg-brand-lavender text-surface-ink',
     fill: COLOR_TOKENS.brand.violet,
     idleOffset: 4,
     idleDuration: 2.5,
@@ -17,7 +17,7 @@ const CURSORS = [
     label: 'Developer',
     active: { x: 224, y: 64 },
     idle: { x: 272, y: 92 },
-    color: 'bg-accent',
+    color: 'bg-accent-light text-surface-ink',
     fill: COLOR_TOKENS.accent.base,
     idleOffset: -4,
     idleDuration: 3,
@@ -122,7 +122,6 @@ export function CollaborationPreview({
             key={cursor.label}
             animate={{
               ...position,
-              opacity: showResult ? 1 : 0.6,
               scale: showResult ? 1 : 0.95,
             }}
             transition={{ type: 'spring', stiffness: 120, damping: 15 }}
@@ -153,7 +152,7 @@ export function CollaborationPreview({
                 />
               </svg>
               <span
-                className={`${cursor.color} rounded px-1 text-[7px] font-bold text-white shadow-md`}
+                className={`${cursor.color} rounded px-1 text-[7px] font-bold shadow-md`}
               >
                 {cursor.label}
               </span>

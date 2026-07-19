@@ -5,10 +5,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "format:check": "prettier --check src package.json eslint.config.mjs",
-    "check": "pnpm typecheck && pnpm lint && pnpm format:check"
+    "format:check": "prettier --check src package.json eslint.config.mjs vitest.config.ts",
+    "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm format:check"
   },
   "packageManager": "pnpm@9.15.3",
   "dependencies": {
@@ -33,7 +35,10 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "20.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "20.19.43",
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "@types/three": "^0.182.0",
@@ -41,11 +46,13 @@
     "eslint": "9.39.2",
     "eslint-config-next": "16.1.6",
     "eslint-plugin-sonarjs": "^4.2.0",
+    "jsdom": "^29.1.1",
     "postcss": "8.5.6",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.54.0"
+    "typescript-eslint": "8.54.0",
+    "vitest": "^4.1.10"
   }
 }

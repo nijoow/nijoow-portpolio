@@ -25,7 +25,7 @@ const binggrae = localFont({
     },
   ],
   variable: '--font-binggrae',
-  display: 'swap',
+  display: 'fallback',
 });
 
 export const metadata: Metadata = {
@@ -125,7 +125,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <NavBar />
               <main
                 id="main-content"
-                className="mx-auto w-full max-w-4xl flex-auto px-4 pt-24 pb-24"
+                tabIndex={-1}
+                className="mx-auto w-full max-w-4xl flex-auto px-4 pt-24 pb-24 focus:outline-none"
               >
                 <SignatureExperience />
                 {children}
@@ -141,14 +142,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                       href="https://github.com/nijoow"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="focus-visible:ring-brand-lavender rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
+                      className="focus-visible:ring-brand-lavender inline-flex min-h-11 items-center rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
                     >
                       GitHub
                     </a>
                     <span className="text-white/20">|</span>
                     <a
                       href="mailto:nijoow1127@gmail.com"
-                      className="focus-visible:ring-brand-lavender rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
+                      className="focus-visible:ring-brand-lavender inline-flex min-h-11 items-center rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"
                     >
                       nijoow1127@gmail.com
                     </a>

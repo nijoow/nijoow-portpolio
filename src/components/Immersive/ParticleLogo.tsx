@@ -4,9 +4,12 @@ import { COLOR_TOKENS } from '@/lib/designTokens';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import type { RootState } from '@react-three/fiber';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
+import type {
+  ParticleGeometryRequest,
+  ParticleGeometryResult,
+} from './particleGeometry.types';
 
 const ENTRANCE_SEC = 3;
 const BURST_SEC = 2.4;
@@ -21,7 +24,6 @@ const SWING_SPEED = 0.3;
 const SWING_AMP = 0.5;
 
 const MAX_POINT_SIZE = 15;
-const GLINT_THRESHOLD = 0.86;
 
 // 정적 팔레트 — props와 무관하므로 모듈 수준에서 1회 생성해 모든 인스턴스가 공유한다.
 const PARTICLE_COLORS = {
@@ -50,18 +52,8 @@ interface ParticleLogoProps {
   entranceSignal?: number;
   /** reduced-motion 환경처럼 입장 응집 모션을 생략할지 여부. */
   animateEntrance?: boolean;
-}
-
-// 결정론적 PRNG(시드 고정) — 렌더 중 Math.random 호출(순수성 위반)을 피한다.
-function mulberry32(seed: number) {
-  let s = seed;
-  return () => {
-    s |= 0;
-    s = (s + 0x6d2b79f5) | 0;
-    let t = Math.imul(s ^ (s >>> 15), 1 | s);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+  /** Worker가 좌표 생성을 마쳐 첫 프레임을 그릴 준비가 되었을 때 호출한다. */
+  onReady?: () => void;
 }
 
 /** 입장 응집: ENTRANCE_SEC 동안 1→0, 큐빅 이즈로 천천히 안착. */
@@ -226,6 +218,7 @@ export function ParticleLogo({
   burstSignal = 0,
   entranceSignal = 0,
   animateEntrance = true,
+  onReady,
 }: ParticleLogoProps) {
   const { nodes } = useGLTF('/3D/nijoowPurple.glb');
   const logoMesh = nodes.Curve003;
@@ -242,108 +235,96 @@ export function ParticleLogo({
   const rotationStartedAtRef = useRef<number | null>(null);
   const lastBurstSignalRef = useRef(burstSignal);
   const lastEntranceSignalRef = useRef(entranceSignal);
+  const [geometryData, setGeometryData] =
+    useState<ParticleGeometryResult | null>(null);
   // 매 프레임 통째로 덮어쓰는 스크래치 버퍼 — 캐싱이 아니라 안정된 정체성이
   // 목적이므로 useMemo가 아닌 ref로 유지한다.
   const mouseWorldRef = useRef(new THREE.Vector3());
 
-  // 로고 표면을 샘플링해 본체 geometry와, 반짝임 입자만 담은 서브셋 geometry를 만든다.
-  // 서브셋 덕분에 glint 패스는 전체(count)가 아닌 ~14%의 버텍스만 처리한다.
+  useEffect(() => {
+    const worker = new Worker(
+      new URL('./particleGeometry.worker.ts', import.meta.url),
+      { type: 'module' },
+    );
+    const sourcePositions = new Float32Array(
+      logoMesh.geometry.getAttribute('position').array,
+    );
+    const sourceIndices = logoMesh.geometry.index
+      ? new Uint32Array(logoMesh.geometry.index.array)
+      : null;
+    const request: ParticleGeometryRequest = {
+      positions: sourcePositions,
+      indices: sourceIndices,
+      count,
+    };
+    const transfer: Transferable[] = [sourcePositions.buffer];
+    if (sourceIndices) transfer.push(sourceIndices.buffer);
+
+    worker.onmessage = (event: MessageEvent<ParticleGeometryResult>) => {
+      setGeometryData(event.data);
+    };
+    worker.onerror = (event) => {
+      console.error('Particle geometry worker failed', event.error);
+    };
+    worker.postMessage(request, transfer);
+
+    return () => worker.terminate();
+  }, [count, logoMesh.geometry]);
+
+  // Worker가 만든 typed array를 GPU geometry로 연결하는 작업만 메인 스레드에서 수행한다.
   const geometries = useMemo(() => {
-    const rand = mulberry32(0x9e3779b9);
-    const mesh = new THREE.Mesh(logoMesh.geometry);
-    const sampler = new MeshSurfaceSampler(mesh).build();
-    const transform = new THREE.Matrix4()
-      .makeRotationX(Math.PI / 2)
-      .multiply(new THREE.Matrix4().makeScale(26, 26, 26));
-
-    const positions = new Float32Array(count * 3);
-    const scatters = new Float32Array(count * 3);
-    const randoms = new Float32Array(count);
-    const temp = new THREE.Vector3();
-    const centroid = new THREE.Vector3();
-
-    for (let i = 0; i < count; i++) {
-      sampler.sample(temp);
-      temp.applyMatrix4(transform);
-      positions[i * 3] = temp.x;
-      positions[i * 3 + 1] = temp.y;
-      positions[i * 3 + 2] = temp.z;
-      centroid.add(temp);
-      randoms[i] = rand();
-    }
-    centroid.multiplyScalar(1 / count);
-
-    let maxR = 0.001;
-    for (let i = 0; i < count; i++) {
-      const x = (positions[i * 3] ?? 0) - centroid.x;
-      const y = (positions[i * 3 + 1] ?? 0) - centroid.y;
-      const z = (positions[i * 3 + 2] ?? 0) - centroid.z;
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-      maxR = Math.max(maxR, Math.sqrt(x * x + y * y + z * z));
-    }
-
-    for (let i = 0; i < count; i++) {
-      const u = rand() * 2 - 1;
-      const theta = rand() * Math.PI * 2;
-      const r = Math.sqrt(1 - u * u);
-      const dist = maxR * (0.6 + rand() * 2.4);
-      scatters[i * 3] = Math.cos(theta) * r * dist;
-      scatters[i * 3 + 1] = Math.sin(theta) * r * dist;
-      scatters[i * 3 + 2] = u * dist;
-    }
+    if (!geometryData) return null;
 
     const full = new THREE.BufferGeometry();
-    full.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    full.setAttribute('aScatter', new THREE.BufferAttribute(scatters, 3));
-    full.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+    full.setAttribute(
+      'position',
+      new THREE.BufferAttribute(geometryData.positions, 3),
+    );
+    full.setAttribute(
+      'aScatter',
+      new THREE.BufferAttribute(geometryData.scatters, 3),
+    );
+    full.setAttribute(
+      'aRandom',
+      new THREE.BufferAttribute(geometryData.randoms, 1),
+    );
 
-    const glintIndices: number[] = [];
-    for (let i = 0; i < count; i++) {
-      if ((randoms[i] ?? 0) > GLINT_THRESHOLD) glintIndices.push(i);
-    }
-    const glintCount = glintIndices.length;
-    const glintPositions = new Float32Array(glintCount * 3);
-    const glintScatters = new Float32Array(glintCount * 3);
-    const glintRandoms = new Float32Array(glintCount);
-    glintIndices.forEach((src, dst) => {
-      glintPositions[dst * 3] = positions[src * 3] ?? 0;
-      glintPositions[dst * 3 + 1] = positions[src * 3 + 1] ?? 0;
-      glintPositions[dst * 3 + 2] = positions[src * 3 + 2] ?? 0;
-      glintScatters[dst * 3] = scatters[src * 3] ?? 0;
-      glintScatters[dst * 3 + 1] = scatters[src * 3 + 1] ?? 0;
-      glintScatters[dst * 3 + 2] = scatters[src * 3 + 2] ?? 0;
-      glintRandoms[dst] = randoms[src] ?? 0;
-    });
     const glint = new THREE.BufferGeometry();
     glint.setAttribute(
       'position',
-      new THREE.BufferAttribute(glintPositions, 3),
+      new THREE.BufferAttribute(geometryData.glintPositions, 3),
     );
-    glint.setAttribute('aScatter', new THREE.BufferAttribute(glintScatters, 3));
-    glint.setAttribute('aRandom', new THREE.BufferAttribute(glintRandoms, 1));
+    glint.setAttribute(
+      'aScatter',
+      new THREE.BufferAttribute(geometryData.glintScatters, 3),
+    );
+    glint.setAttribute(
+      'aRandom',
+      new THREE.BufferAttribute(geometryData.glintRandoms, 1),
+    );
 
     return { full, glint };
-  }, [logoMesh, count]);
+  }, [geometryData]);
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    if (!geometries) return;
+    onReady?.();
+    return () => {
       geometries.full.dispose();
       geometries.glint.dispose();
-    },
-    [geometries],
-  );
+    };
+  }, [geometries, onReady]);
 
   // group에 dispose={null}을 걸어 r3f 자동 정리를 껐으므로 material도 직접 정리한다.
   useEffect(() => {
+    if (!geometries) return;
     const bodyMaterial = bodyMaterialRef.current;
     const glintMaterial = glintMaterialRef.current;
     return () => {
       bodyMaterial?.dispose();
       glintMaterial?.dispose();
     };
-  }, []);
+  }, [geometries]);
 
   // 두 material이 같은 uniforms 객체를 공유한다 — useFrame에서 한 번만 갱신하면
   // 본체·glint 패스에 동시에 반영된다. 실수로 분리하지 말 것.
@@ -422,6 +403,8 @@ export function ParticleLogo({
       group.current.rotation.x = 0;
     }
   });
+
+  if (!geometries) return null;
 
   return (
     <group ref={group} dispose={null}>

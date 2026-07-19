@@ -3,6 +3,7 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
 import { publicWorks, type Work } from '@/features/works/data/worksData';
+import { filterWorksByTag } from '@/features/works/lib/filterWorks';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, m, type Transition } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
@@ -115,14 +116,7 @@ export function WorksGallery() {
   const [selectedTag, setSelectedTag] = useQueryState('tag', {
     history: 'replace',
   });
-  const filteredWorks = newestFirstWorks.filter((work) => {
-    if (selectedTag === null) return true;
-    if (selectedTag === 'Business Project') {
-      return work.projectType === 'business';
-    }
-    if (selectedTag === 'Side Project') return work.projectType === 'side';
-    return work.tags.includes(selectedTag);
-  });
+  const filteredWorks = filterWorksByTag(newestFirstWorks, selectedTag);
 
   function getFilterClass(isActive: boolean): string {
     return cn(

@@ -16,6 +16,7 @@ import {
   type ReactNode,
   type RefObject,
   Suspense,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -52,6 +53,8 @@ const CAMERA_CONFIG = {
 };
 const INTRO_SPARKLES_SCALE: [number, number, number] = [16, 10, 6];
 const HERO_SPARKLES_SCALE: [number, number, number] = [9, 4.5, 4];
+const HERO_LAYOUT_CLASS = 'mb-10 h-[240px] w-full sm:h-[400px]';
+const SOFTWARE_RENDERER_PATTERN = /swiftshader|software|llvmpipe/i;
 
 function makeCanvasTransparent({ gl }: RootState) {
   gl.setClearColor('#000000', 0);
@@ -65,20 +68,31 @@ function resolveFrameLoop(
   return isSceneVisible ? 'always' : 'never';
 }
 
-function canUseWebGL() {
+function hasHardwareAcceleratedWebGL() {
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(
-      window.WebGLRenderingContext &&
-        (canvas.getContext('webgl2') || canvas.getContext('webgl')),
+    if (!window.WebGLRenderingContext) return false;
+
+    const context = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
+    if (!context) return false;
+
+    const rendererInfo = context.getExtension('WEBGL_debug_renderer_info') as {
+      UNMASKED_RENDERER_WEBGL: number;
+    } | null;
+    const renderer = String(
+      rendererInfo
+        ? context.getParameter(rendererInfo.UNMASKED_RENDERER_WEBGL)
+        : context.getParameter(context.RENDERER),
     );
+    context.getExtension('WEBGL_lose_context')?.loseContext();
+    return !SOFTWARE_RENDERER_PATTERN.test(renderer);
   } catch {
     return false;
   }
 }
 
 function detectQuality(): Quality {
-  if (!canUseWebGL()) return 'fallback';
+  if (!hasHardwareAcceleratedWebGL()) return 'fallback';
 
   const isReduced = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
@@ -203,10 +217,25 @@ function SignatureStage({
   introRun,
   orbitControlsRef,
 }: SignatureStageProps) {
+  const [isParticleReady, setIsParticleReady] = useState(false);
+  const markParticleReady = useCallback(() => setIsParticleReady(true), []);
+
   if (!config) return <SignatureFallbackArt />;
 
   return (
     <SignatureErrorBoundary fallback={<SignatureFallbackArt />}>
+      <AnimatePresence>
+        {!isParticleReady ? (
+          <m.div
+            key="signature-fallback"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="pointer-events-none absolute inset-0"
+          >
+            <SignatureFallbackArt />
+          </m.div>
+        ) : null}
+      </AnimatePresence>
       <View
         className="absolute inset-0"
         frames={reduced ? 1 : Infinity}
@@ -230,6 +259,7 @@ function SignatureStage({
             entranceSignal={introRun}
             animateEntrance={!reduced}
             jitter={reduced ? 0 : 0.003}
+            onReady={markParticleReady}
           />
         </Suspense>
         <Sparkles
@@ -467,7 +497,7 @@ export default function SignatureExperience() {
           'overflow-hidden bg-black',
           isIntro
             ? 'fixed inset-0 z-100 border border-transparent'
-            : 'relative z-10 mb-10 h-[240px] w-full border border-white/10 sm:h-[400px]',
+            : cn('relative z-10 border border-white/10', HERO_LAYOUT_CLASS),
         )}
       >
         <SignatureStage
@@ -514,6 +544,10 @@ export default function SignatureExperience() {
           </button>
         ) : null}
       </m.section>
+
+      {isIntro ? (
+        <div aria-hidden="true" className={HERO_LAYOUT_CLASS} />
+      ) : null}
 
       <SignatureViewCanvas
         config={config}
