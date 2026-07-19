@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'memory';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const MemoryPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow.github.io/PNUDT12/pages/about.html"
         imgSrc="pnudt12.webp"
@@ -56,23 +64,7 @@ const MemoryPage = () => {
 
       <PartTitle title={'Link'} />
 
-      <Link
-        href="https://nijoow.github.io/PNUDT12/pages/about.html"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/PNUDT12"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

@@ -1,153 +1,109 @@
 'use client';
 
-import Logo from '@/components/Logo/Logo';
+import { Logo } from '@/components/Logo/Logo';
 import Magnetic from '@/components/Motion/Magnetic';
 import NavToggle from '@/components/Navbar/NavToggle';
-import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Loader2, Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { AnimatePresence, m } from 'framer-motion';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import NavListItem from './NavListItem';
-
-const themeIcon = {
-  dark: (
-    <Sun
-      size={20}
-      className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
-    />
-  ),
-  light: (
-    <Moon
-      size={20}
-      className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-30"
-    />
-  ),
-};
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { NavListItem } from './NavListItem';
 
 const navList = [
-  { text: 'Home', url: '/' },
+  { text: 'About', url: '/' },
   { text: 'Works', url: '/works' },
   { text: 'Contact', url: '/contact' },
-];
+] as const;
+
+function isActiveRoute(pathname: string, url: string) {
+  return pathname === url || (url !== '/' && pathname.startsWith(`${url}/`));
+}
 
 export default function NavBar() {
-  const { setTheme, resolvedTheme: theme } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
   const [isNavShow, setIsNavShow] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!isNavShow) return;
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setIsNavShow(false);
+      toggleRef.current?.focus();
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isNavShow]);
 
   return (
-    <nav
-      className={cn(
-        `sticky top-0 z-50 h-20 w-full overflow-hidden rounded-b-2xl border-b border-black/10 bg-white/80 font-bold shadow-md backdrop-blur-xl transition-all duration-500 md:h-14 dark:border-white/10 dark:bg-black/80`,
-      )}
-    >
-      <div className={`mx-auto flex h-full w-full max-w-2xl items-center px-4`}>
+    <nav aria-label="주요 메뉴" className="fixed inset-x-0 top-4 z-50 px-4">
+      <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between rounded-full border border-white/10 bg-black/50 px-5 shadow-lg backdrop-blur-xl">
         <Magnetic strength={0.2}>
           <Link
             href="/"
-            className="group flex items-center gap-2 font-semibold"
+            className="focus-visible:ring-brand-lavender text-brand-lavender group flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-2"
+            aria-label="nijoow 홈"
           >
             <Logo
-              width={80}
-              height={50}
-              className="transition-transform duration-300 group-hover:scale-[1.1] group-hover:rotate-[5deg]"
+              width={56}
+              height={32}
+              className="transition-opacity group-hover:opacity-80"
             />
-            <span
-              className={`from-purple-medium to-purple-darker bg-linear-to-br bg-clip-text text-lg tracking-tight text-transparent dark:from-gray-200 dark:to-gray-400`}
-            >
-              &apos;S Portfolio
-            </span>
           </Link>
         </Magnetic>
 
-        {/* Desktop Menu */}
-        <ul className={`hidden h-full items-center gap-6 md:ml-auto md:flex`}>
+        <ul className="hidden items-center gap-1 md:flex">
           {navList.map(({ text, url }) => (
             <li className="list-none" key={text}>
               <Magnetic strength={0.3}>
-                <NavListItem text={text} url={url} />
+                <NavListItem
+                  text={text}
+                  url={url}
+                  isActive={isActiveRoute(pathname, url)}
+                />
               </Magnetic>
             </li>
           ))}
-          <li className="list-none">
-            <Magnetic strength={0.3}>
-              <button
-                type="button"
-                aria-label="Toggle theme"
-                className={`group flex items-center justify-center rounded-full bg-white/10 p-2 text-gray-900 shadow-sm transition-colors hover:bg-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20`}
-                onClick={toggleTheme}
-              >
-                {!mounted ? (
-                  <Loader2 className="animate-spin" size={20} />
-                ) : (
-                  themeIcon[theme as 'dark' | 'light']
-                )}
-              </button>
-            </Magnetic>
-          </li>
         </ul>
 
-        {/* Mobile Toggle */}
-        <div className="ml-auto md:hidden">
-          <NavToggle isNavShow={isNavShow} setIsNavShow={setIsNavShow} />
-        </div>
+        <NavToggle
+          ref={toggleRef}
+          isNavShow={isNavShow}
+          onToggle={() => setIsNavShow((isOpen) => !isOpen)}
+        />
       </div>
 
-      {/* Modern Mobile Menu Overlay */}
       <AnimatePresence>
         {isNavShow && (
-          <motion.div
+          <m.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-22 left-0 w-full overflow-hidden px-4 md:hidden"
+            className="absolute top-18 left-0 w-full overflow-hidden px-4 md:hidden"
           >
-            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/90 p-4 shadow-2xl backdrop-blur-xl dark:bg-black/90">
+            <ul className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/90 p-4 shadow-2xl backdrop-blur-xl">
               {navList.map(({ text, url }, i) => (
-                <motion.div
+                <m.li
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.08 }}
                   key={text}
+                  className="list-none"
                 >
-                  <Link
-                    href={url}
+                  <NavListItem
+                    text={text}
+                    url={url}
+                    isActive={isActiveRoute(pathname, url)}
+                    variant="mobile"
                     onClick={() => setIsNavShow(false)}
-                    className="flex h-12 w-full items-center px-4 text-lg font-medium text-gray-900 transition-colors hover:bg-white/10 dark:text-white"
-                  >
-                    {text}
-                  </Link>
-                </motion.div>
+                  />
+                </m.li>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navList.length * 0.1 }}
-                className="mt-2 border-t border-white/10 pt-4"
-              >
-                <button
-                  className="flex h-12 w-full items-center justify-between px-4 text-lg font-medium text-gray-900 dark:text-white"
-                  onClick={toggleTheme}
-                >
-                  <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                  <div className="flex size-10 items-center justify-center rounded-full bg-white/10">
-                    {themeIcon[theme as 'dark' | 'light']}
-                  </div>
-                </button>
-              </motion.div>
-            </div>
-          </motion.div>
+            </ul>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

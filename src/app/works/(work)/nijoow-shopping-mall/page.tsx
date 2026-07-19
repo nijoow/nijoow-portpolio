@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'nijoow-shopping-mall';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const NijoowShoppingMallPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow-shopping-mall.vercel.app/"
         imgSrc="nijoow-shopping-mall.webp"
@@ -65,23 +73,7 @@ const NijoowShoppingMallPage = () => {
 
       <PartTitle title={'Link'} />
 
-      <Link
-        href="https://nijoow-shopping-mall.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/shopping-mall"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

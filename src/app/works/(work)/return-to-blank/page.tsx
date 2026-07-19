@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'return-to-blank';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const ReturnToBlankPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://www.youtube.com/watch?v=11Wplgnpt90"
         imgSrc="return-to-blank.webp"
@@ -75,23 +83,7 @@ const ReturnToBlankPage = () => {
 
       <PartTitle title={'Link'} />
 
-      <Link
-        href="https://www.youtube.com/watch?v=11Wplgnpt90"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <span>졸업전시회 시연 영상</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/return-to-blank"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} liveLabel="졸업전시회 시연 영상" />
     </>
   );
 };

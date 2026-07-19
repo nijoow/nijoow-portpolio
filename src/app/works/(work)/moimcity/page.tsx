@@ -3,10 +3,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'moimcity';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const MoimcityPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkCarousel
         imgSrcList={[
           'moimcity/moimcity.webp',
@@ -76,13 +85,13 @@ const MoimcityPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: 다수의 개발자가 참여하며 코딩 컨벤션이 무너지고, 중복 파일과
             사용되지 않는 익스포트가 산재하여 유지보수가 어려운 상태
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: <strong className="font-bold">Knip</strong> 라이브러리
             도입을 통한 프로젝트 내 미사용 파일, 익스포트, 의존성을 정리
           </p>
@@ -94,14 +103,14 @@ const MoimcityPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: 모바일 웹뷰 앱 환경에서 키보드가 나타날 때, 하단에 불필요한
             여백이 생기는 현상
           </p>
         </CustomList.SubListItem>
 
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 뷰포트 단위를 dvh로 변경하고, 전반적인 레이아웃을 구성하는
             height 및 overflow 속성 최적화
           </p>

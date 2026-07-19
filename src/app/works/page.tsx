@@ -1,26 +1,16 @@
-import Section from '@/components/Section/Section';
-import Link from 'next/link';
-import { Suspense } from 'react';
-import WorkTags from './_container/WorkTags';
-import WorksList from './_container/WorksList';
+import type { Metadata } from 'next';
+import ClassicWorks from './_works/ClassicWorks';
+
+export const metadata: Metadata = {
+  title: 'Works',
+  description:
+    'UI/UX, 인터랙션, 웹 3D를 중심으로 한 프론트엔드 개발자 이우진의 작업을 소개합니다.',
+  alternates: { canonical: '/works' },
+  openGraph: { url: '/works', title: 'Works' },
+};
 
 const WorksPage = () => {
-  return (
-    <Section>
-      <div className="flex w-full flex-col gap-0.5">
-        <Link href="/works" className="text-2xl font-bold">
-          Works
-        </Link>
-        <div className="bg-gray-dark h-[2px] w-full rounded-full dark:bg-white" />
-      </div>
-      <Suspense fallback={<div>Loading tags...</div>}>
-        <WorkTags />
-      </Suspense>
-      <Suspense fallback={<div>Loading works...</div>}>
-        <WorksList />
-      </Suspense>
-    </Section>
-  );
+  return <ClassicWorks />;
 };
 
 export default WorksPage;

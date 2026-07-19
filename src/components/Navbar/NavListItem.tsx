@@ -1,32 +1,37 @@
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
-const NavListItem = ({
-  text,
-  url,
-  onClick,
-}: {
+interface NavListItemProps {
   text: string;
   url: string;
+  isActive: boolean;
   onClick?: () => void;
-}) => {
-  const pathname = usePathname();
+  variant?: 'desktop' | 'mobile';
+}
+
+export function NavListItem({
+  text,
+  url,
+  isActive,
+  onClick,
+  variant = 'desktop',
+}: NavListItemProps) {
   return (
     <Link
       href={url}
       onClick={onClick}
-      className="hover-underline-animation-parent group p-2.5"
+      aria-current={isActive ? 'page' : undefined}
+      className={cn(
+        'focus-visible:ring-brand-lavender flex items-center border border-transparent font-bold transition-colors outline-none focus-visible:ring-2',
+        variant === 'mobile'
+          ? 'h-12 w-full rounded-xl px-4 text-lg'
+          : 'min-h-11 rounded-full px-4 py-1.5 text-sm',
+        isActive
+          ? 'border-brand-lavender/20 bg-brand-deep/55 text-brand-lavender'
+          : 'hover:border-brand-lavender/10 hover:bg-brand-deep/25 text-white/55 hover:text-white',
+      )}
     >
-      <span
-        className={`hover-underline-animation from-purple-medium to-purple-darker after:from-purple-medium after:to-purple-darker relative bg-linear-to-br bg-clip-text text-base font-bold text-transparent after:bg-linear-to-r dark:from-gray-200 dark:to-gray-400 dark:after:from-gray-200 dark:after:to-gray-400 ${
-          pathname === url
-            ? 'active-underline-animation before:from-purple-medium before:to-purple-darker before:bg-linear-to-r dark:before:from-gray-200 dark:before:to-gray-400'
-            : ''
-        }`}
-      >
-        {text}
-      </span>
+      {text}
     </Link>
   );
-};
-export default NavListItem;
+}

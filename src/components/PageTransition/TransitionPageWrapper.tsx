@@ -1,19 +1,24 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import React from 'react';
+import { STANDARD_TRANSITION } from '@/lib/motion';
+import { m } from 'framer-motion';
+import type { ReactNode } from 'react';
 
-const TransitionPageWrapper = ({ children }: { children: React.ReactNode }) => {
+interface TransitionPageWrapperProps {
+  children: ReactNode;
+}
+
+function TransitionPageWrapper({ children }: TransitionPageWrapperProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: 20, opacity: 0 }}
-      transition={{ ease: 'easeIn', duration: 0.4 }}
+      transition={STANDARD_TRANSITION}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
-};
+}
 
 export default TransitionPageWrapper;

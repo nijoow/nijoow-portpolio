@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'moharu';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const MoharuPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage imgSrc="moharu.webp" />
 
       <div className="my-3" />
@@ -54,13 +62,13 @@ const MoharuPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: 백엔드(NCP)와 프론트엔드(Vercel) 배포 환경이 다른 상태에서,
             LTE 모바일 네트워크 접속 시 간헐적으로 SSL_PROTOCOL_ERROR 발생
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             해결책: NCP 서브 도메인의 DNS Records를 Vercel 도메인 설정에
             추가하여 네트워크 경로상의 IP 불일치 문제를 해결
           </p>
@@ -71,24 +79,19 @@ const MoharuPage = () => {
 
       <PartTitle title={'Link'} />
 
-      <Link
-        href="https://bside.best/projects/detail/P240514222247"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
-      >
-        <span>상세 설명 바로가기</span>
-      </Link>
-
-      <Link
-        href="https://github.com/poten-moharu/moharu-frontend"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks
+        links={[
+          {
+            href: 'https://bside.best/projects/detail/P240514222247',
+            label: '상세 설명 바로가기',
+          },
+          {
+            href: 'https://github.com/poten-moharu/moharu-frontend',
+            label: 'GitHub',
+            kind: 'github',
+          },
+        ]}
+      />
     </>
   );
 };

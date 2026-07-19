@@ -3,10 +3,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkCarousel from '../../_container/WorkCarousel';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'atop-dms';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const AtopDmsPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkCarousel
         imgSrcList={[
           'atop-dms/main.webp',
@@ -29,7 +38,13 @@ const AtopDmsPage = () => {
       <PartSubTitle title={'기술 스택'} />
 
       <TechStack
-        stacks={['Next.js', 'Typescript', 'Recoil', 'React-Query', 'Material UI']}
+        stacks={[
+          'Next.js',
+          'Typescript',
+          'Recoil',
+          'React-Query',
+          'Material UI',
+        ]}
       />
 
       <PartSubTitle title={'주요 업무 및 성과'} />

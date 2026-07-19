@@ -1,6 +1,6 @@
 import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
-import React from 'react';
+import type { ReactNode } from 'react';
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({ children }: { children: ReactNode }) {
   return <TransitionPageWrapper>{children}</TransitionPageWrapper>;
 }

@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'lessor-panda-village';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const LessorPandaVillagePage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://lessor-panda-village.vercel.app/"
         imgSrc="lessor-panda-village.webp"
@@ -36,9 +44,7 @@ const LessorPandaVillagePage = () => {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-            Core
-          </span>
+          <span className="text-sm font-semibold text-white/50">Core</span>
           <TechStack
             stacks={[
               'Next.js 15',
@@ -49,7 +55,7 @@ const LessorPandaVillagePage = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+          <span className="text-sm font-semibold text-white/50">
             3D Rendering & Physics
           </span>
           <TechStack
@@ -62,7 +68,7 @@ const LessorPandaVillagePage = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+          <span className="text-sm font-semibold text-white/50">
             Styling & Animation
           </span>
           <TechStack stacks={['Tailwind CSS 4', 'Framer Motion']} />
@@ -102,13 +108,13 @@ const LessorPandaVillagePage = () => {
           <strong className="font-bold">하이드레이션(Hydration) 에러</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: 랜덤 파티클 배치 시 서버와 클라이언트의 렌더링 결과가
             불일치하여 발생하는 하이드레이션 오류
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: useEffect 내 상태 초기화 및 dynamic import를 통해 클라이언트
             사이드 렌더링 시점에만 해당 로직이 활성화되도록 수정
           </p>
@@ -120,13 +126,13 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: Html 컴포넌트로 구현된 닉네임이 캐릭터의 움직임을 따라가지
             못하고 고정되지 않는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: Html 대신 3D 씬 내부에 포함되는 Text 컴포넌트를 사용하여
             정확한 3D 좌표 동기화 구현
           </p>
@@ -138,13 +144,13 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: Supabase Realtime 통신 시 과도한 업데이트로 인한 네트워크 부하
             및 리렌더링 성능 저하
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 위치 정보를 useRef로 관리하여 리렌더링을 방지하고, 전송
             주기를 100ms로 조절하여 트래픽 80% 절감
           </p>
@@ -153,23 +159,7 @@ const LessorPandaVillagePage = () => {
       <div className="my-3" />
 
       <PartTitle title={'Link'} />
-      <Link
-        href="https://lessor-panda-village.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/lessor-panda-village"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

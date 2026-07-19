@@ -1,20 +1,20 @@
 interface Props {
-  stacks: string[];
+  stacks: readonly string[];
 }
 
-const TechStack = ({ stacks }: Props) => {
+function TechStack({ stacks }: Props) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       {stacks.map((stack) => (
         <span
           key={stack}
-          className="rounded-md bg-zinc-600 px-1.5 pt-0.5 text-[13px] font-medium text-zinc-100"
+          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/70"
         >
           {stack}
         </span>
       ))}
     </div>
   );
-};
+}
 
 export default TechStack;

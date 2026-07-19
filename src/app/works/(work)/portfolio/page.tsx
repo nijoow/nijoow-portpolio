@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'portfolio';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const PortPolioPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow-portfolio.vercel.app"
         imgSrc="portfolio.webp"
@@ -62,24 +70,7 @@ const PortPolioPage = () => {
 
       <PartTitle title={'Link'} />
 
-      <Link
-        href="https://nijoow-portfolio.vercel.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-
-      <Link
-        href="https://github.com/nijoow/nijoow.github.io"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-purple-medium px-5 py-2 text-base text-white dark:bg-purple-regular"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

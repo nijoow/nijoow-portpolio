@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'launchpad';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const LaunchpadPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage
         url="https://nijoow-launchpad.vercel.app/"
         imgSrc="nijoow-launchpad.webp"
@@ -47,13 +55,13 @@ const LaunchpadPage = () => {
           <strong className="font-bold">연속 클릭 시 사운드 중첩 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-sm text-gray-400">
+          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
             이슈: onClick 이벤트를 통해 사운드를 재생할 때, 빠른 속도로 연속
             클릭 시 사운드가 끊기지 않고 부자연스럽게 중첩되는 현상
           </p>
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="text-purple-regular text-sm">
+          <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
             해결책: 마우스를 누를 때와 뗄 때의 이벤트를 분리하고, 모바일 환경을
             위해 Touch 이벤트를 개별 처리하여 사운드 재생 시점 제어
           </p>
@@ -62,23 +70,7 @@ const LaunchpadPage = () => {
 
       <div className="my-3" />
       <PartTitle title={'Link'} />
-      <Link
-        href="https://nijoow-launchpad.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/launchpad"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

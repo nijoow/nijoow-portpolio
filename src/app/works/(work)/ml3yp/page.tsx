@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import { GithubIcon } from '@/components/Icons/GithubIcon';
 import CustomList from '../../_container/CustomList';
 import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import { WorkLinks } from '../../_container/WorkLinks';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'ml3yp';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const TelevisionPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage url="https://ml3yp.vercel.app/" imgSrc="ml3yp.webp" />
 
       <div className="my-3" />
@@ -71,23 +79,7 @@ const TelevisionPage = () => {
 
       <div className="my-3" />
       <PartTitle title={'Link'} />
-      <Link
-        href="https://ml3yp.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center rounded-lg px-5 py-2 text-base text-white"
-      >
-        <span>사이트 바로가기</span>
-      </Link>
-      <Link
-        href="https://github.com/nijoow/midnight-lofi-3d-youtube-player"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-purple-medium dark:bg-purple-regular flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-base text-white"
-      >
-        <GithubIcon size={20} />
-        <span>Github</span>
-      </Link>
+      <WorkLinks pageName={PAGE_NAME} />
     </>
   );
 };

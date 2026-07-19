@@ -1,25 +1,15 @@
-import TransitionPageWrapper from '@/components/PageTransition/TransitionPageWrapper';
-import Section from '@/components/Section/Section';
-import SubTitle from '@/components/SubTitle/SubTitle';
-import { Metadata } from 'next';
-import { ContactForm } from './_container/ContactForm';
+import { ContactPageContent } from '@/features/contact/components/ContactPageContent';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact | nijoow',
-  description: 'Get in touch with me!',
+  title: 'Contact',
+  description: '프론트엔드 개발자 이우진에게 협업과 프로젝트를 문의하세요.',
+  alternates: { canonical: '/contact' },
+  openGraph: { url: '/contact', title: 'Contact' },
 };
 
 const ContactPage = () => {
-  return (
-    <TransitionPageWrapper>
-      <div className="flex flex-col gap-6">
-        <Section>
-          <SubTitle title="Contact Me" />
-          <ContactForm />
-        </Section>
-      </div>
-    </TransitionPageWrapper>
-  );
+  return <ContactPageContent />;
 };
 
 export default ContactPage;

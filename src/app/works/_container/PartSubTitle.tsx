@@ -1,7 +1,10 @@
-const PartSubTitle = ({ title }: { title: string }) => {
+function PartSubTitle({ title }: { title: string }) {
   return (
-    <div className="mb-0.5 ml-1 mt-5 text-base font-semibold">[{title}]</div>
+    <div className="mt-6 mb-1.5 flex items-center gap-1.5 text-base font-extrabold">
+      <span className="text-brand-lavender">/</span>
+      {title}
+    </div>
   );
-};
+}
 
 export default PartSubTitle;

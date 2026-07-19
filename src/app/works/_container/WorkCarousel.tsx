@@ -1,71 +1,106 @@
 'use client';
 
-import { AnimatePresence, m } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
+import Image from 'next/image';
+import { Dialog } from 'radix-ui';
+import { type KeyboardEvent, useCallback, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
-import { prefix } from '@/config/config';
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
-
 const NAV_BUTTON_CLASSES =
-  'absolute top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 transform items-center justify-center rounded-full';
+  'focus-visible:ring-brand-lavender absolute top-1/2 z-20 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/25 text-brand-muted outline-none transition-colors hover:bg-black/45 focus-visible:ring-2';
 
-const PrevButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button
-      type="button"
-      className={cn(NAV_BUTTON_CLASSES, 'left-1.5')}
-      onClick={() => swiper.slidePrev()}
-    >
-      <ChevronLeft className="stroke-purple-regular h-full w-full" />
-    </button>
-  );
-};
-
-const NextButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button
-      type="button"
-      className={cn(NAV_BUTTON_CLASSES, 'right-1.5')}
-      onClick={() => swiper.slideNext()}
-    >
-      <ChevronRight className="stroke-purple-regular h-full w-full" />
-    </button>
-  );
-};
-
-const WorkCarousel = ({
-  imgSrcList,
-  aspectRatio = 'video',
-}: {
+interface WorkCarouselProps {
   imgSrcList: string[];
   aspectRatio?: 'video' | 'square';
-}) => {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+}
+
+function CarouselNavigationButton({ direction }: { direction: -1 | 1 }) {
+  const swiper = useSwiper();
+  const isPrevious = direction === -1;
 
   return (
-    <>
+    <button
+      type="button"
+      aria-label={isPrevious ? '이전 이미지' : '다음 이미지'}
+      className={cn(NAV_BUTTON_CLASSES, isPrevious ? 'left-1.5' : 'right-1.5')}
+      onClick={() => {
+        if (isPrevious) swiper.slidePrev();
+        else swiper.slideNext();
+      }}
+    >
+      {isPrevious ? (
+        <ChevronLeft aria-hidden className="size-7" />
+      ) : (
+        <ChevronRight aria-hidden className="size-7" />
+      )}
+    </button>
+  );
+}
+
+export function WorkCarousel({
+  imgSrcList,
+  aspectRatio = 'video',
+}: WorkCarouselProps) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const selectedImage =
+    selectedIndex === null ? null : (imgSrcList[selectedIndex] ?? null);
+  const isModalOpen = selectedImage !== null;
+
+  const closeModal = useCallback(() => setSelectedIndex(null), []);
+
+  const moveSelection = useCallback(
+    (direction: -1 | 1) => {
+      if (selectedIndex === null || imgSrcList.length === 0) return;
+
+      const nextIndex =
+        (selectedIndex + direction + imgSrcList.length) % imgSrcList.length;
+      setSelectedIndex(nextIndex);
+      swiper?.slideToLoop(nextIndex);
+    },
+    [selectedIndex, imgSrcList.length, swiper],
+  );
+
+  function handleModalKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'ArrowLeft' && imgSrcList.length > 1) {
+      event.preventDefault();
+      moveSelection(-1);
+      return;
+    }
+
+    if (event.key === 'ArrowRight' && imgSrcList.length > 1) {
+      event.preventDefault();
+      moveSelection(1);
+    }
+  }
+
+  if (imgSrcList.length === 0) {
+    return (
+      <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-sm text-white/60">
+        표시할 이미지가 없습니다.
+      </div>
+    );
+  }
+
+  return (
+    <Dialog.Root
+      open={isModalOpen}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) closeModal();
+      }}
+    >
       <Swiper
-        onSwiper={setSwiperInstance}
-        modules={[Pagination, Navigation]}
-        pagination={{
-          clickable: true,
-        }}
-        loop
+        onSwiper={setSwiper}
+        modules={[Pagination]}
+        pagination={{ clickable: true }}
+        loop={imgSrcList.length > 1}
         className={cn(
-          '[&_.swiper-pagination-bullet-active]:bg-purple-regular relative w-full max-w-3xl overflow-hidden rounded-lg shadow-md',
+          '[&_.swiper-pagination-bullet-active]:bg-brand-muted relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-md',
           aspectRatio === 'video' ? 'aspect-video' : 'aspect-square',
         )}
       >
@@ -74,117 +109,89 @@ const WorkCarousel = ({
             key={imgSrc}
             className="group relative h-full w-full bg-white"
           >
-            <div
-              className="absolute inset-0 z-10 h-full w-full cursor-zoom-in"
-              onClick={() => setSelectedImg(imgSrc)}
-            />
             <Image
-              src={`${prefix}/images/works/${imgSrc}`}
-              alt={imgSrc}
+              src={`/images/works/${imgSrc}`}
+              alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 이미지 ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-contain"
-              preload={index === 0}
-              fetchPriority={index === 0 ? "high" : "auto"}
+              priority={index === 0}
             />
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                aria-label={`${index + 1}번 이미지 크게 보기`}
+                onClick={() => setSelectedIndex(index)}
+                className="focus-visible:ring-brand-lavender absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
+              />
+            </Dialog.Trigger>
           </SwiperSlide>
         ))}
 
-        <PrevButton />
-        <NextButton />
+        {imgSrcList.length > 1 ? (
+          <>
+            <CarouselNavigationButton direction={-1} />
+            <CarouselNavigationButton direction={1} />
+          </>
+        ) : null}
       </Swiper>
 
-      <AnimatePresence>
-        {selectedImg && (
-          <m.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex cursor-zoom-out items-center justify-center bg-black/50 backdrop-blur-sm md:p-8"
-            onClick={() => setSelectedImg(null)}
+      {selectedImage ? (
+        <Dialog.Portal>
+          <Dialog.Overlay className="work-dialog-overlay fixed inset-0 z-100 cursor-zoom-out bg-black/75 backdrop-blur-sm" />
+          <Dialog.Content
+            onKeyDown={handleModalKeyDown}
+            className="work-dialog-content fixed top-1/2 left-1/2 z-101 flex h-full w-full overflow-hidden rounded-2xl bg-gray-500/30 outline-none md:max-h-[90vh] md:max-w-[86vw]"
           >
-            <m.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative flex h-full w-full cursor-default overflow-hidden rounded-2xl bg-gray-500/30 md:max-h-[90vh] md:max-w-[86vw]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
+            <Dialog.Title className="sr-only">
+              작업 이미지 확대 보기
+            </Dialog.Title>
+
+            <Dialog.Close asChild>
               <button
                 type="button"
-                className="absolute top-4 right-4 z-50 p-2 text-white/70 transition-colors hover:text-white"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImg(null);
-                }}
+                aria-label="확대 이미지 닫기"
+                className="focus-visible:ring-brand-lavender absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 text-white/75 transition-colors outline-none hover:text-white focus-visible:ring-2"
               >
-                <X size={32} />
+                <X aria-hidden size={24} />
               </button>
+            </Dialog.Close>
 
-              {/* Modal Image Container */}
-              <div className="relative m-auto h-full w-full md:h-[96%] md:w-[84%]">
-                <Image
-                  src={`${prefix}/images/works/${selectedImg}`}
-                  alt={selectedImg}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                />
-              </div>
+            <div className="relative m-auto h-full w-full md:h-[96%] md:w-[84%]">
+              <Image
+                src={`/images/works/${selectedImage}`}
+                alt={`${selectedImage.replace(/\.\w+$/, '')} 확대 이미지`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
+            </div>
 
-              {/* Modal Navigation */}
-              {imgSrcList.length > 1 && (
-                <>
-                  {[
-                    {
-                      dir: 'left',
-                      icon: <ChevronLeft className="h-8 w-8" />,
-                      onClick: () => {
-                        const idx = imgSrcList.indexOf(selectedImg);
-                        const prev =
-                          (idx - 1 + imgSrcList.length) % imgSrcList.length;
-                        setSelectedImg(imgSrcList[prev]);
-                        swiperInstance?.slideToLoop(prev);
-                      },
-                    },
-                    {
-                      dir: 'right',
-                      icon: <ChevronRight className="h-8 w-8" />,
-                      onClick: () => {
-                        const idx = imgSrcList.indexOf(selectedImg);
-                        const next = (idx + 1) % imgSrcList.length;
-                        setSelectedImg(imgSrcList[next]);
-                        swiperInstance?.slideToLoop(next);
-                      },
-                    },
-                  ].map(({ dir, icon, onClick }) => (
-                    <button
-                      key={dir}
-                      type="button"
-                      className={cn(
-                        'absolute top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 transform items-center justify-center rounded-full bg-black/30 text-white/70 shadow-lg transition-colors hover:bg-white/20 hover:text-white',
-                        dir === 'left'
-                          ? 'left-2 md:left-6'
-                          : 'right-2 md:right-6',
-                      )}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onClick();
-                      }}
-                    >
-                      {icon}
-                    </button>
-                  ))}
-                </>
-              )}
-            </m.div>
-          </m.div>
-        )}
-      </AnimatePresence>
-    </>
+            {imgSrcList.length > 1 ? (
+              <>
+                <button
+                  type="button"
+                  aria-label="이전 확대 이미지"
+                  className="focus-visible:ring-brand-lavender absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
+                  onClick={() => moveSelection(-1)}
+                >
+                  <ChevronLeft aria-hidden className="size-8" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="다음 확대 이미지"
+                  className="focus-visible:ring-brand-lavender absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
+                  onClick={() => moveSelection(1)}
+                >
+                  <ChevronRight aria-hidden className="size-8" />
+                </button>
+              </>
+            ) : null}
+          </Dialog.Content>
+        </Dialog.Portal>
+      ) : null}
+    </Dialog.Root>
   );
-};
+}
 
 export default WorkCarousel;

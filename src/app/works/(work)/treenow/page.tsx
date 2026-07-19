@@ -3,10 +3,19 @@ import PartSubTitle from '../../_container/PartSubTitle';
 import PartTitle from '../../_container/PartTitle';
 import TechStack from '../../_container/TechStack';
 import WorkImage from '../../_container/WorkImage';
+import {
+  createWorkMetadata,
+  WorkStructuredData,
+} from '../../_container/workMetadata';
+
+const PAGE_NAME = 'treenow';
+
+export const metadata = createWorkMetadata(PAGE_NAME);
 
 const TreenowPage = () => {
   return (
     <>
+      <WorkStructuredData pageName={PAGE_NAME} />
       <WorkImage imgSrc="treenow.webp" />
 
       <div className="my-3" />
