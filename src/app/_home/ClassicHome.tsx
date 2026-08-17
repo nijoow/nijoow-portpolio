@@ -5,16 +5,16 @@ import { GlassPopoverGroup } from '@/components/ui/GlassPopover';
 import { QueryProvider } from '@/context/QueryProvider';
 import { CapabilityGrid } from '@/features/home/components/CapabilityGrid';
 import { ContactCta } from '@/features/home/components/ContactCta';
-import { FeaturedWorks } from '@/features/home/components/FeaturedWorks';
+import { SelectedWorks } from '@/features/home/components/SelectedWorks';
 import { GithubActivity } from '@/features/home/components/GithubActivity';
 import { LivePersonality } from '@/features/home/components/LivePersonality';
 import { PositioningStatement } from '@/features/home/components/PositioningStatement';
 import { RecentlyPlayedMusic } from '@/features/home/components/RecentlyPlayedMusic';
 import { TechStackFocus } from '@/features/home/components/TechStackFocus';
-import { FEATURED_WORK_PAGE_NAMES } from '@/features/home/data/homeContent';
+import { SELECTED_WORK_PAGE_NAMES } from '@/features/home/data/homeContent';
 import { getWorks } from '@/features/works/data/worksData';
 
-const featuredWorks = getWorks(FEATURED_WORK_PAGE_NAMES);
+const selectedWorks = getWorks(SELECTED_WORK_PAGE_NAMES);
 
 export default function ClassicHome() {
   return (
@@ -38,7 +38,7 @@ export default function ClassicHome() {
           </Section>
           <Section>
             <Reveal>
-              <FeaturedWorks works={featuredWorks} />
+              <SelectedWorks works={selectedWorks} />
             </Reveal>
           </Section>
           <Section>

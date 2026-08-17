@@ -72,7 +72,7 @@ const SVGDrawingPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: 도형이 회전되어 있는 상태에서 크기를 조절할 때, 실제 드래그
             거리와 도형의 크기 변화가 일치하지 않는 현상 발생
           </p>

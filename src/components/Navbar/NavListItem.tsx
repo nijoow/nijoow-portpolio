@@ -28,7 +28,7 @@ export function NavListItem({
           : 'min-h-11 rounded-full px-4 py-1.5 text-sm',
         isActive
           ? 'border-brand-lavender/20 bg-brand-deep/55 text-brand-lavender'
-          : 'hover:border-brand-lavender/10 hover:bg-brand-deep/25 text-white/55 hover:text-white',
+          : 'hover:border-brand-lavender/10 hover:bg-brand-deep/25 text-ink-muted hover:text-white',
       )}
     >
       {text}

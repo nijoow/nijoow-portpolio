@@ -26,7 +26,7 @@ const BUTTON_TAP = { scale: 0.98 };
 
 function fieldClass(hasError: boolean) {
   return cn(
-    'w-full rounded-xl border bg-black/20 p-3.5 text-sm text-white transition-colors outline-none placeholder:text-white/50 focus:ring-2',
+    'w-full rounded-xl border bg-black/20 p-3.5 text-sm text-white transition-colors outline-none placeholder:text-ink-muted focus:ring-2',
     hasError
       ? 'border-status-danger/70 focus:border-status-danger focus:ring-status-danger/30'
       : 'focus:border-brand-lavender/45 focus:ring-brand-lavender/20 border-white/10',
@@ -112,7 +112,7 @@ function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
       className={cn(
         'focus-visible:ring-brand-lavender flex w-full items-center justify-center gap-2 rounded-xl border py-3.5 font-bold text-white backdrop-blur-xl transition-colors focus-visible:ring-2 focus-visible:outline-none',
         isSubmitting
-          ? 'cursor-not-allowed border-white/10 bg-white/5 text-white/40'
+          ? 'text-ink-faint cursor-not-allowed border-white/10 bg-white/5'
           : 'border-brand-lavender/30 bg-brand-deep/60 hover:bg-brand-deep/80',
       )}
     >
@@ -171,7 +171,10 @@ export function ContactForm() {
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-bold text-white/80">
+          <label
+            htmlFor="name"
+            className="text-ink-secondary text-sm font-bold"
+          >
             이름 <span className="text-brand-lavender">*</span>
           </label>
           <input
@@ -190,7 +193,10 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-bold text-white/80">
+          <label
+            htmlFor="email"
+            className="text-ink-secondary text-sm font-bold"
+          >
             이메일 <span className="text-brand-lavender">*</span>
           </label>
           <input
@@ -211,7 +217,10 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="subject" className="text-sm font-bold text-white/80">
+        <label
+          htmlFor="subject"
+          className="text-ink-secondary text-sm font-bold"
+        >
           제목 <span className="text-brand-lavender">*</span>
         </label>
         <input
@@ -230,10 +239,13 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-3">
-          <label htmlFor="message" className="text-sm font-bold text-white/80">
+          <label
+            htmlFor="message"
+            className="text-ink-secondary text-sm font-bold"
+          >
             내용 <span className="text-brand-lavender">*</span>
           </label>
-          <span className="text-xs text-white/55">최대 1000자</span>
+          <span className="text-ink-muted text-xs">최대 1000자</span>
         </div>
         <textarea
           {...register('message')}

@@ -55,7 +55,7 @@ const LaunchpadPage = () => {
           <strong className="font-bold">연속 클릭 시 사운드 중첩 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: onClick 이벤트를 통해 사운드를 재생할 때, 빠른 속도로 연속
             클릭 시 사운드가 끊기지 않고 부자연스럽게 중첩되는 현상
           </p>

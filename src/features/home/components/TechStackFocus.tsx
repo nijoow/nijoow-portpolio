@@ -1,5 +1,6 @@
 'use client';
 
+import Eyebrow from '@/components/ui/Eyebrow';
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
 import { GlassPopover } from '@/components/ui/GlassPopover';
@@ -111,16 +112,11 @@ function StackDetails({
 }) {
   return (
     <div className="relative">
-      <span
-        className={cn(
-          'text-[10px] font-black tracking-widest uppercase',
-          type === 'stack' ? 'text-brand-lavender/75' : 'text-accent-light/80',
-        )}
-      >
+      <Eyebrow tone={type === 'stack' ? 'brand' : 'accent'}>
         {type === 'stack' ? 'Main Toolkit' : 'Current Focus'}
-      </span>
+      </Eyebrow>
       <h4 className="mt-1 text-base font-bold text-white">{item.label}</h4>
-      <p className="mt-2 text-xs leading-relaxed break-keep text-white/65">
+      <p className="text-ink-muted mt-2 text-xs leading-relaxed break-keep">
         {item.detail}
       </p>
       <ul
@@ -130,7 +126,7 @@ function StackDetails({
         {item.contexts.map((context) => (
           <li
             key={context}
-            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/60"
+            className="text-ink-muted rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold"
           >
             {context}
           </li>
@@ -155,8 +151,8 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
           <Icon size={19} />
         </div>
         <div className="flex flex-col gap-1">
-          <h3 className="font-extrabold">{title}</h3>
-          <p className="text-sm leading-relaxed break-keep text-white/50">
+          <h3 className="font-bold">{title}</h3>
+          <p className="text-ink-muted text-sm leading-relaxed break-keep">
             {description}
           </p>
         </div>
@@ -169,7 +165,7 @@ function StackGroup({ title, description, items, type }: StackGroupProps) {
               ariaLabel={`${item.label} 자세히 보기`}
               content={<StackDetails item={item} type={type} />}
               className={cn(
-                'focus-visible:ring-brand-lavender min-h-11 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-semibold text-white/60 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none',
+                'focus-visible:ring-brand-lavender text-ink-muted min-h-11 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-bold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none',
                 type === 'stack'
                   ? 'hover:border-brand-lavender/35 hover:bg-brand-deep/35 hover:text-brand-lavender'
                   : 'hover:border-accent/35 hover:bg-accent-deep/30 hover:text-accent-light',

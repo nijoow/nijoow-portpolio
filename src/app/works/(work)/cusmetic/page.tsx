@@ -88,7 +88,7 @@ const CusmeticPage = () => {
           <strong className="font-bold">서버 컴포넌트 데이터 캐싱 문제</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: fetch 함수에 no-store 옵션을 적용했음에도 클라이언트 Router
             Cache로 인해 약 30초간 새로운 데이터를 불러오지 못하는 현상
           </p>
@@ -104,7 +104,7 @@ const CusmeticPage = () => {
           <strong className="font-bold">Next/Image 로딩 성능 저하</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: layout=&apos;fill&apos; 사용 시 너무 많은 srcSet이 생성되어
             이미지 로딩 속도가 느려지는 문제 발생
           </p>

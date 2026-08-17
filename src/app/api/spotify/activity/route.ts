@@ -64,8 +64,6 @@ export async function GET() {
       );
     }
 
-    // 팟캐스트처럼 is_playing이 true여도 item이 없으면 current는 recent로
-    // 폴백하므로, 폴백 트랙에 "재생 중" 표시가 붙지 않게 함께 확인한다.
     const isPlaying = currentResult.isPlaying && currentResult.music !== null;
     const current = currentResult.music ?? recentResult.music[0] ?? null;
     const recent = recentResult.music

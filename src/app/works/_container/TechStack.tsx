@@ -8,7 +8,7 @@ function TechStack({ stacks }: Props) {
       {stacks.map((stack) => (
         <span
           key={stack}
-          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/70"
+          className="text-ink-secondary rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium"
         >
           {stack}
         </span>

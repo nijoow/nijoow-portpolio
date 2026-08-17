@@ -64,16 +64,16 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
           <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="group-hover/work:text-brand-lavender truncate text-lg font-black text-white/90 transition-colors">
+                <h2 className="group-hover/work:text-brand-lavender text-ink-primary truncate text-lg font-bold transition-colors">
                   {work.name}
                 </h2>
                 {work.description ? (
-                  <p className="mt-1 line-clamp-2 text-sm leading-relaxed break-keep text-white/55">
+                  <p className="text-ink-muted mt-1 line-clamp-2 text-sm leading-relaxed break-keep">
                     {work.description}
                   </p>
                 ) : null}
               </div>
-              <span className="group-hover/work:border-brand-lavender/40 group-hover/work:text-brand-lavender flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/45 transition-colors">
+              <span className="group-hover/work:border-brand-lavender/40 group-hover/work:text-brand-lavender text-ink-faint flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors">
                 <ArrowUpRight size={14} />
               </span>
             </div>
@@ -82,13 +82,13 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
               {work.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/60"
+                  className="text-ink-muted rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs"
                 >
                   {tag}
                 </span>
               ))}
               {work.period ? (
-                <span className="ml-auto text-xs text-white/55">
+                <span className="text-ink-muted ml-auto text-xs">
                   {work.period}
                 </span>
               ) : null}
@@ -102,7 +102,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${work.name} 라이브 사이트 열기`}
-            className="focus-visible:ring-brand-lavender absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white/80 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
+            className="focus-visible:ring-brand-lavender text-ink-secondary absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full border border-white/10 bg-black/55 opacity-100 backdrop-blur-sm transition-colors hover:text-white focus-visible:ring-2 focus-visible:outline-none sm:opacity-0 sm:group-focus-within/work:opacity-100 sm:group-hover/work:opacity-100"
           >
             <ExternalLink size={15} />
           </a>
@@ -120,10 +120,10 @@ export function WorksGallery() {
 
   function getFilterClass(isActive: boolean): string {
     return cn(
-      'min-h-11 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-lavender',
+      'min-h-11 rounded-full border px-3 py-1.5 text-xs font-bold backdrop-blur-xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-lavender',
       isActive
         ? 'border-brand-lavender/35 bg-brand-deep/55 text-white'
-        : 'border-white/10 bg-white/5 text-white/55 hover:border-white/20 hover:bg-white/8 hover:text-white',
+        : 'border-white/10 bg-white/5 text-ink-muted hover:border-white/20 hover:bg-white/8 hover:text-white',
     );
   }
 

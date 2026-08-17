@@ -35,7 +35,7 @@ const CatchTheCandyPage = () => {
 
       <PartSubTitle title={'컨셉'} />
 
-      <span className="font-semibold">&quot;Bias&quot;</span>
+      <span className="font-bold">&quot;Bias&quot;</span>
       <span className="pl-1">
         바구니를 선택하면 게임은 시작된다. 높은 점수를 얻기 위해 이리저리
         움직이며 떨어지는 사탕들을 받아보자. 게임에 온전히 몰입하고 빠져들어보는
@@ -58,11 +58,11 @@ const CatchTheCandyPage = () => {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-white/50">졸업 작품</span>
+          <span className="text-ink-muted text-sm font-bold">졸업 작품</span>
           <TechStack stacks={['Processing', 'Arduino', 'kinect v1']} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-white/50">웹 버전</span>
+          <span className="text-ink-muted text-sm font-bold">웹 버전</span>
           <TechStack stacks={['Javascript (p5.js)']} />
         </div>
       </div>

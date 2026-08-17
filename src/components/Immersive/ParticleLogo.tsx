@@ -25,7 +25,6 @@ const SWING_AMP = 0.5;
 
 const MAX_POINT_SIZE = 15;
 
-// 정적 팔레트 — props와 무관하므로 모듈 수준에서 1회 생성해 모든 인스턴스가 공유한다.
 const PARTICLE_COLORS = {
   deep: new THREE.Color(COLOR_TOKENS.brand.violet).multiplyScalar(1.08),
   mid: new THREE.Color(COLOR_TOKENS.brand.lavender).multiplyScalar(1.08),
@@ -34,51 +33,36 @@ const PARTICLE_COLORS = {
 } as const;
 
 interface ParticleLogoProps {
-  /** 마우스 리펄전·포인터 패럴랙스·클릭 버스트 사용 여부 */
   interactive?: boolean;
-  /** 파티클 수(많을수록 글자가 또렷) */
   count?: number;
-  /** 포인트 크기 배율 */
   sizeScale?: number;
-  /** 상시 난류 강도(0에 가까울수록 얇은 획이 또렷) */
   jitter?: number;
-  /** 비인터랙티브일 때 좌우 스윙 회전 여부(false=완전 정지) */
   rotate?: boolean;
-  /** 비인터랙티브여도 클릭하면 흩어졌다 다시 모이는 동작(홈 박스용) */
   clickBurst?: boolean;
-  /** HTML 컨트롤에서 버스트를 요청할 때 증가시키는 값. */
   burstSignal?: number;
-  /** 파티클 좌표는 유지한 채 입장 응집 애니메이션을 다시 시작하는 값. */
   entranceSignal?: number;
-  /** reduced-motion 환경처럼 입장 응집 모션을 생략할지 여부. */
   animateEntrance?: boolean;
-  /** Worker가 좌표 생성을 마쳐 첫 프레임을 그릴 준비가 되었을 때 호출한다. */
   onReady?: () => void;
 }
 
-/** 입장 응집: ENTRANCE_SEC 동안 1→0, 큐빅 이즈로 천천히 안착. */
 function entranceEnvelope(t: number): number {
   const entrance = 1 - THREE.MathUtils.clamp(t / ENTRANCE_SEC, 0, 1);
   return entrance * entrance * entrance;
 }
 
-/** 인터랙티브 유휴 시 미세 흩어짐 파형. */
 function idleWave(t: number): number {
   return (Math.sin(t * 0.5) * 0.5 + 0.5) * IDLE_WAVE_AMP;
 }
 
-/** 인터랙티브 주기적 펄스(간헐적으로 크게 숨쉬는 효과). */
 function pulseWave(t: number): number {
   return Math.pow(Math.max(0, Math.sin(t * 0.7)), 10) * PULSE_AMP;
 }
 
-/** 버스트 곡선: 모인 글자(0)→흩어짐(피크)→다시 모임(0). */
 function burstEnvelope(sinceBurst: number): number {
   const bp = sinceBurst / BURST_SEC;
   return bp >= 0 && bp <= 1 ? Math.sin(Math.PI * bp) * BURST_PEAK : 0;
 }
 
-/** 포인터(NDC)를 z=0 평면의 월드 좌표로 투영한다(리펄전용). */
 function projectPointerToWorld(state: RootState, out: THREE.Vector3) {
   const cam = state.camera;
   out.set(state.pointer.x, state.pointer.y, 0.5).unproject(cam);
@@ -87,7 +71,7 @@ function projectPointerToWorld(state: RootState, out: THREE.Vector3) {
   out.multiplyScalar(planeT).add(cam.position);
 }
 
-const vertexShader = /* glsl */ `
+const vertexShader = `
   uniform float uProgress;
   uniform float uTime;
   uniform float uSizeScale;
@@ -106,18 +90,15 @@ const vertexShader = /* glsl */ `
     vRand = aRandom;
     float p = smoothstep(0.0, 1.0, clamp((uProgress - aRandom * 0.35) / 0.65, 0.0, 1.0));
 
-    // 분해 시 스월(소용돌이)
     vec3 base = position + aScatter * p;
     float ang = p * 3.0;
     float ca = cos(ang);
     float sa = sin(ang);
     base.xz = mat2(ca, -sa, sa, ca) * base.xz;
 
-    // 시간 기반 미세 난류(분해될수록 강해짐)
     float t = uTime * 0.6 + aRandom * 6.2831;
     base += vec3(sin(t), cos(t * 1.3), sin(t * 0.7)) * (uJitterBase + 0.12 * p);
 
-    // 월드 공간 마우스 리펄전(실시간 인터랙션)
     vec4 world = modelMatrix * vec4(base, 1.0);
     vec3 toM = world.xyz - uMouse;
     float dd = length(toM);
@@ -129,15 +110,13 @@ const vertexShader = /* glsl */ `
     vDepth = smoothstep(-1.8, 1.8, base.z);
     vMotion = uProgress;
 
-    // 흩어지는 동안 크기를 보강해 넓게 퍼진 입자도 사라지지 않게 한다.
     float glint = smoothstep(0.86, 1.0, aRandom);
     float size = (mix(6.2, 11.8, aRandom) + glint * 1.6) * mix(1.0, 1.28, uProgress);
-    // 카메라가 가까워져도 포인트가 거대한 원반으로 번지지 않도록 상한을 둔다.
     gl_PointSize = min(size * uSizeScale * (8.0 / -mv.z), uMaxSize);
   }
 `;
 
-const fragmentShader = /* glsl */ `
+const fragmentShader = `
   uniform vec3 uColorDeep;
   uniform vec3 uColorMid;
   uniform vec3 uColorCool;
@@ -151,7 +130,6 @@ const fragmentShader = /* glsl */ `
     float d = length(c);
     if (d > 0.5) discard;
 
-    // 딥 바이올렛 몸체에 쿨 블루 깊이감과 라일락 반사광을 겹친다.
     float palette = fract(vRand * 1.618 + vDepth * 0.24);
     vec3 col = palette < 0.62
       ? mix(uColorDeep, uColorMid, palette / 0.62)
@@ -165,11 +143,9 @@ const fragmentShader = /* glsl */ `
       2.4
     ) * glintSeed;
 
-    // 모든 입자를 발광시키지 않고 가장자리와 일부 반사점만 밝힌다.
     float reflection = min(rim * 0.2 + specular * 0.72, 0.78);
     col = mix(col, uColorGlint, reflection);
 
-    // 응집 상태는 반투명하게, 흩어진 상태는 더 선명하게 유지한다.
     float density = mix(0.7, 0.92, fract(vRand * 7.13));
     float alpha = min(
       body * density * mix(0.82, 1.12, vMotion) + rim * 0.08 + specular * 0.12,
@@ -179,9 +155,7 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-// glint 패스는 GLINT_THRESHOLD를 넘는 입자만 담은 서브셋 geometry로 그리므로
-// 셰이더에서 나머지 입자를 discard할 필요가 없다.
-const glintFragmentShader = /* glsl */ `
+const glintFragmentShader = `
   uniform vec3 uColorCool;
   uniform vec3 uColorGlint;
   varying float vRand;
@@ -237,8 +211,6 @@ export function ParticleLogo({
   const lastEntranceSignalRef = useRef(entranceSignal);
   const [geometryData, setGeometryData] =
     useState<ParticleGeometryResult | null>(null);
-  // 매 프레임 통째로 덮어쓰는 스크래치 버퍼 — 캐싱이 아니라 안정된 정체성이
-  // 목적이므로 useMemo가 아닌 ref로 유지한다.
   const mouseWorldRef = useRef(new THREE.Vector3());
 
   useEffect(() => {
@@ -271,7 +243,6 @@ export function ParticleLogo({
     return () => worker.terminate();
   }, [count, logoMesh.geometry]);
 
-  // Worker가 만든 typed array를 GPU geometry로 연결하는 작업만 메인 스레드에서 수행한다.
   const geometries = useMemo(() => {
     if (!geometryData) return null;
 
@@ -315,7 +286,6 @@ export function ParticleLogo({
     };
   }, [geometries, onReady]);
 
-  // group에 dispose={null}을 걸어 r3f 자동 정리를 껐으므로 material도 직접 정리한다.
   useEffect(() => {
     if (!geometries) return;
     const bodyMaterial = bodyMaterialRef.current;
@@ -326,8 +296,6 @@ export function ParticleLogo({
     };
   }, [geometries]);
 
-  // 두 material이 같은 uniforms 객체를 공유한다 — useFrame에서 한 번만 갱신하면
-  // 본체·glint 패스에 동시에 반영된다. 실수로 분리하지 말 것.
   const uniforms = useMemo(
     () => ({
       uProgress: { value: animateEntrance ? 1 : 0 },
@@ -368,7 +336,6 @@ export function ParticleLogo({
       burstRef.current = t;
     }
 
-    // progress = 여러 모션 소스(입장·유휴·펄스·버스트) 중 가장 큰 흩어짐.
     const progress = Math.max(
       animateEntrance ? entranceEnvelope(t) : 0,
       interactive ? idleWave(t) : 0,
@@ -385,12 +352,10 @@ export function ParticleLogo({
 
     if (!group.current) return;
     if (interactive) {
-      // 인트로: 느린 자전 + 포인터 패럴랙스
       group.current.rotation.y =
         t * INTRO_SPIN_SPEED + state.pointer.x * POINTER_TILT_X;
       group.current.rotation.x = -state.pointer.y * POINTER_TILT_Y;
     } else {
-      // 클래식 로고: 정면 유지 좌우 스윙(가독성). rotate=false면 완전 정지(인트로용).
       if (rotate) {
         rotationStartedAtRef.current ??= absoluteTime;
         const rotationTime = absoluteTime - rotationStartedAtRef.current;

@@ -36,7 +36,7 @@ const ReturnToBlankPage = () => {
 
       <PartSubTitle title={'컨셉'} />
 
-      <span className="font-semibold">
+      <span className="font-bold">
         &quot;제자리걸음(Return to blank) &quot;
       </span>
 

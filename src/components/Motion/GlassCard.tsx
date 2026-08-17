@@ -12,12 +12,9 @@ import { type MouseEvent, type ReactNode, useRef } from 'react';
 interface GlassCardProps {
   children: ReactNode;
   className?: string;
-  /** 호버 시 살짝 떠오르는 효과. 긴 콘텐츠 패널은 끈다. */
   lift?: boolean;
 }
 
-// 모든 주요 카드가 공유하는 프로스티드 글래스 패널.
-// 재질은 전역 frosted-glass 규칙에 두고, 여기서는 포인터 반응만 담당한다.
 function GlassCard({ children, className, lift = true }: GlassCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = Boolean(useReducedMotion());

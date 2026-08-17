@@ -133,11 +133,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </main>
               <footer className="mt-auto w-full border-t border-white/10">
                 <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-between gap-3 px-4 py-7 sm:flex-row">
-                  <span className="text-sm text-white/50">
+                  <span className="text-ink-muted text-sm">
                     &copy; {new Date().getFullYear()} Lee Woo Jin. All Rights
                     Reserved.
                   </span>
-                  <div className="flex items-center gap-4 text-sm font-semibold text-white/60">
+                  <div className="text-ink-muted flex items-center gap-4 text-sm font-bold">
                     <a
                       href="https://github.com/nijoow"
                       target="_blank"
@@ -146,7 +146,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     >
                       GitHub
                     </a>
-                    <span className="text-white/20">|</span>
+                    <span className="text-ink-faint">|</span>
                     <a
                       href="mailto:nijoow1127@gmail.com"
                       className="focus-visible:ring-brand-lavender inline-flex min-h-11 items-center rounded-sm transition-colors outline-none hover:text-white focus-visible:ring-2"

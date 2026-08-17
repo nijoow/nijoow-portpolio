@@ -81,7 +81,7 @@ export function WorkCarousel({
 
   if (imgSrcList.length === 0) {
     return (
-      <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-sm text-white/60">
+      <div className="text-ink-muted flex aspect-video w-full items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-sm">
         표시할 이미지가 없습니다.
       </div>
     );
@@ -151,7 +151,7 @@ export function WorkCarousel({
               <button
                 type="button"
                 aria-label="확대 이미지 닫기"
-                className="focus-visible:ring-brand-lavender absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 text-white/75 transition-colors outline-none hover:text-white focus-visible:ring-2"
+                className="focus-visible:ring-brand-lavender text-ink-secondary absolute top-4 right-4 z-50 flex size-11 items-center justify-center rounded-full bg-black/35 transition-colors outline-none hover:text-white focus-visible:ring-2"
               >
                 <X aria-hidden size={24} />
               </button>
@@ -172,7 +172,7 @@ export function WorkCarousel({
                 <button
                   type="button"
                   aria-label="이전 확대 이미지"
-                  className="focus-visible:ring-brand-lavender absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
+                  className="focus-visible:ring-brand-lavender text-ink-secondary absolute top-1/2 left-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:left-6"
                   onClick={() => moveSelection(-1)}
                 >
                   <ChevronLeft aria-hidden className="size-8" />
@@ -180,7 +180,7 @@ export function WorkCarousel({
                 <button
                   type="button"
                   aria-label="다음 확대 이미지"
-                  className="focus-visible:ring-brand-lavender absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white/75 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
+                  className="focus-visible:ring-brand-lavender text-ink-secondary absolute top-1/2 right-2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 shadow-lg transition-colors outline-none hover:bg-white/20 hover:text-white focus-visible:ring-2 md:right-6"
                   onClick={() => moveSelection(1)}
                 >
                   <ChevronRight aria-hidden className="size-8" />

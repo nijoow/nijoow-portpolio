@@ -1,5 +1,6 @@
 'use client';
 
+import Eyebrow from '@/components/ui/Eyebrow';
 import GlassCard from '@/components/Motion/GlassCard';
 import { useNowPlaying } from '@/features/home/hooks/useNowPlaying';
 import type { Music } from '@/features/home/schemas/spotifySchemas';
@@ -64,7 +65,7 @@ function RecentTrack({ music, index }: { music: Music; index: number }) {
       rel="noopener noreferrer"
       className="group/track focus-visible:ring-brand-lavender flex min-w-0 items-center gap-3 rounded-xl px-2 py-2 transition-colors outline-none hover:bg-white/5 focus-visible:ring-2"
     >
-      <span className="w-4 shrink-0 text-center text-[10px] font-bold text-white/50">
+      <span className="text-ink-muted w-4 shrink-0 text-center text-[10px] font-bold">
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5">
@@ -80,11 +81,11 @@ function RecentTrack({ music, index }: { music: Music; index: number }) {
         <p className="group-hover/track:text-brand-lavender truncate text-sm font-bold transition-colors">
           {music.title}
         </p>
-        <p className="truncate text-xs text-white/55">{music.artist}</p>
+        <p className="text-ink-muted truncate text-xs">{music.artist}</p>
       </div>
       <ExternalLink
         aria-hidden="true"
-        className="size-3.5 shrink-0 text-white/20 transition-colors group-hover/track:text-white/60"
+        className="text-ink-faint group-hover/track:text-ink-muted size-3.5 shrink-0 transition-colors"
       />
     </a>
   );
@@ -130,7 +131,7 @@ export function RecentlyPlayedMusic() {
             <Music2 size={20} />
           </span>
           <p className="font-bold">재생 정보를 불러오지 못했습니다</p>
-          <p className="text-sm text-white/60">잠시 후 다시 시도해 주세요.</p>
+          <p className="text-ink-muted text-sm">잠시 후 다시 시도해 주세요.</p>
         </div>
       </GlassCard>
     );
@@ -153,14 +154,14 @@ export function RecentlyPlayedMusic() {
           >
             <MusicArtwork music={current} shouldAnimate={shouldAnimate} />
             <div className="min-w-0 flex-1">
-              <div className="mb-2 flex items-center gap-2 text-[10px] font-black tracking-widest text-white/55 uppercase">
+              <Eyebrow tone="muted" className="mb-2 flex items-center gap-2">
                 <span className="bg-status-success shadow-status-success/60 size-2 rounded-full shadow-sm" />
                 {isPlaying ? '지금 듣는 중' : '마지막으로 들은 곡'}
-              </div>
-              <h3 className="group-hover/current:text-brand-lavender truncate text-lg font-black transition-colors sm:text-xl">
+              </Eyebrow>
+              <h3 className="group-hover/current:text-brand-lavender truncate text-lg font-bold transition-colors sm:text-xl">
                 {current.title}
               </h3>
-              <p className="text-brand-lavender/80 truncate text-sm font-semibold">
+              <p className="text-brand-lavender/80 truncate text-sm font-bold">
                 {current.artist}
               </p>
               <div className="mt-3 flex h-5 items-end gap-0.5 overflow-hidden">
@@ -183,18 +184,16 @@ export function RecentlyPlayedMusic() {
                 ))}
               </div>
             </div>
-            <ExternalLink className="size-4 shrink-0 self-start text-white/30 transition-colors group-hover/current:text-white/70" />
+            <ExternalLink className="text-ink-faint group-hover/current:text-ink-secondary size-4 shrink-0 self-start transition-colors" />
           </a>
 
           <div className="relative my-5 h-px bg-white/10" />
 
           <div className="relative flex items-center justify-between px-2">
-            <span className="flex items-center gap-2 text-xs font-extrabold text-white/55">
+            <span className="text-ink-muted flex items-center gap-2 text-xs font-bold">
               <History size={13} /> 최근 들은 음악
             </span>
-            <span className="text-brand-lavender/60 text-[10px] font-bold tracking-widest uppercase">
-              Spotify
-            </span>
+            <Eyebrow>Spotify</Eyebrow>
           </div>
 
           <div className="relative mt-2 flex flex-1 flex-col justify-center">
@@ -207,7 +206,7 @@ export function RecentlyPlayedMusic() {
                 />
               ))
             ) : (
-              <p className="px-2 py-5 text-sm text-white/60">
+              <p className="text-ink-muted px-2 py-5 text-sm">
                 최근 들은 음악이 아직 없습니다.
               </p>
             )}

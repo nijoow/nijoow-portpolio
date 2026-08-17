@@ -27,7 +27,7 @@ const capabilities = [
   {
     title: 'AI 페어 프로그래밍',
     description:
-      'AI Agent를 적극적으로 워크플로우에 통합해 신속하게 지식을 탐색·검증하고, 개발 생산성을 극대화합니다.',
+      'AI Agent를 워크플로우에 통합해 지식을 탐색·검증하고, 구현과 검토 과정에 활용합니다.',
     icon: 'ai',
     preview: 'ai',
   },

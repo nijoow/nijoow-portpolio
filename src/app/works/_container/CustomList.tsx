@@ -29,7 +29,7 @@ function SubListItem({
   showBullet?: boolean;
 }) {
   return (
-    <li className="flex gap-2.5 pl-4 text-sm leading-relaxed break-keep text-white/60">
+    <li className="text-ink-muted flex gap-2.5 pl-4 text-sm leading-relaxed break-keep">
       {showBullet ? (
         <span className="mt-2 size-1 shrink-0 rounded-full bg-white/40" />
       ) : null}

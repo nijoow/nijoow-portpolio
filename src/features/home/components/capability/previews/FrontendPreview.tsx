@@ -141,7 +141,7 @@ export function FrontendPreview({
                 className="flex flex-col items-center gap-1.5"
               >
                 <div className="border-brand-cool/30 bg-atmosphere-navy/25 relative flex h-8 w-17 items-center justify-center rounded-md border shadow-md shadow-black/20">
-                  <span className="text-[7px] font-extrabold text-white">
+                  <span className="text-[7px] font-bold text-white">
                     Click Me
                   </span>
                   <span className="bg-brand-cool absolute -top-px right-1/4 left-1/4 h-px" />
