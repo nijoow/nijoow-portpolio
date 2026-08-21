@@ -1,5 +1,6 @@
 'use client';
 
+import Eyebrow from '@/components/ui/Eyebrow';
 import { Logo } from '@/components/Logo/Logo';
 import { COLOR_TOKENS } from '@/lib/designTokens';
 import { cn } from '@/lib/utils';
@@ -123,9 +124,7 @@ function hasSeenIntro() {
 function markIntroSeen() {
   try {
     window.localStorage.setItem(INTRO_SEEN_KEY, '1');
-  } catch {
-    // 저장이 차단된 환경에서는 현재 방문에서만 정상 종료한다.
-  }
+  } catch {}
 }
 
 interface RouteCopy {
@@ -135,19 +134,19 @@ interface RouteCopy {
 
 function getRouteCopy(pathname: string): RouteCopy {
   if (pathname === '/works') {
-    return { eyebrow: 'Archived Project', title: 'Design × Development' };
+    return { eyebrow: 'Project Index', title: '회사·프리랜스·사이드 프로젝트' };
   }
   if (pathname === '/contact') {
     return { eyebrow: 'Let’s Connect', title: 'Ideas into experience' };
   }
   if (pathname.startsWith('/works/')) {
-    return { eyebrow: 'Case Study', title: 'Designed with intent' };
+    return { eyebrow: 'Project Detail', title: '만든 것과 맡은 일' };
   }
   return {
     eyebrow: 'Frontend Developer',
     title: (
       <>
-        이우진 <span className="text-white/40">·</span>{' '}
+        이우진 <span className="text-ink-faint">·</span>{' '}
         <span className="text-brand-lavender">nijoow</span>
       </>
     ),
@@ -206,7 +205,6 @@ interface SignatureStageProps {
   orbitControlsRef: RefObject<ComponentRef<typeof OrbitControls> | null>;
 }
 
-/** View 내부의 3D 장면 — WebGL 불가 시 정적 폴백 아트로 대체한다. */
 function SignatureStage({
   config,
   reduced,
@@ -283,7 +281,6 @@ interface HeroOverlayProps {
   onBurst: () => void;
 }
 
-/** 히어로 하단의 라우트 카피와 인터랙션 컨트롤 오버레이. */
 function HeroOverlay({
   isVisible,
   isLanding,
@@ -310,10 +307,8 @@ function HeroOverlay({
               transition={{ duration: 0.6, delay: isLanding ? 0.65 : 0 }}
               className="flex flex-col gap-0.5"
             >
-              <span className="text-brand-lavender/70 text-[10px] font-bold tracking-widest uppercase sm:text-xs">
-                {routeCopy.eyebrow}
-              </span>
-              <span className="text-lg font-black text-white sm:text-2xl">
+              <Eyebrow>{routeCopy.eyebrow}</Eyebrow>
+              <span className="text-lg font-bold text-white sm:text-2xl">
                 {routeCopy.title}
               </span>
             </m.div>
@@ -322,7 +317,7 @@ function HeroOverlay({
               <span
                 aria-label="드래그해서 회전"
                 title="드래그해서 회전"
-                className="hidden size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 backdrop-blur-sm sm:flex"
+                className="text-ink-muted hidden size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-sm sm:flex"
               >
                 <Move3d size={15} />
               </span>
@@ -332,7 +327,7 @@ function HeroOverlay({
                   onClick={onBurst}
                   aria-label="파티클 흩기"
                   title="파티클 흩기"
-                  className="hover:border-brand-lavender/40 hover:text-brand-lavender focus-visible:ring-brand-lavender flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 backdrop-blur-sm transition-colors outline-none focus-visible:ring-2"
+                  className="hover:border-brand-lavender/40 hover:text-brand-lavender focus-visible:ring-brand-lavender text-ink-muted flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-sm transition-colors outline-none focus-visible:ring-2"
                 >
                   <SparklesIcon size={15} />
                 </button>
@@ -352,7 +347,6 @@ interface SignatureViewCanvasProps {
   isCinematic: boolean;
 }
 
-/** View.Port를 그리는 전역 고정 캔버스 — 화면 밖에서는 프레임루프를 멈춘다. */
 function SignatureViewCanvas({
   config,
   reduced,
@@ -395,7 +389,7 @@ function ReplayButton({
       onClick={onReplay}
       aria-label="인트로 다시 보기"
       title="인트로 다시 보기"
-      className="group focus-visible:ring-brand-lavender hover:border-brand-lavender/35 hover:text-brand-lavender fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 shadow-lg backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
+      className="group focus-visible:ring-brand-lavender hover:border-brand-lavender/35 hover:text-brand-lavender text-ink-secondary fixed right-5 bottom-5 z-40 flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 shadow-lg backdrop-blur-xl transition-colors outline-none focus-visible:ring-2"
     >
       <RotateCcw
         size={18}
@@ -538,7 +532,7 @@ export default function SignatureExperience() {
           <button
             type="button"
             onClick={handleLanding}
-            className="focus-visible:ring-brand-lavender absolute top-5 right-5 z-10 min-h-11 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur-xl transition-colors outline-none hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:ring-2"
+            className="focus-visible:ring-brand-lavender text-ink-secondary absolute top-5 right-5 z-10 min-h-11 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium backdrop-blur-xl transition-colors outline-none hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:ring-2"
           >
             건너뛰기
           </button>

@@ -1,5 +1,6 @@
 'use client';
 
+import Eyebrow from '@/components/ui/Eyebrow';
 import GlassCard from '@/components/Motion/GlassCard';
 import { GlassPopover } from '@/components/ui/GlassPopover';
 import { cn } from '@/lib/utils';
@@ -51,11 +52,9 @@ const interests: readonly Interest[] = [
 function InterestDetails({ interest }: { interest: Interest }) {
   return (
     <div className="relative">
-      <span className="text-accent-light/80 text-[10px] font-black tracking-widest uppercase">
-        {interest.englishLabel}
-      </span>
+      <Eyebrow tone="accent">{interest.englishLabel}</Eyebrow>
       <h4 className="mt-1 text-base font-bold text-white">{interest.label}</h4>
-      <p className="mt-2 text-xs leading-relaxed break-keep text-white/65">
+      <p className="text-ink-muted mt-2 text-xs leading-relaxed break-keep">
         {interest.detail}
       </p>
       <ul
@@ -65,7 +64,7 @@ function InterestDetails({ interest }: { interest: Interest }) {
         {interest.notes.map((note) => (
           <li
             key={note}
-            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/60"
+            className="text-ink-muted rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold"
           >
             {note}
           </li>
@@ -203,10 +202,10 @@ function InterestObject({ interest }: { interest: Interest }) {
           )}
         </span>
         <span className="relative text-center">
-          <span className="block text-sm font-extrabold">{interest.label}</span>
-          <span className="mt-0.5 block text-[10px] font-bold tracking-widest text-white/55 uppercase">
+          <span className="block text-sm font-bold">{interest.label}</span>
+          <Eyebrow tone="muted" className="mt-0.5 block">
             {interest.englishLabel}
-          </span>
+          </Eyebrow>
         </span>
       </GlassPopover>
     </div>
@@ -218,14 +217,11 @@ export function PersonalInterests() {
     <GlassCard lift={false} className="mt-4">
       <div className="grid grid-cols-1 gap-5 p-5 sm:p-6 lg:grid-cols-[1fr_1.8fr] lg:items-center">
         <div className="flex flex-col gap-2">
-          <span className="text-brand-lavender/80 text-[10px] font-black tracking-widest uppercase">
-            Favorites
-          </span>
-          <h3 className="text-xl font-black sm:text-2xl">좋아하는 것들</h3>
-          <p className="text-sm leading-relaxed break-keep text-white/50">
+          <h3 className="text-xl font-bold sm:text-2xl">좋아하는 것들</h3>
+          <p className="text-ink-muted text-sm leading-relaxed break-keep">
             개인적이고 소소한 취미들입니다.
           </p>
-          <span className="mt-1 text-[10px] font-bold tracking-wide text-white/55">
+          <span className="text-ink-muted mt-1 text-[10px] font-bold tracking-wide">
             <span className="hidden sm:inline">
               오브젝트에 마우스를 올려 자세히 보기
             </span>

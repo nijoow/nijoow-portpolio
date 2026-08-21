@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
 @theme inline {
-  /* Palette 값은 designTokens.ts가 소유하고 RootLayout에서 주입한다. */
   --color-brand-lavender: var(--palette-brand-lavender);
   --color-brand-violet: var(--palette-brand-violet);
   --color-brand-muted: var(--palette-brand-muted);
@@ -18,6 +17,12 @@
   --color-status-success: var(--palette-status-success);
   --color-status-warning: var(--palette-status-warning);
   --color-status-danger: var(--palette-status-danger);
+
+  --color-ink-primary: #ffffff;
+  --color-ink-secondary: color-mix(in srgb, white 75%, transparent);
+  --color-ink-muted: color-mix(in srgb, white 55%, transparent);
+  --color-ink-faint: color-mix(in srgb, white 40%, transparent);
+
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
   --default-transition-duration: 220ms;
   --default-transition-timing-function: var(--ease-emphasized);
@@ -37,29 +42,24 @@ body,
   font-family: var(--font-binggrae), sans-serif;
 }
 
-/* 커스텀 커서는 정밀 포인터 + 모션 허용 사용자에게만 적용한다.
-   터치 기기·prefers-reduced-motion 사용자는 OS 기본 커서를 유지한다. */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  html,
-  body,
-  *,
-  *::before,
-  *::after {
-    cursor: none !important;
-  }
-
-  input,
-  textarea,
-  [contenteditable='true'] {
-    cursor: text !important;
-  }
-
-  select {
-    cursor: default !important;
-  }
+html[data-custom-cursor='ready'],
+html[data-custom-cursor='ready'] body,
+html[data-custom-cursor='ready'] *,
+html[data-custom-cursor='ready'] *::before,
+html[data-custom-cursor='ready'] *::after {
+  cursor: none !important;
 }
 
-/* 모션 최소화를 선호하는 사용자에게는 애니메이션/트랜지션을 사실상 제거한다. */
+html[data-custom-cursor='ready'] input,
+html[data-custom-cursor='ready'] textarea,
+html[data-custom-cursor='ready'] [contenteditable='true'] {
+  cursor: text !important;
+}
+
+html[data-custom-cursor='ready'] select {
+  cursor: default !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -79,10 +79,6 @@ body {
   height: 100%;
 }
 
-/*
- * 공통 글래스 재질. 색상 역할과 재질을 분리해 모든 카드가 같은 광학 규칙을
- * 공유하고, 개별 컴포넌트는 브랜드·상태 색상만 추가한다.
- */
 .frosted-glass {
   border-color: color-mix(in srgb, white 15%, transparent);
   background:

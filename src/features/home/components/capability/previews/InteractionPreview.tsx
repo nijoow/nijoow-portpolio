@@ -163,7 +163,7 @@ export function InteractionPreview({
                       ? { scale: 1.05, filter: 'brightness(1.2)' }
                       : { scale: 1, filter: 'brightness(1)' }
                   }
-                  className="bg-accent-deep text-accent-light shadow-accent-deep/50 border-accent/30 flex h-4 w-10 items-center justify-center rounded border text-[5px] font-black shadow-md"
+                  className="bg-accent-deep text-accent-light shadow-accent-deep/50 border-accent/30 flex h-4 w-10 items-center justify-center rounded border text-[5px] font-bold shadow-md"
                 >
                   Glow
                 </m.div>
@@ -173,7 +173,7 @@ export function InteractionPreview({
         </m.div>
       </div>
 
-      <span className="absolute right-2 bottom-1.5 text-[6px] font-black tracking-wider text-white/30">
+      <span className="text-ink-faint absolute right-2 bottom-1.5 text-[6px] font-bold tracking-wider">
         3D EXPLODED DECK
       </span>
     </div>

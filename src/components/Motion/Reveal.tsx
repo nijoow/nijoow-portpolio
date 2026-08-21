@@ -11,8 +11,6 @@ interface RevealProps {
   className?: string;
 }
 
-// 스크롤 진입 시 아래에서 떠오르는 공용 리빌 래퍼.
-// reduced-motion은 루트 MotionConfig(reducedMotion="user")가 일괄 처리한다.
 function Reveal({ children, delay = 0, className }: RevealProps) {
   return (
     <m.div

@@ -12,7 +12,6 @@ export interface Work {
   period?: string;
   liveUrl?: string;
   repoUrl?: string;
-  /** 공개 상태. draft는 목록·sitemap에서 제외하고 noindex 처리한다. */
   status: 'published' | 'archive' | 'draft';
 }
 

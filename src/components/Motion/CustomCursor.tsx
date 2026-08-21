@@ -123,6 +123,16 @@ function CustomCursor() {
   );
 
   useEffect(() => {
+    if (!isEnabled || !isVisible) return;
+
+    const root = document.documentElement;
+    root.dataset.customCursor = 'ready';
+    return () => {
+      delete root.dataset.customCursor;
+    };
+  }, [isEnabled, isVisible]);
+
+  useEffect(() => {
     if (!isEnabled) return;
 
     const handleMouseMove = (event: MouseEvent) => {

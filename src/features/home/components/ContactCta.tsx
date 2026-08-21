@@ -1,3 +1,4 @@
+import Eyebrow from '@/components/ui/Eyebrow';
 import { GithubIcon } from '@/components/Icons/GithubIcon';
 import GlassCard from '@/components/Motion/GlassCard';
 import { ArrowRight, Mail } from 'lucide-react';
@@ -26,15 +27,13 @@ export function ContactCta() {
       <GlassCard lift={false} className="w-full">
         <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-lg">
-            <span className="text-brand-lavender/85 text-xs font-bold tracking-widest uppercase">
-              Contact
-            </span>
-            <h2 className="mt-2 text-2xl font-black break-keep sm:text-3xl">
-              새로운 기회나 아이디어는 언제나 환영입니다.
+            <Eyebrow>Contact</Eyebrow>
+            <h2 className="mt-2 text-2xl font-bold break-keep sm:text-3xl">
+              함께 이야기해 보고 싶은 일이 있다면, 편하게 연락해 주세요.
             </h2>
-            <p className="mt-2 text-sm leading-relaxed break-keep text-white/50">
-              협업에 관한 구체적인 제안부터 가벼운 커피 챗까지 모두 편하게 남겨
-              주세요.
+            <p className="text-ink-muted mt-2 text-sm leading-relaxed break-keep">
+              프론트엔드 협업과 프로젝트 제안, 채용 관련 이야기, 커피챗까지
+              편하게 남겨 주세요.
             </p>
           </div>
 
@@ -49,22 +48,22 @@ export function ContactCta() {
               >
                 <span className="text-accent-light">{icon}</span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[10px] font-bold tracking-wider text-white/55 uppercase">
+                  <Eyebrow tone="muted" className="block">
                     {label}
-                  </span>
-                  <span className="block truncate font-bold text-white/75 group-hover:text-white">
+                  </Eyebrow>
+                  <span className="text-ink-secondary block truncate font-bold group-hover:text-white">
                     {value}
                   </span>
                 </span>
                 <ArrowRight
                   size={15}
-                  className="text-white/35 transition-transform group-hover:translate-x-0.5 group-hover:text-white"
+                  className="text-ink-faint transition-transform group-hover:translate-x-0.5 group-hover:text-white"
                 />
               </a>
             ))}
             <Link
               href="/contact"
-              className="focus-visible:ring-brand-lavender mt-3 flex min-h-11 items-center justify-center rounded-lg text-center text-xs font-bold text-white/60 transition-colors outline-none hover:text-white focus-visible:ring-2"
+              className="focus-visible:ring-brand-lavender text-ink-muted mt-3 flex min-h-11 items-center justify-center rounded-lg text-center text-xs font-bold transition-colors outline-none hover:text-white focus-visible:ring-2"
             >
               메일 보내기
             </Link>

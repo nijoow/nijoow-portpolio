@@ -1,5 +1,6 @@
 'use client';
 
+import Eyebrow from '@/components/ui/Eyebrow';
 import { GithubIcon } from '@/components/Icons/GithubIcon';
 import GlassCard from '@/components/Motion/GlassCard';
 import { useGithubActivity } from '@/features/home/hooks/useGithubActivity';
@@ -11,7 +12,6 @@ import { useState } from 'react';
 
 const CONTRIBUTION_OPACITY_STEPS = [0.08, 0.18, 0.32, 0.5] as const;
 
-// 시드 고정 의사난수 — Math.random은 서버/클라이언트 하이드레이션 불일치를 만든다.
 const CONTRIBUTION_CELLS = Array.from({ length: 70 }, (_, index) => {
   const seeded = Math.sin(index * 91.37 + 47.11) * 10000;
   const step = Math.floor(
@@ -31,7 +31,7 @@ const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
 
 function RepositoryMeta({ repository }: { repository: GithubRepository }) {
   return (
-    <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-white/55">
+    <span className="text-ink-muted flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
       {repository.language ? (
         <span className="flex items-center gap-1.5">
           <span className="bg-accent size-1.5 rounded-full" />
@@ -58,19 +58,19 @@ function FeaturedRepository({ repository }: { repository: GithubRepository }) {
       rel="noopener noreferrer"
       className="frosted-glass-subtle group/featured border-accent/15 hover:border-accent/40 focus-visible:ring-brand-lavender block rounded-2xl border p-4 transition-colors outline-none focus-visible:ring-2"
     >
-      <span className="text-accent-light/80 mb-3 flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
+      <Eyebrow tone="accent" className="mb-3 flex items-center gap-2">
         <Hammer size={12} /> 최근 업데이트
-      </span>
+      </Eyebrow>
       <span className="flex items-start justify-between gap-3">
         <span className="min-w-0">
-          <span className="group-hover/featured:text-accent-light block truncate text-base font-black transition-colors">
+          <span className="group-hover/featured:text-accent-light block truncate text-base font-bold transition-colors">
             {repository.name}
           </span>
-          <span className="mt-1 line-clamp-2 min-h-10 text-sm leading-relaxed text-white/60">
+          <span className="text-ink-muted mt-1 line-clamp-2 min-h-10 text-sm leading-relaxed">
             {repository.description ?? '요즘 손보고 있는 프로젝트입니다.'}
           </span>
         </span>
-        <ExternalLink className="size-4 shrink-0 text-white/25 transition-colors group-hover/featured:text-white/65" />
+        <ExternalLink className="text-ink-faint group-hover/featured:text-ink-muted size-4 shrink-0 transition-colors" />
       </span>
 
       {repository.topics.length > 0 ? (
@@ -78,7 +78,7 @@ function FeaturedRepository({ repository }: { repository: GithubRepository }) {
           {repository.topics.map((topic) => (
             <span
               key={topic}
-              className="rounded-full border border-white/10 bg-black/20 px-2 py-0.5 text-[10px] text-white/60"
+              className="text-ink-muted rounded-full border border-white/10 bg-black/20 px-2 py-0.5 text-[10px]"
             >
               {topic}
             </span>
@@ -110,7 +110,7 @@ function RepositoryRow({ repository }: { repository: GithubRepository }) {
         </span>
         <RepositoryMeta repository={repository} />
       </span>
-      <ExternalLink className="size-3.5 shrink-0 text-white/20 transition-colors group-hover/repo:text-white/60" />
+      <ExternalLink className="text-ink-faint group-hover/repo:text-ink-muted size-3.5 shrink-0 transition-colors" />
     </a>
   );
 }
@@ -145,7 +145,7 @@ function RepositoryContent({
   const featuredRepository = repositories?.[0];
   if (isError || !featuredRepository) {
     return (
-      <div className="flex min-h-56 items-center justify-center text-center text-sm text-white/60">
+      <div className="text-ink-muted flex min-h-56 items-center justify-center text-center text-sm">
         GitHub 작업을 불러오지 못했습니다.
       </div>
     );
@@ -214,8 +214,8 @@ export function GithubActivity() {
               <GithubIcon size={18} />
             </span>
             <div>
-              <h3 className="text-sm font-extrabold">최근 작업</h3>
-              <p className="text-xs text-white/55">
+              <h3 className="text-sm font-bold">최근 작업</h3>
+              <p className="text-ink-muted text-xs">
                 GitHub에서 최근 업데이트한 프로젝트
               </p>
             </div>
@@ -225,7 +225,7 @@ export function GithubActivity() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="nijoow GitHub 프로필 열기"
-            className="hover:border-accent/40 hover:text-accent-light focus-visible:ring-brand-lavender flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition-colors outline-none focus-visible:ring-2"
+            className="hover:border-accent/40 hover:text-accent-light focus-visible:ring-brand-lavender text-ink-muted flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors outline-none focus-visible:ring-2"
           >
             <ExternalLink size={14} />
           </a>

@@ -85,7 +85,7 @@ const MoimcityPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: 다수의 개발자가 참여하며 코딩 컨벤션이 무너지고, 중복 파일과
             사용되지 않는 익스포트가 산재하여 유지보수가 어려운 상태
           </p>
@@ -103,7 +103,7 @@ const MoimcityPage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: 모바일 웹뷰 앱 환경에서 키보드가 나타날 때, 하단에 불필요한
             여백이 생기는 현상
           </p>

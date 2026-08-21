@@ -94,11 +94,11 @@ export function CollaborationPreview({
                   />
                 </svg>
               </div>
-              <span className="text-[9px] leading-none font-extrabold text-white">
+              <span className="text-[9px] leading-none font-bold text-white">
                 Button
               </span>
             </div>
-            <div className="bg-accent-deep text-accent-light shadow-accent-deep/40 border-accent/25 flex h-5 items-center justify-center rounded-md border px-2 text-[7px] font-extrabold shadow-lg">
+            <div className="bg-accent-deep text-accent-light shadow-accent-deep/40 border-accent/25 flex h-5 items-center justify-center rounded-md border px-2 text-[7px] font-bold shadow-lg">
               Deploy
             </div>
           </m.div>

@@ -44,7 +44,7 @@ const LessorPandaVillagePage = () => {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-white/50">Core</span>
+          <span className="text-ink-muted text-sm font-bold">Core</span>
           <TechStack
             stacks={[
               'Next.js 15',
@@ -55,7 +55,7 @@ const LessorPandaVillagePage = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-white/50">
+          <span className="text-ink-muted text-sm font-bold">
             3D Rendering & Physics
           </span>
           <TechStack
@@ -68,7 +68,7 @@ const LessorPandaVillagePage = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-white/50">
+          <span className="text-ink-muted text-sm font-bold">
             Styling & Animation
           </span>
           <TechStack stacks={['Tailwind CSS 4', 'Framer Motion']} />
@@ -108,7 +108,7 @@ const LessorPandaVillagePage = () => {
           <strong className="font-bold">하이드레이션(Hydration) 에러</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: 랜덤 파티클 배치 시 서버와 클라이언트의 렌더링 결과가
             불일치하여 발생하는 하이드레이션 오류
           </p>
@@ -126,7 +126,7 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: Html 컴포넌트로 구현된 닉네임이 캐릭터의 움직임을 따라가지
             못하고 고정되지 않는 현상
           </p>
@@ -144,7 +144,7 @@ const LessorPandaVillagePage = () => {
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
-          <p className="border-l-2 border-white/15 pl-3 text-sm break-keep text-white/55">
+          <p className="text-ink-muted border-l-2 border-white/15 pl-3 text-sm break-keep">
             이슈: Supabase Realtime 통신 시 과도한 업데이트로 인한 네트워크 부하
             및 리렌더링 성능 저하
           </p>

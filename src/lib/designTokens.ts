@@ -1,9 +1,5 @@
 import type { CSSProperties } from 'react';
 
-/**
- * 이 값 하나만 바꾸면 보조색의 기본·밝은색·어두운색이 함께 갱신됩니다.
- * 주의: 반드시 6자리 hex(#rrggbb)여야 합니다 — mixHexColors/withAlpha가 이 형식을 전제합니다.
- */
 const SECONDARY_COLOR = '#A8B3C4';
 
 function mixHexColors(base: string, target: string, targetWeight: number) {
@@ -21,10 +17,6 @@ function mixHexColors(base: string, target: string, targetWeight: number) {
     .join('')}`;
 }
 
-/**
- * 런타임 Canvas와 CSS가 함께 사용하는 색상 팔레트의 단일 소스입니다.
- * 컴포넌트에서는 원시 색상 대신 globals.css에 매핑된 의미 기반 토큰을 사용합니다.
- */
 export const COLOR_TOKENS = {
   brand: {
     lavender: '#ded2f7',
@@ -75,10 +67,8 @@ const paletteVariables = {
   '--palette-status-danger': COLOR_TOKENS.status.danger,
 } satisfies Record<PaletteVariable, string>;
 
-// React CSSProperties가 커스텀 프로퍼티를 모델링하지 않아 검증된 객체를 경계에서 변환한다.
 export const PALETTE_CSS_VARIABLES = paletteVariables as CSSProperties;
 
-/** Framer Motion·Canvas처럼 CSS 알파 유틸리티를 쓸 수 없는 경계에서 사용합니다. */
 export function withAlpha(hexColor: string, alpha: number): string {
   const value = Number.parseInt(hexColor.slice(1), 16);
   const red = (value >> 16) & 255;
