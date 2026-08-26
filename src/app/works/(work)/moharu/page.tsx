@@ -21,9 +21,7 @@ const MoharuPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">🎫 moharu</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>취미 활동 추천 플랫폼</CustomList.MainListItem>
@@ -32,13 +30,13 @@ const MoharuPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
-        stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'Auth.js']}
+        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Auth.js']}
       />
 
-      <PartSubTitle title={'역할'} />
+      <PartSubTitle title="주요 작업" />
 
       <CustomList>
         <CustomList.MainListItem>Next.js 구조 설계</CustomList.MainListItem>
@@ -49,11 +47,11 @@ const MoharuPage = () => {
           Vercel 배포 및 도메인 연결
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          클라이언 컴포넌트로 만든 페이지를 서버 컴포넌트로 리팩토링
+          클라이언트 컴포넌트로 만든 페이지를 서버 컴포넌트로 리팩터링
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -77,7 +75,7 @@ const MoharuPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks
         links={[

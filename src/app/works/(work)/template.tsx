@@ -1,5 +1,6 @@
 'use client';
 
+import { StaticSignature } from '@/components/Immersive/StaticSignature';
 import Section from '@/components/Section/Section';
 import { getWork } from '@/features/works/data/worksData';
 import { usePathname } from 'next/navigation';
@@ -14,6 +15,7 @@ export default function Template({ children }: { children: ReactNode }) {
 
   return (
     <div>
+      <StaticSignature eyebrow="Project Detail" title="만든 것과 맡은 일" />
       <Section>
         <WorksBreadCrumb work={work} slug={slug} />
       </Section>

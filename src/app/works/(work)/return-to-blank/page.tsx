@@ -24,9 +24,7 @@ const ReturnToBlankPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">🖌️ Return To Blank</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -34,7 +32,7 @@ const ReturnToBlankPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'컨셉'} />
+      <PartSubTitle title="콘셉트" />
 
       <span className="font-bold">
         &quot;제자리걸음(Return to blank) &quot;
@@ -45,7 +43,7 @@ const ReturnToBlankPage = () => {
         &quot;선행성 기억상실증[Anterograde amnesia] &quot;. 새로운 정보나
         경험을 완전히 받아들이지 못하고 돌아서는 순간 그 기억들이 사라지게 된다.
         계속해서 자신이 무엇을 하고 있었는지, 무엇을 하려고 했는지, 자신이 처한
-        상환 판단조차 할 수 없고 머릿속은 백지상태[白紙狀態]로 돌아간다. 앞으로
+        상황 판단조차 할 수 없고 머릿속은 백지상태[白紙狀態]로 돌아간다. 앞으로
         나아가지 못하고 현재에 머무르며 평생 &quot;제자리걸음 &quot;을 하는
         것이다.
         <br /> <br />
@@ -56,22 +54,22 @@ const ReturnToBlankPage = () => {
         않을 것이다. 인터랙티브 아트를 통해 계속해서 백지상태로 돌아가며 앞으로
         나아가지 못하고 제자리걸음을 하는 선행성 기억상실증을 표현하였다.
       </span>
-      <PartSubTitle title={'실행 과정'} />
+      <PartSubTitle title="작품 흐름" />
       <ul>
         <li>1) 사용자가 붓으로 천스크린을 누르는 동안 그림이 그려진다.</li>
         <li>2) 스크린에서 붓을 떼는 순간 그리던 그림이 사라진다.</li>
         <li>3) 백지상태로 돌아간다.</li>
       </ul>
-      <PartSubTitle title={'기술 스택 및 사용 도구'} />
+      <PartSubTitle title="기술 스택 및 사용 도구" />
 
       <TechStack
-        stacks={['Unity', '빔프로젝터', 'kinect v1', '패브릭 스크린']}
+        stacks={['Unity', '빔프로젝터', 'Kinect v1', '패브릭 스크린']}
       />
 
-      <PartSubTitle title={'구현 기능'} />
+      <PartSubTitle title="주요 작업" />
       <CustomList>
         <CustomList.MainListItem>
-          Unity vfx graph를 사용하여 파티클로 물감이 그려지는 것처럼 표현
+          Unity VFX Graph를 사용해 파티클로 물감이 번지는 듯한 시각 효과 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           Kinect v1 Depth 카메라를 통해 스크린에 가장 깊게 눌려진 위치와 손을
@@ -81,7 +79,7 @@ const ReturnToBlankPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} liveLabel="졸업전시회 시연 영상" />
     </>

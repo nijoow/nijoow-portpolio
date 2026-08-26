@@ -26,28 +26,26 @@ const AtopDmsPage = () => {
         ]}
       />
       <div className="my-3" />
-      <PartTitle title={'Explanation'} />
-      <span className="text-gray-400">주식회사 비멕스(BMEKSCo. Ltd.)</span>
-      <span className="text-xl font-bold">📊 ATOP.DMS</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
           기업 맞춤형 데이터 관리 시스템 SaaS
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
         stacks={[
           'Next.js',
-          'Typescript',
+          'TypeScript',
           'Recoil',
-          'React-Query',
+          'React Query',
           'Material UI',
         ]}
       />
 
-      <PartSubTitle title={'주요 업무 및 성과'} />
+      <PartSubTitle title="주요 작업과 결과" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -57,10 +55,8 @@ const AtopDmsPage = () => {
           맞추는데 기여
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          엑셀 기능 관련 라이브러리를 교체를 통해 Virtualization을 적용하고
-          대용량 파일{' '}
-          <strong className="font-bold">렌더링 속도 90% 이상 개선</strong>, 다중
-          워크시트 기능을 추가 개발하여 사용성 개선
+          엑셀 라이브러리를 교체하고 가상화 렌더링을 적용해 대용량 파일 처리
+          성능을 개선하고, 다중 워크시트 기능을 추가해 사용성 보완
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           Apache ECharts를 활용한{' '}
@@ -73,8 +69,8 @@ const AtopDmsPage = () => {
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           useState 기반의 폼 모달을{' '}
-          <strong className="font-bold">react-hook-form</strong>으로
-          리팩토링하여 코드 복잡도 및 유지보수성 개선
+          <strong className="font-bold">React Hook Form</strong>으로
+          리팩터링하여 코드 복잡도 및 유지보수성 개선
         </CustomList.MainListItem>
       </CustomList>
 

@@ -21,15 +21,27 @@ function isActiveRoute(pathname: string, url: string) {
 
 export default function NavBar() {
   const pathname = usePathname();
-  const [isNavShow, setIsNavShow] = useState(false);
+  const [openPathname, setOpenPathname] = useState<string | null>(null);
+  const isNavShow = openPathname === pathname;
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia('(min-width: 768px)');
+    const closeDesktopMenu = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpenPathname(null);
+    };
+
+    desktopMediaQuery.addEventListener('change', closeDesktopMenu);
+    return () =>
+      desktopMediaQuery.removeEventListener('change', closeDesktopMenu);
+  }, []);
 
   useEffect(() => {
     if (!isNavShow) return;
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return;
-      setIsNavShow(false);
+      setOpenPathname(null);
       toggleRef.current?.focus();
     };
 
@@ -43,6 +55,7 @@ export default function NavBar() {
         <Magnetic strength={0.2}>
           <Link
             href="/"
+            onClick={() => setOpenPathname(null)}
             className="focus-visible:ring-brand-lavender text-brand-lavender group flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-2"
             aria-label="nijoow 홈"
           >
@@ -71,7 +84,11 @@ export default function NavBar() {
         <NavToggle
           ref={toggleRef}
           isNavShow={isNavShow}
-          onToggle={() => setIsNavShow((isOpen) => !isOpen)}
+          onToggle={() =>
+            setOpenPathname((currentPathname) =>
+              currentPathname === pathname ? null : pathname,
+            )
+          }
         />
       </div>
 
@@ -98,7 +115,7 @@ export default function NavBar() {
                     url={url}
                     isActive={isActiveRoute(pathname, url)}
                     variant="mobile"
-                    onClick={() => setIsNavShow(false)}
+                    onClick={() => setOpenPathname(null)}
                   />
                 </m.li>
               ))}

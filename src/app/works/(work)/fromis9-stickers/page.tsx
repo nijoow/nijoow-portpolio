@@ -24,32 +24,31 @@ const Fromis9StickersPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">💖 프로미스나인 스티커 꾸미기</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
-          프로미스나인 팬들을 위한 스티커 꾸미기 웹 사이트
+          프로미스나인 팬들을 위한 스티커 꾸미기 웹사이트
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           좋아하는 멤버의 사진을 다양한 스티커로 꾸미고 이미지로 저장할 수 있는
           기능을 제공
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          AI Agent (Google Antigravity)를 활용하여 기획, 디자인, 프론트엔드
-          개발까지 전 과정을 수행
+          Google Antigravity·Claude·Codex를 기획·디자인·구현 검토를 위한 페어
+          프로그래밍 도구로 함께 활용하고, UX/UI와 프론트엔드 개발 전 과정을
+          직접 진행
         </CustomList.MainListItem>
       </CustomList>
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
       <TechStack
         stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']}
       />
 
-      <PartSubTitle title={'주요 기능'} />
+      <PartSubTitle title="주요 기능" />
       <CustomList>
         <CustomList.MainListItem>
-          스티커 커스텀: 스티커 추가 삭제 및 회전, 크기 조절 기능
+          스티커 커스텀: 스티커 추가·삭제, 회전, 크기 조절
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           레이어링 관리: 스티커와 멤버 사진의 레이어 순서 변경 및 잠금 기능
@@ -64,7 +63,7 @@ const Fromis9StickersPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} />
     </>

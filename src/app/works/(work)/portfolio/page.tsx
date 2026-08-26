@@ -24,51 +24,62 @@ const PortPolioPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
+      <PartTitle title="프로젝트 개요" />
 
-      <span className="text-xl font-bold">🎨 개인 포트폴리오 사이트</span>
+      <CustomList>
+        <CustomList.MainListItem>
+          작업 아카이브와 현재 관심사를 한곳에서 보여주기 위해 지속적으로
+          개선하고 있는 개인 포트폴리오
+        </CustomList.MainListItem>
+        <CustomList.MainListItem>
+          손글씨 로고와 파티클 인터랙션을 중심으로 다크·코스믹 시각 정체성을
+          구성
+        </CustomList.MainListItem>
+      </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
         stacks={[
           'Next.js',
-          'Typescript',
+          'TypeScript',
           'Tailwind CSS',
-          'React-Three-Fiber',
-          'Framer-Motion',
+          'React Three Fiber',
+          'Framer Motion',
+          'TanStack Query',
         ]}
       />
 
-      <PartSubTitle title={'개발'} />
+      <PartSubTitle title="주요 작업" />
 
       <CustomList>
         <CustomList.MainListItem>
-          Next.js 프레임워크의 SPA
+          Next.js App Router 기반으로 홈·작업 목록·상세·연락 페이지 구성
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          canvas, three.js 라이브러리를 사용한 3D 로고 렌더링
+          Three.js와 React Three Fiber로 손글씨 파티클 로고 및 포인터 인터랙션
+          구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          Framer-motion 라이브러리를 활용한 트랜지션
+          작업 데이터를 한곳에서 관리하고 공개 상태에 따라 목록·상세
+          메타데이터·사이트맵을 일관되게 생성
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          시스템 테마에 따른 다크모드 및 토글 기능
+          Spotify와 GitHub API 응답을 서버 경계에서 검증하고 최근 활동 UI에 연결
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          Spotify API를 통해 AccessToken 발급 및 최근들은 음악 정보 소개
+          키보드 포커스, 모션 축소 설정, WebGL 미지원 환경의 정적 폴백을 포함한
+          접근성 보완
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          javascript 에서 typescript로 마이그레이션
-        </CustomList.MainListItem>
-        <CustomList.MainListItem>
-          SCSS를 통한 스타일링에서 tailwind css로 마이그레이션
+          초기 JavaScript·SCSS 구현을 TypeScript·Tailwind CSS 구조로 단계적으로
+          마이그레이션
         </CustomList.MainListItem>
       </CustomList>
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} />
     </>

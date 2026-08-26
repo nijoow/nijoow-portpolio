@@ -8,24 +8,14 @@ function WorkImage({ url, imgSrc }: { url?: string; imgSrc: string }) {
       {!imgSrc ? (
         <div>이미지가 없습니다</div>
       ) : (
-        <>
-          <Image
-            src={`/images/works/${imgSrc}`}
-            quality={10}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 768px"
-            className="object-cover blur-md"
-          />
-          <Image
-            src={`/images/works/${imgSrc}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 768px"
-            alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 스크린샷`}
-            priority
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
-          />
-        </>
+        <Image
+          src={`/images/works/${imgSrc}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
+          alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 스크린샷`}
+          priority
+          className="object-contain transition-transform duration-300 group-hover:scale-105"
+        />
       )}
       {url && (
         <Link

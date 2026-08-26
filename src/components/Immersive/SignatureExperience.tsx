@@ -8,7 +8,6 @@ import { OrbitControls, Sparkles, View } from '@react-three/drei';
 import { Canvas, type RootState } from '@react-three/fiber';
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { Move3d, RotateCcw, SparklesIcon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 import {
   Component,
   type ComponentRef,
@@ -132,26 +131,15 @@ interface RouteCopy {
   title: ReactNode;
 }
 
-function getRouteCopy(pathname: string): RouteCopy {
-  if (pathname === '/works') {
-    return { eyebrow: 'Project Index', title: '회사·프리랜스·사이드 프로젝트' };
-  }
-  if (pathname === '/contact') {
-    return { eyebrow: 'Let’s Connect', title: 'Ideas into experience' };
-  }
-  if (pathname.startsWith('/works/')) {
-    return { eyebrow: 'Project Detail', title: '만든 것과 맡은 일' };
-  }
-  return {
-    eyebrow: 'Frontend Developer',
-    title: (
-      <>
-        이우진 <span className="text-ink-faint">·</span>{' '}
-        <span className="text-brand-lavender">nijoow</span>
-      </>
-    ),
-  };
-}
+const HOME_ROUTE_COPY: RouteCopy = {
+  eyebrow: 'Frontend Developer',
+  title: (
+    <>
+      이우진 <span className="text-ink-faint">·</span>{' '}
+      <span className="text-brand-lavender">nijoow</span>
+    </>
+  ),
+};
 
 function SignatureFallbackArt() {
   return (
@@ -400,15 +388,14 @@ function ReplayButton({
 }
 
 export default function SignatureExperience() {
-  const pathname = usePathname();
   const reduced = useReducedMotion();
   const wrapRef = useRef<HTMLElement>(null);
   const orbitControlsRef = useRef<ComponentRef<typeof OrbitControls>>(null);
   const [quality] = useState<Quality>(detectQuality);
   const [phase, setPhase] = useState<StagePhase>(() => {
     const shouldPlay =
-      pathname === '/' &&
       quality !== 'fallback' &&
+      quality !== 'low' &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
       !hasSeenIntro();
     return shouldPlay ? 'intro' : 'hero';
@@ -417,7 +404,6 @@ export default function SignatureExperience() {
   const [burstSignal, setBurstSignal] = useState(0);
   const [isInView, setIsInView] = useState(true);
 
-  const routeCopy = getRouteCopy(pathname);
   const isIntro = phase === 'intro';
   const isHero = phase === 'hero';
   const isCinematic = phase !== 'hero';
@@ -425,8 +411,7 @@ export default function SignatureExperience() {
   const heroInteractive = isHero && !reduced;
   const isSceneVisible = isInView || isCinematic;
   const showBurstButton = !reduced && config !== null;
-  const showReplayButton =
-    pathname === '/' && heroInteractive && isInView && config !== null;
+  const showReplayButton = heroInteractive && isInView && config !== null;
 
   useEffect(() => {
     const element = wrapRef.current;
@@ -523,7 +508,7 @@ export default function SignatureExperience() {
         <HeroOverlay
           isVisible={!isIntro}
           isLanding={phase === 'landing'}
-          routeCopy={routeCopy}
+          routeCopy={HOME_ROUTE_COPY}
           showBurstButton={showBurstButton}
           onBurst={handleBurst}
         />

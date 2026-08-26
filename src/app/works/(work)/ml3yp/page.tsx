@@ -21,24 +21,20 @@ const TelevisionPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">
-        📺 Midnight Lofi 3D Youtube Player
-      </span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
-          YouTube 플레이리스트 감상을 위한 몰입형 3D 환경 토이 프로젝트.
+          YouTube 플레이리스트를 몰입형 3D 공간에서 감상하는 토이 프로젝트
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
         stacks={[
           'Next.js',
-          'Typescript',
+          'TypeScript',
           'Three.js',
           'React Three Fiber',
           'Framer Motion',
@@ -46,18 +42,18 @@ const TelevisionPage = () => {
         ]}
       />
 
-      <PartSubTitle title={'주요 기능'} />
+      <PartSubTitle title="주요 기능" />
       <CustomList>
         <CustomList.MainListItem>
           <strong className="font-bold">🌌 몰입형 3D 환경</strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem>
           <strong className="font-bold">TV 화면 속 영상</strong>: TV 화면 내에
-          Youtube Player를 맵핑하여 실감나게 구현.
+          YouTube 플레이어를 매핑해 실제 TV에서 재생되는 듯한 장면 구현
         </CustomList.SubListItem>
         <CustomList.SubListItem>
           <strong className="font-bold">인터랙티브 카메라</strong>: Orbit
-          Controls을 통해 원하는 각도에서 공간을 탐색하고 감상 가능.
+          Controls를 통해 원하는 각도에서 공간을 탐색하고 감상 가능
         </CustomList.SubListItem>
 
         <CustomList.MainListItem>
@@ -69,16 +65,16 @@ const TelevisionPage = () => {
         </CustomList.SubListItem>
         <CustomList.SubListItem>
           <strong className="font-bold">실시간 검색</strong>: YouTube API 연동을
-          통해 영상을 검색 해서 플레이리스트에 추가 가능.
+          통해 영상을 검색해 플레이리스트에 추가 가능
         </CustomList.SubListItem>
         <CustomList.SubListItem>
           <strong className="font-bold">직관적인 UI</strong>: 하단 제어 컨트롤러
-          패널을 통해 재생, 볼륨 조절, 플레이리스트 관리.
+          패널에서 재생·볼륨·플레이리스트 관리
         </CustomList.SubListItem>
       </CustomList>
 
       <div className="my-3" />
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
       <WorkLinks pageName={PAGE_NAME} />
     </>
   );

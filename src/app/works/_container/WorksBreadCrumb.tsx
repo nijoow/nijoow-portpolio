@@ -30,8 +30,29 @@ function WorksBreadCrumb({ work, slug }: WorksBreadCrumbProps) {
           <span className="text-ink-muted text-sm">{work.period}</span>
         )}
       </div>
+      {work?.description ? (
+        <p className="text-ink-muted mt-1 max-w-3xl text-[15px] leading-relaxed break-keep sm:text-base">
+          {work.description}
+        </p>
+      ) : null}
+      {work?.role || work?.organization ? (
+        <dl className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+          {work.role ? (
+            <div className="flex gap-2">
+              <dt className="text-ink-muted">역할</dt>
+              <dd>{work.role}</dd>
+            </div>
+          ) : null}
+          {work.organization ? (
+            <div className="flex gap-2">
+              <dt className="text-ink-muted">소속·의뢰</dt>
+              <dd>{work.organization}</dd>
+            </div>
+          ) : null}
+        </dl>
+      ) : null}
       {work ? (
-        <div className="mt-1 flex flex-wrap items-center gap-1.5">
+        <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <ProjectTypeChip
             projectType={work.projectType}
             isFreelance={work.isFreelance}
@@ -46,7 +67,7 @@ function WorksBreadCrumb({ work, slug }: WorksBreadCrumbProps) {
           ))}
         </div>
       ) : null}
-      <div className="from-brand-muted/45 mt-3 h-px w-full bg-linear-to-r to-transparent" />
+      <div className="from-brand-muted/45 mt-4 h-px w-full bg-linear-to-r to-transparent" />
     </div>
   );
 }

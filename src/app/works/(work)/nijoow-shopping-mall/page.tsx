@@ -24,24 +24,22 @@ const NijoowShoppingMallPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">👟 shopping-mall</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
-          쇼핑몰 풀스택 토이 프로젝트
+          인증부터 상품·배송 데이터까지 직접 구현하는 풀스택 토이 프로젝트
         </CustomList.MainListItem>
         <CustomList.MainListItem>🚧 개발 진행 중 🚧</CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
-        stacks={['Next.js', 'Typescript', 'Tailwind CSS', 'PostgreSQL']}
+        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']}
       />
 
-      <PartSubTitle title={'기능'} />
+      <PartSubTitle title="구현 기능" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -55,7 +53,7 @@ const NijoowShoppingMallPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'추가/개선할 기능'} />
+      <PartSubTitle title="추가·개선할 기능" />
 
       <CustomList>
         <CustomList.MainListItem>디자인 개선</CustomList.MainListItem>
@@ -71,7 +69,7 @@ const NijoowShoppingMallPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} />
     </>

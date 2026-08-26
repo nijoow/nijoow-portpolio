@@ -1,3 +1,4 @@
+import SignatureExperience from '@/components/Immersive/SignatureExperienceDynamic';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 import type { Metadata } from 'next';
 import ClassicHome from './_home/ClassicHome';
@@ -10,7 +11,12 @@ export const metadata: Metadata = {
 };
 
 const HomePage = () => {
-  return <ClassicHome />;
+  return (
+    <>
+      <SignatureExperience />
+      <ClassicHome />
+    </>
+  );
 };
 
 export default HomePage;

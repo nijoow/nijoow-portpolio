@@ -30,28 +30,25 @@ const MoimcityPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-gray-400">(주)모임특별시</span>
-      <span className="text-xl font-bold">💖 모임특별시</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
           취향 기반 소셜 모임 플랫폼
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
       <TechStack
         stacks={[
           'Next.js',
           'TypeScript',
           'Tailwind CSS',
-          'zustand',
+          'Zustand',
           'Framer Motion',
         ]}
       />
 
-      <PartSubTitle title={'주요 업무 및 성과'} />
+      <PartSubTitle title="주요 작업과 결과" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -64,19 +61,19 @@ const MoimcityPage = () => {
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           <strong className="font-bold">
-            Prettier 및 플러그인 설정・코드 리팩토링
+            Prettier 및 플러그인 설정·코드 리팩터링
           </strong>
           을 통해 가독성 및 유지보수성 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           <strong className="font-bold">
-            600개 이상의 불필요한 파일 정리 및 9만 줄의 데드코드 감축
+            600개 이상의 불필요한 파일과 약 9만 줄의 데드 코드 정리
           </strong>
-          을 통해 개발 환경 최적화 및 빌드 속도 개선
+          로 코드베이스 탐색과 유지보수 범위 축소
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>

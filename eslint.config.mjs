@@ -4,7 +4,13 @@ import tseslint from 'typescript-eslint';
 
 const config = [
   {
-    ignores: ['.next/**', 'out/**', 'node_modules/**', 'public/**'],
+    ignores: [
+      '.next/**',
+      '.vercel/**',
+      'out/**',
+      'node_modules/**',
+      'public/**',
+    ],
   },
   ...nextCoreWebVitals,
   sonarjs.configs.recommended,

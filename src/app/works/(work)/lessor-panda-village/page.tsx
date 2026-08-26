@@ -24,23 +24,20 @@ const LessorPandaVillagePage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">
-        🐾 Lessor Panda Village (레서판다 빌리지)
-      </span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
           레서판다와 함께 평화로운 마을에서 다른 유저들과 소통하는 3D 인터랙티브
           웹 애플리케이션
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          AI Agent(Antigravity)를 페어 프로그래밍 파트너로 활용하여 복잡한 3D
-          로직과 실시간 동기화 기능을 효율적으로 구현
+          Google Antigravity·Claude·Codex를 3D 로직 설계·구현·리뷰를 위한 페어
+          프로그래밍 도구로 함께 활용하고, 실시간 동기화 기능을 직접 검증하며
+          개발
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택 및 사용 도구'} />
+      <PartSubTitle title="기술 스택 및 사용 도구" />
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
@@ -74,7 +71,7 @@ const LessorPandaVillagePage = () => {
           <TechStack stacks={['Tailwind CSS 4', 'Framer Motion']} />
         </div>
       </div>
-      <PartSubTitle title={'주요 기능'} />
+      <PartSubTitle title="주요 기능" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -101,7 +98,7 @@ const LessorPandaVillagePage = () => {
         </CustomList.SubListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -151,14 +148,14 @@ const LessorPandaVillagePage = () => {
         </CustomList.SubListItem>
         <CustomList.SubListItem showBullet={false}>
           <p className="border-brand-lavender/40 text-brand-lavender/90 border-l-2 pl-3 text-sm break-keep">
-            해결책: 위치 정보를 useRef로 관리하여 리렌더링을 방지하고, 전송
-            주기를 100ms로 조절하여 트래픽 80% 절감
+            해결책: 위치 정보를 useRef로 관리해 불필요한 리렌더링을 줄이고, 전송
+            주기를 100ms로 제한해 위치 업데이트 트래픽을 제어
           </p>
         </CustomList.SubListItem>
       </CustomList>
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
       <WorkLinks pageName={PAGE_NAME} />
     </>
   );

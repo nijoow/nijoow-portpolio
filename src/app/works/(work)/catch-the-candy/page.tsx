@@ -24,16 +24,14 @@ const CatchTheCandyPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">🍬 Catch the candy</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
           졸업전시회 팀 인터랙티브아트 (p5.js ver.)
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'컨셉'} />
+      <PartSubTitle title="콘셉트" />
 
       <span className="font-bold">&quot;Bias&quot;</span>
       <span className="pl-1">
@@ -43,7 +41,7 @@ const CatchTheCandyPage = () => {
         나올지도 모른다.
       </span>
 
-      <PartSubTitle title={'실행 과정'} />
+      <PartSubTitle title="게임 흐름" />
 
       <CustomList>
         <li>1) 빨간색 바구니와 파란색 바구니중 하나를 클릭하면 게임 시작</li>
@@ -54,20 +52,20 @@ const CatchTheCandyPage = () => {
         <li>3) 타이머가 끝나고 게임이 종료되면 결과를 확인</li>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택 및 사용 도구'} />
+      <PartSubTitle title="기술 스택 및 사용 도구" />
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
           <span className="text-ink-muted text-sm font-bold">졸업 작품</span>
-          <TechStack stacks={['Processing', 'Arduino', 'kinect v1']} />
+          <TechStack stacks={['Processing', 'Arduino', 'Kinect v1']} />
         </div>
         <div className="flex flex-col gap-1.5">
           <span className="text-ink-muted text-sm font-bold">웹 버전</span>
-          <TechStack stacks={['Javascript (p5.js)']} />
+          <TechStack stacks={['JavaScript (p5.js)']} />
         </div>
       </div>
 
-      <PartSubTitle title={'역할'} />
+      <PartSubTitle title="주요 작업" />
 
       <CustomList>
         <CustomList.MainListItem>아이디어 및 컨셉 기획</CustomList.MainListItem>
@@ -77,7 +75,7 @@ const CatchTheCandyPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
       <WorkLinks
         pageName={PAGE_NAME}
         links={[

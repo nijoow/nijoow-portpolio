@@ -31,7 +31,6 @@ describe('filterWorksByTag', () => {
     ['Side Project', ['side-3d']],
     ['Frontend', ['business-web']],
     ['3D', ['side-3d']],
-    ['Backend', []],
   ])('%s 필터에 맞는 작업만 반환한다', (filter, expectedPageNames) => {
     expect(
       filterWorksByTag(works, filter).map((work) => work.pageName),

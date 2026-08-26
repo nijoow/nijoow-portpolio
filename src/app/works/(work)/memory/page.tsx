@@ -22,8 +22,7 @@ const MemoryPage = () => {
         imgSrc="pnudt12.webp"
       />
       <div className="my-3" />
-      <PartTitle title={'Explanation'} />
-      <span className="text-xl font-bold">🎓 MEMORY</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
           부산대학교 디자인학과 디자인엔테크놀로지 전공 12회 졸업전시회
@@ -41,11 +40,11 @@ const MemoryPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
-      <TechStack stacks={['HTML', 'CSS', 'Javascript']} />
+      <TechStack stacks={['HTML', 'CSS', 'JavaScript']} />
 
-      <PartSubTitle title={'역할'} />
+      <PartSubTitle title="주요 작업" />
 
       <CustomList>
         <CustomList.MainListItem>기획 및 디자인 참여</CustomList.MainListItem>
@@ -56,13 +55,13 @@ const MemoryPage = () => {
           가로스크롤 페이지, 스크롤 타임라인 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          스크롤, hover 애니메이션 구현
+          스크롤·호버 애니메이션 구현
         </CustomList.MainListItem>
       </CustomList>
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} />
     </>

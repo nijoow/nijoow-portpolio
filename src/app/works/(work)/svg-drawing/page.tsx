@@ -24,28 +24,26 @@ const SVGDrawingPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">🎨 svg-drawing</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
-          svg 드로잉 토이 프로젝트
+          SVG 드로잉 토이 프로젝트
         </CustomList.MainListItem>
         <CustomList.MainListItem>🚧 개발 임시 중단 🚧</CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
-      <TechStack stacks={['Next.js', 'Typescript', 'Recoil', 'Tailwind CSS']} />
+      <TechStack stacks={['Next.js', 'TypeScript', 'Recoil', 'Tailwind CSS']} />
 
-      <PartSubTitle title={'기능'} />
+      <PartSubTitle title="주요 기능" />
 
       <CustomList>
         <CustomList.MainListItem>
           마우스 드래그로 사각형, 삼각형, 원 그리기
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          면 색, 선 색, 선 굵기, 투명도 조절
+          면 색·선 색·선 굵기·투명도 조절
         </CustomList.MainListItem>
         <CustomList.SubListItem>
           선택된 도형이 없을 경우 새로 그리는 도형에 적용
@@ -55,20 +53,20 @@ const SVGDrawingPage = () => {
         </CustomList.SubListItem>
         <CustomList.MainListItem>도형 핸들러 구현</CustomList.MainListItem>
         <CustomList.SubListItem>
-          드래그 이동, 크기 조절, 회전 이벤트, point 수정
+          드래그 이동, 크기 조절, 회전, 꼭짓점 수정
         </CustomList.SubListItem>
         <CustomList.MainListItem>
-          Context Menu 기능 개발
+          컨텍스트 메뉴 기능 개발
         </CustomList.MainListItem>
-        <CustomList.SubListItem>삭제 및 앞 뒤로 이동</CustomList.SubListItem>
+        <CustomList.SubListItem>삭제 및 앞뒤 순서 변경</CustomList.SubListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>
           <strong className="font-bold">
-            도형 Resize 시 회전에 따른 마우스 좌표 불일치 문제
+            도형 크기 조절 시 회전에 따른 마우스 좌표 불일치 문제
           </strong>
         </CustomList.MainListItem>
         <CustomList.SubListItem showBullet={false}>
@@ -87,7 +85,7 @@ const SVGDrawingPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
 
       <WorkLinks pageName={PAGE_NAME} />
     </>

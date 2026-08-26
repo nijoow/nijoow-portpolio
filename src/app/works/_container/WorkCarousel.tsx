@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
 import { Dialog } from 'radix-ui';
-import { type KeyboardEvent, useCallback, useState } from 'react';
+import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -48,6 +48,7 @@ export function WorkCarousel({
 }: WorkCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const openingTriggerRef = useRef<HTMLButtonElement | null>(null);
   const selectedImage =
     selectedIndex === null ? null : (imgSrcList[selectedIndex] ?? null);
   const isModalOpen = selectedImage !== null;
@@ -109,22 +110,29 @@ export function WorkCarousel({
             key={imgSrc}
             className="group relative h-full w-full bg-white"
           >
-            <Image
-              src={`/images/works/${imgSrc}`}
-              alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 이미지 ${index + 1}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="object-contain"
-              priority={index === 0}
-            />
-            <Dialog.Trigger asChild>
-              <button
-                type="button"
-                aria-label={`${index + 1}번 이미지 크게 보기`}
-                onClick={() => setSelectedIndex(index)}
-                className="focus-visible:ring-brand-lavender absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
-              />
-            </Dialog.Trigger>
+            {({ isActive }) => (
+              <>
+                <Image
+                  src={`/images/works/${imgSrc}`}
+                  alt={`${imgSrc.replace(/\.\w+$/, '')} 작업 이미지 ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-contain"
+                  priority={index === 0}
+                />
+                <button
+                  type="button"
+                  aria-label={`${index + 1}번 이미지 크게 보기`}
+                  aria-hidden={!isActive}
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={(event) => {
+                    openingTriggerRef.current = event.currentTarget;
+                    setSelectedIndex(index);
+                  }}
+                  className="focus-visible:ring-brand-lavender absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-inset"
+                />
+              </>
+            )}
           </SwiperSlide>
         ))}
 
@@ -141,6 +149,10 @@ export function WorkCarousel({
           <Dialog.Overlay className="work-dialog-overlay fixed inset-0 z-100 cursor-zoom-out bg-black/75 backdrop-blur-sm" />
           <Dialog.Content
             onKeyDown={handleModalKeyDown}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              openingTriggerRef.current?.focus();
+            }}
             className="work-dialog-content fixed top-1/2 left-1/2 z-101 flex h-full w-full overflow-hidden rounded-2xl bg-gray-500/30 outline-none md:max-h-[90vh] md:max-w-[86vw]"
           >
             <Dialog.Title className="sr-only">

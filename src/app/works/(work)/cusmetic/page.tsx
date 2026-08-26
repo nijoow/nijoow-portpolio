@@ -29,10 +29,7 @@ const CusmeticPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-gray-400">주식회사 비멕스(BMEKSCo. Ltd.)</span>
-      <span className="text-xl font-bold">🧴 Cusmetic</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -40,17 +37,17 @@ const CusmeticPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
-      <TechStack stacks={['Next.js', 'Typescript', 'Recoil', 'Tailwind CSS']} />
+      <TechStack stacks={['Next.js', 'TypeScript', 'Recoil', 'Tailwind CSS']} />
 
-      <PartSubTitle title={'주요 업무 및 성과'} />
+      <PartSubTitle title="주요 작업과 결과" />
 
       <CustomList>
         <CustomList.MainListItem>
-          <strong className="font-bold">Next.js/Typescript</strong> 기반의{' '}
+          <strong className="font-bold">Next.js/TypeScript</strong> 기반의{' '}
           <strong className="font-bold">
-            프론트엔드 아키텍쳐 설계 및 인터페이스 구현
+            프론트엔드 아키텍처 설계 및 인터페이스 구현
           </strong>
         </CustomList.MainListItem>
         <CustomList.MainListItem>
@@ -58,7 +55,7 @@ const CusmeticPage = () => {
           활용해 인증에 따른 컴포넌트 깜빡임 제거 및 초기 렌더링 속도 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          <strong className="font-bold">Next-Auth</strong>를 활용해 프론트엔드
+          <strong className="font-bold">NextAuth.js</strong>를 활용해 프론트엔드
           환경에서{' '}
           <strong className="font-bold">소셜 로그인 기반의 인증 체계</strong>를
           신속하게 구현
@@ -68,10 +65,9 @@ const CusmeticPage = () => {
           관리하여 새로고침이나 링크 공유 시 맥락 유지
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          검색 <strong className="font-bold">Debounce</strong> 적용으로{' '}
-          <strong className="font-bold">API 호출을 80% 이상 절감</strong>
-          하고, <strong className="font-bold">무한스크롤</strong> 기반 리스트
-          최적화로 사용자 경험 개선
+          검색 <strong className="font-bold">디바운스</strong>와{' '}
+          <strong className="font-bold">무한 스크롤</strong>을 적용해 불필요한
+          API 호출과 초기 렌더링 부담을 줄이고 검색 흐름 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           AWS Amplify를 활용한{' '}
@@ -81,7 +77,7 @@ const CusmeticPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>

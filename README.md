@@ -2,7 +2,7 @@
 
 - 서비스: [nijoow-portfolio.vercel.app](https://nijoow-portfolio.vercel.app/)
 - 주요 화면: Home, Works, Contact, 프로젝트 상세
-- 핵심 경험: 파티클 `nijoow` 시그니처, 작업 필터, Spotify·GitHub 활동, 문의 폼
+- 핵심 경험: 홈 파티클 `nijoow` 시그니처, 작업 필터, Spotify·GitHub 활동, 문의 폼
 
 ## 기술 스택
 
@@ -11,4 +11,5 @@
 - Three.js, React Three Fiber, Drei
 - TanStack Query, nuqs
 - React Hook Form, Zod
+- Vercel Analytics, Speed Insights
 - Vitest, React Testing Library

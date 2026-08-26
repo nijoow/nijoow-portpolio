@@ -24,31 +24,29 @@ const LaunchpadPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-xl font-bold">🎹 nijoow-launchpad</span>
+      <PartTitle title="프로젝트 개요" />
       <CustomList>
         <CustomList.MainListItem>
-          전자 악기 런치패드 토이프로젝트
+          전자 악기 런치패드 토이 프로젝트
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
-      <TechStack stacks={['Next.js', 'Typescript', 'Tailwind CSS']} />
+      <TechStack stacks={['Next.js', 'TypeScript', 'Tailwind CSS']} />
 
-      <PartSubTitle title={'기능'} />
+      <PartSubTitle title="주요 기능" />
 
       <CustomList>
         <CustomList.MainListItem>
-          마우스/키보드/터치 이벤트로 런치패드를 클릭할 때 마다 사운드 재생
+          마우스·키보드·터치 입력으로 런치패드를 누를 때마다 사운드 재생
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          피아노 사운드/드럼을 포함한 다양한 사운드의 두가지 모드로 연주 가능
+          피아노와 드럼을 포함한 두 가지 사운드 모드 제공
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'트러블 슈팅'} />
+      <PartSubTitle title="문제 해결" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -69,7 +67,7 @@ const LaunchpadPage = () => {
       </CustomList>
 
       <div className="my-3" />
-      <PartTitle title={'Link'} />
+      <PartTitle title="관련 링크" />
       <WorkLinks pageName={PAGE_NAME} />
     </>
   );

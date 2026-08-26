@@ -1,10 +1,10 @@
-import SignatureExperience from '@/components/Immersive/SignatureExperienceDynamic';
 import { AmbientBackground } from '@/components/Motion/AmbientBackground';
 import CustomCursor from '@/components/Motion/CustomCursor';
 import NavBar from '@/components/Navbar/NavBar';
 import { COLOR_TOKENS, PALETTE_CSS_VARIABLES } from '@/lib/designTokens';
 import { PERSON_ID, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { LazyMotion, MotionConfig, domMax } from 'framer-motion';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
@@ -14,12 +14,12 @@ import './globals.css';
 const binggrae = localFont({
   src: [
     {
-      path: '../font/Binggrae.otf',
+      path: '../font/Binggrae.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../font/Binggrae-Bold.otf',
+      path: '../font/Binggrae-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
@@ -128,7 +128,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 tabIndex={-1}
                 className="mx-auto w-full max-w-4xl flex-auto px-4 pt-24 pb-24 focus:outline-none"
               >
-                <SignatureExperience />
                 {children}
               </main>
               <footer className="mt-auto w-full border-t border-white/10">
@@ -160,6 +159,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </MotionConfig>
         </LazyMotion>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

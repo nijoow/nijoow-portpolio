@@ -20,10 +20,7 @@ const TreenowPage = () => {
 
       <div className="my-3" />
 
-      <PartTitle title={'Explanation'} />
-
-      <span className="text-gray-400">주식회사 비멕스(BMEKSCo. Ltd.)</span>
-      <span className="text-xl font-bold">🌳 트리나우</span>
+      <PartTitle title="프로젝트 개요" />
 
       <CustomList>
         <CustomList.MainListItem>
@@ -31,24 +28,24 @@ const TreenowPage = () => {
         </CustomList.MainListItem>
       </CustomList>
 
-      <PartSubTitle title={'기술 스택'} />
+      <PartSubTitle title="기술 스택" />
 
       <TechStack
         stacks={[
           'React.js',
-          'Typescript',
+          'TypeScript',
           'Recoil',
           'Tailwind CSS',
-          'React-native(webview)',
+          'React Native WebView',
         ]}
       />
 
-      <PartSubTitle title={'주요 업무 및 성과'} />
+      <PartSubTitle title="주요 작업" />
 
       <CustomList>
         <CustomList.MainListItem>
           <strong className="font-bold">디자인 시스템</strong>을 고려한{' '}
-          <strong className="font-bold">React/Typescript</strong> 기반{' '}
+          <strong className="font-bold">React/TypeScript</strong> 기반{' '}
           <strong className="font-bold">
             프론트엔드 환경 설계 및 반응형 UI 개발
           </strong>
@@ -59,7 +56,7 @@ const TreenowPage = () => {
           로직 구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          <strong className="font-bold">React-Native 웹뷰</strong>를 활용한{' '}
+          <strong className="font-bold">React Native WebView</strong>를 활용한{' '}
           <strong className="font-bold">
             하이브리드 앱 개발 및 앱스토어 심사·배포
           </strong>

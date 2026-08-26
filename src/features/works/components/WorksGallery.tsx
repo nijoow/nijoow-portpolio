@@ -4,23 +4,16 @@ import GlassCard from '@/components/Motion/GlassCard';
 import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
 import { publicWorks, type Work } from '@/features/works/data/worksData';
 import { filterWorksByTag } from '@/features/works/lib/filterWorks';
+import {
+  WORK_FILTER_TAGS,
+  workFilterParser,
+} from '@/features/works/lib/workFilters';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, m, type Transition } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
-
-const WORK_FILTER_TAGS = [
-  'Web',
-  'Design',
-  'Frontend',
-  'Interactive',
-  '3D',
-  'Backend',
-  'Business Project',
-  'Side Project',
-];
 
 const newestFirstWorks = [...publicWorks].reverse();
 const CARD_INITIAL = { opacity: 0, y: 12, scale: 0.98 };
@@ -113,9 +106,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
 }
 
 export function WorksGallery() {
-  const [selectedTag, setSelectedTag] = useQueryState('tag', {
-    history: 'replace',
-  });
+  const [selectedTag, setSelectedTag] = useQueryState('tag', workFilterParser);
   const filteredWorks = filterWorksByTag(newestFirstWorks, selectedTag);
 
   function getFilterClass(isActive: boolean): string {
@@ -155,13 +146,31 @@ export function WorksGallery() {
         ))}
       </div>
 
-      <m.div layout className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <AnimatePresence initial={false} mode="popLayout">
-          {filteredWorks.map((work, index) => (
-            <WorkCard key={work.pageName} work={work} isFirst={index === 0} />
-          ))}
-        </AnimatePresence>
-      </m.div>
+      {filteredWorks.length > 0 ? (
+        <m.div layout className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <AnimatePresence initial={false} mode="popLayout">
+            {filteredWorks.map((work, index) => (
+              <WorkCard key={work.pageName} work={work} isFirst={index === 0} />
+            ))}
+          </AnimatePresence>
+        </m.div>
+      ) : (
+        <div
+          role="status"
+          className="flex min-h-48 flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 text-center"
+        >
+          <p className="text-ink-muted text-sm">
+            해당 필터에 공개된 작업이 없습니다.
+          </p>
+          <button
+            type="button"
+            onClick={() => setSelectedTag(null)}
+            className="focus-visible:ring-brand-lavender text-brand-lavender min-h-11 rounded-full border border-white/10 px-4 text-sm font-bold outline-none hover:bg-white/5 focus-visible:ring-2"
+          >
+            전체 작업 보기
+          </button>
+        </div>
+      )}
     </div>
   );
 }
