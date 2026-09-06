@@ -13,21 +13,21 @@ const capabilities = [
   {
     title: '프론트엔드 개발',
     description:
-      'Next.js와 TypeScript를 중심으로 개발 세팅부터 빌드·배포까지 전반적으로 안정성 있는 서비스를 구현합니다.',
+      'Next.js와 TypeScript를 중심으로 화면과 데이터 흐름을 구현하고, 개발 환경부터 빌드·배포까지 필요한 작업을 함께 다룹니다.',
     icon: 'code',
     preview: 'frontend',
   },
   {
     title: '인터랙션과 디테일',
     description:
-      '레이아웃 간격과 모션의 디테일을 다듬고, 3D나 인터랙티브 요소를 활용해 시선을 사로잡는 감각적이고 개성 있는 화면을 만드는 것을 즐깁니다.',
+      '레이아웃과 모션의 디테일을 다듬고, 3D와 인터랙티브 요소로 서비스의 성격을 드러내는 화면을 만드는 것을 좋아합니다.',
     icon: 'interaction',
     preview: 'interaction',
   },
   {
     title: 'AI 페어 프로그래밍',
     description:
-      'AI Agent를 워크플로우에 통합해 지식을 탐색·검증하고, 구현과 검토 과정에 활용합니다.',
+      'AI Agent를 반복적인 탐색·구현·검토에 활용하고 결과를 직접 검증합니다.',
     icon: 'ai',
     preview: 'ai',
   },

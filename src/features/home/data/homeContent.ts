@@ -1,6 +1,6 @@
 export const SELECTED_WORK_PAGE_NAMES = [
-  'atop-dms',
+  'digital-asset-management',
   'fromyou',
   'lessor-panda-village',
-  'cusmetic',
+  'atop-dms',
 ] as const;

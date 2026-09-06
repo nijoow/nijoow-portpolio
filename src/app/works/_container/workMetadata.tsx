@@ -20,7 +20,7 @@ export function createWorkMetadata(
   }
 
   const canonicalPath = `/works/${work.pageName}`;
-  const imageUrl = `/images/works/${work.imgSrc}`;
+  const imageUrl = work.imgSrc ? `/images/works/${work.imgSrc}` : undefined;
   const description = work.description ?? FALLBACK_DESCRIPTION;
   const isIndexable = work.status !== 'draft';
 
@@ -37,13 +37,15 @@ export function createWorkMetadata(
       url: canonicalPath,
       title: work.name,
       description,
-      images: [{ url: imageUrl, alt: `${work.name} 작업 미리보기` }],
+      ...(imageUrl
+        ? { images: [{ url: imageUrl, alt: `${work.name} 작업 미리보기` }] }
+        : {}),
     },
     twitter: {
-      card: 'summary_large_image',
+      card: imageUrl ? 'summary_large_image' : 'summary',
       title: work.name,
       description,
-      images: [imageUrl],
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
   };
 
@@ -66,7 +68,9 @@ function createCreativeWorkJsonLd(work: Work) {
     name: work.name,
     description: work.description ?? FALLBACK_DESCRIPTION,
     url: workUrl,
-    image: `${SITE_URL}/images/works/${work.imgSrc}`,
+    ...(work.imgSrc
+      ? { image: `${SITE_URL}/images/works/${work.imgSrc}` }
+      : {}),
     keywords: work.tags.join(', '),
     creator: { '@id': PERSON_ID },
     contributor: { '@id': PERSON_ID },

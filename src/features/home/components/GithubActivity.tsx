@@ -5,7 +5,10 @@ import { GithubIcon } from '@/components/Icons/GithubIcon';
 import GlassCard from '@/components/Motion/GlassCard';
 import { useGithubActivity } from '@/features/home/hooks/useGithubActivity';
 import type { GithubRepository } from '@/features/home/schemas/githubActivitySchemas';
-import { useReducedMotion } from 'framer-motion';
+import {
+  REDUCED_MOTION_MEDIA_QUERY,
+  useMediaQuery,
+} from '@/hooks/useMediaQuery';
 import { ExternalLink, FolderGit2, Hammer, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -181,7 +184,7 @@ function StaticContributionPreview() {
 }
 
 function ContributionPreview() {
-  const shouldReduceMotion = Boolean(useReducedMotion());
+  const shouldReduceMotion = useMediaQuery(REDUCED_MOTION_MEDIA_QUERY);
   const [hasImageError, setHasImageError] = useState(false);
 
   if (shouldReduceMotion || hasImageError) {

@@ -3,9 +3,10 @@ export type ProjectType = 'business' | 'side';
 export interface Work {
   pageName: string;
   name: string;
-  imgSrc: string;
+  imgSrc?: string;
   projectType: ProjectType;
   isFreelance?: boolean;
+  disclosure?: 'full' | 'limited';
   tags: readonly string[];
   description?: string;
   role?: string;
@@ -70,7 +71,7 @@ export const works: readonly Work[] = [
     role: 'UX/UI·프론트엔드',
     period: '2022. ~',
     liveUrl: 'https://nijoow-portfolio.vercel.app',
-    repoUrl: 'https://github.com/nijoow/nijoow.github.io',
+    repoUrl: 'https://github.com/nijoow/nijoow-portfolio',
     status: 'published',
   },
   {
@@ -134,6 +135,18 @@ export const works: readonly Work[] = [
     liveUrl: 'https://nijoow-shopping-mall.vercel.app/',
     repoUrl: 'https://github.com/nijoow/shopping-mall',
     status: 'draft',
+  },
+  {
+    pageName: 'process-safety-management',
+    name: '공정 안전 관리 시스템',
+    projectType: 'business',
+    disclosure: 'limited',
+    tags: ['Web', 'Frontend'],
+    description: '공정 프로세스의 작업 및 문서를 관리하는 B2B 웹 시스템',
+    role: '프론트엔드 개발',
+    organization: '주식회사 비멕스',
+    period: '2023.03 ~ 2024.07',
+    status: 'published',
   },
   {
     pageName: 'moharu',
@@ -217,6 +230,20 @@ export const works: readonly Work[] = [
     period: '2026.03',
     liveUrl: 'https://lessor-panda-village.vercel.app/',
     repoUrl: 'https://github.com/nijoow/lessor-panda-village',
+    status: 'published',
+  },
+  {
+    pageName: 'digital-asset-management',
+    name: '디지털 자산 관리 시스템 고도화',
+    projectType: 'business',
+    isFreelance: true,
+    disclosure: 'limited',
+    tags: ['Web', 'Frontend'],
+    description:
+      '디지털 자산의 등록·검색·분류·메타데이터·버전·권한 등을 관리하는 웹 애플리케이션 고도화',
+    role: '프론트엔드 개발',
+    organization: '(주)템페스트',
+    period: '2026.05 ~ 현재',
     status: 'published',
   },
 ];

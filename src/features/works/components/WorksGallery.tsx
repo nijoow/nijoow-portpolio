@@ -1,6 +1,10 @@
 'use client';
 
 import GlassCard from '@/components/Motion/GlassCard';
+import {
+  LimitedProjectCover,
+  ProjectDisclosureChip,
+} from '@/features/works/components/LimitedProject';
 import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
 import { publicWorks, type Work } from '@/features/works/data/worksData';
 import { filterWorksByTag } from '@/features/works/lib/filterWorks';
@@ -21,7 +25,24 @@ const CARD_ANIMATE = { opacity: 1, y: 0, scale: 1 };
 const CARD_EXIT = { opacity: 0, scale: 0.96 };
 const CARD_TRANSITION: Transition = { duration: 0.3, ease: 'easeOut' };
 
-function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
+function WorkCard({ work, eager }: { work: Work; eager: boolean }) {
+  let previewContent = null;
+
+  if (work.disclosure === 'limited') {
+    previewContent = <LimitedProjectCover className="h-full w-full" />;
+  } else if (work.imgSrc) {
+    previewContent = (
+      <Image
+        src={`/images/works/${work.imgSrc}`}
+        alt={`${work.name} 작업 미리보기`}
+        fill
+        loading={eager ? 'eager' : 'lazy'}
+        sizes="(max-width: 640px) 100vw, 448px"
+        className="object-contain transition-transform duration-500 group-hover/work:scale-105"
+      />
+    );
+  }
+
   return (
     <m.article
       layout
@@ -34,30 +55,30 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
       <GlassCard className="group/work h-full">
         <Link
           href={`/works/${work.pageName}`}
-          aria-label={`${work.name} 작업 상세 보기`}
+          aria-label={`${work.name} 작업 상세 보기${
+            work.disclosure === 'limited' ? ', 보안상 화면 비공개' : ''
+          }`}
           className="focus-visible:ring-brand-lavender flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
         >
           <div className="from-atmosphere-navy/20 relative aspect-video w-full overflow-hidden border-b border-white/10 bg-linear-to-br via-black/20 to-white/5">
-            <Image
-              src={`/images/works/${work.imgSrc}`}
-              alt={`${work.name} 작업 미리보기`}
-              fill
-              loading={isFirst ? 'eager' : 'lazy'}
-              sizes="(max-width: 640px) 100vw, 448px"
-              className="object-contain transition-transform duration-500 group-hover/work:scale-105"
-            />
+            {previewContent}
             <span className="absolute top-3 left-3">
               <ProjectTypeChip
                 projectType={work.projectType}
                 isFreelance={work.isFreelance}
               />
             </span>
+            {work.disclosure === 'limited' ? (
+              <span className="absolute right-3 bottom-3">
+                <ProjectDisclosureChip />
+              </span>
+            ) : null}
           </div>
 
           <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="group-hover/work:text-brand-lavender text-ink-primary truncate text-lg font-bold transition-colors">
+                <h2 className="group-hover/work:text-brand-lavender text-ink-primary line-clamp-2 text-lg leading-snug font-bold transition-colors">
                   {work.name}
                 </h2>
                 {work.description ? (
@@ -108,6 +129,7 @@ function WorkCard({ work, isFirst }: { work: Work; isFirst: boolean }) {
 export function WorksGallery() {
   const [selectedTag, setSelectedTag] = useQueryState('tag', workFilterParser);
   const filteredWorks = filterWorksByTag(newestFirstWorks, selectedTag);
+  const firstImageIndex = filteredWorks.findIndex((work) => work.imgSrc);
 
   function getFilterClass(isActive: boolean): string {
     return cn(
@@ -150,7 +172,11 @@ export function WorksGallery() {
         <m.div layout className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <AnimatePresence initial={false} mode="popLayout">
             {filteredWorks.map((work, index) => (
-              <WorkCard key={work.pageName} work={work} isFirst={index === 0} />
+              <WorkCard
+                key={work.pageName}
+                work={work}
+                eager={index === firstImageIndex}
+              />
             ))}
           </AnimatePresence>
         </m.div>

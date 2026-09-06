@@ -6,8 +6,12 @@ import type {
   CapabilityConfig,
   CapabilityIconType,
 } from '@/features/home/components/capability/types';
-import { FINE_POINTER_MEDIA_QUERY, useMediaQuery } from '@/hooks/useMediaQuery';
-import { useInView, useReducedMotion } from 'framer-motion';
+import {
+  FINE_POINTER_MEDIA_QUERY,
+  REDUCED_MOTION_MEDIA_QUERY,
+  useMediaQuery,
+} from '@/hooks/useMediaQuery';
+import { useInView } from 'framer-motion';
 import {
   Blocks,
   Bot,
@@ -34,7 +38,7 @@ export function CapabilityCard({
   const [isPointerActive, setIsPointerActive] = useState(false);
   const hasFinePointer = useMediaQuery(FINE_POINTER_MEDIA_QUERY);
   const isInView = useInView(articleRef, { amount: 0.55 });
-  const shouldReduceMotion = Boolean(useReducedMotion());
+  const shouldReduceMotion = useMediaQuery(REDUCED_MOTION_MEDIA_QUERY);
   const Icon = CAPABILITY_ICONS[icon];
   const isActive =
     shouldReduceMotion || isPointerActive || (!hasFinePointer && isInView);

@@ -16,7 +16,7 @@ interface StackItem {
 const coreStack = [
   {
     label: 'Next.js',
-    detail: 'App Router를 중심으로 페이지 구조와 데이터 흐름을 설계합니다.',
+    detail: 'App Router 기반으로 페이지 구조와 데이터 흐름을 구성합니다.',
     contexts: ['App Router', 'RSC', 'Route Handler'],
   },
   {
@@ -46,7 +46,7 @@ const coreStack = [
   },
   {
     label: 'React Hook Form',
-    detail: '입력 상태와 검증 흐름을 효율적으로 구성해 폼을 관리합니다.',
+    detail: '입력 상태와 검증 흐름을 구성해 폼을 관리합니다.',
     contexts: ['Form State', 'Validation', 'Performance'],
   },
   {
@@ -57,8 +57,7 @@ const coreStack = [
   },
   {
     label: 'Framer Motion',
-    detail:
-      '레이아웃 전환과 제스처, 마이크로 인터랙션을 자연스럽게 구현합니다.',
+    detail: '레이아웃 전환과 제스처, 마이크로 인터랙션을 구현합니다.',
     contexts: ['Layout', 'Gesture', 'Motion'],
   },
 ] as const satisfies readonly StackItem[];
@@ -73,7 +72,7 @@ const currentFocus = [
   {
     label: 'AI 협업',
     detail:
-      'AI Agent를 탐색·구현·검증 흐름에 연결해 더 나은 협업 방식을 실험하고 있습니다.',
+      '반복적인 탐색·변경·리뷰에 AI Agent를 활용하고, 결과를 직접 검증하는 방식을 다듬고 있습니다.',
     contexts: ['Agent', 'Automation', 'Review'],
   },
   {

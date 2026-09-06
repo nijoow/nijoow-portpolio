@@ -5,11 +5,14 @@ import {
   type MotionValue,
   type Transition,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
 } from 'framer-motion';
+import {
+  REDUCED_MOTION_MEDIA_QUERY,
+  useMediaQuery,
+} from '@/hooks/useMediaQuery';
 import { useEffect } from 'react';
 
 interface StarParticle {
@@ -53,7 +56,7 @@ const STAR_PARTICLES: StarParticle[] = Array.from(
 const STATIC_TRANSITION = { duration: 0 } as const;
 
 export function AmbientBackground() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useMediaQuery(REDUCED_MOTION_MEDIA_QUERY);
   const pointerX = useMotionValue(0);
   const smoothPointerX = useSpring(pointerX, { stiffness: 45, damping: 24 });
   const blobX1 = useTransform(smoothPointerX, (value) => value * -0.75);

@@ -31,24 +31,32 @@ const FromYouPage = () => {
       <PartSubTitle title="기술 스택" />
 
       <TechStack
-        stacks={['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']}
+        stacks={[
+          'Next.js',
+          'TypeScript',
+          'Tailwind CSS',
+          'Motion',
+          'dnd-kit',
+          'Nivo',
+        ]}
       />
 
       <PartSubTitle title="주요 작업과 결과" />
 
       <CustomList>
         <CustomList.MainListItem>
-          SVG·드래그 앤 드롭·차트·스크롤 애니메이션 등을 활용한{' '}
+          요구사항이 구체화되지 않은 초기 단계에서{' '}
           <strong className="font-bold">
-            UX/UI 시각화 기획・디자인 및 반응형 웹 개발
+            UX/UI 디자인과 프론트엔드 개발을 함께 진행
           </strong>
+          하고, 피드백에 따라 화면과 인터랙션을 반복 개선
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          AWS Amplify 기반 <strong className="font-bold">배포 자동화</strong>{' '}
-          구축
+          SVG 지도·드래그 앤 드롭·차트·스크롤 애니메이션 등을 활용한 반응형 웹
+          구현
         </CustomList.MainListItem>
         <CustomList.MainListItem>
-          서브도메인 DNS 설정 및 배포
+          AWS Amplify 기반 배포 및 서브도메인 설정
         </CustomList.MainListItem>
         <CustomList.MainListItem>
           신문방송편집인협회의 2025 지역신문 기획취재 제작 지원 대상으로 선정된
@@ -62,7 +70,6 @@ const FromYouPage = () => {
       <div className="my-3" />
       <PartTitle title="관련 링크" />
       <WorkLinks
-        pageName={PAGE_NAME}
         links={[
           {
             href: 'https://www.incheonilbo.com/news/articleView.html?idxno=1312711',

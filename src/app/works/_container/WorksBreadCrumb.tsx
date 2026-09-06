@@ -1,4 +1,5 @@
 import Eyebrow from '@/components/ui/Eyebrow';
+import { ProjectDisclosureChip } from '@/features/works/components/LimitedProject';
 import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
 import type { Work } from '@/features/works/data/worksData';
 import { ChevronRight } from 'lucide-react';
@@ -57,6 +58,7 @@ function WorksBreadCrumb({ work, slug }: WorksBreadCrumbProps) {
             projectType={work.projectType}
             isFreelance={work.isFreelance}
           />
+          {work.disclosure === 'limited' ? <ProjectDisclosureChip /> : null}
           {work.tags.map((tag) => (
             <span
               key={tag}

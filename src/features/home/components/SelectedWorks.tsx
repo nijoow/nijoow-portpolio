@@ -1,5 +1,9 @@
 import GlassCard from '@/components/Motion/GlassCard';
 import SubTitle from '@/components/SubTitle/SubTitle';
+import {
+  LimitedProjectCover,
+  ProjectDisclosureChip,
+} from '@/features/works/components/LimitedProject';
 import { ProjectTypeChip } from '@/features/works/components/ProjectTypeChip';
 import type { Work } from '@/features/works/data/worksData';
 import { ArrowUpRight } from 'lucide-react';
@@ -11,34 +15,53 @@ interface SelectedWorksProps {
 }
 
 function SelectedWorkCard({ work }: { work: Work }) {
+  let previewContent = null;
+
+  if (work.disclosure === 'limited') {
+    previewContent = <LimitedProjectCover className="h-full w-full" />;
+  } else if (work.imgSrc) {
+    previewContent = (
+      <>
+        <Image
+          src={`/images/works/${work.imgSrc}`}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 416px"
+          className="scale-110 object-cover opacity-25 blur-xl"
+        />
+        <Image
+          src={`/images/works/${work.imgSrc}`}
+          alt={`${work.name} 작업 미리보기`}
+          fill
+          sizes="(max-width: 768px) 100vw, 416px"
+          className="object-contain transition-transform duration-500 group-hover/work:scale-105"
+        />
+      </>
+    );
+  }
+
   return (
     <GlassCard className="group/work h-full">
       <Link
         href={`/works/${work.pageName}`}
-        aria-label={`${work.name} 작업 상세 보기`}
+        aria-label={`${work.name} 작업 상세 보기${
+          work.disclosure === 'limited' ? ', 보안상 화면 비공개' : ''
+        }`}
         className="focus-visible:ring-brand-lavender flex h-full flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset"
       >
         <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-black/30">
-          <Image
-            src={`/images/works/${work.imgSrc}`}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 416px"
-            className="scale-110 object-cover opacity-25 blur-xl"
-          />
-          <Image
-            src={`/images/works/${work.imgSrc}`}
-            alt={`${work.name} 작업 미리보기`}
-            fill
-            sizes="(max-width: 768px) 100vw, 416px"
-            className="object-contain transition-transform duration-500 group-hover/work:scale-105"
-          />
+          {previewContent}
           <span className="absolute top-3 left-3">
             <ProjectTypeChip
               projectType={work.projectType}
               isFreelance={work.isFreelance}
             />
           </span>
+          {work.disclosure === 'limited' ? (
+            <span className="absolute right-3 bottom-3">
+              <ProjectDisclosureChip />
+            </span>
+          ) : null}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-5">
